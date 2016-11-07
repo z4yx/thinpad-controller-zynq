@@ -47,14 +47,14 @@
 -- DO NOT MODIFY THIS FILE.
 
 -- IP VLNV: xilinx.com:ip:proc_sys_reset:5.0
--- IP Revision: 8
+-- IP Revision: 10
 
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 USE ieee.numeric_std.ALL;
 
-LIBRARY proc_sys_reset_v5_0_8;
-USE proc_sys_reset_v5_0_8.proc_sys_reset;
+LIBRARY proc_sys_reset_v5_0_10;
+USE proc_sys_reset_v5_0_10.proc_sys_reset;
 
 ENTITY design_1_proc_sys_reset_0_0 IS
   PORT (
@@ -72,9 +72,8 @@ ENTITY design_1_proc_sys_reset_0_0 IS
 END design_1_proc_sys_reset_0_0;
 
 ARCHITECTURE design_1_proc_sys_reset_0_0_arch OF design_1_proc_sys_reset_0_0 IS
-  ATTRIBUTE DowngradeIPIdentifiedWarnings : string;
+  ATTRIBUTE DowngradeIPIdentifiedWarnings : STRING;
   ATTRIBUTE DowngradeIPIdentifiedWarnings OF design_1_proc_sys_reset_0_0_arch: ARCHITECTURE IS "yes";
-
   COMPONENT proc_sys_reset IS
     GENERIC (
       C_FAMILY : STRING;

@@ -1,3 +1,4 @@
+
 // file: design_1_clk_wiz_0_0.v
 // 
 // (c) Copyright 2008 - 2013 Xilinx, Inc. All rights reserved.
@@ -55,8 +56,8 @@
 //  Output     Output      Phase    Duty Cycle   Pk-to-Pk     Phase
 //   Clock     Freq (MHz)  (degrees)    (%)     Jitter (ps)  Error (ps)
 //----------------------------------------------------------------------------
-// CLK_OUT1____11.060______0.000______50.0______291.050____161.614
-// CLK_OUT2____50.000______0.000______50.0______210.144____161.614
+// clk_out1____50.000______0.000______50.0______190.710____163.922
+// clk_out2____11.058______0.000______50.0______278.968____163.922
 //
 //----------------------------------------------------------------------------
 // Input Clock   Freq (MHz)    Input Jitter (UI)
@@ -66,8 +67,8 @@
 `timescale 1ps/1ps
 
 module design_1_clk_wiz_0_0_clk_wiz 
+
  (// Clock in ports
-  input         clk_in1,
   // Clock out ports
   output        clk_out1,
   output        clk_out2,
@@ -81,15 +82,16 @@ module design_1_clk_wiz_0_0_clk_wiz
   input         dwe,
   // Status and control signals
   input         reset,
-  output        locked
+  output        locked,
+  input         clk_in1
  );
-
   // Input buffering
   //------------------------------------
-  IBUF clkin1_ibufg
+wire clk_in1_design_1_clk_wiz_0_0;
+wire clk_in2_design_1_clk_wiz_0_0;
+  BUFG clkin1_bufg
    (.O (clk_in1_design_1_clk_wiz_0_0),
     .I (clk_in1));
-
 
 
   // Clocking PRIMITIVE
@@ -98,6 +100,15 @@ module design_1_clk_wiz_0_0_clk_wiz
   // Instantiation of the MMCM PRIMITIVE
   //    * Unused inputs are tied off
   //    * Unused outputs are labeled unused
+
+  wire        clk_out1_design_1_clk_wiz_0_0;
+  wire        clk_out2_design_1_clk_wiz_0_0;
+  wire        clk_out3_design_1_clk_wiz_0_0;
+  wire        clk_out4_design_1_clk_wiz_0_0;
+  wire        clk_out5_design_1_clk_wiz_0_0;
+  wire        clk_out6_design_1_clk_wiz_0_0;
+  wire        clk_out7_design_1_clk_wiz_0_0;
+
   wire        psdone_unused;
   wire        locked_int;
   wire        clkfbout_design_1_clk_wiz_0_0;
@@ -122,14 +133,14 @@ module design_1_clk_wiz_0_0_clk_wiz
     .COMPENSATION         ("ZHOLD"),
     .STARTUP_WAIT         ("FALSE"),
     .DIVCLK_DIVIDE        (1),
-    .CLKFBOUT_MULT_F      (18.000),
+    .CLKFBOUT_MULT_F      (20.125),
     .CLKFBOUT_PHASE       (0.000),
     .CLKFBOUT_USE_FINE_PS ("FALSE"),
-    .CLKOUT0_DIVIDE_F     (81.375),
+    .CLKOUT0_DIVIDE_F     (20.125),
     .CLKOUT0_PHASE        (0.000),
     .CLKOUT0_DUTY_CYCLE   (0.500),
     .CLKOUT0_USE_FINE_PS  ("FALSE"),
-    .CLKOUT1_DIVIDE       (18),
+    .CLKOUT1_DIVIDE       (91),
     .CLKOUT1_PHASE        (0.000),
     .CLKOUT1_DUTY_CYCLE   (0.500),
     .CLKOUT1_USE_FINE_PS  ("FALSE"),
@@ -175,12 +186,12 @@ module design_1_clk_wiz_0_0_clk_wiz
     .CLKFBSTOPPED        (clkfbstopped_unused),
     .PWRDWN              (1'b0),
     .RST                 (reset_high));
-
   assign reset_high = reset; 
 
   assign locked = locked_int;
-
-  // Output buffering
+// Clock Monitor clock assigning
+//--------------------------------------
+ // Output buffering
   //-----------------------------------
 
   BUFG clkf_buf

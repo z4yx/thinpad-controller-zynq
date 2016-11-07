@@ -1,3 +1,4 @@
+
 // file: design_1_clk_wiz_0_0.v
 // 
 // (c) Copyright 2008 - 2013 Xilinx, Inc. All rights reserved.
@@ -55,8 +56,8 @@
 //  Output     Output      Phase    Duty Cycle   Pk-to-Pk     Phase
 //   Clock     Freq (MHz)  (degrees)    (%)     Jitter (ps)  Error (ps)
 //----------------------------------------------------------------------------
-// CLK_OUT1____11.060______0.000______50.0______291.050____161.614
-// CLK_OUT2____50.000______0.000______50.0______210.144____161.614
+// clk_out1____50.000______0.000______50.0______190.710____163.922
+// clk_out2____11.058______0.000______50.0______278.968____163.922
 //
 //----------------------------------------------------------------------------
 // Input Clock   Freq (MHz)    Input Jitter (UI)
@@ -65,7 +66,7 @@
 
 `timescale 1ps/1ps
 
-(* CORE_GENERATION_INFO = "design_1_clk_wiz_0_0,clk_wiz_v5_2_1,{component_name=design_1_clk_wiz_0_0,use_phase_alignment=true,use_min_o_jitter=false,use_max_i_jitter=false,use_dyn_phase_shift=false,use_inclk_switchover=false,use_dyn_reconfig=true,enable_axi=1,feedback_source=FDBK_AUTO,PRIMITIVE=MMCM,num_out_clk=2,clkin1_period=20.0,clkin2_period=10.0,use_power_down=false,use_reset=true,use_locked=true,use_inclk_stopped=false,feedback_type=SINGLE,CLOCK_MGR_TYPE=NA,manual_override=false}" *)
+(* CORE_GENERATION_INFO = "design_1_clk_wiz_0_0,clk_wiz_v5_3_2_0,{component_name=design_1_clk_wiz_0_0,use_phase_alignment=true,use_min_o_jitter=false,use_max_i_jitter=false,use_dyn_phase_shift=false,use_inclk_switchover=false,use_dyn_reconfig=true,enable_axi=1,feedback_source=FDBK_AUTO,PRIMITIVE=MMCM,num_out_clk=2,clkin1_period=20.0,clkin2_period=10.0,use_power_down=false,use_reset=true,use_locked=true,use_inclk_stopped=false,feedback_type=SINGLE,CLOCK_MGR_TYPE=NA,manual_override=false}" *)
 
 module design_1_clk_wiz_0_0 
  (
@@ -88,13 +89,13 @@ module design_1_clk_wiz_0_0
   output [1 : 0] s_axi_rresp,
   output s_axi_rvalid,
   input s_axi_rready,
- // Clock in ports
-  input         clk_in1,
   // Clock out ports
   output        clk_out1,
   output        clk_out2,
   // Status and control signals
-  output        locked
+  output        locked,
+ // Clock in ports
+  input         clk_in1
  );
 
   design_1_clk_wiz_0_0_axi_clk_config #(
@@ -121,13 +122,13 @@ module design_1_clk_wiz_0_0
   .s_axi_rresp     (s_axi_rresp),                    
   .s_axi_rvalid    (s_axi_rvalid),                    
   .s_axi_rready    (s_axi_rready),                    
- // Clock in ports
-  .clk_in1(clk_in1),
   // Clock out ports  
   .clk_out1(clk_out1),
   .clk_out2(clk_out2),
   // Status and control signals               
-  .locked(locked)            
+  .locked(locked),
+ // Clock in ports
+  .clk_in1(clk_in1)
   );
 
 endmodule

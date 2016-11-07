@@ -56,6 +56,25 @@
 `timescale 1ns/1ps
 
 module design_1_ps7_0_0 (
+GPIO_I, 
+GPIO_O, 
+GPIO_T, 
+SPI0_SCLK_I, 
+SPI0_SCLK_O, 
+SPI0_SCLK_T, 
+SPI0_MOSI_I, 
+SPI0_MOSI_O, 
+SPI0_MOSI_T, 
+SPI0_MISO_I, 
+SPI0_MISO_O, 
+SPI0_MISO_T, 
+SPI0_SS_I, 
+SPI0_SS_O, 
+SPI0_SS1_O, 
+SPI0_SS2_O, 
+SPI0_SS_T, 
+UART1_TX, 
+UART1_RX, 
 USB0_PORT_INDCTL, 
 USB0_VBUS_PWRSELECT, 
 USB0_VBUS_PWRFAULT, 
@@ -98,6 +117,7 @@ M_AXI_GP0_RID,
 M_AXI_GP0_BRESP, 
 M_AXI_GP0_RRESP, 
 M_AXI_GP0_RDATA, 
+IRQ_F2P, 
 FCLK_CLK0, 
 FCLK_RESET0_N, 
 MIO, 
@@ -122,6 +142,25 @@ PS_SRSTB,
 PS_CLK, 
 PS_PORB 
 );
+input [2 : 0] GPIO_I;
+output [2 : 0] GPIO_O;
+output [2 : 0] GPIO_T;
+input SPI0_SCLK_I;
+output SPI0_SCLK_O;
+output SPI0_SCLK_T;
+input SPI0_MOSI_I;
+output SPI0_MOSI_O;
+output SPI0_MOSI_T;
+input SPI0_MISO_I;
+output SPI0_MISO_O;
+output SPI0_MISO_T;
+input SPI0_SS_I;
+output SPI0_SS_O;
+output SPI0_SS1_O;
+output SPI0_SS2_O;
+output SPI0_SS_T;
+output UART1_TX;
+input UART1_RX;
 output [1 : 0] USB0_PORT_INDCTL;
 output USB0_VBUS_PWRSELECT;
 input USB0_VBUS_PWRFAULT;
@@ -164,6 +203,7 @@ input [11 : 0] M_AXI_GP0_RID;
 input [1 : 0] M_AXI_GP0_BRESP;
 input [1 : 0] M_AXI_GP0_RRESP;
 input [31 : 0] M_AXI_GP0_RDATA;
+input [0 : 0] IRQ_F2P;
 output FCLK_CLK0;
 output FCLK_RESET0_N;
 input [53 : 0] MIO;
@@ -204,9 +244,9 @@ input PS_PORB;
     .C_S_AXI_HP3_DATA_WIDTH(64),
     .C_HIGH_OCM_EN(0),
     .C_FCLK_CLK0_FREQ(50.0),
-    .C_FCLK_CLK1_FREQ(50.0),
-    .C_FCLK_CLK2_FREQ(50.0),
-    .C_FCLK_CLK3_FREQ(50.0),
+    .C_FCLK_CLK1_FREQ(10.0),
+    .C_FCLK_CLK2_FREQ(10.0),
+    .C_FCLK_CLK3_FREQ(10.0),
 	.C_M_AXI_GP0_ENABLE_STATIC_REMAP(0),
 	.C_M_AXI_GP1_ENABLE_STATIC_REMAP(0),
 	.C_M_AXI_GP0_THREAD_ID_WIDTH (12), 
@@ -576,7 +616,7 @@ input PS_PORB;
     .FCLK_RESET1_N(),
     .FCLK_RESET2_N(),
     .FCLK_RESET3_N(),
-    .IRQ_F2P(16'B0),
+    .IRQ_F2P(IRQ_F2P),
     .PS_SRSTB(PS_SRSTB),
     .PS_CLK(PS_CLK),
     .PS_PORB(PS_PORB)

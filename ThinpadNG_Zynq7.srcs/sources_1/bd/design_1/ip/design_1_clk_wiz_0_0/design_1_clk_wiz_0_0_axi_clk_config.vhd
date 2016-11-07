@@ -1,3 +1,4 @@
+
 -- ************************************************************************
 -- ** DISCLAIMER OF LIABILITY                                            **
 -- **                                                                    **
@@ -149,14 +150,13 @@ entity design_1_clk_wiz_0_0_axi_clk_config is
   s_axi_rresp     : out std_logic_vector(1 downto 0);                   
   s_axi_rvalid    : out std_logic;                                      
   s_axi_rready    : in  std_logic;                                      
-  
-  -- Clock in ports
-  clk_in1           : in     std_logic;
   -- Clock out ports
   clk_out1          : out    std_logic;
   clk_out2          : out    std_logic;
   -- Status and control signals
-  locked            : out    std_logic
+  locked            : out    std_logic;
+  -- Clock in ports
+  clk_in1           : in     std_logic
   );   
 
 -------------------------------------------------------------------------------
@@ -203,13 +203,15 @@ component design_1_clk_wiz_0_0_clk_wiz_drp
   IP2Bus_WrAck    : out std_logic;
   IP2Bus_RdAck    : out std_logic;
   ----------------  clocking macro interface  -------------------
-  -- Clock in ports
-  clk_in1           : in     std_logic;
+  -- Clock Monitor ports
+
   -- Clock out ports
   clk_out1          : out    std_logic;
   clk_out2          : out    std_logic;
   -- Status and control signals
-  locked            : out    std_logic
+  locked            : out    std_logic;
+  -- Clock in ports
+  clk_in1           : in     std_logic
    );
 
 end component;
@@ -461,13 +463,13 @@ CLK_CORE_DRP_I : design_1_clk_wiz_0_0_clk_wiz_drp
    IP2Bus_Data                  => ip2bus_data,
    IP2Bus_WrAck                 => ip2bus_wrack_core,
    IP2Bus_RdAck                 => ip2bus_rdack_core,
-   -- Clock in ports
-   clk_in1 => clk_in1,
   -- Clock out ports  
    clk_out1 => clk_out1,
    clk_out2 => clk_out2,
   -- Status and control signals                
-   locked => locked            
+   locked => locked,
+   -- Clock in ports
+   clk_in1 => clk_in1
    );
 
 ----------------------------------------------------------

@@ -1,8 +1,8 @@
-//Copyright 1986-2015 Xilinx, Inc. All Rights Reserved.
+//Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
-//Tool Version: Vivado v.2015.4 (win64) Build 1412921 Wed Nov 18 09:43:45 MST 2015
-//Date        : Sat Oct 29 15:43:07 2016
-//Host        : 305B-PC running 64-bit Service Pack 1  (build 7601)
+//Tool Version: Vivado v.2016.3 (win64) Build 1682563 Mon Oct 10 19:07:27 MDT 2016
+//Date        : Mon Nov 07 20:47:15 2016
+//Host        : lightField-PC running 64-bit Service Pack 1  (build 7601)
 //Command     : generate_target design_1_wrapper.bd
 //Design      : design_1_wrapper
 //Purpose     : IP block netlist
@@ -31,9 +31,17 @@ module design_1_wrapper
     FIXED_IO_ps_clk,
     FIXED_IO_ps_porb,
     FIXED_IO_ps_srstb,
+    SPI0_MOSI_O,
+    SPI0_SCLK_O,
+    UART_1_rxd,
+    UART_1_txd,
     clk_out1,
     clk_out2,
-    locked);
+    done,
+    initb,
+    progb,
+    rxd_232,
+    txd_232);
   inout [14:0]DDR_addr;
   inout [2:0]DDR_ba;
   inout DDR_cas_n;
@@ -55,9 +63,17 @@ module design_1_wrapper
   inout FIXED_IO_ps_clk;
   inout FIXED_IO_ps_porb;
   inout FIXED_IO_ps_srstb;
+  output SPI0_MOSI_O;
+  output SPI0_SCLK_O;
+  input UART_1_rxd;
+  output UART_1_txd;
   output clk_out1;
   output clk_out2;
-  output locked;
+  input done;
+  input initb;
+  output [0:0]progb;
+  input rxd_232;
+  output txd_232;
 
   wire [14:0]DDR_addr;
   wire [2:0]DDR_ba;
@@ -80,9 +96,17 @@ module design_1_wrapper
   wire FIXED_IO_ps_clk;
   wire FIXED_IO_ps_porb;
   wire FIXED_IO_ps_srstb;
+  wire SPI0_MOSI_O;
+  wire SPI0_SCLK_O;
+  wire UART_1_rxd;
+  wire UART_1_txd;
   wire clk_out1;
   wire clk_out2;
-  wire locked;
+  wire done;
+  wire initb;
+  wire [0:0]progb;
+  wire rxd_232;
+  wire txd_232;
 
   design_1 design_1_i
        (.DDR_addr(DDR_addr),
@@ -106,7 +130,15 @@ module design_1_wrapper
         .FIXED_IO_ps_clk(FIXED_IO_ps_clk),
         .FIXED_IO_ps_porb(FIXED_IO_ps_porb),
         .FIXED_IO_ps_srstb(FIXED_IO_ps_srstb),
+        .SPI0_MOSI_O(SPI0_MOSI_O),
+        .SPI0_SCLK_O(SPI0_SCLK_O),
+        .UART_1_rxd(UART_1_rxd),
+        .UART_1_txd(UART_1_txd),
         .clk_out1(clk_out1),
         .clk_out2(clk_out2),
-        .locked(locked));
+        .done(done),
+        .initb(initb),
+        .progb(progb),
+        .rxd_232(rxd_232),
+        .txd_232(txd_232));
 endmodule

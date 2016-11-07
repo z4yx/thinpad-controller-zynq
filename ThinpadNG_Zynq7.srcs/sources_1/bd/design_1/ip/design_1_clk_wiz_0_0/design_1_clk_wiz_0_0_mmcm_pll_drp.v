@@ -1,3 +1,4 @@
+
 ///////////////////////////////////////////////////////////////////////////////
 //    
 //    Company:          Xilinx
@@ -126,7 +127,6 @@ module design_1_clk_wiz_0_0_mmcm_drp
       parameter S1_CLKOUT6_PHASE          = 0,
       parameter S1_CLKOUT6_DUTY           = 50000
    ) (
-      
       //***********************************************************************
       // State 2 Parameters configured through S2_* ports - These are for the second reconfiguration state.
       //***********************************************************************
@@ -150,6 +150,7 @@ module design_1_clk_wiz_0_0_mmcm_drp
       //    _FRAC_EN: This indicates fractional divide has been enabled. If 1
       //          then the fractional divide algorithm will be used to calculate
       //          register settings. If 0 then default calculation to be used.
+      
       input [7:0] S2_CLKFBOUT_MULT  ,//        , // 1,
       input [9:0] S2_CLKFBOUT_FRAC  ,//        , // 125, 
       input  S2_CLKFBOUT_FRAC_EN     ,//  , // 1, 
@@ -237,11 +238,10 @@ module design_1_clk_wiz_0_0_mmcm_drp
    
    // Pass SCLK to DCLK for the MMCM/PLL
    assign DCLK = SCLK;
-
    // Include the MMCM/PLLreconfiguration functions.  This contains the constant
    // functions that are used in the calculations below.  This file is 
    // required.
-   `include "mmcm_pll_drp_func.h"
+   `include "mmcm_pll_drp_func_7s_mmcm.vh"
    
    //**************************************************************************
    // State 1 Calculations
@@ -327,13 +327,11 @@ module design_1_clk_wiz_0_0_mmcm_drp
          
    wire [37:0] S2_CLKOUT6        = 
       mmcm_pll_count_calc(S2_CLKOUT6_DIVIDE, S1_CLKOUT6_PHASE, S1_CLKOUT6_DUTY);
-   
    initial begin
       // ram entries contain (in order) the address, a bitmask, and a bitset
       //***********************************************************************
       // State 1 Initialization
       //***********************************************************************
-
       
       // Store the power bits
       ram[0] = {7'h28, 16'h0000, 16'hFFFF};
