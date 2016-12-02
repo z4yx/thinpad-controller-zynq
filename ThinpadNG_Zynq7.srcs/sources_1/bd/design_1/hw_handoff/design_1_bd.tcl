@@ -188,7 +188,7 @@ CONFIG.C_ALL_INPUTS {0} \
 CONFIG.C_ALL_INPUTS_2 {0} \
 CONFIG.C_ALL_OUTPUTS {0} \
 CONFIG.C_GPIO_WIDTH {6} \
-CONFIG.C_INTERRUPT_PRESENT {0} \
+CONFIG.C_INTERRUPT_PRESENT {1} \
 CONFIG.C_IS_DUAL {0} \
  ] $axi_gpio_1
 
@@ -198,7 +198,7 @@ CONFIG.C_IS_DUAL {0} \
 CONFIG.C_ALL_INPUTS {0} \
 CONFIG.C_ALL_INPUTS_2 {0} \
 CONFIG.C_ALL_OUTPUTS {0} \
-CONFIG.C_INTERRUPT_PRESENT {0} \
+CONFIG.C_INTERRUPT_PRESENT {1} \
 CONFIG.C_IS_DUAL {0} \
  ] $axi_gpio_2
 
@@ -1515,33 +1515,57 @@ CONFIG.PCW_WDT_WDT_IO.VALUE_SRC {DEFAULT} \
   # Create instance: system_ila, and set properties
   set system_ila [ create_bd_cell -type ip -vlnv xilinx.com:ip:system_ila:1.0 system_ila ]
   set_property -dict [ list \
+CONFIG.C_BRAM_CNT {0.5} \
 CONFIG.C_MON_TYPE {NATIVE} \
 CONFIG.C_NUM_OF_PROBES {1} \
 CONFIG.C_PROBE0_TYPE {0} \
  ] $system_ila
 
+  # Need to retain value_src of defaults
+  set_property -dict [ list \
+CONFIG.C_BRAM_CNT.VALUE_SRC {DEFAULT} \
+ ] $system_ila
+
   # Create instance: system_ila1, and set properties
   set system_ila1 [ create_bd_cell -type ip -vlnv xilinx.com:ip:system_ila:1.0 system_ila1 ]
   set_property -dict [ list \
+CONFIG.C_BRAM_CNT {0.5} \
 CONFIG.C_MON_TYPE {NATIVE} \
 CONFIG.C_NUM_OF_PROBES {1} \
 CONFIG.C_PROBE0_TYPE {0} \
  ] $system_ila1
 
+  # Need to retain value_src of defaults
+  set_property -dict [ list \
+CONFIG.C_BRAM_CNT.VALUE_SRC {DEFAULT} \
+ ] $system_ila1
+
   # Create instance: system_ila2, and set properties
   set system_ila2 [ create_bd_cell -type ip -vlnv xilinx.com:ip:system_ila:1.0 system_ila2 ]
   set_property -dict [ list \
+CONFIG.C_BRAM_CNT {0.5} \
 CONFIG.C_MON_TYPE {NATIVE} \
 CONFIG.C_NUM_OF_PROBES {1} \
 CONFIG.C_PROBE0_TYPE {0} \
  ] $system_ila2
 
+  # Need to retain value_src of defaults
+  set_property -dict [ list \
+CONFIG.C_BRAM_CNT.VALUE_SRC {DEFAULT} \
+ ] $system_ila2
+
   # Create instance: system_ila3, and set properties
   set system_ila3 [ create_bd_cell -type ip -vlnv xilinx.com:ip:system_ila:1.0 system_ila3 ]
   set_property -dict [ list \
+CONFIG.C_BRAM_CNT {0.5} \
 CONFIG.C_MON_TYPE {NATIVE} \
 CONFIG.C_NUM_OF_PROBES {1} \
 CONFIG.C_PROBE0_TYPE {0} \
+ ] $system_ila3
+
+  # Need to retain value_src of defaults
+  set_property -dict [ list \
+CONFIG.C_BRAM_CNT.VALUE_SRC {DEFAULT} \
  ] $system_ila3
 
   # Create instance: xlconcat_0, and set properties
@@ -1647,19 +1671,19 @@ preplace inst system_ila1 -pg 1 -lvl 3 -y 0 -defaultsOSRD
 preplace inst system_ila2 -pg 1 -lvl 3 -y 530 -defaultsOSRD
 preplace inst system_ila3 -pg 1 -lvl 3 -y 630 -defaultsOSRD
 preplace inst axi_uartlite_0 -pg 1 -lvl 4 -y 120 -defaultsOSRD
-preplace inst ps7_0 -pg 1 -lvl 2 -y -80 -defaultsOSRD
+preplace inst ps7_0 -pg 1 -lvl 2 -y -90 -defaultsOSRD
 preplace inst axi_interconnect_0 -pg 1 -lvl 3 -y 260 -defaultsOSRD
 preplace inst clk_wiz_0 -pg 1 -lvl 4 -y -80 -defaultsOSRD
-preplace netloc ps7_0_UART_1 1 2 3 720 -80 1040J 0 1320J
-preplace netloc processing_system7_0_DDR 1 2 3 670J -210 NJ -210 1330J
-preplace netloc ps7_0_SPI0_MOSI_O 1 2 3 700 60 990J 30 1330
-preplace netloc ps7_0_SPI0_SCLK_O 1 2 3 690 -60 1020J 20 NJ
-preplace netloc axi_uartlite_0_interrupt 1 1 4 260 -250 720J -220 NJ -220 1310
+preplace netloc ps7_0_UART_1 1 2 3 720 -80 1040J 0 1300J
+preplace netloc processing_system7_0_DDR 1 2 3 670J -210 NJ -210 1310J
+preplace netloc ps7_0_SPI0_MOSI_O 1 2 3 720 60 990J 30 1310
+preplace netloc ps7_0_SPI0_SCLK_O 1 2 3 690 -70 1020J 20 NJ
+preplace netloc axi_uartlite_0_interrupt 1 1 4 260 -260 720J -220 NJ -220 1290
 preplace netloc axi_interconnect_0_M02_AXI 1 3 1 1000
 preplace netloc initb_1 1 0 2 N 170 260
 preplace netloc processing_system7_0_FCLK_RESET0_N 1 1 2 280 90 640
 preplace netloc done_1 1 0 2 N 300 260
-preplace netloc axi_uartlite_0_tx 1 4 1 1330
+preplace netloc axi_uartlite_0_tx 1 4 1 1310
 preplace netloc proc_sys_reset_0_interconnect_aresetn 1 2 1 690
 preplace netloc axi_interconnect_0_M04_AXI 1 3 1 980
 preplace netloc xlconstant_0_dout 1 1 1 260
@@ -1667,16 +1691,16 @@ preplace netloc xlconcat_0_dout 1 2 1 660
 preplace netloc ps7_0_GPIO_O 1 2 1 680
 preplace netloc processing_system7_0_FIXED_IO 1 2 3 700J -200 NJ -200 NJ
 preplace netloc S00_AXI_1 1 2 1 650
-preplace netloc clk_wiz_0_clk_out1 1 4 1 1330J
-preplace netloc axi_gpio_0_GPIO 1 4 1 1320J
+preplace netloc clk_wiz_0_clk_out1 1 4 1 1310J
+preplace netloc axi_gpio_0_GPIO 1 4 1 1300J
 preplace netloc axi_interconnect_0_M00_AXI 1 3 1 980
 preplace netloc proc_sys_reset_0_peripheral_aresetn 1 2 2 720 460 1030J
-preplace netloc clk_wiz_0_clk_out2 1 4 1 1330J
-preplace netloc axi_gpio_2_GPIO 1 4 1 1320
+preplace netloc clk_wiz_0_clk_out2 1 4 1 1310J
+preplace netloc axi_gpio_2_GPIO 1 4 1 1300
 preplace netloc axi_interconnect_0_M01_AXI 1 3 1 1040
-preplace netloc rxd_232_1 1 0 5 -50J 470 NJ 470 NJ 470 970J 650 1300
+preplace netloc rxd_232_1 1 0 5 -50J 470 NJ 470 NJ 470 970J 650 1280
 preplace netloc processing_system7_0_FCLK_CLK0 1 1 3 270 260 710 -90 1010J
-preplace netloc axi_gpio_1_GPIO 1 4 1 1310J
+preplace netloc axi_gpio_1_GPIO 1 4 1 1290J
 preplace netloc axi_interconnect_0_M03_AXI 1 3 1 990
 preplace netloc xlslice_0_Dout 1 3 2 980J -240 N
 levelinfo -pg 1 -70 182 470 850 1170 1350 -top -400 -bot 680

@@ -77,6 +77,7 @@ ENTITY design_1_axi_gpio_0_1 IS
     s_axi_rresp : OUT STD_LOGIC_VECTOR(1 DOWNTO 0);
     s_axi_rvalid : OUT STD_LOGIC;
     s_axi_rready : IN STD_LOGIC;
+    ip2intc_irpt : OUT STD_LOGIC;
     gpio_io_i : IN STD_LOGIC_VECTOR(5 DOWNTO 0);
     gpio_io_o : OUT STD_LOGIC_VECTOR(5 DOWNTO 0);
     gpio_io_t : OUT STD_LOGIC_VECTOR(5 DOWNTO 0)
@@ -153,6 +154,7 @@ ARCHITECTURE design_1_axi_gpio_0_1_arch OF design_1_axi_gpio_0_1 IS
   ATTRIBUTE X_INTERFACE_INFO OF s_axi_rresp: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI RRESP";
   ATTRIBUTE X_INTERFACE_INFO OF s_axi_rvalid: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI RVALID";
   ATTRIBUTE X_INTERFACE_INFO OF s_axi_rready: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI RREADY";
+  ATTRIBUTE X_INTERFACE_INFO OF ip2intc_irpt: SIGNAL IS "xilinx.com:signal:interrupt:1.0 IP2INTC_IRQ INTERRUPT";
   ATTRIBUTE X_INTERFACE_INFO OF gpio_io_i: SIGNAL IS "xilinx.com:interface:gpio:1.0 GPIO TRI_I";
   ATTRIBUTE X_INTERFACE_INFO OF gpio_io_o: SIGNAL IS "xilinx.com:interface:gpio:1.0 GPIO TRI_O";
   ATTRIBUTE X_INTERFACE_INFO OF gpio_io_t: SIGNAL IS "xilinx.com:interface:gpio:1.0 GPIO TRI_T";
@@ -168,7 +170,7 @@ BEGIN
       C_ALL_INPUTS_2 => 0,
       C_ALL_OUTPUTS => 0,
       C_ALL_OUTPUTS_2 => 0,
-      C_INTERRUPT_PRESENT => 0,
+      C_INTERRUPT_PRESENT => 1,
       C_DOUT_DEFAULT => X"00000000",
       C_TRI_DEFAULT => X"FFFFFFFF",
       C_IS_DUAL => 0,
@@ -195,6 +197,7 @@ BEGIN
       s_axi_rresp => s_axi_rresp,
       s_axi_rvalid => s_axi_rvalid,
       s_axi_rready => s_axi_rready,
+      ip2intc_irpt => ip2intc_irpt,
       gpio_io_i => gpio_io_i,
       gpio_io_o => gpio_io_o,
       gpio_io_t => gpio_io_t,

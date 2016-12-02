@@ -2,5 +2,5 @@
 the_ROM_image:
 {
 	[bootloader]C:\ThinpadNG_Zynq7\ThinpadNG_Zynq7.sdk\fsbl\Debug\fsbl.elf
-	C:\ThinpadNG_Zynq7\ThinpadNG_Zynq7.sdk\u-boot.elf
+	D:\essential_for_zynq\u-boot.elf
 }
