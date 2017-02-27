@@ -2,7 +2,7 @@
  File Name : thinpadNG_zynq_top.v
  Purpose :
  Creation Date : 27-02-2017
- Last Modified : Mon Feb 27 12:30:25 2017
+ Last Modified : Mon Feb 27 12:57:49 2017
  Created By : Jeasine Ma [jeasinema[at]gmail[dot]com]
 -----------------------------------------------------*/
 `ifndef __THINPADNG_ZYNQ_TOP_V__
@@ -75,25 +75,24 @@ module thinpadNG_zynq_top(/*autoarg*/
     input rxd_232;
     output txd_232;
 
-
-    wire DDR_addr[14:0];
-    wire DDR_ba[2:0];
+    wire [14:0]DDR_addr;
+    wire [2:0]DDR_ba;
     wire DDR_cas_n;
     wire DDR_ck_n;
     wire DDR_ck_p;
     wire DDR_cke;
     wire DDR_cs_n;
-    wire DDR_dm[3:0];
-    wire DDR_dq[31:0];
-    wire DDR_dqs_n[3:0];
-    wire DDR_dqs_p[3:0];
+    wire [3:0]DDR_dm;
+    wire [31:0]DDR_dq;
+    wire [3:0]DDR_dqs_n;
+    wire [3:0]DDR_dqs_p;
     wire DDR_odt;
     wire DDR_ras_n;
     wire DDR_reset_n;
     wire DDR_we_n;
     wire FIXED_IO_ddr_vrn;
     wire FIXED_IO_ddr_vrp;
-    wire FIXED_IO_mio[53:0];
+    wire [53:0]FIXED_IO_mio;
     wire FIXED_IO_ps_clk;
     wire FIXED_IO_ps_porb;
     wire FIXED_IO_ps_srstb;
@@ -104,26 +103,26 @@ module thinpadNG_zynq_top(/*autoarg*/
     wire clk_out1;
     wire clk_out2;
     wire done;
-    wire emc_rtl_addr[31:0];
+    wire [31:0]emc_rtl_addr;
     wire emc_rtl_adv_ldn;
-    wire emc_rtl_ben[3:0];
-    wire emc_rtl_ce[0:0];
-    wire emc_rtl_ce_n[0:0];
+    wire [3:0]emc_rtl_ben;
+    wire [0:0]emc_rtl_ce;
+    wire [0:0]emc_rtl_ce_n;
     wire emc_rtl_clken;
     wire emc_rtl_cre;
-    wire emc_rtl_dq_io[31:0];
+    wire [31:0]emc_rtl_dq_io;
     wire emc_rtl_lbon;
-    wire emc_rtl_oen[0:0];
-    wire emc_rtl_qwen[3:0];
+    wire [0:0]emc_rtl_oen;
+    wire [3:0]emc_rtl_qwen;
     wire emc_rtl_rnw;
     wire emc_rtl_rpn;
-    wire emc_rtl_wait[0:0];
+    wire [0:0]emc_rtl_wait;
     wire emc_rtl_wen;
-    wire gpio_rtl_0_tri_io[5:0];
-    wire gpio_rtl_1_tri_io[31:0];
-    wire gpio_rtl_tri_io[31:0];
+    wire [5:0]gpio_rtl_0_tri_io;
+    wire [31:0]gpio_rtl_1_tri_io;
+    wire [31:0]gpio_rtl_tri_io;
     wire initb;
-    wire progb[0:0];
+    wire [0:0]progb;
     wire rxd_232;
     wire txd_232;
 
