@@ -38,20 +38,11 @@ module design_1_wrapper
     clk_out1,
     clk_out2,
     done,
-    emc_rtl_addr,
-    emc_rtl_adv_ldn,
+    emc_rtl_addr_wrap,
     emc_rtl_ben,
-    emc_rtl_ce,
     emc_rtl_ce_n,
-    emc_rtl_clken,
-    emc_rtl_cre,
     emc_rtl_dq_io,
-    emc_rtl_lbon,
     emc_rtl_oen,
-    emc_rtl_qwen,
-    emc_rtl_rnw,
-    emc_rtl_rpn,
-    emc_rtl_wait,
     emc_rtl_wen,
     gpio_rtl_0_tri_io,
     gpio_rtl_1_tri_io,
@@ -88,20 +79,11 @@ module design_1_wrapper
   output clk_out1;
   output clk_out2;
   input done;
-  output [31:0]emc_rtl_addr;
-  output emc_rtl_adv_ldn;
+  output [19:0]emc_rtl_addr_wrap;
   output [3:0]emc_rtl_ben;
-  output [0:0]emc_rtl_ce;
   output [0:0]emc_rtl_ce_n;
-  output emc_rtl_clken;
-  output emc_rtl_cre;
   inout [31:0]emc_rtl_dq_io;
-  output emc_rtl_lbon;
   output [0:0]emc_rtl_oen;
-  output [3:0]emc_rtl_qwen;
-  output emc_rtl_rnw;
-  output emc_rtl_rpn;
-  input [0:0]emc_rtl_wait;
   output emc_rtl_wen;
   inout [5:0]gpio_rtl_0_tri_io;
   inout [31:0]gpio_rtl_1_tri_io;
@@ -110,6 +92,9 @@ module design_1_wrapper
   output [0:0]progb;
   input rxd_232;
   output txd_232;
+
+  wire [19:0] emc_rtl_addr_wrap;
+  assign emc_rtl_addr_wrap = emc_rtl_addr[19:0];
 
   wire [14:0]DDR_addr;
   wire [2:0]DDR_ba;
