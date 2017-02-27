@@ -1,7 +1,7 @@
 //Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2016.3 (win64) Build 1682563 Mon Oct 10 19:07:27 MDT 2016
-//Date        : Fri Dec 02 13:25:15 2016
+//Date        : Sun Feb 26 20:32:50 2017
 //Host        : lightField-PC running 64-bit Service Pack 1  (build 7601)
 //Command     : generate_target design_1_wrapper.bd
 //Design      : design_1_wrapper
@@ -38,6 +38,21 @@ module design_1_wrapper
     clk_out1,
     clk_out2,
     done,
+    emc_rtl_addr,
+    emc_rtl_adv_ldn,
+    emc_rtl_ben,
+    emc_rtl_ce,
+    emc_rtl_ce_n,
+    emc_rtl_clken,
+    emc_rtl_cre,
+    emc_rtl_dq_io,
+    emc_rtl_lbon,
+    emc_rtl_oen,
+    emc_rtl_qwen,
+    emc_rtl_rnw,
+    emc_rtl_rpn,
+    emc_rtl_wait,
+    emc_rtl_wen,
     gpio_rtl_0_tri_io,
     gpio_rtl_1_tri_io,
     gpio_rtl_tri_io,
@@ -73,6 +88,21 @@ module design_1_wrapper
   output clk_out1;
   output clk_out2;
   input done;
+  output [31:0]emc_rtl_addr;
+  output emc_rtl_adv_ldn;
+  output [3:0]emc_rtl_ben;
+  output [0:0]emc_rtl_ce;
+  output [0:0]emc_rtl_ce_n;
+  output emc_rtl_clken;
+  output emc_rtl_cre;
+  inout [31:0]emc_rtl_dq_io;
+  output emc_rtl_lbon;
+  output [0:0]emc_rtl_oen;
+  output [3:0]emc_rtl_qwen;
+  output emc_rtl_rnw;
+  output emc_rtl_rpn;
+  input [0:0]emc_rtl_wait;
+  output emc_rtl_wen;
   inout [5:0]gpio_rtl_0_tri_io;
   inout [31:0]gpio_rtl_1_tri_io;
   inout [31:0]gpio_rtl_tri_io;
@@ -109,6 +139,148 @@ module design_1_wrapper
   wire clk_out1;
   wire clk_out2;
   wire done;
+  wire [31:0]emc_rtl_addr;
+  wire emc_rtl_adv_ldn;
+  wire [3:0]emc_rtl_ben;
+  wire [0:0]emc_rtl_ce;
+  wire [0:0]emc_rtl_ce_n;
+  wire emc_rtl_clken;
+  wire emc_rtl_cre;
+  wire [0:0]emc_rtl_dq_i_0;
+  wire [1:1]emc_rtl_dq_i_1;
+  wire [10:10]emc_rtl_dq_i_10;
+  wire [11:11]emc_rtl_dq_i_11;
+  wire [12:12]emc_rtl_dq_i_12;
+  wire [13:13]emc_rtl_dq_i_13;
+  wire [14:14]emc_rtl_dq_i_14;
+  wire [15:15]emc_rtl_dq_i_15;
+  wire [16:16]emc_rtl_dq_i_16;
+  wire [17:17]emc_rtl_dq_i_17;
+  wire [18:18]emc_rtl_dq_i_18;
+  wire [19:19]emc_rtl_dq_i_19;
+  wire [2:2]emc_rtl_dq_i_2;
+  wire [20:20]emc_rtl_dq_i_20;
+  wire [21:21]emc_rtl_dq_i_21;
+  wire [22:22]emc_rtl_dq_i_22;
+  wire [23:23]emc_rtl_dq_i_23;
+  wire [24:24]emc_rtl_dq_i_24;
+  wire [25:25]emc_rtl_dq_i_25;
+  wire [26:26]emc_rtl_dq_i_26;
+  wire [27:27]emc_rtl_dq_i_27;
+  wire [28:28]emc_rtl_dq_i_28;
+  wire [29:29]emc_rtl_dq_i_29;
+  wire [3:3]emc_rtl_dq_i_3;
+  wire [30:30]emc_rtl_dq_i_30;
+  wire [31:31]emc_rtl_dq_i_31;
+  wire [4:4]emc_rtl_dq_i_4;
+  wire [5:5]emc_rtl_dq_i_5;
+  wire [6:6]emc_rtl_dq_i_6;
+  wire [7:7]emc_rtl_dq_i_7;
+  wire [8:8]emc_rtl_dq_i_8;
+  wire [9:9]emc_rtl_dq_i_9;
+  wire [0:0]emc_rtl_dq_io_0;
+  wire [1:1]emc_rtl_dq_io_1;
+  wire [10:10]emc_rtl_dq_io_10;
+  wire [11:11]emc_rtl_dq_io_11;
+  wire [12:12]emc_rtl_dq_io_12;
+  wire [13:13]emc_rtl_dq_io_13;
+  wire [14:14]emc_rtl_dq_io_14;
+  wire [15:15]emc_rtl_dq_io_15;
+  wire [16:16]emc_rtl_dq_io_16;
+  wire [17:17]emc_rtl_dq_io_17;
+  wire [18:18]emc_rtl_dq_io_18;
+  wire [19:19]emc_rtl_dq_io_19;
+  wire [2:2]emc_rtl_dq_io_2;
+  wire [20:20]emc_rtl_dq_io_20;
+  wire [21:21]emc_rtl_dq_io_21;
+  wire [22:22]emc_rtl_dq_io_22;
+  wire [23:23]emc_rtl_dq_io_23;
+  wire [24:24]emc_rtl_dq_io_24;
+  wire [25:25]emc_rtl_dq_io_25;
+  wire [26:26]emc_rtl_dq_io_26;
+  wire [27:27]emc_rtl_dq_io_27;
+  wire [28:28]emc_rtl_dq_io_28;
+  wire [29:29]emc_rtl_dq_io_29;
+  wire [3:3]emc_rtl_dq_io_3;
+  wire [30:30]emc_rtl_dq_io_30;
+  wire [31:31]emc_rtl_dq_io_31;
+  wire [4:4]emc_rtl_dq_io_4;
+  wire [5:5]emc_rtl_dq_io_5;
+  wire [6:6]emc_rtl_dq_io_6;
+  wire [7:7]emc_rtl_dq_io_7;
+  wire [8:8]emc_rtl_dq_io_8;
+  wire [9:9]emc_rtl_dq_io_9;
+  wire [0:0]emc_rtl_dq_o_0;
+  wire [1:1]emc_rtl_dq_o_1;
+  wire [10:10]emc_rtl_dq_o_10;
+  wire [11:11]emc_rtl_dq_o_11;
+  wire [12:12]emc_rtl_dq_o_12;
+  wire [13:13]emc_rtl_dq_o_13;
+  wire [14:14]emc_rtl_dq_o_14;
+  wire [15:15]emc_rtl_dq_o_15;
+  wire [16:16]emc_rtl_dq_o_16;
+  wire [17:17]emc_rtl_dq_o_17;
+  wire [18:18]emc_rtl_dq_o_18;
+  wire [19:19]emc_rtl_dq_o_19;
+  wire [2:2]emc_rtl_dq_o_2;
+  wire [20:20]emc_rtl_dq_o_20;
+  wire [21:21]emc_rtl_dq_o_21;
+  wire [22:22]emc_rtl_dq_o_22;
+  wire [23:23]emc_rtl_dq_o_23;
+  wire [24:24]emc_rtl_dq_o_24;
+  wire [25:25]emc_rtl_dq_o_25;
+  wire [26:26]emc_rtl_dq_o_26;
+  wire [27:27]emc_rtl_dq_o_27;
+  wire [28:28]emc_rtl_dq_o_28;
+  wire [29:29]emc_rtl_dq_o_29;
+  wire [3:3]emc_rtl_dq_o_3;
+  wire [30:30]emc_rtl_dq_o_30;
+  wire [31:31]emc_rtl_dq_o_31;
+  wire [4:4]emc_rtl_dq_o_4;
+  wire [5:5]emc_rtl_dq_o_5;
+  wire [6:6]emc_rtl_dq_o_6;
+  wire [7:7]emc_rtl_dq_o_7;
+  wire [8:8]emc_rtl_dq_o_8;
+  wire [9:9]emc_rtl_dq_o_9;
+  wire [0:0]emc_rtl_dq_t_0;
+  wire [1:1]emc_rtl_dq_t_1;
+  wire [10:10]emc_rtl_dq_t_10;
+  wire [11:11]emc_rtl_dq_t_11;
+  wire [12:12]emc_rtl_dq_t_12;
+  wire [13:13]emc_rtl_dq_t_13;
+  wire [14:14]emc_rtl_dq_t_14;
+  wire [15:15]emc_rtl_dq_t_15;
+  wire [16:16]emc_rtl_dq_t_16;
+  wire [17:17]emc_rtl_dq_t_17;
+  wire [18:18]emc_rtl_dq_t_18;
+  wire [19:19]emc_rtl_dq_t_19;
+  wire [2:2]emc_rtl_dq_t_2;
+  wire [20:20]emc_rtl_dq_t_20;
+  wire [21:21]emc_rtl_dq_t_21;
+  wire [22:22]emc_rtl_dq_t_22;
+  wire [23:23]emc_rtl_dq_t_23;
+  wire [24:24]emc_rtl_dq_t_24;
+  wire [25:25]emc_rtl_dq_t_25;
+  wire [26:26]emc_rtl_dq_t_26;
+  wire [27:27]emc_rtl_dq_t_27;
+  wire [28:28]emc_rtl_dq_t_28;
+  wire [29:29]emc_rtl_dq_t_29;
+  wire [3:3]emc_rtl_dq_t_3;
+  wire [30:30]emc_rtl_dq_t_30;
+  wire [31:31]emc_rtl_dq_t_31;
+  wire [4:4]emc_rtl_dq_t_4;
+  wire [5:5]emc_rtl_dq_t_5;
+  wire [6:6]emc_rtl_dq_t_6;
+  wire [7:7]emc_rtl_dq_t_7;
+  wire [8:8]emc_rtl_dq_t_8;
+  wire [9:9]emc_rtl_dq_t_9;
+  wire emc_rtl_lbon;
+  wire [0:0]emc_rtl_oen;
+  wire [3:0]emc_rtl_qwen;
+  wire emc_rtl_rnw;
+  wire emc_rtl_rpn;
+  wire [0:0]emc_rtl_wait;
+  wire emc_rtl_wen;
   wire [0:0]gpio_rtl_0_tri_i_0;
   wire [1:1]gpio_rtl_0_tri_i_1;
   wire [2:2]gpio_rtl_0_tri_i_2;
@@ -423,6 +595,23 @@ module design_1_wrapper
         .clk_out1(clk_out1),
         .clk_out2(clk_out2),
         .done(done),
+        .emc_rtl_addr(emc_rtl_addr),
+        .emc_rtl_adv_ldn(emc_rtl_adv_ldn),
+        .emc_rtl_ben(emc_rtl_ben),
+        .emc_rtl_ce(emc_rtl_ce),
+        .emc_rtl_ce_n(emc_rtl_ce_n),
+        .emc_rtl_clken(emc_rtl_clken),
+        .emc_rtl_cre(emc_rtl_cre),
+        .emc_rtl_dq_i({emc_rtl_dq_i_31,emc_rtl_dq_i_30,emc_rtl_dq_i_29,emc_rtl_dq_i_28,emc_rtl_dq_i_27,emc_rtl_dq_i_26,emc_rtl_dq_i_25,emc_rtl_dq_i_24,emc_rtl_dq_i_23,emc_rtl_dq_i_22,emc_rtl_dq_i_21,emc_rtl_dq_i_20,emc_rtl_dq_i_19,emc_rtl_dq_i_18,emc_rtl_dq_i_17,emc_rtl_dq_i_16,emc_rtl_dq_i_15,emc_rtl_dq_i_14,emc_rtl_dq_i_13,emc_rtl_dq_i_12,emc_rtl_dq_i_11,emc_rtl_dq_i_10,emc_rtl_dq_i_9,emc_rtl_dq_i_8,emc_rtl_dq_i_7,emc_rtl_dq_i_6,emc_rtl_dq_i_5,emc_rtl_dq_i_4,emc_rtl_dq_i_3,emc_rtl_dq_i_2,emc_rtl_dq_i_1,emc_rtl_dq_i_0}),
+        .emc_rtl_dq_o({emc_rtl_dq_o_31,emc_rtl_dq_o_30,emc_rtl_dq_o_29,emc_rtl_dq_o_28,emc_rtl_dq_o_27,emc_rtl_dq_o_26,emc_rtl_dq_o_25,emc_rtl_dq_o_24,emc_rtl_dq_o_23,emc_rtl_dq_o_22,emc_rtl_dq_o_21,emc_rtl_dq_o_20,emc_rtl_dq_o_19,emc_rtl_dq_o_18,emc_rtl_dq_o_17,emc_rtl_dq_o_16,emc_rtl_dq_o_15,emc_rtl_dq_o_14,emc_rtl_dq_o_13,emc_rtl_dq_o_12,emc_rtl_dq_o_11,emc_rtl_dq_o_10,emc_rtl_dq_o_9,emc_rtl_dq_o_8,emc_rtl_dq_o_7,emc_rtl_dq_o_6,emc_rtl_dq_o_5,emc_rtl_dq_o_4,emc_rtl_dq_o_3,emc_rtl_dq_o_2,emc_rtl_dq_o_1,emc_rtl_dq_o_0}),
+        .emc_rtl_dq_t({emc_rtl_dq_t_31,emc_rtl_dq_t_30,emc_rtl_dq_t_29,emc_rtl_dq_t_28,emc_rtl_dq_t_27,emc_rtl_dq_t_26,emc_rtl_dq_t_25,emc_rtl_dq_t_24,emc_rtl_dq_t_23,emc_rtl_dq_t_22,emc_rtl_dq_t_21,emc_rtl_dq_t_20,emc_rtl_dq_t_19,emc_rtl_dq_t_18,emc_rtl_dq_t_17,emc_rtl_dq_t_16,emc_rtl_dq_t_15,emc_rtl_dq_t_14,emc_rtl_dq_t_13,emc_rtl_dq_t_12,emc_rtl_dq_t_11,emc_rtl_dq_t_10,emc_rtl_dq_t_9,emc_rtl_dq_t_8,emc_rtl_dq_t_7,emc_rtl_dq_t_6,emc_rtl_dq_t_5,emc_rtl_dq_t_4,emc_rtl_dq_t_3,emc_rtl_dq_t_2,emc_rtl_dq_t_1,emc_rtl_dq_t_0}),
+        .emc_rtl_lbon(emc_rtl_lbon),
+        .emc_rtl_oen(emc_rtl_oen),
+        .emc_rtl_qwen(emc_rtl_qwen),
+        .emc_rtl_rnw(emc_rtl_rnw),
+        .emc_rtl_rpn(emc_rtl_rpn),
+        .emc_rtl_wait(emc_rtl_wait),
+        .emc_rtl_wen(emc_rtl_wen),
         .gpio_rtl_0_tri_i({gpio_rtl_0_tri_i_5,gpio_rtl_0_tri_i_4,gpio_rtl_0_tri_i_3,gpio_rtl_0_tri_i_2,gpio_rtl_0_tri_i_1,gpio_rtl_0_tri_i_0}),
         .gpio_rtl_0_tri_o({gpio_rtl_0_tri_o_5,gpio_rtl_0_tri_o_4,gpio_rtl_0_tri_o_3,gpio_rtl_0_tri_o_2,gpio_rtl_0_tri_o_1,gpio_rtl_0_tri_o_0}),
         .gpio_rtl_0_tri_t({gpio_rtl_0_tri_t_5,gpio_rtl_0_tri_t_4,gpio_rtl_0_tri_t_3,gpio_rtl_0_tri_t_2,gpio_rtl_0_tri_t_1,gpio_rtl_0_tri_t_0}),
@@ -436,6 +625,166 @@ module design_1_wrapper
         .progb(progb),
         .rxd_232(rxd_232),
         .txd_232(txd_232));
+  IOBUF emc_rtl_dq_iobuf_0
+       (.I(emc_rtl_dq_o_0),
+        .IO(emc_rtl_dq_io[0]),
+        .O(emc_rtl_dq_i_0),
+        .T(emc_rtl_dq_t_0));
+  IOBUF emc_rtl_dq_iobuf_1
+       (.I(emc_rtl_dq_o_1),
+        .IO(emc_rtl_dq_io[1]),
+        .O(emc_rtl_dq_i_1),
+        .T(emc_rtl_dq_t_1));
+  IOBUF emc_rtl_dq_iobuf_10
+       (.I(emc_rtl_dq_o_10),
+        .IO(emc_rtl_dq_io[10]),
+        .O(emc_rtl_dq_i_10),
+        .T(emc_rtl_dq_t_10));
+  IOBUF emc_rtl_dq_iobuf_11
+       (.I(emc_rtl_dq_o_11),
+        .IO(emc_rtl_dq_io[11]),
+        .O(emc_rtl_dq_i_11),
+        .T(emc_rtl_dq_t_11));
+  IOBUF emc_rtl_dq_iobuf_12
+       (.I(emc_rtl_dq_o_12),
+        .IO(emc_rtl_dq_io[12]),
+        .O(emc_rtl_dq_i_12),
+        .T(emc_rtl_dq_t_12));
+  IOBUF emc_rtl_dq_iobuf_13
+       (.I(emc_rtl_dq_o_13),
+        .IO(emc_rtl_dq_io[13]),
+        .O(emc_rtl_dq_i_13),
+        .T(emc_rtl_dq_t_13));
+  IOBUF emc_rtl_dq_iobuf_14
+       (.I(emc_rtl_dq_o_14),
+        .IO(emc_rtl_dq_io[14]),
+        .O(emc_rtl_dq_i_14),
+        .T(emc_rtl_dq_t_14));
+  IOBUF emc_rtl_dq_iobuf_15
+       (.I(emc_rtl_dq_o_15),
+        .IO(emc_rtl_dq_io[15]),
+        .O(emc_rtl_dq_i_15),
+        .T(emc_rtl_dq_t_15));
+  IOBUF emc_rtl_dq_iobuf_16
+       (.I(emc_rtl_dq_o_16),
+        .IO(emc_rtl_dq_io[16]),
+        .O(emc_rtl_dq_i_16),
+        .T(emc_rtl_dq_t_16));
+  IOBUF emc_rtl_dq_iobuf_17
+       (.I(emc_rtl_dq_o_17),
+        .IO(emc_rtl_dq_io[17]),
+        .O(emc_rtl_dq_i_17),
+        .T(emc_rtl_dq_t_17));
+  IOBUF emc_rtl_dq_iobuf_18
+       (.I(emc_rtl_dq_o_18),
+        .IO(emc_rtl_dq_io[18]),
+        .O(emc_rtl_dq_i_18),
+        .T(emc_rtl_dq_t_18));
+  IOBUF emc_rtl_dq_iobuf_19
+       (.I(emc_rtl_dq_o_19),
+        .IO(emc_rtl_dq_io[19]),
+        .O(emc_rtl_dq_i_19),
+        .T(emc_rtl_dq_t_19));
+  IOBUF emc_rtl_dq_iobuf_2
+       (.I(emc_rtl_dq_o_2),
+        .IO(emc_rtl_dq_io[2]),
+        .O(emc_rtl_dq_i_2),
+        .T(emc_rtl_dq_t_2));
+  IOBUF emc_rtl_dq_iobuf_20
+       (.I(emc_rtl_dq_o_20),
+        .IO(emc_rtl_dq_io[20]),
+        .O(emc_rtl_dq_i_20),
+        .T(emc_rtl_dq_t_20));
+  IOBUF emc_rtl_dq_iobuf_21
+       (.I(emc_rtl_dq_o_21),
+        .IO(emc_rtl_dq_io[21]),
+        .O(emc_rtl_dq_i_21),
+        .T(emc_rtl_dq_t_21));
+  IOBUF emc_rtl_dq_iobuf_22
+       (.I(emc_rtl_dq_o_22),
+        .IO(emc_rtl_dq_io[22]),
+        .O(emc_rtl_dq_i_22),
+        .T(emc_rtl_dq_t_22));
+  IOBUF emc_rtl_dq_iobuf_23
+       (.I(emc_rtl_dq_o_23),
+        .IO(emc_rtl_dq_io[23]),
+        .O(emc_rtl_dq_i_23),
+        .T(emc_rtl_dq_t_23));
+  IOBUF emc_rtl_dq_iobuf_24
+       (.I(emc_rtl_dq_o_24),
+        .IO(emc_rtl_dq_io[24]),
+        .O(emc_rtl_dq_i_24),
+        .T(emc_rtl_dq_t_24));
+  IOBUF emc_rtl_dq_iobuf_25
+       (.I(emc_rtl_dq_o_25),
+        .IO(emc_rtl_dq_io[25]),
+        .O(emc_rtl_dq_i_25),
+        .T(emc_rtl_dq_t_25));
+  IOBUF emc_rtl_dq_iobuf_26
+       (.I(emc_rtl_dq_o_26),
+        .IO(emc_rtl_dq_io[26]),
+        .O(emc_rtl_dq_i_26),
+        .T(emc_rtl_dq_t_26));
+  IOBUF emc_rtl_dq_iobuf_27
+       (.I(emc_rtl_dq_o_27),
+        .IO(emc_rtl_dq_io[27]),
+        .O(emc_rtl_dq_i_27),
+        .T(emc_rtl_dq_t_27));
+  IOBUF emc_rtl_dq_iobuf_28
+       (.I(emc_rtl_dq_o_28),
+        .IO(emc_rtl_dq_io[28]),
+        .O(emc_rtl_dq_i_28),
+        .T(emc_rtl_dq_t_28));
+  IOBUF emc_rtl_dq_iobuf_29
+       (.I(emc_rtl_dq_o_29),
+        .IO(emc_rtl_dq_io[29]),
+        .O(emc_rtl_dq_i_29),
+        .T(emc_rtl_dq_t_29));
+  IOBUF emc_rtl_dq_iobuf_3
+       (.I(emc_rtl_dq_o_3),
+        .IO(emc_rtl_dq_io[3]),
+        .O(emc_rtl_dq_i_3),
+        .T(emc_rtl_dq_t_3));
+  IOBUF emc_rtl_dq_iobuf_30
+       (.I(emc_rtl_dq_o_30),
+        .IO(emc_rtl_dq_io[30]),
+        .O(emc_rtl_dq_i_30),
+        .T(emc_rtl_dq_t_30));
+  IOBUF emc_rtl_dq_iobuf_31
+       (.I(emc_rtl_dq_o_31),
+        .IO(emc_rtl_dq_io[31]),
+        .O(emc_rtl_dq_i_31),
+        .T(emc_rtl_dq_t_31));
+  IOBUF emc_rtl_dq_iobuf_4
+       (.I(emc_rtl_dq_o_4),
+        .IO(emc_rtl_dq_io[4]),
+        .O(emc_rtl_dq_i_4),
+        .T(emc_rtl_dq_t_4));
+  IOBUF emc_rtl_dq_iobuf_5
+       (.I(emc_rtl_dq_o_5),
+        .IO(emc_rtl_dq_io[5]),
+        .O(emc_rtl_dq_i_5),
+        .T(emc_rtl_dq_t_5));
+  IOBUF emc_rtl_dq_iobuf_6
+       (.I(emc_rtl_dq_o_6),
+        .IO(emc_rtl_dq_io[6]),
+        .O(emc_rtl_dq_i_6),
+        .T(emc_rtl_dq_t_6));
+  IOBUF emc_rtl_dq_iobuf_7
+       (.I(emc_rtl_dq_o_7),
+        .IO(emc_rtl_dq_io[7]),
+        .O(emc_rtl_dq_i_7),
+        .T(emc_rtl_dq_t_7));
+  IOBUF emc_rtl_dq_iobuf_8
+       (.I(emc_rtl_dq_o_8),
+        .IO(emc_rtl_dq_io[8]),
+        .O(emc_rtl_dq_i_8),
+        .T(emc_rtl_dq_t_8));
+  IOBUF emc_rtl_dq_iobuf_9
+       (.I(emc_rtl_dq_o_9),
+        .IO(emc_rtl_dq_io[9]),
+        .O(emc_rtl_dq_i_9),
+        .T(emc_rtl_dq_t_9));
   IOBUF gpio_rtl_0_tri_iobuf_0
        (.I(gpio_rtl_0_tri_o_0),
         .IO(gpio_rtl_0_tri_io[0]),
