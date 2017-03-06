@@ -6,7 +6,7 @@ BEGIN OS
  PARAMETER OS_NAME = device_tree
  PARAMETER PROC_INSTANCE = ps7_cortexa9_0
  PARAMETER console_device = axi_uartlite_0
- PARAMETER main_memory = ps7_ddr_0
+ PARAMETER main_memory = axi_emc_0
 END
 
 
@@ -15,6 +15,91 @@ BEGIN PROCESSOR
  PARAMETER HW_INSTANCE = ps7_cortexa9_0
 END
 
+
+BEGIN DRIVER
+ PARAMETER DRIVER_NAME = axi_emc
+ PARAMETER HW_INSTANCE = axi_emc_0
+ PARAMETER bank-width = 4
+ PARAMETER reg = 0x60000000 0x2000000
+ PARAMETER xlnx,axi-clk-period-ps = 20000
+ PARAMETER xlnx,include-datawidth-matching-0 = 0
+ PARAMETER xlnx,include-datawidth-matching-1 = 1
+ PARAMETER xlnx,include-datawidth-matching-2 = 1
+ PARAMETER xlnx,include-datawidth-matching-3 = 1
+ PARAMETER xlnx,include-negedge-ioregs = 0
+ PARAMETER xlnx,lflash-period-ps = 20000
+ PARAMETER xlnx,linear-flash-sync-burst = 0
+ PARAMETER xlnx,max-mem-width = 32
+ PARAMETER xlnx,mem-a-lsb = 0
+ PARAMETER xlnx,mem-a-msb = 31
+ PARAMETER xlnx,mem0-type = 1
+ PARAMETER xlnx,mem0-width = 32
+ PARAMETER xlnx,mem1-type = 0
+ PARAMETER xlnx,mem1-width = 16
+ PARAMETER xlnx,mem2-type = 0
+ PARAMETER xlnx,mem2-width = 16
+ PARAMETER xlnx,mem3-type = 0
+ PARAMETER xlnx,mem3-width = 16
+ PARAMETER xlnx,num-banks-mem = 1
+ PARAMETER xlnx,page-size = 16
+ PARAMETER xlnx,parity-type-mem-0 = 0
+ PARAMETER xlnx,parity-type-mem-1 = 0
+ PARAMETER xlnx,parity-type-mem-2 = 0
+ PARAMETER xlnx,parity-type-mem-3 = 0
+ PARAMETER xlnx,port-diff = 0
+ PARAMETER xlnx,s-axi-en-reg = 0
+ PARAMETER xlnx,s-axi-mem-addr-width = 32
+ PARAMETER xlnx,s-axi-mem-data-width = 32
+ PARAMETER xlnx,s-axi-mem-id-width = 1
+ PARAMETER xlnx,s-axi-reg-addr-width = 5
+ PARAMETER xlnx,s-axi-reg-data-width = 32
+ PARAMETER xlnx,synch-pipedelay-0 = 1
+ PARAMETER xlnx,synch-pipedelay-1 = 1
+ PARAMETER xlnx,synch-pipedelay-2 = 1
+ PARAMETER xlnx,synch-pipedelay-3 = 1
+ PARAMETER xlnx,tavdv-ps-mem-0 = 15000
+ PARAMETER xlnx,tavdv-ps-mem-1 = 15000
+ PARAMETER xlnx,tavdv-ps-mem-2 = 15000
+ PARAMETER xlnx,tavdv-ps-mem-3 = 15000
+ PARAMETER xlnx,tcedv-ps-mem-0 = 15000
+ PARAMETER xlnx,tcedv-ps-mem-1 = 15000
+ PARAMETER xlnx,tcedv-ps-mem-2 = 15000
+ PARAMETER xlnx,tcedv-ps-mem-3 = 15000
+ PARAMETER xlnx,thzce-ps-mem-0 = 7000
+ PARAMETER xlnx,thzce-ps-mem-1 = 7000
+ PARAMETER xlnx,thzce-ps-mem-2 = 7000
+ PARAMETER xlnx,thzce-ps-mem-3 = 7000
+ PARAMETER xlnx,thzoe-ps-mem-0 = 7000
+ PARAMETER xlnx,thzoe-ps-mem-1 = 7000
+ PARAMETER xlnx,thzoe-ps-mem-2 = 7000
+ PARAMETER xlnx,thzoe-ps-mem-3 = 7000
+ PARAMETER xlnx,tlzwe-ps-mem-0 = 0
+ PARAMETER xlnx,tlzwe-ps-mem-1 = 0
+ PARAMETER xlnx,tlzwe-ps-mem-2 = 0
+ PARAMETER xlnx,tlzwe-ps-mem-3 = 0
+ PARAMETER xlnx,tpacc-ps-flash-0 = 25000
+ PARAMETER xlnx,tpacc-ps-flash-1 = 25000
+ PARAMETER xlnx,tpacc-ps-flash-2 = 25000
+ PARAMETER xlnx,tpacc-ps-flash-3 = 25000
+ PARAMETER xlnx,twc-ps-mem-0 = 15000
+ PARAMETER xlnx,twc-ps-mem-1 = 15000
+ PARAMETER xlnx,twc-ps-mem-2 = 15000
+ PARAMETER xlnx,twc-ps-mem-3 = 15000
+ PARAMETER xlnx,twp-ps-mem-0 = 12000
+ PARAMETER xlnx,twp-ps-mem-1 = 12000
+ PARAMETER xlnx,twp-ps-mem-2 = 12000
+ PARAMETER xlnx,twp-ps-mem-3 = 12000
+ PARAMETER xlnx,twph-ps-mem-0 = 12000
+ PARAMETER xlnx,twph-ps-mem-1 = 12000
+ PARAMETER xlnx,twph-ps-mem-2 = 12000
+ PARAMETER xlnx,twph-ps-mem-3 = 12000
+ PARAMETER xlnx,use-startup = 0
+ PARAMETER xlnx,use-startup-int = 0
+ PARAMETER xlnx,wr-rec-time-mem-0 = 27000
+ PARAMETER xlnx,wr-rec-time-mem-1 = 27000
+ PARAMETER xlnx,wr-rec-time-mem-2 = 27000
+ PARAMETER xlnx,wr-rec-time-mem-3 = 27000
+END
 
 BEGIN DRIVER
  PARAMETER DRIVER_NAME = gpio
@@ -37,7 +122,6 @@ END
 BEGIN DRIVER
  PARAMETER DRIVER_NAME = gpio
  PARAMETER HW_INSTANCE = axi_gpio_1
- PARAMETER #interrupt-cells = 2
  PARAMETER reg = 0x41210000 0x10000
  PARAMETER xlnx,all-inputs = 0
  PARAMETER xlnx,all-inputs-2 = 0
@@ -47,7 +131,7 @@ BEGIN DRIVER
  PARAMETER xlnx,dout-default-2 = 0x00000000
  PARAMETER xlnx,gpio-width = 6
  PARAMETER xlnx,gpio2-width = 32
- PARAMETER xlnx,interrupt-present = 1
+ PARAMETER xlnx,interrupt-present = 0
  PARAMETER xlnx,is-dual = 0
  PARAMETER xlnx,tri-default = 0xFFFFFFFF
  PARAMETER xlnx,tri-default-2 = 0xFFFFFFFF
@@ -56,7 +140,6 @@ END
 BEGIN DRIVER
  PARAMETER DRIVER_NAME = gpio
  PARAMETER HW_INSTANCE = axi_gpio_2
- PARAMETER #interrupt-cells = 2
  PARAMETER reg = 0x41220000 0x10000
  PARAMETER xlnx,all-inputs = 0
  PARAMETER xlnx,all-inputs-2 = 0
@@ -66,7 +149,7 @@ BEGIN DRIVER
  PARAMETER xlnx,dout-default-2 = 0x00000000
  PARAMETER xlnx,gpio-width = 32
  PARAMETER xlnx,gpio2-width = 32
- PARAMETER xlnx,interrupt-present = 1
+ PARAMETER xlnx,interrupt-present = 0
  PARAMETER xlnx,is-dual = 0
  PARAMETER xlnx,tri-default = 0xFFFFFFFF
  PARAMETER xlnx,tri-default-2 = 0xFFFFFFFF

@@ -18,7 +18,7 @@ module thinpadNG_zynq_top(/*autoarg*/
 
     //Outputs
     SPI0_MOSI_O, SPI0_SCLK_O, UART_1_txd, 
-    clk_out1, clk_out2, emc_rtl_addr, emc_rtl_ben, 
+    clk_out1, clk_out2, emc_rtl_addr_wrapper, emc_rtl_ben, 
     emc_rtl_ce_n, emc_rtl_oen, emc_rtl_wen, 
     progb, txd_232, 
 
@@ -61,7 +61,7 @@ module thinpadNG_zynq_top(/*autoarg*/
     output clk_out1;
     output clk_out2;
     input done;
-    output [31:0]emc_rtl_addr;
+    output [19:0]emc_rtl_addr_wrapper;
     output [3:0]emc_rtl_ben;
     output [0:0]emc_rtl_ce_n;
     inout [31:0]emc_rtl_dq_io;
@@ -104,6 +104,7 @@ module thinpadNG_zynq_top(/*autoarg*/
     wire clk_out2;
     wire done;
     wire [31:0]emc_rtl_addr;
+    wire [19:0]emc_rtl_addr_wrapper;
     wire emc_rtl_adv_ldn;
     wire [3:0]emc_rtl_ben;
     wire [0:0]emc_rtl_ce;
@@ -125,6 +126,8 @@ module thinpadNG_zynq_top(/*autoarg*/
     wire [0:0]progb;
     wire rxd_232;
     wire txd_232;
+    
+    assign emc_rtl_addr_wrapper = emc_rtl_addr[21:2];
 
     design_1_wrapper block_design(/*autoinst*/
     .DDR_addr                   (DDR_addr[14:0]                 ), // inout
