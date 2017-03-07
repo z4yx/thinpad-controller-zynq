@@ -1,8 +1,8 @@
 //Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
-//Tool Version: Vivado v.2016.3 (win64) Build 1682563 Mon Oct 10 19:07:27 MDT 2016
-//Date        : Mon Feb 27 13:15:33 2017
-//Host        : lightField-PC running 64-bit Service Pack 1  (build 7601)
+//Tool Version: Vivado v.2016.4 (lin64) Build 1733598 Wed Dec 14 22:35:42 MST 2016
+//Date        : Mon Mar  6 23:57:46 2017
+//Host        : skyworks running 64-bit Ubuntu 16.04.1 LTS
 //Command     : generate_target bd_0cd4_wrapper.bd
 //Design      : bd_0cd4_wrapper
 //Purpose     : IP block netlist

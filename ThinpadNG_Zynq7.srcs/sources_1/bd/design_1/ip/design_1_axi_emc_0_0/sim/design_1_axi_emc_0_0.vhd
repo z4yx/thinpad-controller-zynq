@@ -47,20 +47,21 @@
 -- DO NOT MODIFY THIS FILE.
 
 -- IP VLNV: xilinx.com:ip:axi_emc:3.0
--- IP Revision: 10
+-- IP Revision: 11
 
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 USE ieee.numeric_std.ALL;
 
-LIBRARY axi_emc_v3_0_10;
-USE axi_emc_v3_0_10.axi_emc;
+LIBRARY axi_emc_v3_0_11;
+USE axi_emc_v3_0_11.axi_emc;
 
 ENTITY design_1_axi_emc_0_0 IS
   PORT (
     s_axi_aclk : IN STD_LOGIC;
     s_axi_aresetn : IN STD_LOGIC;
     rdclk : IN STD_LOGIC;
+    s_axi_mem_awid : IN STD_LOGIC_VECTOR(11 DOWNTO 0);
     s_axi_mem_awaddr : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
     s_axi_mem_awlen : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
     s_axi_mem_awsize : IN STD_LOGIC_VECTOR(2 DOWNTO 0);
@@ -75,9 +76,11 @@ ENTITY design_1_axi_emc_0_0 IS
     s_axi_mem_wlast : IN STD_LOGIC;
     s_axi_mem_wvalid : IN STD_LOGIC;
     s_axi_mem_wready : OUT STD_LOGIC;
+    s_axi_mem_bid : OUT STD_LOGIC_VECTOR(11 DOWNTO 0);
     s_axi_mem_bresp : OUT STD_LOGIC_VECTOR(1 DOWNTO 0);
     s_axi_mem_bvalid : OUT STD_LOGIC;
     s_axi_mem_bready : IN STD_LOGIC;
+    s_axi_mem_arid : IN STD_LOGIC_VECTOR(11 DOWNTO 0);
     s_axi_mem_araddr : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
     s_axi_mem_arlen : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
     s_axi_mem_arsize : IN STD_LOGIC_VECTOR(2 DOWNTO 0);
@@ -87,6 +90,7 @@ ENTITY design_1_axi_emc_0_0 IS
     s_axi_mem_arprot : IN STD_LOGIC_VECTOR(2 DOWNTO 0);
     s_axi_mem_arvalid : IN STD_LOGIC;
     s_axi_mem_arready : OUT STD_LOGIC;
+    s_axi_mem_rid : OUT STD_LOGIC_VECTOR(11 DOWNTO 0);
     s_axi_mem_rdata : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
     s_axi_mem_rresp : OUT STD_LOGIC_VECTOR(1 DOWNTO 0);
     s_axi_mem_rlast : OUT STD_LOGIC;
@@ -226,7 +230,7 @@ ARCHITECTURE design_1_axi_emc_0_0_arch OF design_1_axi_emc_0_0 IS
       s_axi_reg_rresp : OUT STD_LOGIC_VECTOR(1 DOWNTO 0);
       s_axi_reg_rvalid : OUT STD_LOGIC;
       s_axi_reg_rready : IN STD_LOGIC;
-      s_axi_mem_awid : IN STD_LOGIC_VECTOR(0 DOWNTO 0);
+      s_axi_mem_awid : IN STD_LOGIC_VECTOR(11 DOWNTO 0);
       s_axi_mem_awaddr : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
       s_axi_mem_awlen : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
       s_axi_mem_awsize : IN STD_LOGIC_VECTOR(2 DOWNTO 0);
@@ -241,11 +245,11 @@ ARCHITECTURE design_1_axi_emc_0_0_arch OF design_1_axi_emc_0_0 IS
       s_axi_mem_wlast : IN STD_LOGIC;
       s_axi_mem_wvalid : IN STD_LOGIC;
       s_axi_mem_wready : OUT STD_LOGIC;
-      s_axi_mem_bid : OUT STD_LOGIC_VECTOR(0 DOWNTO 0);
+      s_axi_mem_bid : OUT STD_LOGIC_VECTOR(11 DOWNTO 0);
       s_axi_mem_bresp : OUT STD_LOGIC_VECTOR(1 DOWNTO 0);
       s_axi_mem_bvalid : OUT STD_LOGIC;
       s_axi_mem_bready : IN STD_LOGIC;
-      s_axi_mem_arid : IN STD_LOGIC_VECTOR(0 DOWNTO 0);
+      s_axi_mem_arid : IN STD_LOGIC_VECTOR(11 DOWNTO 0);
       s_axi_mem_araddr : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
       s_axi_mem_arlen : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
       s_axi_mem_arsize : IN STD_LOGIC_VECTOR(2 DOWNTO 0);
@@ -255,7 +259,7 @@ ARCHITECTURE design_1_axi_emc_0_0_arch OF design_1_axi_emc_0_0 IS
       s_axi_mem_arprot : IN STD_LOGIC_VECTOR(2 DOWNTO 0);
       s_axi_mem_arvalid : IN STD_LOGIC;
       s_axi_mem_arready : OUT STD_LOGIC;
-      s_axi_mem_rid : OUT STD_LOGIC_VECTOR(0 DOWNTO 0);
+      s_axi_mem_rid : OUT STD_LOGIC_VECTOR(11 DOWNTO 0);
       s_axi_mem_rdata : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
       s_axi_mem_rresp : OUT STD_LOGIC_VECTOR(1 DOWNTO 0);
       s_axi_mem_rlast : OUT STD_LOGIC;
@@ -296,6 +300,7 @@ ARCHITECTURE design_1_axi_emc_0_0_arch OF design_1_axi_emc_0_0 IS
   ATTRIBUTE X_INTERFACE_INFO OF s_axi_aclk: SIGNAL IS "xilinx.com:signal:clock:1.0 aclk CLK";
   ATTRIBUTE X_INTERFACE_INFO OF s_axi_aresetn: SIGNAL IS "xilinx.com:signal:reset:1.0 aresetn RST";
   ATTRIBUTE X_INTERFACE_INFO OF rdclk: SIGNAL IS "xilinx.com:signal:clock:1.0 rdclk CLK";
+  ATTRIBUTE X_INTERFACE_INFO OF s_axi_mem_awid: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI_MEM AWID";
   ATTRIBUTE X_INTERFACE_INFO OF s_axi_mem_awaddr: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI_MEM AWADDR";
   ATTRIBUTE X_INTERFACE_INFO OF s_axi_mem_awlen: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI_MEM AWLEN";
   ATTRIBUTE X_INTERFACE_INFO OF s_axi_mem_awsize: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI_MEM AWSIZE";
@@ -310,9 +315,11 @@ ARCHITECTURE design_1_axi_emc_0_0_arch OF design_1_axi_emc_0_0 IS
   ATTRIBUTE X_INTERFACE_INFO OF s_axi_mem_wlast: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI_MEM WLAST";
   ATTRIBUTE X_INTERFACE_INFO OF s_axi_mem_wvalid: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI_MEM WVALID";
   ATTRIBUTE X_INTERFACE_INFO OF s_axi_mem_wready: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI_MEM WREADY";
+  ATTRIBUTE X_INTERFACE_INFO OF s_axi_mem_bid: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI_MEM BID";
   ATTRIBUTE X_INTERFACE_INFO OF s_axi_mem_bresp: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI_MEM BRESP";
   ATTRIBUTE X_INTERFACE_INFO OF s_axi_mem_bvalid: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI_MEM BVALID";
   ATTRIBUTE X_INTERFACE_INFO OF s_axi_mem_bready: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI_MEM BREADY";
+  ATTRIBUTE X_INTERFACE_INFO OF s_axi_mem_arid: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI_MEM ARID";
   ATTRIBUTE X_INTERFACE_INFO OF s_axi_mem_araddr: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI_MEM ARADDR";
   ATTRIBUTE X_INTERFACE_INFO OF s_axi_mem_arlen: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI_MEM ARLEN";
   ATTRIBUTE X_INTERFACE_INFO OF s_axi_mem_arsize: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI_MEM ARSIZE";
@@ -322,6 +329,7 @@ ARCHITECTURE design_1_axi_emc_0_0_arch OF design_1_axi_emc_0_0 IS
   ATTRIBUTE X_INTERFACE_INFO OF s_axi_mem_arprot: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI_MEM ARPROT";
   ATTRIBUTE X_INTERFACE_INFO OF s_axi_mem_arvalid: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI_MEM ARVALID";
   ATTRIBUTE X_INTERFACE_INFO OF s_axi_mem_arready: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI_MEM ARREADY";
+  ATTRIBUTE X_INTERFACE_INFO OF s_axi_mem_rid: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI_MEM RID";
   ATTRIBUTE X_INTERFACE_INFO OF s_axi_mem_rdata: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI_MEM RDATA";
   ATTRIBUTE X_INTERFACE_INFO OF s_axi_mem_rresp: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI_MEM RRESP";
   ATTRIBUTE X_INTERFACE_INFO OF s_axi_mem_rlast: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI_MEM RLAST";
@@ -359,7 +367,7 @@ BEGIN
       C_S_AXI_EN_REG => 0,
       C_S_AXI_MEM_ADDR_WIDTH => 32,
       C_S_AXI_MEM_DATA_WIDTH => 32,
-      C_S_AXI_MEM_ID_WIDTH => 1,
+      C_S_AXI_MEM_ID_WIDTH => 12,
       C_S_AXI_MEM0_BASEADDR => X"60000000",
       C_S_AXI_MEM0_HIGHADDR => X"61FFFFFF",
       C_S_AXI_MEM1_BASEADDR => X"B0000000",
@@ -448,7 +456,7 @@ BEGIN
       s_axi_reg_araddr => STD_LOGIC_VECTOR(TO_UNSIGNED(0, 5)),
       s_axi_reg_arvalid => '0',
       s_axi_reg_rready => '0',
-      s_axi_mem_awid => STD_LOGIC_VECTOR(TO_UNSIGNED(0, 1)),
+      s_axi_mem_awid => s_axi_mem_awid,
       s_axi_mem_awaddr => s_axi_mem_awaddr,
       s_axi_mem_awlen => s_axi_mem_awlen,
       s_axi_mem_awsize => s_axi_mem_awsize,
@@ -463,10 +471,11 @@ BEGIN
       s_axi_mem_wlast => s_axi_mem_wlast,
       s_axi_mem_wvalid => s_axi_mem_wvalid,
       s_axi_mem_wready => s_axi_mem_wready,
+      s_axi_mem_bid => s_axi_mem_bid,
       s_axi_mem_bresp => s_axi_mem_bresp,
       s_axi_mem_bvalid => s_axi_mem_bvalid,
       s_axi_mem_bready => s_axi_mem_bready,
-      s_axi_mem_arid => STD_LOGIC_VECTOR(TO_UNSIGNED(0, 1)),
+      s_axi_mem_arid => s_axi_mem_arid,
       s_axi_mem_araddr => s_axi_mem_araddr,
       s_axi_mem_arlen => s_axi_mem_arlen,
       s_axi_mem_arsize => s_axi_mem_arsize,
@@ -476,6 +485,7 @@ BEGIN
       s_axi_mem_arprot => s_axi_mem_arprot,
       s_axi_mem_arvalid => s_axi_mem_arvalid,
       s_axi_mem_arready => s_axi_mem_arready,
+      s_axi_mem_rid => s_axi_mem_rid,
       s_axi_mem_rdata => s_axi_mem_rdata,
       s_axi_mem_rresp => s_axi_mem_rresp,
       s_axi_mem_rlast => s_axi_mem_rlast,

@@ -48,7 +48,7 @@
 
 
 // IP VLNV: xilinx.com:ip:axi_mmu:2.1
-// IP Revision: 8
+// IP Revision: 9
 
 `timescale 1ns/1ps
 
@@ -291,7 +291,7 @@ input wire m_axi_rvalid;
 (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 M_AXI RREADY" *)
 output wire m_axi_rready;
 
-  axi_mmu_v2_1_8_top #(
+  axi_mmu_v2_1_9_top #(
     .C_FAMILY("zynq"),
     .C_AXI_PROTOCOL(1),
     .C_AXI_ID_WIDTH(12),
@@ -306,7 +306,7 @@ output wire m_axi_rready;
     .C_AXI_BUSER_WIDTH(1),
     .C_NUM_RANGES(5),
     .C_BASE_ADDR('H00000000600000000000000043c000000000000042c0000000000000412200000000000041200000),
-    .C_RANGE_SIZE('H0000001900000010000000100000001000000011),
+    .C_RANGE_SIZE('H0000001900000011000000100000001000000011),
     .C_USES_DEST(0),
     .C_DEST_WIDTH(1),
     .C_DEST('H0000000000000000),

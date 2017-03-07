@@ -18,8 +18,8 @@ module thinpadNG_zynq_top(/*autoarg*/
 
     //Outputs
     SPI0_MOSI_O, SPI0_SCLK_O, UART_1_txd, 
-    clk_out1, clk_out2, emc_rtl_addr_wrapper, emc_rtl_ben, 
-    emc_rtl_ce_n, emc_rtl_oen, emc_rtl_wen, 
+    clk_out1, clk_out2, emc_rtl_addr_wrap, emc_rtl_ben_wrap, 
+    emc_rtl_ce_n_wrap, emc_rtl_oen_wrap, emc_rtl_wen_wrap, 
     progb, txd_232, 
 
     //Inouts
@@ -61,12 +61,12 @@ module thinpadNG_zynq_top(/*autoarg*/
     output clk_out1;
     output clk_out2;
     input done;
-    output [19:0]emc_rtl_addr_wrapper;
-    output [3:0]emc_rtl_ben;
-    output [0:0]emc_rtl_ce_n;
-    inout [31:0]emc_rtl_dq_io;
-    output [0:0]emc_rtl_oen;
-    output emc_rtl_wen;
+    output [19:0]emc_rtl_addr_wrap;
+    output [3:0]emc_rtl_ben_wrap;
+    output [0:0]emc_rtl_ce_n_wrap;
+    inout [31:0]emc_rtl_dq_io;  // because of IOBUF, there is no need to wrap dq_io
+    output [0:0]emc_rtl_oen_wrap;
+    output emc_rtl_wen_wrap;
     inout [5:0]gpio_rtl_0_tri_io;
     inout [31:0]gpio_rtl_1_tri_io;
     inout [31:0]gpio_rtl_tri_io;
@@ -104,7 +104,6 @@ module thinpadNG_zynq_top(/*autoarg*/
     wire clk_out2;
     wire done;
     wire [31:0]emc_rtl_addr;
-    wire [19:0]emc_rtl_addr_wrapper;
     wire emc_rtl_adv_ldn;
     wire [3:0]emc_rtl_ben;
     wire [0:0]emc_rtl_ce;
@@ -126,8 +125,7 @@ module thinpadNG_zynq_top(/*autoarg*/
     wire [0:0]progb;
     wire rxd_232;
     wire txd_232;
-    
-    assign emc_rtl_addr_wrapper = emc_rtl_addr[21:2];
+    wire [127:0]reg2port;
 
     design_1_wrapper block_design(/*autoinst*/
     .DDR_addr                   (DDR_addr[14:0]                 ), // inout
@@ -178,9 +176,47 @@ module thinpadNG_zynq_top(/*autoarg*/
     .gpio_rtl_tri_io            (gpio_rtl_tri_io[31:0]          ), // inout
     .initb                      (initb                          ), // input
     .progb                      (progb[0:0]                     ), // output
+    .reg2port                   (reg2port[127:0]                ), // output
     .rxd_232                    (rxd_232                        ), // input
     .txd_232                    (txd_232                        )  // output
 );
+    
+    // User logic
+    // high_impedence wrapper for axi_emc
+    parameter ADDR_PINS_AMOUNT = 10'd20;
+    parameter ADDR_PINS_OFFSET = 10'd2;
+    parameter BE_PINS_AMOUNT = 10'd4;
+    parameter IO_PINS_AMOUNT = 10'd32;
+
+    reg io_enable;
+    reg io_dir;
+    wire [19:0]emc_rtl_addr_wrap;
+    wire [3:0]emc_rtl_ben_wrap;
+    wire [0:0]emc_rtl_ce_n_wrap;
+    wire [0:0]emc_rtl_oen_wrap;
+    wire emc_rtl_wen_wrap;
+    wire [31:0]emc_rtl_dq_io_wrap;
+       
+    always @(*) begin
+        io_enable <= reg2port[0];  // 1 for enable
+        io_dir <= (~emc_rtl_wen & emc_rtl_oen) ? 1'b1 : 1'b0; // 1 for output
+    end
+    
+    generate
+        genvar i;
+        
+        for (i = 0; i < ADDR_PINS_AMOUNT; i = i + 1) begin : gen2
+            assign emc_rtl_addr_wrap[i] = io_enable ? emc_rtl_addr[i + ADDR_PINS_OFFSET] : 1'bz; 
+        end
+        
+        for (i = 0; i < BE_PINS_AMOUNT; i = i + 1) begin : gen3
+            assign emc_rtl_ben_wrap[i] = io_enable ? emc_rtl_ben[i] : 1'bz; 
+        end  
+    endgenerate
+    
+    assign emc_rtl_ce_n_wrap = io_enable ? emc_rtl_ce_n : 1'bz; 
+    assign emc_rtl_oen_wrap = io_enable ? emc_rtl_oen : 1'bz; 
+    assign emc_rtl_wen_wrap = io_enable ? emc_rtl_wen : 1'bz; 
 
 endmodule
 

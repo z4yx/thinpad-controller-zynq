@@ -238,11 +238,11 @@
         </spirit:parameter>
         <spirit:parameter>
           <spirit:name>NUM_READ_OUTSTANDING</spirit:name>
-          <spirit:value spirit:resolve="generated" spirit:id="BUSIFPARAM_VALUE.S_AXI.NUM_READ_OUTSTANDING">2</spirit:value>
+          <spirit:value spirit:resolve="generated" spirit:id="BUSIFPARAM_VALUE.S_AXI.NUM_READ_OUTSTANDING">8</spirit:value>
         </spirit:parameter>
         <spirit:parameter>
           <spirit:name>NUM_WRITE_OUTSTANDING</spirit:name>
-          <spirit:value spirit:resolve="generated" spirit:id="BUSIFPARAM_VALUE.S_AXI.NUM_WRITE_OUTSTANDING">2</spirit:value>
+          <spirit:value spirit:resolve="generated" spirit:id="BUSIFPARAM_VALUE.S_AXI.NUM_WRITE_OUTSTANDING">8</spirit:value>
         </spirit:parameter>
         <spirit:parameter>
           <spirit:name>MAX_BURST_LENGTH</spirit:name>
@@ -438,7 +438,7 @@
     <spirit:busInterface>
       <spirit:name>interrupt</spirit:name>
       <spirit:displayName>INTERRUPT</spirit:displayName>
-      <spirit:description>Interrupt to Microblaze or to cascaded INTC</spirit:description>
+      <spirit:description>Interrupt to MicroBlaze or to cascaded INTC</spirit:description>
       <spirit:busType spirit:vendor="xilinx.com" spirit:library="interface" spirit:name="mbinterrupt" spirit:version="1.0"/>
       <spirit:abstractionType spirit:vendor="xilinx.com" spirit:library="interface" spirit:name="mbinterrupt_rtl" spirit:version="1.0"/>
       <spirit:master/>
@@ -2040,11 +2040,11 @@ For each bit:
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Mon Feb 27 05:15:45 UTC 2017</spirit:value>
+            <spirit:value>Mon Mar 06 15:53:48 UTC 2017</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>boundaryCRC</spirit:name>
-            <spirit:value>888de370</spirit:value>
+            <spirit:value>947d0436</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>boundaryCRCversion</spirit:name>
@@ -2052,7 +2052,7 @@ For each bit:
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>customizationCRC</spirit:name>
-            <spirit:value>34bbb1ce</spirit:value>
+            <spirit:value>e1b8ae08</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>customizationCRCversion</spirit:name>
@@ -2071,11 +2071,11 @@ For each bit:
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Mon Feb 27 05:15:45 UTC 2017</spirit:value>
+            <spirit:value>Mon Mar 06 15:53:48 UTC 2017</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>boundaryCRC</spirit:name>
-            <spirit:value>888de370</spirit:value>
+            <spirit:value>947d0436</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>boundaryCRCversion</spirit:name>
@@ -2083,7 +2083,7 @@ For each bit:
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>customizationCRC</spirit:name>
-            <spirit:value>34bbb1ce</spirit:value>
+            <spirit:value>e1b8ae08</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>customizationCRCversion</spirit:name>
@@ -2105,11 +2105,11 @@ For each bit:
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Mon Feb 27 05:15:45 UTC 2017</spirit:value>
+            <spirit:value>Mon Mar 06 15:53:48 UTC 2017</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>boundaryCRC</spirit:name>
-            <spirit:value>888de370</spirit:value>
+            <spirit:value>947d0436</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>boundaryCRCversion</spirit:name>
@@ -2117,7 +2117,7 @@ For each bit:
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>customizationCRC</spirit:name>
-            <spirit:value>38a33a64</spirit:value>
+            <spirit:value>9a596c85</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>customizationCRCversion</spirit:name>
@@ -2136,11 +2136,11 @@ For each bit:
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Mon Feb 27 05:15:45 UTC 2017</spirit:value>
+            <spirit:value>Mon Mar 06 15:53:48 UTC 2017</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>boundaryCRC</spirit:name>
-            <spirit:value>888de370</spirit:value>
+            <spirit:value>947d0436</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>boundaryCRCversion</spirit:name>
@@ -2148,7 +2148,7 @@ For each bit:
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>customizationCRC</spirit:name>
-            <spirit:value>38a33a64</spirit:value>
+            <spirit:value>9a596c85</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>customizationCRCversion</spirit:name>
@@ -2814,9 +2814,9 @@ For each bit:
         <spirit:userFileType>USED_IN_synthesis</spirit:userFileType>
       </spirit:file>
       <spirit:file>
-        <spirit:name>../../ipshared/3dfb/hdl/axi_intc_v4_1_vh_rfs.vhd</spirit:name>
+        <spirit:name>../../ipshared/a811/hdl/axi_intc_v4_1_vh_rfs.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
-        <spirit:logicalName>axi_intc_v4_1_8</spirit:logicalName>
+        <spirit:logicalName>axi_intc_v4_1_9</spirit:logicalName>
       </spirit:file>
     </spirit:fileSet>
     <spirit:fileSet>
@@ -2846,10 +2846,10 @@ For each bit:
     <spirit:fileSet>
       <spirit:name>xilinx_vhdlbehavioralsimulation_view_fileset</spirit:name>
       <spirit:file>
-        <spirit:name>../../ipshared/3dfb/hdl/axi_intc_v4_1_vh_rfs.vhd</spirit:name>
+        <spirit:name>../../ipshared/a811/hdl/axi_intc_v4_1_vh_rfs.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
         <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
-        <spirit:logicalName>axi_intc_v4_1_8</spirit:logicalName>
+        <spirit:logicalName>axi_intc_v4_1_9</spirit:logicalName>
       </spirit:file>
     </spirit:fileSet>
     <spirit:fileSet>
@@ -2914,7 +2914,7 @@ For each bit:
     <spirit:parameter>
       <spirit:name>C_NUM_SW_INTR</spirit:name>
       <spirit:displayName>Number of Software Interrupts</spirit:displayName>
-      <spirit:description>Number of interupts controlled by software in addition to the hardware interrupt inputs</spirit:description>
+      <spirit:description>Number of interrupts controlled by software in addition to the hardware interrupt inputs</spirit:description>
       <spirit:value spirit:format="long" spirit:resolve="user" spirit:id="PARAM_VALUE.C_NUM_SW_INTR" spirit:order="2050" spirit:minimum="0" spirit:maximum="31" spirit:rangeType="long">0</spirit:value>
     </spirit:parameter>
     <spirit:parameter>
@@ -2932,7 +2932,7 @@ For each bit:
     <spirit:parameter>
       <spirit:name>C_NUM_SYNC_FF</spirit:name>
       <spirit:displayName>Number of synchronization flip-flops</spirit:displayName>
-      <spirit:description>Number of synchronization flip-flops used to synchronize asynchronous interupt inputs</spirit:description>
+      <spirit:description>Number of synchronization flip-flops used to synchronize asynchronous interrupt inputs</spirit:description>
       <spirit:value spirit:format="long" spirit:resolve="user" spirit:id="PARAM_VALUE.C_NUM_SYNC_FF" spirit:order="2120" spirit:minimum="0" spirit:maximum="7" spirit:rangeType="long">2</spirit:value>
     </spirit:parameter>
     <spirit:parameter>
@@ -2963,7 +2963,7 @@ For each bit:
     <spirit:parameter>
       <spirit:name>C_IVAR_RESET_VALUE</spirit:name>
       <spirit:displayName>Interrupt Vector Address Register reset value</spirit:displayName>
-      <spirit:description>This option determines the Interrupt Vector Address Register reset value, It should be set to the processor interrupt vector address, which is C_BASE_VECTORS + 0x10 for MicroBlaze. Only used when the core is configured with Fast Mode Interrupt.</spirit:description>
+      <spirit:description>This option determines the Interrupt Vector Address Register reset value. It should be set to the processor interrupt vector address, which is C_BASE_VECTORS + 0x10 for MicroBlaze. Only used when the core is configured with Fast Mode Interrupt.</spirit:description>
       <spirit:value spirit:format="bitString" spirit:resolve="user" spirit:id="PARAM_VALUE.C_IVAR_RESET_VALUE" spirit:order="2500" spirit:bitStringLength="32">0x00000010</spirit:value>
       <spirit:vendorExtensions>
         <xilinx:parameterInfo>
@@ -2975,7 +2975,7 @@ For each bit:
     </spirit:parameter>
     <spirit:parameter>
       <spirit:name>C_ENABLE_ASYNC</spirit:name>
-      <spirit:displayName>Enable Asyncronous Clock operation</spirit:displayName>
+      <spirit:displayName>Enable Asynchronous Clock operation</spirit:displayName>
       <spirit:description>Set this option when the AXI clock is asynchronous to the processor clock. In this case the processor_clk and processor_rst inputs must be connected to the processor clock and reset, respectively. Only used when the core is configured with Fast Mode Interrupt.</spirit:description>
       <spirit:value spirit:format="long" spirit:resolve="user" spirit:id="PARAM_VALUE.C_ENABLE_ASYNC" spirit:choiceRef="choice_pairs_4873554b" spirit:order="3400">0</spirit:value>
     </spirit:parameter>
@@ -3060,7 +3060,7 @@ For each bit:
   <spirit:vendorExtensions>
     <xilinx:coreExtensions>
       <xilinx:displayName>AXI Interrupt Controller</xilinx:displayName>
-      <xilinx:coreRevision>8</xilinx:coreRevision>
+      <xilinx:coreRevision>9</xilinx:coreRevision>
       <xilinx:configElementInfos>
         <xilinx:configElementInfo xilinx:referenceId="BUSIFPARAM_VALUE.INTERRUPT.LOW_LATENCY" xilinx:valueSource="user"/>
         <xilinx:configElementInfo xilinx:referenceId="BUSIFPARAM_VALUE.INTERRUPT.SENSITIVITY" xilinx:valueSource="user"/>
@@ -3101,13 +3101,13 @@ For each bit:
       </xilinx:configElementInfos>
     </xilinx:coreExtensions>
     <xilinx:packagingInfo>
-      <xilinx:xilinxVersion>2016.3</xilinx:xilinxVersion>
-      <xilinx:checksum xilinx:scope="busInterfaces" xilinx:value="ab8aa548"/>
+      <xilinx:xilinxVersion>2016.4</xilinx:xilinxVersion>
+      <xilinx:checksum xilinx:scope="busInterfaces" xilinx:value="bca766d9"/>
       <xilinx:checksum xilinx:scope="memoryMaps" xilinx:value="351726b2"/>
-      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="27ced6c7"/>
+      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="384fc50c"/>
       <xilinx:checksum xilinx:scope="ports" xilinx:value="0c6ed35b"/>
       <xilinx:checksum xilinx:scope="hdlParameters" xilinx:value="57757963"/>
-      <xilinx:checksum xilinx:scope="parameters" xilinx:value="0979e88f"/>
+      <xilinx:checksum xilinx:scope="parameters" xilinx:value="c6c7a067"/>
     </xilinx:packagingInfo>
   </spirit:vendorExtensions>
 </spirit:component>

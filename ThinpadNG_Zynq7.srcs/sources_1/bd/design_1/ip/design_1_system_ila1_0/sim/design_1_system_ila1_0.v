@@ -48,7 +48,7 @@
 
 
 // IP VLNV: xilinx.com:ip:system_ila:1.0
-// IP Revision: 0
+// IP Revision: 1
 
 `timescale 1ns/1ps
 

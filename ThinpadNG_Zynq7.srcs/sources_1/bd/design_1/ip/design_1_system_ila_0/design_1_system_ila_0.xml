@@ -61,37 +61,7 @@
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>customizationCRC</spirit:name>
-            <spirit:value>f5e56b86</spirit:value>
-          </spirit:parameter>
-          <spirit:parameter>
-            <spirit:name>customizationCRCversion</spirit:name>
-            <spirit:value>6</spirit:value>
-          </spirit:parameter>
-        </spirit:parameters>
-      </spirit:view>
-      <spirit:view>
-        <spirit:name>xilinx_elaboratebd</spirit:name>
-        <spirit:displayName>Elaborate BD</spirit:displayName>
-        <spirit:envIdentifier>:vivado.xilinx.com:elaborate.bd</spirit:envIdentifier>
-        <spirit:fileSetRef>
-          <spirit:localName>xilinx_elaboratebd_view_fileset</spirit:localName>
-        </spirit:fileSetRef>
-        <spirit:parameters>
-          <spirit:parameter>
-            <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Mon Feb 27 01:36:20 UTC 2017</spirit:value>
-          </spirit:parameter>
-          <spirit:parameter>
-            <spirit:name>boundaryCRC</spirit:name>
-            <spirit:value>e3459755</spirit:value>
-          </spirit:parameter>
-          <spirit:parameter>
-            <spirit:name>boundaryCRCversion</spirit:name>
-            <spirit:value>1</spirit:value>
-          </spirit:parameter>
-          <spirit:parameter>
-            <spirit:name>customizationCRC</spirit:name>
-            <spirit:value>f5e56b86</spirit:value>
+            <spirit:value>20e67440</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>customizationCRCversion</spirit:name>
@@ -114,7 +84,7 @@
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>customizationCRC</spirit:name>
-            <spirit:value>f5e56b86</spirit:value>
+            <spirit:value>20e67440</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>customizationCRCversion</spirit:name>
@@ -133,7 +103,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Mon Feb 27 05:15:00 UTC 2017</spirit:value>
+            <spirit:value>Mon Mar 06 15:53:39 UTC 2017</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>boundaryCRC</spirit:name>
@@ -145,7 +115,7 @@
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>customizationCRC</spirit:name>
-            <spirit:value>f5e56b86</spirit:value>
+            <spirit:value>20e67440</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>customizationCRCversion</spirit:name>
@@ -169,7 +139,7 @@
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>customizationCRC</spirit:name>
-            <spirit:value>a309cb24</spirit:value>
+            <spirit:value>01f39dc5</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>customizationCRCversion</spirit:name>
@@ -188,7 +158,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Mon Feb 27 05:15:00 UTC 2017</spirit:value>
+            <spirit:value>Mon Mar 06 15:53:39 UTC 2017</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>boundaryCRC</spirit:name>
@@ -200,7 +170,37 @@
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>customizationCRC</spirit:name>
-            <spirit:value>a309cb24</spirit:value>
+            <spirit:value>01f39dc5</spirit:value>
+          </spirit:parameter>
+          <spirit:parameter>
+            <spirit:name>customizationCRCversion</spirit:name>
+            <spirit:value>6</spirit:value>
+          </spirit:parameter>
+        </spirit:parameters>
+      </spirit:view>
+      <spirit:view>
+        <spirit:name>xilinx_elaboratebd</spirit:name>
+        <spirit:displayName>Elaborate BD</spirit:displayName>
+        <spirit:envIdentifier>:vivado.xilinx.com:elaborate.bd</spirit:envIdentifier>
+        <spirit:fileSetRef>
+          <spirit:localName>xilinx_elaboratebd_view_fileset</spirit:localName>
+        </spirit:fileSetRef>
+        <spirit:parameters>
+          <spirit:parameter>
+            <spirit:name>GENtimestamp</spirit:name>
+            <spirit:value>Mon Mar 06 15:56:20 UTC 2017</spirit:value>
+          </spirit:parameter>
+          <spirit:parameter>
+            <spirit:name>boundaryCRC</spirit:name>
+            <spirit:value>e3459755</spirit:value>
+          </spirit:parameter>
+          <spirit:parameter>
+            <spirit:name>boundaryCRCversion</spirit:name>
+            <spirit:value>1</spirit:value>
+          </spirit:parameter>
+          <spirit:parameter>
+            <spirit:name>customizationCRC</spirit:name>
+            <spirit:value>20e67440</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>customizationCRCversion</spirit:name>
@@ -410,9 +410,8 @@
       <spirit:enumeration>131072</spirit:enumeration>
     </spirit:choice>
     <spirit:choice>
-      <spirit:name>choice_list_e053a1d9</spirit:name>
+      <spirit:name>choice_list_e0ade823</spirit:name>
       <spirit:enumeration>AUTO</spirit:enumeration>
-      <spirit:enumeration>0</spirit:enumeration>
       <spirit:enumeration>8</spirit:enumeration>
       <spirit:enumeration>16</spirit:enumeration>
       <spirit:enumeration>24</spirit:enumeration>
@@ -968,13 +967,6 @@
   </spirit:choices>
   <spirit:fileSets>
     <spirit:fileSet>
-      <spirit:name>xilinx_elaboratebd_view_fileset</spirit:name>
-      <spirit:file>
-        <spirit:name>bd_0/bd_384c.bd</spirit:name>
-        <spirit:userFileType>block_diagram</spirit:userFileType>
-      </spirit:file>
-    </spirit:fileSet>
-    <spirit:fileSet>
       <spirit:name>xilinx_verilogsynthesiswrapper_view_fileset</spirit:name>
       <spirit:file>
         <spirit:name>synth/design_1_system_ila_0.v</spirit:name>
@@ -988,6 +980,13 @@
         <spirit:name>sim/design_1_system_ila_0.v</spirit:name>
         <spirit:fileType>verilogSource</spirit:fileType>
         <spirit:logicalName>xil_defaultlib</spirit:logicalName>
+      </spirit:file>
+    </spirit:fileSet>
+    <spirit:fileSet>
+      <spirit:name>xilinx_elaboratebd_view_fileset</spirit:name>
+      <spirit:file>
+        <spirit:name>bd_0/bd_384c.bd</spirit:name>
+        <spirit:userFileType>block_diagram</spirit:userFileType>
       </spirit:file>
     </spirit:fileSet>
   </spirit:fileSets>
@@ -33054,7 +33053,7 @@
     <spirit:parameter>
       <spirit:name>C_SLOT_0_AXIS_TDATA_WIDTH</spirit:name>
       <spirit:displayName>C Slot 0 Axis TData Width</spirit:displayName>
-      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.C_SLOT_0_AXIS_TDATA_WIDTH" spirit:choiceRef="choice_list_e053a1d9" spirit:order="218600">AUTO</spirit:value>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.C_SLOT_0_AXIS_TDATA_WIDTH" spirit:choiceRef="choice_list_e0ade823" spirit:order="218600">AUTO</spirit:value>
     </spirit:parameter>
     <spirit:parameter>
       <spirit:name>C_SLOT_0_AXIS_TID_WIDTH</spirit:name>
@@ -33119,7 +33118,7 @@
     <spirit:parameter>
       <spirit:name>C_SLOT_1_AXIS_TDATA_WIDTH</spirit:name>
       <spirit:displayName>C Slot 1 Axis TData Width</spirit:displayName>
-      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.C_SLOT_1_AXIS_TDATA_WIDTH" spirit:choiceRef="choice_list_e053a1d9" spirit:order="218610">AUTO</spirit:value>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.C_SLOT_1_AXIS_TDATA_WIDTH" spirit:choiceRef="choice_list_e0ade823" spirit:order="218610">AUTO</spirit:value>
     </spirit:parameter>
     <spirit:parameter>
       <spirit:name>C_SLOT_1_AXIS_TID_WIDTH</spirit:name>
@@ -33269,7 +33268,7 @@
     <spirit:parameter>
       <spirit:name>C_SLOT_2_AXIS_TDATA_WIDTH</spirit:name>
       <spirit:displayName>C Slot 2 Axis TData Width</spirit:displayName>
-      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.C_SLOT_2_AXIS_TDATA_WIDTH" spirit:choiceRef="choice_list_e053a1d9" spirit:order="218620">AUTO</spirit:value>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.C_SLOT_2_AXIS_TDATA_WIDTH" spirit:choiceRef="choice_list_e0ade823" spirit:order="218620">AUTO</spirit:value>
     </spirit:parameter>
     <spirit:parameter>
       <spirit:name>C_SLOT_2_AXIS_TID_WIDTH</spirit:name>
@@ -33334,7 +33333,7 @@
     <spirit:parameter>
       <spirit:name>C_SLOT_3_AXIS_TDATA_WIDTH</spirit:name>
       <spirit:displayName>C Slot 3 Axis TData Width</spirit:displayName>
-      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.C_SLOT_3_AXIS_TDATA_WIDTH" spirit:choiceRef="choice_list_e053a1d9" spirit:order="218630">AUTO</spirit:value>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.C_SLOT_3_AXIS_TDATA_WIDTH" spirit:choiceRef="choice_list_e0ade823" spirit:order="218630">AUTO</spirit:value>
     </spirit:parameter>
     <spirit:parameter>
       <spirit:name>C_SLOT_3_AXIS_TID_WIDTH</spirit:name>
@@ -33399,7 +33398,7 @@
     <spirit:parameter>
       <spirit:name>C_SLOT_4_AXIS_TDATA_WIDTH</spirit:name>
       <spirit:displayName>C Slot 4 Axis TData Width</spirit:displayName>
-      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.C_SLOT_4_AXIS_TDATA_WIDTH" spirit:choiceRef="choice_list_e053a1d9" spirit:order="218640">AUTO</spirit:value>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.C_SLOT_4_AXIS_TDATA_WIDTH" spirit:choiceRef="choice_list_e0ade823" spirit:order="218640">AUTO</spirit:value>
     </spirit:parameter>
     <spirit:parameter>
       <spirit:name>C_SLOT_4_AXIS_TID_WIDTH</spirit:name>
@@ -33464,7 +33463,7 @@
     <spirit:parameter>
       <spirit:name>C_SLOT_5_AXIS_TDATA_WIDTH</spirit:name>
       <spirit:displayName>C Slot 5 Axis TData Width</spirit:displayName>
-      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.C_SLOT_5_AXIS_TDATA_WIDTH" spirit:choiceRef="choice_list_e053a1d9" spirit:order="218650">AUTO</spirit:value>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.C_SLOT_5_AXIS_TDATA_WIDTH" spirit:choiceRef="choice_list_e0ade823" spirit:order="218650">AUTO</spirit:value>
     </spirit:parameter>
     <spirit:parameter>
       <spirit:name>C_SLOT_5_AXIS_TID_WIDTH</spirit:name>
@@ -33529,7 +33528,7 @@
     <spirit:parameter>
       <spirit:name>C_SLOT_6_AXIS_TDATA_WIDTH</spirit:name>
       <spirit:displayName>C Slot 6 Axis TData Width</spirit:displayName>
-      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.C_SLOT_6_AXIS_TDATA_WIDTH" spirit:choiceRef="choice_list_e053a1d9" spirit:order="218660">AUTO</spirit:value>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.C_SLOT_6_AXIS_TDATA_WIDTH" spirit:choiceRef="choice_list_e0ade823" spirit:order="218660">AUTO</spirit:value>
     </spirit:parameter>
     <spirit:parameter>
       <spirit:name>C_SLOT_6_AXIS_TID_WIDTH</spirit:name>
@@ -33594,7 +33593,7 @@
     <spirit:parameter>
       <spirit:name>C_SLOT_7_AXIS_TDATA_WIDTH</spirit:name>
       <spirit:displayName>C Slot 7 Axis TData Width</spirit:displayName>
-      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.C_SLOT_7_AXIS_TDATA_WIDTH" spirit:choiceRef="choice_list_e053a1d9" spirit:order="218670">AUTO</spirit:value>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.C_SLOT_7_AXIS_TDATA_WIDTH" spirit:choiceRef="choice_list_e0ade823" spirit:order="218670">AUTO</spirit:value>
     </spirit:parameter>
     <spirit:parameter>
       <spirit:name>C_SLOT_7_AXIS_TID_WIDTH</spirit:name>
@@ -33659,7 +33658,7 @@
     <spirit:parameter>
       <spirit:name>C_SLOT_8_AXIS_TDATA_WIDTH</spirit:name>
       <spirit:displayName>C Slot 8 Axis TData Width</spirit:displayName>
-      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.C_SLOT_8_AXIS_TDATA_WIDTH" spirit:choiceRef="choice_list_e053a1d9" spirit:order="218680">AUTO</spirit:value>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.C_SLOT_8_AXIS_TDATA_WIDTH" spirit:choiceRef="choice_list_e0ade823" spirit:order="218680">AUTO</spirit:value>
     </spirit:parameter>
     <spirit:parameter>
       <spirit:name>C_SLOT_8_AXIS_TID_WIDTH</spirit:name>
@@ -33724,7 +33723,7 @@
     <spirit:parameter>
       <spirit:name>C_SLOT_9_AXIS_TDATA_WIDTH</spirit:name>
       <spirit:displayName>C Slot 9 Axis TData Width</spirit:displayName>
-      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.C_SLOT_9_AXIS_TDATA_WIDTH" spirit:choiceRef="choice_list_e053a1d9" spirit:order="218690">AUTO</spirit:value>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.C_SLOT_9_AXIS_TDATA_WIDTH" spirit:choiceRef="choice_list_e0ade823" spirit:order="218690">AUTO</spirit:value>
     </spirit:parameter>
     <spirit:parameter>
       <spirit:name>C_SLOT_9_AXIS_TID_WIDTH</spirit:name>
@@ -33789,7 +33788,7 @@
     <spirit:parameter>
       <spirit:name>C_SLOT_10_AXIS_TDATA_WIDTH</spirit:name>
       <spirit:displayName>C Slot 10 Axis TData Width</spirit:displayName>
-      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.C_SLOT_10_AXIS_TDATA_WIDTH" spirit:choiceRef="choice_list_e053a1d9" spirit:order="2186100">AUTO</spirit:value>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.C_SLOT_10_AXIS_TDATA_WIDTH" spirit:choiceRef="choice_list_e0ade823" spirit:order="2186100">AUTO</spirit:value>
     </spirit:parameter>
     <spirit:parameter>
       <spirit:name>C_SLOT_10_AXIS_TID_WIDTH</spirit:name>
@@ -33854,7 +33853,7 @@
     <spirit:parameter>
       <spirit:name>C_SLOT_11_AXIS_TDATA_WIDTH</spirit:name>
       <spirit:displayName>C Slot 11 Axis TData Width</spirit:displayName>
-      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.C_SLOT_11_AXIS_TDATA_WIDTH" spirit:choiceRef="choice_list_e053a1d9" spirit:order="2186110">AUTO</spirit:value>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.C_SLOT_11_AXIS_TDATA_WIDTH" spirit:choiceRef="choice_list_e0ade823" spirit:order="2186110">AUTO</spirit:value>
     </spirit:parameter>
     <spirit:parameter>
       <spirit:name>C_SLOT_11_AXIS_TID_WIDTH</spirit:name>
@@ -33919,7 +33918,7 @@
     <spirit:parameter>
       <spirit:name>C_SLOT_12_AXIS_TDATA_WIDTH</spirit:name>
       <spirit:displayName>C Slot 12 Axis TData Width</spirit:displayName>
-      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.C_SLOT_12_AXIS_TDATA_WIDTH" spirit:choiceRef="choice_list_e053a1d9" spirit:order="2186120">AUTO</spirit:value>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.C_SLOT_12_AXIS_TDATA_WIDTH" spirit:choiceRef="choice_list_e0ade823" spirit:order="2186120">AUTO</spirit:value>
     </spirit:parameter>
     <spirit:parameter>
       <spirit:name>C_SLOT_12_AXIS_TID_WIDTH</spirit:name>
@@ -33984,7 +33983,7 @@
     <spirit:parameter>
       <spirit:name>C_SLOT_13_AXIS_TDATA_WIDTH</spirit:name>
       <spirit:displayName>C Slot 13 Axis TData Width</spirit:displayName>
-      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.C_SLOT_13_AXIS_TDATA_WIDTH" spirit:choiceRef="choice_list_e053a1d9" spirit:order="2186130">AUTO</spirit:value>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.C_SLOT_13_AXIS_TDATA_WIDTH" spirit:choiceRef="choice_list_e0ade823" spirit:order="2186130">AUTO</spirit:value>
     </spirit:parameter>
     <spirit:parameter>
       <spirit:name>C_SLOT_13_AXIS_TID_WIDTH</spirit:name>
@@ -34049,7 +34048,7 @@
     <spirit:parameter>
       <spirit:name>C_SLOT_14_AXIS_TDATA_WIDTH</spirit:name>
       <spirit:displayName>C Slot 14 Axis TData Width</spirit:displayName>
-      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.C_SLOT_14_AXIS_TDATA_WIDTH" spirit:choiceRef="choice_list_e053a1d9" spirit:order="2186140">AUTO</spirit:value>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.C_SLOT_14_AXIS_TDATA_WIDTH" spirit:choiceRef="choice_list_e0ade823" spirit:order="2186140">AUTO</spirit:value>
     </spirit:parameter>
     <spirit:parameter>
       <spirit:name>C_SLOT_14_AXIS_TID_WIDTH</spirit:name>
@@ -34114,7 +34113,7 @@
     <spirit:parameter>
       <spirit:name>C_SLOT_15_AXIS_TDATA_WIDTH</spirit:name>
       <spirit:displayName>C Slot 15 Axis TData Width</spirit:displayName>
-      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.C_SLOT_15_AXIS_TDATA_WIDTH" spirit:choiceRef="choice_list_e053a1d9" spirit:order="2186150">AUTO</spirit:value>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.C_SLOT_15_AXIS_TDATA_WIDTH" spirit:choiceRef="choice_list_e0ade823" spirit:order="2186150">AUTO</spirit:value>
     </spirit:parameter>
     <spirit:parameter>
       <spirit:name>C_SLOT_15_AXIS_TID_WIDTH</spirit:name>
@@ -34140,7 +34139,7 @@
   <spirit:vendorExtensions>
     <xilinx:coreExtensions>
       <xilinx:displayName>System ILA</xilinx:displayName>
-      <xilinx:coreRevision>0</xilinx:coreRevision>
+      <xilinx:coreRevision>1</xilinx:coreRevision>
       <xilinx:tags>
         <xilinx:tag xilinx:name="xilinx.com:ip:system_ila:1.0_ARCHIVE_LOCATION">/proj/xhdhdstaff/niloyr/debug_tools/IP3_niloyr_cs/DEV/output/internal/vivado/data/ip/xilinx</xilinx:tag>
         <xilinx:tag xilinx:name="bd_viewable">false</xilinx:tag>
@@ -34155,9 +34154,9 @@
       </xilinx:configElementInfos>
     </xilinx:coreExtensions>
     <xilinx:packagingInfo>
-      <xilinx:xilinxVersion>2016.3</xilinx:xilinxVersion>
-      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="afe47bfe"/>
-      <xilinx:checksum xilinx:scope="parameters" xilinx:value="fbf02d61"/>
+      <xilinx:xilinxVersion>2016.4</xilinx:xilinxVersion>
+      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="b13be8ca"/>
+      <xilinx:checksum xilinx:scope="parameters" xilinx:value="bd8cafd9"/>
     </xilinx:packagingInfo>
   </spirit:vendorExtensions>
 </spirit:component>

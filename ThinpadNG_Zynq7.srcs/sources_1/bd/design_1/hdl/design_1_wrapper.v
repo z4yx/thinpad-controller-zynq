@@ -1,8 +1,8 @@
 //Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
-//Tool Version: Vivado v.2016.3 (win64) Build 1682563 Mon Oct 10 19:07:27 MDT 2016
-//Date        : Mon Feb 27 13:13:41 2017
-//Host        : lightField-PC running 64-bit Service Pack 1  (build 7601)
+//Tool Version: Vivado v.2016.4 (lin64) Build 1733598 Wed Dec 14 22:35:42 MST 2016
+//Date        : Mon Mar  6 23:57:39 2017
+//Host        : skyworks running 64-bit Ubuntu 16.04.1 LTS
 //Command     : generate_target design_1_wrapper.bd
 //Design      : design_1_wrapper
 //Purpose     : IP block netlist
@@ -58,6 +58,7 @@ module design_1_wrapper
     gpio_rtl_tri_io,
     initb,
     progb,
+    reg2port,
     rxd_232,
     txd_232);
   inout [14:0]DDR_addr;
@@ -108,6 +109,7 @@ module design_1_wrapper
   inout [31:0]gpio_rtl_tri_io;
   input initb;
   output [0:0]progb;
+  output [127:0]reg2port;
   input rxd_232;
   output txd_232;
 
@@ -563,6 +565,7 @@ module design_1_wrapper
   wire [9:9]gpio_rtl_tri_t_9;
   wire initb;
   wire [0:0]progb;
+  wire [127:0]reg2port;
   wire rxd_232;
   wire txd_232;
 
@@ -623,168 +626,169 @@ module design_1_wrapper
         .gpio_rtl_tri_t({gpio_rtl_tri_t_31,gpio_rtl_tri_t_30,gpio_rtl_tri_t_29,gpio_rtl_tri_t_28,gpio_rtl_tri_t_27,gpio_rtl_tri_t_26,gpio_rtl_tri_t_25,gpio_rtl_tri_t_24,gpio_rtl_tri_t_23,gpio_rtl_tri_t_22,gpio_rtl_tri_t_21,gpio_rtl_tri_t_20,gpio_rtl_tri_t_19,gpio_rtl_tri_t_18,gpio_rtl_tri_t_17,gpio_rtl_tri_t_16,gpio_rtl_tri_t_15,gpio_rtl_tri_t_14,gpio_rtl_tri_t_13,gpio_rtl_tri_t_12,gpio_rtl_tri_t_11,gpio_rtl_tri_t_10,gpio_rtl_tri_t_9,gpio_rtl_tri_t_8,gpio_rtl_tri_t_7,gpio_rtl_tri_t_6,gpio_rtl_tri_t_5,gpio_rtl_tri_t_4,gpio_rtl_tri_t_3,gpio_rtl_tri_t_2,gpio_rtl_tri_t_1,gpio_rtl_tri_t_0}),
         .initb(initb),
         .progb(progb),
+        .reg2port(reg2port),
         .rxd_232(rxd_232),
         .txd_232(txd_232));
   IOBUF emc_rtl_dq_iobuf_0
        (.I(emc_rtl_dq_o_0),
         .IO(emc_rtl_dq_io[0]),
         .O(emc_rtl_dq_i_0),
-        .T(emc_rtl_dq_t_0));
+        .T(emc_rtl_dq_t_0 | ~reg2port[0]));
   IOBUF emc_rtl_dq_iobuf_1
        (.I(emc_rtl_dq_o_1),
         .IO(emc_rtl_dq_io[1]),
         .O(emc_rtl_dq_i_1),
-        .T(emc_rtl_dq_t_1));
+        .T(emc_rtl_dq_t_1 | ~reg2port[0]));
   IOBUF emc_rtl_dq_iobuf_10
        (.I(emc_rtl_dq_o_10),
         .IO(emc_rtl_dq_io[10]),
         .O(emc_rtl_dq_i_10),
-        .T(emc_rtl_dq_t_10));
+        .T(emc_rtl_dq_t_10 | ~reg2port[0] ));
   IOBUF emc_rtl_dq_iobuf_11
        (.I(emc_rtl_dq_o_11),
         .IO(emc_rtl_dq_io[11]),
         .O(emc_rtl_dq_i_11),
-        .T(emc_rtl_dq_t_11));
+        .T(emc_rtl_dq_t_11 | ~reg2port[0] ));
   IOBUF emc_rtl_dq_iobuf_12
        (.I(emc_rtl_dq_o_12),
         .IO(emc_rtl_dq_io[12]),
         .O(emc_rtl_dq_i_12),
-        .T(emc_rtl_dq_t_12));
+        .T(emc_rtl_dq_t_12 | ~reg2port[0]));
   IOBUF emc_rtl_dq_iobuf_13
        (.I(emc_rtl_dq_o_13),
         .IO(emc_rtl_dq_io[13]),
         .O(emc_rtl_dq_i_13),
-        .T(emc_rtl_dq_t_13));
+        .T(emc_rtl_dq_t_13 | ~reg2port[0]));
   IOBUF emc_rtl_dq_iobuf_14
        (.I(emc_rtl_dq_o_14),
         .IO(emc_rtl_dq_io[14]),
         .O(emc_rtl_dq_i_14),
-        .T(emc_rtl_dq_t_14));
+        .T(emc_rtl_dq_t_14 | ~reg2port[0]));
   IOBUF emc_rtl_dq_iobuf_15
        (.I(emc_rtl_dq_o_15),
         .IO(emc_rtl_dq_io[15]),
         .O(emc_rtl_dq_i_15),
-        .T(emc_rtl_dq_t_15));
+        .T(emc_rtl_dq_t_15 | ~reg2port[0]));
   IOBUF emc_rtl_dq_iobuf_16
        (.I(emc_rtl_dq_o_16),
         .IO(emc_rtl_dq_io[16]),
         .O(emc_rtl_dq_i_16),
-        .T(emc_rtl_dq_t_16));
+        .T(emc_rtl_dq_t_16 | ~reg2port[0]));
   IOBUF emc_rtl_dq_iobuf_17
        (.I(emc_rtl_dq_o_17),
         .IO(emc_rtl_dq_io[17]),
         .O(emc_rtl_dq_i_17),
-        .T(emc_rtl_dq_t_17));
+        .T(emc_rtl_dq_t_17 | ~reg2port[0]));
   IOBUF emc_rtl_dq_iobuf_18
        (.I(emc_rtl_dq_o_18),
         .IO(emc_rtl_dq_io[18]),
         .O(emc_rtl_dq_i_18),
-        .T(emc_rtl_dq_t_18));
+        .T(emc_rtl_dq_t_18 | ~reg2port[0]));
   IOBUF emc_rtl_dq_iobuf_19
        (.I(emc_rtl_dq_o_19),
         .IO(emc_rtl_dq_io[19]),
         .O(emc_rtl_dq_i_19),
-        .T(emc_rtl_dq_t_19));
+        .T(emc_rtl_dq_t_19 | ~reg2port[0]));
   IOBUF emc_rtl_dq_iobuf_2
        (.I(emc_rtl_dq_o_2),
         .IO(emc_rtl_dq_io[2]),
         .O(emc_rtl_dq_i_2),
-        .T(emc_rtl_dq_t_2));
+        .T(emc_rtl_dq_t_2 | ~reg2port[0]));
   IOBUF emc_rtl_dq_iobuf_20
        (.I(emc_rtl_dq_o_20),
         .IO(emc_rtl_dq_io[20]),
         .O(emc_rtl_dq_i_20),
-        .T(emc_rtl_dq_t_20));
+        .T(emc_rtl_dq_t_20 | ~reg2port[0]));
   IOBUF emc_rtl_dq_iobuf_21
        (.I(emc_rtl_dq_o_21),
         .IO(emc_rtl_dq_io[21]),
         .O(emc_rtl_dq_i_21),
-        .T(emc_rtl_dq_t_21));
+        .T(emc_rtl_dq_t_21 | ~reg2port[0]));
   IOBUF emc_rtl_dq_iobuf_22
        (.I(emc_rtl_dq_o_22),
         .IO(emc_rtl_dq_io[22]),
         .O(emc_rtl_dq_i_22),
-        .T(emc_rtl_dq_t_22));
+        .T(emc_rtl_dq_t_22 | ~reg2port[0]));
   IOBUF emc_rtl_dq_iobuf_23
        (.I(emc_rtl_dq_o_23),
         .IO(emc_rtl_dq_io[23]),
         .O(emc_rtl_dq_i_23),
-        .T(emc_rtl_dq_t_23));
+        .T(emc_rtl_dq_t_23 | ~reg2port[0]));
   IOBUF emc_rtl_dq_iobuf_24
        (.I(emc_rtl_dq_o_24),
         .IO(emc_rtl_dq_io[24]),
         .O(emc_rtl_dq_i_24),
-        .T(emc_rtl_dq_t_24));
+        .T(emc_rtl_dq_t_24 | ~reg2port[0]));
   IOBUF emc_rtl_dq_iobuf_25
        (.I(emc_rtl_dq_o_25),
         .IO(emc_rtl_dq_io[25]),
         .O(emc_rtl_dq_i_25),
-        .T(emc_rtl_dq_t_25));
+        .T(emc_rtl_dq_t_25 | ~reg2port[0]));
   IOBUF emc_rtl_dq_iobuf_26
        (.I(emc_rtl_dq_o_26),
         .IO(emc_rtl_dq_io[26]),
         .O(emc_rtl_dq_i_26),
-        .T(emc_rtl_dq_t_26));
+        .T(emc_rtl_dq_t_26 | ~reg2port[0]));
   IOBUF emc_rtl_dq_iobuf_27
        (.I(emc_rtl_dq_o_27),
         .IO(emc_rtl_dq_io[27]),
         .O(emc_rtl_dq_i_27),
-        .T(emc_rtl_dq_t_27));
+        .T(emc_rtl_dq_t_27 | ~reg2port[0]));
   IOBUF emc_rtl_dq_iobuf_28
        (.I(emc_rtl_dq_o_28),
         .IO(emc_rtl_dq_io[28]),
         .O(emc_rtl_dq_i_28),
-        .T(emc_rtl_dq_t_28));
+        .T(emc_rtl_dq_t_28 | ~reg2port[0]));
   IOBUF emc_rtl_dq_iobuf_29
        (.I(emc_rtl_dq_o_29),
         .IO(emc_rtl_dq_io[29]),
         .O(emc_rtl_dq_i_29),
-        .T(emc_rtl_dq_t_29));
+        .T(emc_rtl_dq_t_29 | ~reg2port[0]));
   IOBUF emc_rtl_dq_iobuf_3
        (.I(emc_rtl_dq_o_3),
         .IO(emc_rtl_dq_io[3]),
         .O(emc_rtl_dq_i_3),
-        .T(emc_rtl_dq_t_3));
+        .T(emc_rtl_dq_t_3 | ~reg2port[0]));
   IOBUF emc_rtl_dq_iobuf_30
        (.I(emc_rtl_dq_o_30),
         .IO(emc_rtl_dq_io[30]),
         .O(emc_rtl_dq_i_30),
-        .T(emc_rtl_dq_t_30));
+        .T(emc_rtl_dq_t_30 | ~reg2port[0]));
   IOBUF emc_rtl_dq_iobuf_31
        (.I(emc_rtl_dq_o_31),
         .IO(emc_rtl_dq_io[31]),
         .O(emc_rtl_dq_i_31),
-        .T(emc_rtl_dq_t_31));
+        .T(emc_rtl_dq_t_31 | ~reg2port[0]));
   IOBUF emc_rtl_dq_iobuf_4
        (.I(emc_rtl_dq_o_4),
         .IO(emc_rtl_dq_io[4]),
         .O(emc_rtl_dq_i_4),
-        .T(emc_rtl_dq_t_4));
+        .T(emc_rtl_dq_t_4 | ~reg2port[0]));
   IOBUF emc_rtl_dq_iobuf_5
        (.I(emc_rtl_dq_o_5),
         .IO(emc_rtl_dq_io[5]),
         .O(emc_rtl_dq_i_5),
-        .T(emc_rtl_dq_t_5));
+        .T(emc_rtl_dq_t_5 | ~reg2port[0]));
   IOBUF emc_rtl_dq_iobuf_6
        (.I(emc_rtl_dq_o_6),
         .IO(emc_rtl_dq_io[6]),
         .O(emc_rtl_dq_i_6),
-        .T(emc_rtl_dq_t_6));
+        .T(emc_rtl_dq_t_6 | ~reg2port[0]));
   IOBUF emc_rtl_dq_iobuf_7
        (.I(emc_rtl_dq_o_7),
         .IO(emc_rtl_dq_io[7]),
         .O(emc_rtl_dq_i_7),
-        .T(emc_rtl_dq_t_7));
+        .T(emc_rtl_dq_t_7 | ~reg2port[0]));
   IOBUF emc_rtl_dq_iobuf_8
        (.I(emc_rtl_dq_o_8),
         .IO(emc_rtl_dq_io[8]),
         .O(emc_rtl_dq_i_8),
-        .T(emc_rtl_dq_t_8));
+        .T(emc_rtl_dq_t_8 | ~reg2port[0]));
   IOBUF emc_rtl_dq_iobuf_9
        (.I(emc_rtl_dq_o_9),
         .IO(emc_rtl_dq_io[9]),
         .O(emc_rtl_dq_i_9),
-        .T(emc_rtl_dq_t_9));
+        .T(emc_rtl_dq_t_9 | ~reg2port[0]));
   IOBUF gpio_rtl_0_tri_iobuf_0
        (.I(gpio_rtl_0_tri_o_0),
         .IO(gpio_rtl_0_tri_io[0]),
@@ -879,7 +883,7 @@ module design_1_wrapper
        (.I(gpio_rtl_1_tri_o_2),
         .IO(gpio_rtl_1_tri_io[2]),
         .O(gpio_rtl_1_tri_i_2),
-        .T(gpio_rtl_1_tri_t_2));
+        .T(gpio_rtl_1_tri_t_2 ));
   IOBUF gpio_rtl_1_tri_iobuf_20
        (.I(gpio_rtl_1_tri_o_20),
         .IO(gpio_rtl_1_tri_io[20]),
