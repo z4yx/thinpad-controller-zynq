@@ -29,9 +29,9 @@ preplace portBus reg2port -pg 1 -y 760 -defaultsOSRD
 preplace portBus emc_rtl_dq_i -pg 1 -y 1220 -defaultsOSRD
 preplace portBus emc_rtl_ben -pg 1 -y 1120 -defaultsOSRD
 preplace inst axi_register_0 -pg 1 -lvl 4 -y 840 -defaultsOSRD
-preplace inst xlslice_0 -pg 1 -lvl 3 -y -186 -defaultsOSRD
+preplace inst xlslice_0 -pg 1 -lvl 3 -y -206 -defaultsOSRD
 preplace inst xlconstant_0 -pg 1 -lvl 1 -y 120 -defaultsOSRD
-preplace inst axi_emc_0 -pg 1 -lvl 4 -y 1230 -defaultsOSRD
+preplace inst axi_emc_0 -pg 1 -lvl 4 -y 1320 -defaultsOSRD
 preplace inst bus_analyze -pg 1 -lvl 3 -y 4 -defaultsOSRD
 preplace inst axi_gpio_0 -pg 1 -lvl 4 -y 300 -defaultsOSRD
 preplace inst xlconcat_0 -pg 1 -lvl 2 -y 160 -defaultsOSRD
@@ -43,54 +43,55 @@ preplace inst ps7_0 -pg 1 -lvl 2 -y -120 -defaultsOSRD
 preplace inst axi_uartlite_0 -pg 1 -lvl 4 -y 120 -defaultsOSRD
 preplace inst axi_interconnect_0 -pg 1 -lvl 3 -y 692 -defaultsOSRD
 preplace inst clk_wiz_0 -pg 1 -lvl 4 -y -80 -defaultsOSRD
-preplace netloc ps7_0_UART_1 1 2 3 690J -140 1150J -160 2350J
-preplace netloc processing_system7_0_DDR 1 2 3 710J -130 1130J -220 NJ
-preplace netloc bus_analyze_s2mm_introut 1 0 4 -20 -340 NJ -340 NJ -340 1110
-preplace netloc axi_register_0_reg2port 1 4 1 2370J
-preplace netloc axi_emc_0_mem_dq_t 1 4 1 2360
-preplace netloc ps7_0_SPI0_MOSI_O 1 2 3 670J -110 1160J -180 2370J
-preplace netloc ps7_0_SPI0_SCLK_O 1 2 3 660J -260 NJ -260 2380J
-preplace netloc axi_uartlite_0_interrupt 1 0 5 -10 60 NJ 60 700J 110 1180J 40 2350
-preplace netloc bus_analyze_axis_1 1 0 3 -30J -350 NJ -350 720
-preplace netloc axi_emc_0_mem_ben 1 4 1 2380J
-preplace netloc axi_interconnect_0_M02_AXI 1 3 1 1210
+preplace netloc ps7_0_UART_1 1 2 3 NJ -150 1190J -160 2400J
+preplace netloc processing_system7_0_DDR 1 2 3 660J -260 NJ -260 2420J
+preplace netloc bus_analyze_s2mm_introut 1 0 4 -10 -330 NJ -330 NJ -330 1120
+preplace netloc axi_register_0_reg2port 1 4 1 2380J
+preplace netloc axi_emc_0_mem_dq_t 1 4 1 2410
+preplace netloc ps7_0_SPI0_MOSI_O 1 2 3 660J -130 1180J -190 2420J
+preplace netloc ps7_0_SPI0_SCLK_O 1 2 3 NJ -110 1200J -170 2390J
+preplace netloc axi_uartlite_0_interrupt 1 0 5 -20 230 NJ 230 NJ 230 NJ 230 2350
+preplace netloc bus_analyze_axis_1 1 0 3 NJ 60 NJ 60 710
+preplace netloc axi_emc_0_mem_ben 1 4 1 2370J
+preplace netloc axi_interconnect_0_M02_AXI 1 3 1 1250
 preplace netloc xlconcat_1_dout 1 1 1 160
 preplace netloc initb_1 1 0 2 NJ 170 160J
-preplace netloc processing_system7_0_FCLK_RESET0_N 1 1 2 170 -320 680
+preplace netloc processing_system7_0_FCLK_RESET0_N 1 1 2 180 -300 670
 preplace netloc axi_emc_0_mem_a 1 4 1 2360J
-preplace netloc done_1 1 0 2 NJ 300 160J
-preplace netloc axi_interconnect_0_M07_AXI 1 3 1 1130
-preplace netloc axi_emc_0_mem_wen 1 4 1 2360
-preplace netloc axi_emc_0_mem_cen 1 4 1 2390J
-preplace netloc ps7_0_FCLK_CLK1 1 1 4 160 -330 730 -330 NJ -330 NJ
-preplace netloc axi_uartlite_0_tx 1 4 1 2360
-preplace netloc proc_sys_reset_0_interconnect_aresetn 1 2 1 660
-preplace netloc axi_interconnect_0_M08_AXI 1 2 2 740 -100 1100
-preplace netloc axi_interconnect_0_M04_AXI 1 3 1 1240
-preplace netloc xlconstant_0_dout 1 1 1 160J
+preplace netloc done_1 1 0 2 NJ 300 170J
+preplace netloc axi_interconnect_0_M07_AXI 1 3 1 1160
+preplace netloc axi_emc_0_mem_wen 1 4 1 N
+preplace netloc axi_emc_0_mem_cen 1 4 1 2380J
+preplace netloc ps7_0_FCLK_CLK1 1 1 4 170 -320 720 -320 NJ -320 2420J
+preplace netloc axi_uartlite_0_tx 1 4 1 2370
+preplace netloc proc_sys_reset_0_interconnect_aresetn 1 2 1 690
+preplace netloc axi_interconnect_0_M08_AXI 1 2 2 730 -100 1130
+preplace netloc axi_interconnect_0_M04_AXI 1 3 1 1280
+preplace netloc bus_analyze_mm2s_introut 1 0 4 -30 -340 NJ -340 NJ -340 1150
+preplace netloc xlconstant_0_dout 1 1 1 170J
 preplace netloc xlconcat_0_dout 1 2 1 650
-preplace netloc ps7_0_GPIO_O 1 2 1 740
-preplace netloc processing_system7_0_FIXED_IO 1 2 3 670J -120 1140J -200 NJ
-preplace netloc S00_AXI_1 1 2 1 710
-preplace netloc axi_emc_0_mem_oen 1 4 1 2370
-preplace netloc mem_dq_i_1 1 0 5 -20J 1100 NJ 1100 NJ 1100 NJ 1100 2340
-preplace netloc clk_wiz_0_clk_out1 1 4 1 2390J
-preplace netloc axi_gpio_0_GPIO 1 4 1 2350J
-preplace netloc axi_interconnect_0_M00_AXI 1 3 1 1170
-preplace netloc axi_emc_0_mem_dq_o 1 4 1 2370
-preplace netloc proc_sys_reset_0_peripheral_aresetn 1 2 2 740 400 1220J
-preplace netloc clk_wiz_0_clk_out2 1 4 1 2340J
-preplace netloc axi_gpio_2_GPIO 1 4 1 2360J
-preplace netloc axi_interconnect_0_M01_AXI 1 3 1 1190
-preplace netloc rxd_232_1 1 0 5 -20J 230 NJ 230 NJ 230 NJ 230 2340
-preplace netloc processing_system7_0_FCLK_CLK0 1 1 3 180 1220 690 1220 1200J
-preplace netloc axi_gpio_1_GPIO 1 4 1 2340J
-preplace netloc axi_interconnect_1_M00_AXI 1 1 3 180J -300 NJ -300 1090
-preplace netloc axi_interconnect_0_M06_AXI 1 3 1 1160
-preplace netloc axi_interconnect_0_M03_AXI 1 3 1 1230
-preplace netloc bus_analyze_peripheral_aresetn 1 3 2 N 24 2370J
-preplace netloc xlslice_0_Dout 1 3 2 1120J -240 NJ
-levelinfo -pg 1 -50 80 450 950 2210 2430 -top -480 -bot 1570
+preplace netloc ps7_0_GPIO_O 1 2 1 700
+preplace netloc processing_system7_0_FIXED_IO 1 2 3 660J -160 1170J -200 NJ
+preplace netloc S00_AXI_1 1 2 1 700
+preplace netloc axi_emc_0_mem_oen 1 4 1 2420
+preplace netloc mem_dq_i_1 1 0 5 -20J 1190 NJ 1190 NJ 1190 NJ 1190 2350
+preplace netloc clk_wiz_0_clk_out1 1 4 1 2410J
+preplace netloc axi_gpio_0_GPIO 1 4 1 2360J
+preplace netloc axi_interconnect_0_M00_AXI 1 3 1 1210
+preplace netloc axi_emc_0_mem_dq_o 1 4 1 2390
+preplace netloc proc_sys_reset_0_peripheral_aresetn 1 2 2 730 400 1260J
+preplace netloc clk_wiz_0_clk_out2 1 4 1 2380J
+preplace netloc axi_gpio_2_GPIO 1 4 1 2390J
+preplace netloc axi_interconnect_0_M01_AXI 1 3 1 1230
+preplace netloc rxd_232_1 1 0 5 NJ 240 NJ 240 NJ 240 1220J 200 2360
+preplace netloc processing_system7_0_FCLK_CLK0 1 1 3 190 1310 680 1310 1240J
+preplace netloc axi_gpio_1_GPIO 1 4 1 2350J
+preplace netloc axi_interconnect_1_M00_AXI 1 1 3 160J -360 NJ -360 1140
+preplace netloc axi_interconnect_0_M06_AXI 1 3 1 1200
+preplace netloc axi_interconnect_0_M03_AXI 1 3 1 1270
+preplace netloc bus_analyze_peripheral_aresetn 1 3 2 N 14 2380J
+preplace netloc xlslice_0_Dout 1 3 2 1160J -240 NJ
+levelinfo -pg 1 -50 80 450 973 2219 2440 -top -480 -bot 1710
 ",
 }
 {

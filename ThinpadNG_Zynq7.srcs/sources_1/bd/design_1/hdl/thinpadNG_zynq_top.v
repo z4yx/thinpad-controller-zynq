@@ -226,6 +226,7 @@ module thinpadNG_zynq_top(/*autoarg*/
         bus_analyze_axis_tvalid <= bus_analyze_axis_tready;
     end
     assign bus_analyze_axis_tdata = test_data;
+    assign bus_analyze_axis_tlast = 0;
 
 endmodule
 
