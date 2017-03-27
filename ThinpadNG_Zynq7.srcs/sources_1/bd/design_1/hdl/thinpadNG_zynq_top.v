@@ -100,23 +100,22 @@ module thinpadNG_zynq_top(/*autoarg*/
     wire SPI0_SCLK_O;
     wire UART_1_rxd;
     wire UART_1_txd;
+    wire [31:0]bus_analyze_axis_tdata;
+    wire bus_analyze_axis_tlast;
+    wire bus_analyze_axis_tready;
+    reg  bus_analyze_axis_tvalid;
+    wire bus_analyze_clk;
+    wire [0:0]bus_analyze_rst_n;
     wire clk_out1;
     wire clk_out2;
     wire done;
     wire [31:0]emc_rtl_addr;
-    wire emc_rtl_adv_ldn;
     wire [3:0]emc_rtl_ben;
-    wire [0:0]emc_rtl_ce;
     wire [0:0]emc_rtl_ce_n;
-    wire emc_rtl_clken;
-    wire emc_rtl_cre;
-    wire [31:0]emc_rtl_dq_io;
-    wire emc_rtl_lbon;
+    wire [31:0]emc_rtl_dq_i;
+    wire [31:0]emc_rtl_dq_o;
+    wire [31:0]emc_rtl_dq_t;
     wire [0:0]emc_rtl_oen;
-    wire [3:0]emc_rtl_qwen;
-    wire emc_rtl_rnw;
-    wire emc_rtl_rpn;
-    wire [0:0]emc_rtl_wait;
     wire emc_rtl_wen;
     wire [5:0]gpio_rtl_0_tri_io;
     wire [31:0]gpio_rtl_1_tri_io;
@@ -153,23 +152,22 @@ module thinpadNG_zynq_top(/*autoarg*/
     .SPI0_SCLK_O                (SPI0_SCLK_O                    ), // output
     .UART_1_rxd                 (UART_1_rxd                     ), // input
     .UART_1_txd                 (UART_1_txd                     ), // output
+    .bus_analyze_axis_tdata     (bus_analyze_axis_tdata),
+    .bus_analyze_axis_tlast     (bus_analyze_axis_tlast),
+    .bus_analyze_axis_tready    (bus_analyze_axis_tready),
+    .bus_analyze_axis_tvalid    (bus_analyze_axis_tvalid),
+    .bus_analyze_clk            (bus_analyze_clk),
+    .bus_analyze_rst_n          (bus_analyze_rst_n),
     .clk_out1                   (clk_out1                       ), // output
     .clk_out2                   (clk_out2                       ), // output
     .done                       (done                           ), // input
     .emc_rtl_addr               (emc_rtl_addr[31:0]             ), // output
-    .emc_rtl_adv_ldn            (emc_rtl_adv_ldn                ), // output
     .emc_rtl_ben                (emc_rtl_ben[3:0]               ), // output
-    .emc_rtl_ce                 (emc_rtl_ce[0:0]                ), // output
     .emc_rtl_ce_n               (emc_rtl_ce_n[0:0]              ), // output
-    .emc_rtl_clken              (emc_rtl_clken                  ), // output
-    .emc_rtl_cre                (emc_rtl_cre                    ), // output
-    .emc_rtl_dq_io              (emc_rtl_dq_io[31:0]            ), // inout
-    .emc_rtl_lbon               (emc_rtl_lbon                   ), // output
+    .emc_rtl_dq_i               (emc_rtl_dq_i[31:0]             ), // inout
+    .emc_rtl_dq_o               (emc_rtl_dq_o[31:0]             ), // inout
+    .emc_rtl_dq_t               (emc_rtl_dq_t[31:0]             ), // inout
     .emc_rtl_oen                (emc_rtl_oen[0:0]               ), // output
-    .emc_rtl_qwen               (emc_rtl_qwen[3:0]              ), // output
-    .emc_rtl_rnw                (emc_rtl_rnw                    ), // output
-    .emc_rtl_rpn                (emc_rtl_rpn                    ), // output
-    .emc_rtl_wait               (emc_rtl_wait[0:0]              ), // input
     .emc_rtl_wen                (emc_rtl_wen                    ), // output
     .gpio_rtl_0_tri_io          (gpio_rtl_0_tri_io[5:0]         ), // inout
     .gpio_rtl_1_tri_io          (gpio_rtl_1_tri_io[31:0]        ), // inout
@@ -195,7 +193,6 @@ module thinpadNG_zynq_top(/*autoarg*/
     wire [0:0]emc_rtl_ce_n_wrap;
     wire [0:0]emc_rtl_oen_wrap;
     wire emc_rtl_wen_wrap;
-    wire [31:0]emc_rtl_dq_io_wrap;
        
     always @(*) begin
         io_enable <= reg2port[0];  // 1 for enable
@@ -212,11 +209,23 @@ module thinpadNG_zynq_top(/*autoarg*/
         for (i = 0; i < BE_PINS_AMOUNT; i = i + 1) begin : gen3
             assign emc_rtl_ben_wrap[i] = io_enable ? emc_rtl_ben[i] : 1'bz; 
         end  
+        
+        for (i = 0; i < IO_PINS_AMOUNT; i = i + 1) begin : gen4
+            assign emc_rtl_dq_io[i] = (io_enable & ~emc_rtl_dq_t[i]) ? emc_rtl_dq_o[i] : 1'bz; 
+            assign emc_rtl_dq_i[i] = emc_rtl_dq_io[i];
+        end  
     endgenerate
     
     assign emc_rtl_ce_n_wrap = io_enable ? emc_rtl_ce_n : 1'bz; 
     assign emc_rtl_oen_wrap = io_enable ? emc_rtl_oen : 1'bz; 
     assign emc_rtl_wen_wrap = io_enable ? emc_rtl_wen : 1'bz; 
+    
+    reg [31:0] test_data;
+    always@(posedge bus_analyze_clk)begin
+        test_data <= test_data + bus_analyze_axis_tready;
+        bus_analyze_axis_tvalid <= bus_analyze_axis_tready;
+    end
+    assign bus_analyze_axis_tdata = test_data;
 
 endmodule
 
