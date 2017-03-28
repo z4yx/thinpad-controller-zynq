@@ -228,42 +228,6 @@ HDL_ATTRIBUTE.DEBUG {true} \
   connect_bd_net -net ps7_0_FCLK_CLK1 [get_bd_pins M00_ACLK] [get_bd_pins axi_dma_0/m_axi_mm2s_aclk] [get_bd_pins axi_dma_0/m_axi_s2mm_aclk] [get_bd_pins axi_interconnect_1/ACLK] [get_bd_pins axi_interconnect_1/M00_ACLK] [get_bd_pins axi_interconnect_1/S00_ACLK] [get_bd_pins axi_interconnect_1/S01_ACLK] [get_bd_pins axis_data_fifo_0/s_axis_aclk] [get_bd_pins proc_sys_reset_0/slowest_sync_clk]
   connect_bd_net -net s_axi_lite_aclk_1 [get_bd_pins s_axi_lite_aclk] [get_bd_pins axi_dma_0/s_axi_lite_aclk]
 
-  # Perform GUI Layout
-  regenerate_bd_layout -hierarchy [get_bd_cells /bus_analyze] -layout_string {
-   guistr: "# # String gsaved with Nlview 6.6.5b  2016-09-06 bk=1.3687 VDI=39 GEI=35 GUI=JA:1.6
-#  -string -flagsOSRD
-preplace port S_AXI_LITE -pg 1 -y 30 -defaultsOSRD
-preplace port mm2s_introut -pg 1 -y 80 -defaultsOSRD
-preplace port M00_ACLK -pg 1 -y 100 -defaultsOSRD
-preplace port S_AXIS -pg 1 -y -110 -defaultsOSRD
-preplace port axi_resetn -pg 1 -y 80 -defaultsOSRD
-preplace port s2mm_introut -pg 1 -y 100 -defaultsOSRD
-preplace port s_axi_lite_aclk -pg 1 -y 50 -defaultsOSRD
-preplace port ext_reset_in -pg 1 -y 320 -defaultsOSRD
-preplace port M00_AXI -pg 1 -y 230 -defaultsOSRD
-preplace portBus peripheral_aresetn -pg 1 -y 120 -defaultsOSRD
-preplace inst axi_dma_0 -pg 1 -lvl 1 -y 80 -defaultsOSRD
-preplace inst proc_sys_reset_0 -pg 1 -lvl 1 -y 340 -defaultsOSRD
-preplace inst axi_interconnect_1 -pg 1 -lvl 2 -y 240 -defaultsOSRD
-preplace inst axis_data_fifo_0 -pg 1 -lvl 1 -y -110 -defaultsOSRD
-preplace netloc Conn1 1 0 1 NJ
-preplace netloc ARESETN_1 1 1 1 320
-preplace netloc axi_dma_0_s2mm_introut 1 1 2 300J 390 620J
-preplace netloc ps7_0_FCLK_CLK1 1 0 2 -80 190 330
-preplace netloc axi_dma_0_mm2s_introut 1 1 2 300J 80 NJ
-preplace netloc ext_reset_in_1 1 0 1 N
-preplace netloc S_AXIS_1 1 0 1 -80
-preplace netloc S01_AXI_1 1 1 1 330
-preplace netloc S00_AXI_2 1 1 1 320
-preplace netloc axi_resetn_1 1 0 1 -90
-preplace netloc proc_sys_reset_0_peripheral_aresetn 1 0 3 -60 250 310 400 640J
-preplace netloc axis_data_fifo_0_M_AXIS 1 0 2 -70 -190 330
-preplace netloc axi_interconnect_1_M00_AXI 1 2 1 630
-preplace netloc s_axi_lite_aclk_1 1 0 1 -90J
-levelinfo -pg 1 -130 140 483 660 -top -330 -bot 530
-",
-}
-
   # Restore current instance
   current_bd_instance $oldCurInst
 }

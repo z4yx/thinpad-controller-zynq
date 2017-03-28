@@ -8,7 +8,7 @@
 `ifndef __THINPADNG_ZYNQ_TOP_V__
 `define __THINPADNG_ZYNQ_TOP_V__
 
-`default_nettype none
+//`default_nettype none
 
 `timescale 1ns/1ns
 
@@ -61,12 +61,12 @@ module thinpadNG_zynq_top(/*autoarg*/
     output clk_out1;
     output clk_out2;
     input done;
-    output [19:0]emc_rtl_addr_wrap;
-    output [3:0]emc_rtl_ben_wrap;
-    output [0:0]emc_rtl_ce_n_wrap;
+    inout [19:0]emc_rtl_addr_wrap;
+    inout [3:0]emc_rtl_ben_wrap;
+    inout [0:0]emc_rtl_ce_n_wrap;
     inout [31:0]emc_rtl_dq_io;  // because of IOBUF, there is no need to wrap dq_io
-    output [0:0]emc_rtl_oen_wrap;
-    output emc_rtl_wen_wrap;
+    inout [0:0]emc_rtl_oen_wrap;
+    inout emc_rtl_wen_wrap;
     inout [5:0]gpio_rtl_0_tri_io;
     inout [31:0]gpio_rtl_1_tri_io;
     inout [31:0]gpio_rtl_tri_io;
@@ -103,7 +103,7 @@ module thinpadNG_zynq_top(/*autoarg*/
     wire [31:0]bus_analyze_axis_tdata;
     wire bus_analyze_axis_tlast;
     wire bus_analyze_axis_tready;
-    reg  bus_analyze_axis_tvalid;
+    wire bus_analyze_axis_tvalid;
     wire bus_analyze_clk;
     wire [0:0]bus_analyze_rst_n;
     wire clk_out1;
@@ -188,13 +188,17 @@ module thinpadNG_zynq_top(/*autoarg*/
 
     reg io_enable;
     reg io_dir;
+    reg bus_analyze_start;
+    reg [20:0] bus_analyze_sample_cnt;
     wire [19:0]emc_rtl_addr_wrap;
     wire [3:0]emc_rtl_ben_wrap;
     wire [0:0]emc_rtl_ce_n_wrap;
     wire [0:0]emc_rtl_oen_wrap;
     wire emc_rtl_wen_wrap;
-       
+
     always @(*) begin
+        bus_analyze_sample_cnt <= reg2port[32+20:32];
+        bus_analyze_start <= reg2port[32+31]; //MSB
         io_enable <= reg2port[0];  // 1 for enable
         io_dir <= (~emc_rtl_wen & emc_rtl_oen) ? 1'b1 : 1'b0; // 1 for output
     end
@@ -220,6 +224,7 @@ module thinpadNG_zynq_top(/*autoarg*/
     assign emc_rtl_oen_wrap = io_enable ? emc_rtl_oen : 1'bz; 
     assign emc_rtl_wen_wrap = io_enable ? emc_rtl_wen : 1'bz; 
     
+    /*
     reg [31:0] test_data;
     always@(posedge bus_analyze_clk)begin
         test_data <= test_data + bus_analyze_axis_tready;
@@ -227,6 +232,27 @@ module thinpadNG_zynq_top(/*autoarg*/
     end
     assign bus_analyze_axis_tdata = test_data;
     assign bus_analyze_axis_tlast = 0;
+    */
+    bus_analyze bus_analyzer(
+        .clk(bus_analyze_clk),
+        .rst_n(bus_analyze_rst_n),
+    
+        .ram_addr_in(emc_rtl_addr_wrap),
+        .ram_dq_in(emc_rtl_dq_io),
+        .ram_wr_n_in(emc_rtl_wen_wrap),
+        .ram_rd_n_in(emc_rtl_oen_wrap),
+        .ram_ce_n_in(emc_rtl_ce_n_wrap),
+        .ram_be_n_in(emc_rtl_ben_wrap),
+
+        .new_sample_cnt(bus_analyze_sample_cnt),
+        .new_sample_valid(bus_analyze_start),
+
+        .axis_data(bus_analyze_axis_tdata),
+        .axis_valid(bus_analyze_axis_tvalid),
+        .axis_ready(bus_analyze_axis_tready),
+        .axis_tlast(bus_analyze_axis_tlast)
+
+    );
 
 endmodule
 
