@@ -14,13 +14,14 @@
 
 module thinpadNG_zynq_top(/*autoarg*/
     //Inputs
-    UART_1_rxd, done, initb, rxd_232, 
+    UART_1_rxd, done, initb, 
 
     //Outputs
     SPI0_MOSI_O, SPI0_SCLK_O, UART_1_txd, 
     clk_out1, clk_out2, emc_rtl_addr_wrap, emc_rtl_ben_wrap, 
     emc_rtl_ce_n_wrap, emc_rtl_oen_wrap, emc_rtl_wen_wrap, 
-    progb, txd_232, 
+    progb, 
+    clkin1_p,  clkin1_n, datain1_p, datain1_n,
 
     //Inouts
     DDR_addr, DDR_ba, DDR_cas_n, DDR_ck_n, 
@@ -72,8 +73,8 @@ module thinpadNG_zynq_top(/*autoarg*/
     inout [31:0]gpio_rtl_tri_io;
     input initb;
     output [0:0]progb;
-    input rxd_232;
-    output txd_232;
+    input clkin1_p,  clkin1_n;            // lvds channel 1 clock input
+    input [3:0]   datain1_p, datain1_n;           // lvds channel 1 data inputs
 
     wire [14:0]DDR_addr;
     wire [2:0]DDR_ba;
@@ -106,6 +107,8 @@ module thinpadNG_zynq_top(/*autoarg*/
     wire bus_analyze_axis_tvalid;
     wire bus_analyze_clk;
     wire [0:0]bus_analyze_rst_n;
+    wire ps_perph_rstn;
+    wire clk_serdes;
     wire clk_out1;
     wire clk_out2;
     wire done;
@@ -122,6 +125,8 @@ module thinpadNG_zynq_top(/*autoarg*/
     wire [31:0]gpio_rtl_tri_io;
     wire initb;
     wire [0:0]progb;
+    wire clkin1_p,  clkin1_n;            // lvds channel 1 clock input
+    wire [3:0]   datain1_p, datain1_n;           // lvds channel 1 data inputs
     wire rxd_232;
     wire txd_232;
     wire [127:0]reg2port;
@@ -158,6 +163,8 @@ module thinpadNG_zynq_top(/*autoarg*/
     .bus_analyze_axis_tvalid    (bus_analyze_axis_tvalid),
     .bus_analyze_clk            (bus_analyze_clk),
     .bus_analyze_rst_n          (bus_analyze_rst_n),
+    .clk_serdes                 (clk_serdes),
+    .ps_perph_rstn              (ps_perph_rstn),
     .clk_out1                   (clk_out1                       ), // output
     .clk_out2                   (clk_out2                       ), // output
     .done                       (done                           ), // input
@@ -252,6 +259,15 @@ module thinpadNG_zynq_top(/*autoarg*/
         .axis_ready(bus_analyze_axis_tready),
         .axis_tlast(bus_analyze_axis_tlast)
 
+    );
+
+    logic_analyzer LA(
+        .refclk   (clk_serdes),
+        .rst_n    (ps_perph_rstn),
+        .clkin1_p (clkin1_p),
+        .clkin1_n (clkin1_n),
+        .datain1_p(datain1_p),
+        .datain1_n(datain1_n)
     );
 
 endmodule

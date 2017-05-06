@@ -225,6 +225,39 @@ HDL_ATTRIBUTE.DEBUG {true} \
   connect_bd_net -net ps7_0_FCLK_CLK1 [get_bd_pins M00_ACLK] [get_bd_pins axi_dma_0/m_axi_s2mm_aclk] [get_bd_pins axi_interconnect_1/ACLK] [get_bd_pins axi_interconnect_1/M00_ACLK] [get_bd_pins axi_interconnect_1/S00_ACLK] [get_bd_pins axi_interconnect_1/S01_ACLK] [get_bd_pins axis_data_fifo_0/s_axis_aclk] [get_bd_pins proc_sys_reset_0/slowest_sync_clk]
   connect_bd_net -net s_axi_lite_aclk_1 [get_bd_pins s_axi_lite_aclk] [get_bd_pins axi_dma_0/s_axi_lite_aclk]
 
+  # Perform GUI Layout
+  regenerate_bd_layout -hierarchy [get_bd_cells /bus_analyze] -layout_string {
+   guistr: "# # String gsaved with Nlview 6.6.5b  2016-09-06 bk=1.3687 VDI=39 GEI=35 GUI=JA:1.6
+#  -string -flagsOSRD
+preplace port S_AXI_LITE -pg 1 -y 30 -defaultsOSRD
+preplace port M00_ACLK -pg 1 -y 100 -defaultsOSRD
+preplace port S_AXIS -pg 1 -y -110 -defaultsOSRD
+preplace port axi_resetn -pg 1 -y 80 -defaultsOSRD
+preplace port s2mm_introut -pg 1 -y 100 -defaultsOSRD
+preplace port s_axi_lite_aclk -pg 1 -y 50 -defaultsOSRD
+preplace port ext_reset_in -pg 1 -y 320 -defaultsOSRD
+preplace port M00_AXI -pg 1 -y 230 -defaultsOSRD
+preplace portBus peripheral_aresetn -pg 1 -y 120 -defaultsOSRD
+preplace inst axi_dma_0 -pg 1 -lvl 1 -y 80 -defaultsOSRD
+preplace inst proc_sys_reset_0 -pg 1 -lvl 1 -y 340 -defaultsOSRD
+preplace inst axi_interconnect_1 -pg 1 -lvl 2 -y 240 -defaultsOSRD
+preplace inst axis_data_fifo_0 -pg 1 -lvl 1 -y -110 -defaultsOSRD
+preplace netloc Conn1 1 0 1 -60J
+preplace netloc ARESETN_1 1 1 1 330
+preplace netloc axi_dma_0_s2mm_introut 1 1 2 310J 390 620J
+preplace netloc ps7_0_FCLK_CLK1 1 0 2 -70 190 340
+preplace netloc ext_reset_in_1 1 0 1 N
+preplace netloc S_AXIS_1 1 0 1 -70
+preplace netloc S00_AXI_2 1 1 1 340
+preplace netloc axi_resetn_1 1 0 1 -90
+preplace netloc proc_sys_reset_0_peripheral_aresetn 1 0 3 -40 250 320 400 640J
+preplace netloc axis_data_fifo_0_M_AXIS 1 0 2 -50 -190 310
+preplace netloc axi_interconnect_1_M00_AXI 1 2 1 630
+preplace netloc s_axi_lite_aclk_1 1 0 1 -80J
+levelinfo -pg 1 -130 140 483 660 -top -330 -bot 530
+",
+}
+
   # Restore current instance
   current_bd_instance $oldCurInst
 }
@@ -292,6 +325,7 @@ CONFIG.ASSOCIATED_RESET {bus_analyze_rst_n} \
   set bus_analyze_rst_n [ create_bd_port -dir O -from 0 -to 0 -type rst bus_analyze_rst_n ]
   set clk_out1 [ create_bd_port -dir O -type clk clk_out1 ]
   set clk_out2 [ create_bd_port -dir O -type clk clk_out2 ]
+  set clk_serdes [ create_bd_port -dir O -type clk clk_serdes ]
   set done [ create_bd_port -dir I done ]
   set emc_rtl_addr [ create_bd_port -dir O -from 31 -to 0 emc_rtl_addr ]
   set emc_rtl_ben [ create_bd_port -dir O -from 3 -to 0 emc_rtl_ben ]
@@ -303,6 +337,7 @@ CONFIG.ASSOCIATED_RESET {bus_analyze_rst_n} \
   set emc_rtl_wen [ create_bd_port -dir O emc_rtl_wen ]
   set initb [ create_bd_port -dir I initb ]
   set progb [ create_bd_port -dir O -from 0 -to 0 progb ]
+  set ps_perph_rstn [ create_bd_port -dir O -from 0 -to 0 ps_perph_rstn ]
   set reg2port [ create_bd_port -dir O -from 127 -to 0 -type data reg2port ]
   set rxd_232 [ create_bd_port -dir I rxd_232 ]
   set txd_232 [ create_bd_port -dir O txd_232 ]
@@ -410,7 +445,7 @@ CONFIG.PCW_ACT_ENET0_PERIPHERAL_FREQMHZ {125.000000} \
 CONFIG.PCW_ACT_ENET1_PERIPHERAL_FREQMHZ {10.000000} \
 CONFIG.PCW_ACT_FPGA0_PERIPHERAL_FREQMHZ {50.000000} \
 CONFIG.PCW_ACT_FPGA1_PERIPHERAL_FREQMHZ {100.000000} \
-CONFIG.PCW_ACT_FPGA2_PERIPHERAL_FREQMHZ {10.000000} \
+CONFIG.PCW_ACT_FPGA2_PERIPHERAL_FREQMHZ {200.000000} \
 CONFIG.PCW_ACT_FPGA3_PERIPHERAL_FREQMHZ {10.000000} \
 CONFIG.PCW_ACT_PCAP_PERIPHERAL_FREQMHZ {200.000000} \
 CONFIG.PCW_ACT_QSPI_PERIPHERAL_FREQMHZ {200.000000} \
@@ -436,7 +471,7 @@ CONFIG.PCW_CAN_PERIPHERAL_DIVISOR0 {1} \
 CONFIG.PCW_CAN_PERIPHERAL_DIVISOR1 {1} \
 CONFIG.PCW_CAN_PERIPHERAL_FREQMHZ {100} \
 CONFIG.PCW_CLK1_FREQ {100000000} \
-CONFIG.PCW_CLK2_FREQ {10000000} \
+CONFIG.PCW_CLK2_FREQ {200000000} \
 CONFIG.PCW_CLK3_FREQ {10000000} \
 CONFIG.PCW_CPU_CPU_6X4X_MAX_RANGE {667} \
 CONFIG.PCW_CPU_CPU_PLL_FREQMHZ {1333.333} \
@@ -493,6 +528,7 @@ CONFIG.PCW_ENET_RESET_POLARITY {Active Low} \
 CONFIG.PCW_ENET_RESET_SELECT {Share reset pin} \
 CONFIG.PCW_EN_4K_TIMER {0} \
 CONFIG.PCW_EN_CLK1_PORT {1} \
+CONFIG.PCW_EN_CLK2_PORT {1} \
 CONFIG.PCW_EN_EMIO_GPIO {1} \
 CONFIG.PCW_EN_EMIO_SPI0 {1} \
 CONFIG.PCW_EN_EMIO_UART1 {1} \
@@ -510,21 +546,22 @@ CONFIG.PCW_FCLK1_PERIPHERAL_CLKSRC {IO PLL} \
 CONFIG.PCW_FCLK1_PERIPHERAL_DIVISOR0 {5} \
 CONFIG.PCW_FCLK1_PERIPHERAL_DIVISOR1 {2} \
 CONFIG.PCW_FCLK2_PERIPHERAL_CLKSRC {IO PLL} \
-CONFIG.PCW_FCLK2_PERIPHERAL_DIVISOR0 {1} \
+CONFIG.PCW_FCLK2_PERIPHERAL_DIVISOR0 {5} \
 CONFIG.PCW_FCLK2_PERIPHERAL_DIVISOR1 {1} \
 CONFIG.PCW_FCLK3_PERIPHERAL_CLKSRC {IO PLL} \
 CONFIG.PCW_FCLK3_PERIPHERAL_DIVISOR0 {1} \
 CONFIG.PCW_FCLK3_PERIPHERAL_DIVISOR1 {1} \
 CONFIG.PCW_FCLK_CLK0_BUF {TRUE} \
 CONFIG.PCW_FCLK_CLK1_BUF {TRUE} \
-CONFIG.PCW_FCLK_CLK2_BUF {FALSE} \
+CONFIG.PCW_FCLK_CLK2_BUF {TRUE} \
 CONFIG.PCW_FCLK_CLK3_BUF {FALSE} \
 CONFIG.PCW_FPGA0_PERIPHERAL_FREQMHZ {50} \
 CONFIG.PCW_FPGA1_PERIPHERAL_FREQMHZ {100} \
-CONFIG.PCW_FPGA2_PERIPHERAL_FREQMHZ {50} \
+CONFIG.PCW_FPGA2_PERIPHERAL_FREQMHZ {200} \
 CONFIG.PCW_FPGA3_PERIPHERAL_FREQMHZ {50} \
 CONFIG.PCW_FPGA_FCLK0_ENABLE {1} \
 CONFIG.PCW_FPGA_FCLK1_ENABLE {1} \
+CONFIG.PCW_FPGA_FCLK2_ENABLE {1} \
 CONFIG.PCW_FTM_CTI_IN0 {<Select>} \
 CONFIG.PCW_FTM_CTI_IN1 {<Select>} \
 CONFIG.PCW_FTM_CTI_IN2 {<Select>} \
@@ -1166,10 +1203,10 @@ CONFIG.PCW_FCLK_CLK1_BUF.VALUE_SRC {DEFAULT} \
 CONFIG.PCW_FCLK_CLK2_BUF.VALUE_SRC {DEFAULT} \
 CONFIG.PCW_FCLK_CLK3_BUF.VALUE_SRC {DEFAULT} \
 CONFIG.PCW_FPGA0_PERIPHERAL_FREQMHZ.VALUE_SRC {DEFAULT} \
-CONFIG.PCW_FPGA2_PERIPHERAL_FREQMHZ.VALUE_SRC {DEFAULT} \
 CONFIG.PCW_FPGA3_PERIPHERAL_FREQMHZ.VALUE_SRC {DEFAULT} \
 CONFIG.PCW_FPGA_FCLK0_ENABLE.VALUE_SRC {DEFAULT} \
 CONFIG.PCW_FPGA_FCLK1_ENABLE.VALUE_SRC {DEFAULT} \
+CONFIG.PCW_FPGA_FCLK2_ENABLE.VALUE_SRC {DEFAULT} \
 CONFIG.PCW_FTM_CTI_IN0.VALUE_SRC {DEFAULT} \
 CONFIG.PCW_FTM_CTI_IN1.VALUE_SRC {DEFAULT} \
 CONFIG.PCW_FTM_CTI_IN2.VALUE_SRC {DEFAULT} \
@@ -1730,10 +1767,11 @@ CONFIG.DIN_WIDTH {3} \
   connect_bd_net -net initb_1 [get_bd_ports initb] [get_bd_pins xlconcat_0/In1]
   connect_bd_net -net mem_dq_i_1 [get_bd_ports emc_rtl_dq_i] [get_bd_pins axi_emc_0/mem_dq_i]
   connect_bd_net -net proc_sys_reset_0_interconnect_aresetn [get_bd_pins axi_interconnect_0/ARESETN] [get_bd_pins proc_sys_reset_0/interconnect_aresetn]
-  connect_bd_net -net proc_sys_reset_0_peripheral_aresetn [get_bd_pins axi_emc_0/s_axi_aresetn] [get_bd_pins axi_gpio_0/s_axi_aresetn] [get_bd_pins axi_gpio_1/s_axi_aresetn] [get_bd_pins axi_gpio_2/s_axi_aresetn] [get_bd_pins axi_interconnect_0/M00_ARESETN] [get_bd_pins axi_interconnect_0/M01_ARESETN] [get_bd_pins axi_interconnect_0/M02_ARESETN] [get_bd_pins axi_interconnect_0/M03_ARESETN] [get_bd_pins axi_interconnect_0/M04_ARESETN] [get_bd_pins axi_interconnect_0/M05_ARESETN] [get_bd_pins axi_interconnect_0/M06_ARESETN] [get_bd_pins axi_interconnect_0/M07_ARESETN] [get_bd_pins axi_interconnect_0/M08_ARESETN] [get_bd_pins axi_interconnect_0/S00_ARESETN] [get_bd_pins axi_register_0/s00_axi_aresetn] [get_bd_pins axi_uartlite_0/s_axi_aresetn] [get_bd_pins bus_analyze/axi_resetn] [get_bd_pins clk_wiz_0/s_axi_aresetn] [get_bd_pins proc_sys_reset_0/peripheral_aresetn]
+  connect_bd_net -net proc_sys_reset_0_peripheral_aresetn [get_bd_ports ps_perph_rstn] [get_bd_pins axi_emc_0/s_axi_aresetn] [get_bd_pins axi_gpio_0/s_axi_aresetn] [get_bd_pins axi_gpio_1/s_axi_aresetn] [get_bd_pins axi_gpio_2/s_axi_aresetn] [get_bd_pins axi_interconnect_0/M00_ARESETN] [get_bd_pins axi_interconnect_0/M01_ARESETN] [get_bd_pins axi_interconnect_0/M02_ARESETN] [get_bd_pins axi_interconnect_0/M03_ARESETN] [get_bd_pins axi_interconnect_0/M04_ARESETN] [get_bd_pins axi_interconnect_0/M05_ARESETN] [get_bd_pins axi_interconnect_0/M06_ARESETN] [get_bd_pins axi_interconnect_0/M07_ARESETN] [get_bd_pins axi_interconnect_0/M08_ARESETN] [get_bd_pins axi_interconnect_0/S00_ARESETN] [get_bd_pins axi_register_0/s00_axi_aresetn] [get_bd_pins axi_uartlite_0/s_axi_aresetn] [get_bd_pins bus_analyze/axi_resetn] [get_bd_pins clk_wiz_0/s_axi_aresetn] [get_bd_pins proc_sys_reset_0/peripheral_aresetn]
   connect_bd_net -net processing_system7_0_FCLK_CLK0 [get_bd_pins axi_emc_0/rdclk] [get_bd_pins axi_emc_0/s_axi_aclk] [get_bd_pins axi_gpio_0/s_axi_aclk] [get_bd_pins axi_gpio_1/s_axi_aclk] [get_bd_pins axi_gpio_2/s_axi_aclk] [get_bd_pins axi_interconnect_0/ACLK] [get_bd_pins axi_interconnect_0/M00_ACLK] [get_bd_pins axi_interconnect_0/M01_ACLK] [get_bd_pins axi_interconnect_0/M02_ACLK] [get_bd_pins axi_interconnect_0/M03_ACLK] [get_bd_pins axi_interconnect_0/M04_ACLK] [get_bd_pins axi_interconnect_0/M05_ACLK] [get_bd_pins axi_interconnect_0/M06_ACLK] [get_bd_pins axi_interconnect_0/M07_ACLK] [get_bd_pins axi_interconnect_0/M08_ACLK] [get_bd_pins axi_interconnect_0/S00_ACLK] [get_bd_pins axi_register_0/s00_axi_aclk] [get_bd_pins axi_uartlite_0/s_axi_aclk] [get_bd_pins bus_analyze/s_axi_lite_aclk] [get_bd_pins clk_wiz_0/clk_in1] [get_bd_pins clk_wiz_0/s_axi_aclk] [get_bd_pins proc_sys_reset_0/slowest_sync_clk] [get_bd_pins ps7_0/FCLK_CLK0] [get_bd_pins ps7_0/M_AXI_GP0_ACLK]
   connect_bd_net -net processing_system7_0_FCLK_RESET0_N [get_bd_pins bus_analyze/ext_reset_in] [get_bd_pins proc_sys_reset_0/ext_reset_in] [get_bd_pins ps7_0/FCLK_RESET0_N]
   connect_bd_net -net ps7_0_FCLK_CLK1 [get_bd_ports bus_analyze_clk] [get_bd_pins bus_analyze/M00_ACLK] [get_bd_pins ps7_0/FCLK_CLK1] [get_bd_pins ps7_0/S_AXI_HP0_ACLK]
+  connect_bd_net -net ps7_0_FCLK_CLK2 [get_bd_ports clk_serdes] [get_bd_pins ps7_0/FCLK_CLK2]
   connect_bd_net -net ps7_0_GPIO_O [get_bd_pins ps7_0/GPIO_O] [get_bd_pins xlslice_0/Din]
   set_property -dict [ list \
 HDL_ATTRIBUTE.DEBUG {true} \
@@ -1775,7 +1813,9 @@ preplace port DDR -pg 1 -y -220 -defaultsOSRD
 preplace port emc_rtl_wen -pg 1 -y 1400 -defaultsOSRD
 preplace port gpio_rtl -pg 1 -y 470 -defaultsOSRD
 preplace port rxd_232 -pg 1 -y 240 -defaultsOSRD
+preplace port clk_serdes -pg 1 -y 0 -defaultsOSRD
 preplace port UART_1 -pg 1 -y -30 -defaultsOSRD
+preplace port ps_perph_rstn -pg 1 -y 580 -defaultsOSRD
 preplace port clk_out1 -pg 1 -y -90 -defaultsOSRD
 preplace port clk_out2 -pg 1 -y -50 -defaultsOSRD
 preplace port FIXED_IO -pg 1 -y -200 -defaultsOSRD
@@ -1785,7 +1825,7 @@ preplace port gpio_rtl_0 -pg 1 -y 490 -defaultsOSRD
 preplace port bus_analyze_clk -pg 1 -y -330 -defaultsOSRD
 preplace port initb -pg 1 -y 170 -defaultsOSRD
 preplace port gpio_rtl_1 -pg 1 -y 510 -defaultsOSRD
-preplace port SPI0_MOSI_O -pg 1 -y -10 -defaultsOSRD
+preplace port SPI0_MOSI_O -pg 1 -y -160 -defaultsOSRD
 preplace port SPI0_SCLK_O -pg 1 -y 20 -defaultsOSRD
 preplace portBus emc_rtl_dq_o -pg 1 -y 1240 -defaultsOSRD
 preplace portBus emc_rtl_oen -pg 1 -y 1300 -defaultsOSRD
@@ -1801,7 +1841,7 @@ preplace inst axi_register_0 -pg 1 -lvl 4 -y 840 -defaultsOSRD
 preplace inst xlslice_0 -pg 1 -lvl 3 -y -206 -defaultsOSRD
 preplace inst xlconstant_0 -pg 1 -lvl 1 -y 120 -defaultsOSRD
 preplace inst axi_emc_0 -pg 1 -lvl 4 -y 1320 -defaultsOSRD
-preplace inst bus_analyze -pg 1 -lvl 3 -y 4 -defaultsOSRD
+preplace inst bus_analyze -pg 1 -lvl 3 -y 10 -defaultsOSRD
 preplace inst axi_gpio_0 -pg 1 -lvl 4 -y 300 -defaultsOSRD
 preplace inst xlconcat_0 -pg 1 -lvl 2 -y 160 -defaultsOSRD
 preplace inst proc_sys_reset_0 -pg 1 -lvl 2 -y 360 -defaultsOSRD
@@ -1812,54 +1852,55 @@ preplace inst ps7_0 -pg 1 -lvl 2 -y -120 -defaultsOSRD
 preplace inst axi_uartlite_0 -pg 1 -lvl 4 -y 120 -defaultsOSRD
 preplace inst axi_interconnect_0 -pg 1 -lvl 3 -y 692 -defaultsOSRD
 preplace inst clk_wiz_0 -pg 1 -lvl 4 -y -80 -defaultsOSRD
-preplace netloc ps7_0_UART_1 1 2 3 NJ -150 1180J -160 2400J
-preplace netloc processing_system7_0_DDR 1 2 3 660J -260 NJ -260 2420J
-preplace netloc bus_analyze_s2mm_introut 1 0 4 -30 -330 NJ -330 NJ -330 1130
-preplace netloc axi_register_0_reg2port 1 4 1 2380J
-preplace netloc axi_emc_0_mem_dq_t 1 4 1 2410
-preplace netloc ps7_0_SPI0_MOSI_O 1 2 3 660J -130 1170J -190 2420J
-preplace netloc ps7_0_SPI0_SCLK_O 1 2 3 NJ -110 1190J -170 2390J
-preplace netloc axi_uartlite_0_interrupt 1 0 5 -20 230 NJ 230 NJ 230 NJ 230 2350
-preplace netloc bus_analyze_axis_1 1 0 3 NJ 60 NJ 60 710
+preplace netloc ps7_0_UART_1 1 2 3 660J -150 1180J 0 2360J
+preplace netloc processing_system7_0_DDR 1 2 3 660J -260 NJ -260 2370J
+preplace netloc bus_analyze_s2mm_introut 1 0 4 -20 -340 NJ -340 NJ -340 1130
+preplace netloc axi_register_0_reg2port 1 4 1 2370J
+preplace netloc axi_emc_0_mem_dq_t 1 4 1 2400
+preplace netloc ps7_0_SPI0_MOSI_O 1 2 3 720J -130 1170J -160 NJ
+preplace netloc ps7_0_SPI0_SCLK_O 1 2 3 NJ -120 1160J 20 NJ
+preplace netloc axi_uartlite_0_interrupt 1 0 5 -10 230 NJ 230 NJ 230 NJ 230 2360
+preplace netloc bus_analyze_axis_1 1 0 3 -30J -360 NJ -360 740
 preplace netloc axi_emc_0_mem_ben 1 4 1 2370J
-preplace netloc axi_interconnect_0_M02_AXI 1 3 1 1240
+preplace netloc axi_interconnect_0_M02_AXI 1 3 1 1200
 preplace netloc xlconcat_1_dout 1 1 1 160
 preplace netloc initb_1 1 0 2 NJ 170 160J
-preplace netloc processing_system7_0_FCLK_RESET0_N 1 1 2 180 -300 670
+preplace netloc processing_system7_0_FCLK_RESET0_N 1 1 2 180 -320 670
 preplace netloc axi_emc_0_mem_a 1 4 1 2360J
 preplace netloc done_1 1 0 2 NJ 300 170J
 preplace netloc axi_interconnect_0_M07_AXI 1 3 1 1140
 preplace netloc axi_emc_0_mem_wen 1 4 1 N
 preplace netloc axi_emc_0_mem_cen 1 4 1 2380J
-preplace netloc ps7_0_FCLK_CLK1 1 1 4 170 -320 720 -320 NJ -320 2420J
-preplace netloc axi_uartlite_0_tx 1 4 1 2370
+preplace netloc ps7_0_FCLK_CLK1 1 1 4 170 -330 730 -330 NJ -330 NJ
+preplace netloc axi_uartlite_0_tx 1 4 1 2380
 preplace netloc proc_sys_reset_0_interconnect_aresetn 1 2 1 690
-preplace netloc axi_interconnect_0_M08_AXI 1 2 2 730 -100 1120
-preplace netloc axi_interconnect_0_M04_AXI 1 3 1 1270
+preplace netloc axi_interconnect_0_M08_AXI 1 2 2 750 -100 1120
+preplace netloc axi_interconnect_0_M04_AXI 1 3 1 1230
+preplace netloc ps7_0_FCLK_CLK2 1 2 3 710J -140 1150J -190 2380J
 preplace netloc xlconstant_0_dout 1 1 1 170J
 preplace netloc xlconcat_0_dout 1 2 1 650
-preplace netloc ps7_0_GPIO_O 1 2 1 700
-preplace netloc processing_system7_0_FIXED_IO 1 2 3 660J -160 1160J -200 NJ
+preplace netloc ps7_0_GPIO_O 1 2 1 750
+preplace netloc processing_system7_0_FIXED_IO 1 2 3 720J -160 1160J -180 2370J
 preplace netloc S00_AXI_1 1 2 1 700
-preplace netloc axi_emc_0_mem_oen 1 4 1 2420
-preplace netloc mem_dq_i_1 1 0 5 -30J 1190 NJ 1190 NJ 1190 NJ 1190 2350
-preplace netloc clk_wiz_0_clk_out1 1 4 1 2410J
-preplace netloc axi_gpio_0_GPIO 1 4 1 2360J
-preplace netloc axi_interconnect_0_M00_AXI 1 3 1 1200
+preplace netloc axi_emc_0_mem_oen 1 4 1 2410
+preplace netloc mem_dq_i_1 1 0 5 -20J 1190 NJ 1190 NJ 1190 NJ 1190 2350
+preplace netloc clk_wiz_0_clk_out1 1 4 1 2400J
+preplace netloc axi_gpio_0_GPIO 1 4 1 2370J
+preplace netloc axi_interconnect_0_M00_AXI 1 3 1 1150
 preplace netloc axi_emc_0_mem_dq_o 1 4 1 2390
-preplace netloc proc_sys_reset_0_peripheral_aresetn 1 2 2 730 400 1250J
-preplace netloc clk_wiz_0_clk_out2 1 4 1 2380J
-preplace netloc axi_gpio_2_GPIO 1 4 1 2390J
-preplace netloc axi_interconnect_0_M01_AXI 1 3 1 1220
-preplace netloc rxd_232_1 1 0 5 NJ 240 NJ 240 NJ 240 1210J 200 2360
-preplace netloc processing_system7_0_FCLK_CLK0 1 1 3 190 1310 680 1310 1230J
-preplace netloc axi_gpio_1_GPIO 1 4 1 2350J
-preplace netloc axi_interconnect_1_M00_AXI 1 1 3 160J -340 NJ -340 1140
-preplace netloc axi_interconnect_0_M06_AXI 1 3 1 1170
-preplace netloc axi_interconnect_0_M03_AXI 1 3 1 1260
-preplace netloc bus_analyze_peripheral_aresetn 1 3 2 N 24 2380J
-preplace netloc xlslice_0_Dout 1 3 2 1150J -240 NJ
-levelinfo -pg 1 -50 80 450 973 2219 2440 -top -480 -bot 1710
+preplace netloc proc_sys_reset_0_peripheral_aresetn 1 2 3 750 400 1210J 540 2360
+preplace netloc clk_wiz_0_clk_out2 1 4 1 2360J
+preplace netloc axi_gpio_2_GPIO 1 4 1 2380J
+preplace netloc axi_interconnect_0_M01_AXI 1 3 1 1180
+preplace netloc rxd_232_1 1 0 5 NJ 240 NJ 240 NJ 240 1170J 200 2370
+preplace netloc processing_system7_0_FCLK_CLK0 1 1 3 190 1310 680 1310 1190J
+preplace netloc axi_gpio_1_GPIO 1 4 1 2360J
+preplace netloc axi_interconnect_1_M00_AXI 1 1 3 160J -380 NJ -380 1140
+preplace netloc axi_interconnect_0_M06_AXI 1 3 1 1160
+preplace netloc axi_interconnect_0_M03_AXI 1 3 1 1220
+preplace netloc bus_analyze_peripheral_aresetn 1 3 2 N 30 2400J
+preplace netloc xlslice_0_Dout 1 3 2 NJ -206 2360J
+levelinfo -pg 1 -50 80 450 973 2219 2450 -top -480 -bot 1710
 ",
 }
 

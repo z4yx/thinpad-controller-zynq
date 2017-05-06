@@ -1,7 +1,7 @@
 //Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2016.4 (lin64) Build 1733598 Wed Dec 14 22:35:42 MST 2016
-//Date        : Tue May  2 15:05:36 2017
+//Date        : Sat May  6 17:43:01 2017
 //Host        : skyworks running 64-bit Ubuntu 16.04.2 LTS
 //Command     : generate_target design_1_wrapper.bd
 //Design      : design_1_wrapper
@@ -43,6 +43,7 @@ module design_1_wrapper
     bus_analyze_rst_n,
     clk_out1,
     clk_out2,
+    clk_serdes,
     done,
     emc_rtl_addr,
     emc_rtl_ben,
@@ -57,6 +58,7 @@ module design_1_wrapper
     gpio_rtl_tri_io,
     initb,
     progb,
+    ps_perph_rstn,
     reg2port,
     rxd_232,
     txd_232);
@@ -93,6 +95,7 @@ module design_1_wrapper
   output [0:0]bus_analyze_rst_n;
   output clk_out1;
   output clk_out2;
+  output clk_serdes;
   input done;
   output [31:0]emc_rtl_addr;
   output [3:0]emc_rtl_ben;
@@ -107,6 +110,7 @@ module design_1_wrapper
   inout [31:0]gpio_rtl_tri_io;
   input initb;
   output [0:0]progb;
+  output [0:0]ps_perph_rstn;
   output [127:0]reg2port;
   input rxd_232;
   output txd_232;
@@ -144,6 +148,7 @@ module design_1_wrapper
   wire [0:0]bus_analyze_rst_n;
   wire clk_out1;
   wire clk_out2;
+  wire clk_serdes;
   wire done;
   wire [31:0]emc_rtl_addr;
   wire [3:0]emc_rtl_ben;
@@ -435,6 +440,7 @@ module design_1_wrapper
   wire [9:9]gpio_rtl_tri_t_9;
   wire initb;
   wire [0:0]progb;
+  wire [0:0]ps_perph_rstn;
   wire [127:0]reg2port;
   wire rxd_232;
   wire txd_232;
@@ -473,6 +479,7 @@ module design_1_wrapper
         .bus_analyze_rst_n(bus_analyze_rst_n),
         .clk_out1(clk_out1),
         .clk_out2(clk_out2),
+        .clk_serdes(clk_serdes),
         .done(done),
         .emc_rtl_addr(emc_rtl_addr),
         .emc_rtl_ben(emc_rtl_ben),
@@ -493,6 +500,7 @@ module design_1_wrapper
         .gpio_rtl_tri_t({gpio_rtl_tri_t_31,gpio_rtl_tri_t_30,gpio_rtl_tri_t_29,gpio_rtl_tri_t_28,gpio_rtl_tri_t_27,gpio_rtl_tri_t_26,gpio_rtl_tri_t_25,gpio_rtl_tri_t_24,gpio_rtl_tri_t_23,gpio_rtl_tri_t_22,gpio_rtl_tri_t_21,gpio_rtl_tri_t_20,gpio_rtl_tri_t_19,gpio_rtl_tri_t_18,gpio_rtl_tri_t_17,gpio_rtl_tri_t_16,gpio_rtl_tri_t_15,gpio_rtl_tri_t_14,gpio_rtl_tri_t_13,gpio_rtl_tri_t_12,gpio_rtl_tri_t_11,gpio_rtl_tri_t_10,gpio_rtl_tri_t_9,gpio_rtl_tri_t_8,gpio_rtl_tri_t_7,gpio_rtl_tri_t_6,gpio_rtl_tri_t_5,gpio_rtl_tri_t_4,gpio_rtl_tri_t_3,gpio_rtl_tri_t_2,gpio_rtl_tri_t_1,gpio_rtl_tri_t_0}),
         .initb(initb),
         .progb(progb),
+        .ps_perph_rstn(ps_perph_rstn),
         .reg2port(reg2port),
         .rxd_232(rxd_232),
         .txd_232(txd_232));

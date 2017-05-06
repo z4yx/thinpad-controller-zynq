@@ -1,7 +1,7 @@
 //Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2016.4 (lin64) Build 1733598 Wed Dec 14 22:35:42 MST 2016
-//Date        : Tue May  2 15:05:36 2017
+//Date        : Sat May  6 17:43:01 2017
 //Host        : skyworks running 64-bit Ubuntu 16.04.2 LTS
 //Command     : generate_target design_1.bd
 //Design      : design_1
@@ -476,6 +476,7 @@ module design_1
     bus_analyze_rst_n,
     clk_out1,
     clk_out2,
+    clk_serdes,
     done,
     emc_rtl_addr,
     emc_rtl_ben,
@@ -496,6 +497,7 @@ module design_1
     gpio_rtl_tri_t,
     initb,
     progb,
+    ps_perph_rstn,
     reg2port,
     rxd_232,
     txd_232);
@@ -532,6 +534,7 @@ module design_1
   output [0:0]bus_analyze_rst_n;
   output clk_out1;
   output clk_out2;
+  output clk_serdes;
   input done;
   output [31:0]emc_rtl_addr;
   output [3:0]emc_rtl_ben;
@@ -552,6 +555,7 @@ module design_1
   output [31:0]gpio_rtl_tri_t;
   input initb;
   output [0:0]progb;
+  output [0:0]ps_perph_rstn;
   output [127:0]reg2port;
   input rxd_232;
   output txd_232;
@@ -843,6 +847,7 @@ module design_1
   wire processing_system7_0_FIXED_IO_PS_PORB;
   wire processing_system7_0_FIXED_IO_PS_SRSTB;
   wire ps7_0_FCLK_CLK1;
+  wire ps7_0_FCLK_CLK2;
   (* DEBUG = "true" *) (* MARK_DEBUG *) wire [2:0]ps7_0_GPIO_O;
   (* DEBUG = "true" *) (* MARK_DEBUG *) wire ps7_0_SPI0_MOSI_O;
   (* DEBUG = "true" *) (* MARK_DEBUG *) wire ps7_0_SPI0_SCLK_O;
@@ -868,6 +873,7 @@ module design_1
   assign bus_analyze_rst_n[0] = bus_analyze_peripheral_aresetn;
   assign clk_out1 = clk_wiz_0_clk_out1;
   assign clk_out2 = clk_wiz_0_clk_out2;
+  assign clk_serdes = ps7_0_FCLK_CLK2;
   assign done_1 = done;
   assign emc_rtl_addr[31:0] = axi_emc_0_mem_a;
   assign emc_rtl_ben[3:0] = axi_emc_0_mem_ben;
@@ -886,6 +892,7 @@ module design_1
   assign mem_dq_i_1 = emc_rtl_dq_i[31:0];
   assign progb[0] = xlslice_0_Dout;
   assign ps7_0_UART_1_RxD = UART_1_rxd;
+  assign ps_perph_rstn[0] = proc_sys_reset_0_peripheral_aresetn;
   assign reg2port[127:0] = axi_register_0_reg2port;
   assign rxd_232_1 = rxd_232;
   assign txd_232 = axi_uartlite_0_tx;
@@ -1395,6 +1402,7 @@ module design_1
         .DDR_WEB(DDR_we_n),
         .FCLK_CLK0(processing_system7_0_FCLK_CLK0),
         .FCLK_CLK1(ps7_0_FCLK_CLK1),
+        .FCLK_CLK2(ps7_0_FCLK_CLK2),
         .FCLK_RESET0_N(processing_system7_0_FCLK_RESET0_N),
         .GPIO_I(xlconcat_0_dout),
         .GPIO_O(ps7_0_GPIO_O),
