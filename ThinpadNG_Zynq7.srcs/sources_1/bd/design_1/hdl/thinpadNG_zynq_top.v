@@ -261,13 +261,21 @@ module thinpadNG_zynq_top(/*autoarg*/
 
     );
 
-    logic_analyzer LA(
-        .refclk   (clk_serdes),
-        .rst_n    (ps_perph_rstn),
+    (* MARK_DEBUG = "TRUE" *) wire[2:0]  lock_level;
+    wire rx_pixel_clk;
+    (* MARK_DEBUG = "TRUE" *) wire[255:0] received_data;
+    (* MARK_DEBUG = "TRUE" *) wire received_update;
+    la_receiver_0 LA(
+        .refclkin (clk_serdes),
+        .reset    (~ps_perph_rstn),
         .clkin1_p (clkin1_p),
         .clkin1_n (clkin1_n),
         .datain1_p(datain1_p),
-        .datain1_n(datain1_n)
+        .datain1_n(datain1_n),
+        .lock_level       (lock_level),
+        .rx_pixel_clk     (rx_pixel_clk),
+        .raw_signal_result(received_data),
+        .raw_signal_update(received_update)
     );
 
 endmodule
