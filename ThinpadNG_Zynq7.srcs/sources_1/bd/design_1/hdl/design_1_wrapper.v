@@ -1,7 +1,7 @@
 //Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2016.4 (lin64) Build 1733598 Wed Dec 14 22:35:42 MST 2016
-//Date        : Sat May  6 17:43:01 2017
+//Date        : Sat Jun  3 23:34:45 2017
 //Host        : skyworks running 64-bit Ubuntu 16.04.2 LTS
 //Command     : generate_target design_1_wrapper.bd
 //Design      : design_1_wrapper
@@ -57,6 +57,13 @@ module design_1_wrapper
     gpio_rtl_1_tri_io,
     gpio_rtl_tri_io,
     initb,
+    la_fifo_aclk,
+    la_fifo_aresetn,
+    la_rst_n,
+    la_storage_axis_tdata,
+    la_storage_axis_tlast,
+    la_storage_axis_tready,
+    la_storage_axis_tvalid,
     progb,
     ps_perph_rstn,
     reg2port,
@@ -109,6 +116,13 @@ module design_1_wrapper
   inout [31:0]gpio_rtl_1_tri_io;
   inout [31:0]gpio_rtl_tri_io;
   input initb;
+  input la_fifo_aclk;
+  input la_fifo_aresetn;
+  output [0:0]la_rst_n;
+  input [255:0]la_storage_axis_tdata;
+  input la_storage_axis_tlast;
+  output la_storage_axis_tready;
+  input la_storage_axis_tvalid;
   output [0:0]progb;
   output [0:0]ps_perph_rstn;
   output [127:0]reg2port;
@@ -439,6 +453,13 @@ module design_1_wrapper
   wire [8:8]gpio_rtl_tri_t_8;
   wire [9:9]gpio_rtl_tri_t_9;
   wire initb;
+  wire la_fifo_aclk;
+  wire la_fifo_aresetn;
+  wire [0:0]la_rst_n;
+  wire [255:0]la_storage_axis_tdata;
+  wire la_storage_axis_tlast;
+  wire la_storage_axis_tready;
+  wire la_storage_axis_tvalid;
   wire [0:0]progb;
   wire [0:0]ps_perph_rstn;
   wire [127:0]reg2port;
@@ -499,6 +520,13 @@ module design_1_wrapper
         .gpio_rtl_tri_o({gpio_rtl_tri_o_31,gpio_rtl_tri_o_30,gpio_rtl_tri_o_29,gpio_rtl_tri_o_28,gpio_rtl_tri_o_27,gpio_rtl_tri_o_26,gpio_rtl_tri_o_25,gpio_rtl_tri_o_24,gpio_rtl_tri_o_23,gpio_rtl_tri_o_22,gpio_rtl_tri_o_21,gpio_rtl_tri_o_20,gpio_rtl_tri_o_19,gpio_rtl_tri_o_18,gpio_rtl_tri_o_17,gpio_rtl_tri_o_16,gpio_rtl_tri_o_15,gpio_rtl_tri_o_14,gpio_rtl_tri_o_13,gpio_rtl_tri_o_12,gpio_rtl_tri_o_11,gpio_rtl_tri_o_10,gpio_rtl_tri_o_9,gpio_rtl_tri_o_8,gpio_rtl_tri_o_7,gpio_rtl_tri_o_6,gpio_rtl_tri_o_5,gpio_rtl_tri_o_4,gpio_rtl_tri_o_3,gpio_rtl_tri_o_2,gpio_rtl_tri_o_1,gpio_rtl_tri_o_0}),
         .gpio_rtl_tri_t({gpio_rtl_tri_t_31,gpio_rtl_tri_t_30,gpio_rtl_tri_t_29,gpio_rtl_tri_t_28,gpio_rtl_tri_t_27,gpio_rtl_tri_t_26,gpio_rtl_tri_t_25,gpio_rtl_tri_t_24,gpio_rtl_tri_t_23,gpio_rtl_tri_t_22,gpio_rtl_tri_t_21,gpio_rtl_tri_t_20,gpio_rtl_tri_t_19,gpio_rtl_tri_t_18,gpio_rtl_tri_t_17,gpio_rtl_tri_t_16,gpio_rtl_tri_t_15,gpio_rtl_tri_t_14,gpio_rtl_tri_t_13,gpio_rtl_tri_t_12,gpio_rtl_tri_t_11,gpio_rtl_tri_t_10,gpio_rtl_tri_t_9,gpio_rtl_tri_t_8,gpio_rtl_tri_t_7,gpio_rtl_tri_t_6,gpio_rtl_tri_t_5,gpio_rtl_tri_t_4,gpio_rtl_tri_t_3,gpio_rtl_tri_t_2,gpio_rtl_tri_t_1,gpio_rtl_tri_t_0}),
         .initb(initb),
+        .la_fifo_aclk(la_fifo_aclk),
+        .la_fifo_aresetn(la_fifo_aresetn),
+        .la_rst_n(la_rst_n),
+        .la_storage_axis_tdata(la_storage_axis_tdata),
+        .la_storage_axis_tlast(la_storage_axis_tlast),
+        .la_storage_axis_tready(la_storage_axis_tready),
+        .la_storage_axis_tvalid(la_storage_axis_tvalid),
         .progb(progb),
         .ps_perph_rstn(ps_perph_rstn),
         .reg2port(reg2port),

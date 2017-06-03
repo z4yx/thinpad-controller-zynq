@@ -130,6 +130,13 @@ module thinpadNG_zynq_top(/*autoarg*/
     wire rxd_232;
     wire txd_232;
     wire [127:0]reg2port;
+    wire la_fifo_aclk;
+    wire la_fifo_aresetn;
+    wire la_rst_n;
+    wire [255:0]la_storage_axis_tdata;
+    wire la_storage_axis_tlast;
+    wire la_storage_axis_tready;
+    wire la_storage_axis_tvalid;
 
     design_1_wrapper block_design(/*autoinst*/
     .DDR_addr                   (DDR_addr[14:0]                 ), // inout
@@ -163,6 +170,13 @@ module thinpadNG_zynq_top(/*autoarg*/
     .bus_analyze_axis_tvalid    (bus_analyze_axis_tvalid),
     .bus_analyze_clk            (bus_analyze_clk),
     .bus_analyze_rst_n          (bus_analyze_rst_n),
+    .la_fifo_aclk               (la_fifo_aclk),
+    .la_fifo_aresetn            (la_fifo_aresetn),
+    .la_rst_n                   (la_rst_n),
+    .la_storage_axis_tdata      (la_storage_axis_tdata),
+    .la_storage_axis_tlast      (la_storage_axis_tlast),
+    .la_storage_axis_tready     (la_storage_axis_tready),
+    .la_storage_axis_tvalid     (la_storage_axis_tvalid),
     .clk_serdes                 (clk_serdes),
     .ps_perph_rstn              (ps_perph_rstn),
     .clk_out1                   (clk_out1                       ), // output
@@ -262,20 +276,37 @@ module thinpadNG_zynq_top(/*autoarg*/
     );
 
     (* MARK_DEBUG = "TRUE" *) wire[2:0]  lock_level;
-    wire rx_pixel_clk;
     (* MARK_DEBUG = "TRUE" *) wire[255:0] received_data;
     (* MARK_DEBUG = "TRUE" *) wire received_update;
+
+    (* MARK_DEBUG = "TRUE" *) wire[48+3-1:0] acq_data_out;
+    (* MARK_DEBUG = "TRUE" *) wire acq_data_valid;
     la_receiver_0 LA(
         .refclkin (clk_serdes),
-        .reset    (~ps_perph_rstn),
+        .reset    (~la_rst_n),
         .clkin1_p (clkin1_p),
         .clkin1_n (clkin1_n),
         .datain1_p(datain1_p),
         .datain1_n(datain1_n),
+        .acq_data_out     (acq_data_out),
+        .acq_data_valid   (acq_data_valid),
         .lock_level       (lock_level),
-        .rx_pixel_clk     (rx_pixel_clk),
+        .rx_pixel_clk     (la_fifo_aclk), //clock from module
         .raw_signal_result(received_data),
         .raw_signal_update(received_update)
+    );
+
+    la_storage_pack LApack(
+        .rst_n                 (~la_rst_n),
+        .la_fifo_aresetn       (la_fifo_aresetn),
+        .la_storage_axis_tdata (la_storage_axis_tdata),
+        .la_storage_axis_tlast (la_storage_axis_tlast),
+        .la_storage_axis_tvalid(la_storage_axis_tvalid),
+        .la_storage_axis_tready(la_storage_axis_tready),
+        .lock_level            (lock_level),
+        .acq_data              (acq_data_out),
+        .acq_data_valid        (acq_data_valid),
+        .clk                   (la_fifo_aclk)
     );
 
 endmodule
