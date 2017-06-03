@@ -1,6 +1,7 @@
 module interpreter (
 /*autoport*/
 //output
+            packet_type_compact,
             data_out,
             data_update_out,
 //input
@@ -24,6 +25,7 @@ input rst_n;  // Asynchronous reset active low
 input wire[5:0] packet_type;
 input wire[47:0] payload;
 input wire payload_valid;
+output reg[2:0] packet_type_compact;
 output reg[DATA_BITS*CHANNEL-1:0] data_out;
 output reg data_update_out;
 
@@ -31,6 +33,25 @@ reg [47:0] payload_buf[0:NUM_BUF_BLOCKS-1];
 reg [2:0]  buf_idx;
 reg [12:0] nop_count;
 reg update;
+
+always @(*) begin : proc_packet_type
+    case (packet_type)
+        `PACKET_T_NOP: begin
+            packet_type_compact <= 0;
+        end
+        `PACKET_T_FIRST: begin 
+            packet_type_compact <= 1;
+        end
+        `PACKET_T_NEXT: begin 
+            packet_type_compact <= 2;
+        end
+        `PACKET_T_LAST: begin 
+            packet_type_compact <= 3;
+        end
+        default : 
+            packet_type_compact <= 4;
+    endcase
+end
 
 always @(posedge clk or negedge rst_n) begin : proc_payload_buf
     if(~rst_n) begin
