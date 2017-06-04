@@ -1,7 +1,7 @@
 //Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2016.4 (lin64) Build 1733598 Wed Dec 14 22:35:42 MST 2016
-//Date        : Sat Jun  3 23:34:44 2017
+//Date        : Sun Jun  4 14:27:54 2017
 //Host        : skyworks running 64-bit Ubuntu 16.04.2 LTS
 //Command     : generate_target design_1.bd
 //Design      : design_1
@@ -155,13 +155,13 @@ module bus_analyze_imp_1PVRXT
   wire axi_interconnect_1_M00_AXI_WREADY;
   wire [7:0]axi_interconnect_1_M00_AXI_WSTRB;
   wire axi_interconnect_1_M00_AXI_WVALID;
-  (* DEBUG = "true" *) (* MARK_DEBUG *) wire axi_resetn_1;
+  wire axi_resetn_1;
   wire [31:0]axis_data_fifo_0_M_AXIS_TDATA;
   wire axis_data_fifo_0_M_AXIS_TLAST;
   wire axis_data_fifo_0_M_AXIS_TREADY;
   wire axis_data_fifo_0_M_AXIS_TVALID;
   wire ext_reset_in_1;
-  (* DEBUG = "true" *) (* MARK_DEBUG *) wire [0:0]proc_sys_reset_0_peripheral_aresetn;
+  wire [0:0]proc_sys_reset_0_peripheral_aresetn;
   wire ps7_0_FCLK_CLK1;
   wire s_axi_lite_aclk_1;
 
@@ -700,7 +700,7 @@ module design_1
   wire bus_analyze_axis_1_TLAST;
   wire bus_analyze_axis_1_TREADY;
   wire bus_analyze_axis_1_TVALID;
-  (* DEBUG = "true" *) wire [0:0]bus_analyze_peripheral_aresetn;
+  wire [0:0]bus_analyze_peripheral_aresetn;
   (* DEBUG = "true" *) wire bus_analyze_s2mm_introut;
   wire clk_wiz_0_clk_out1;
   wire clk_wiz_0_clk_out2;
@@ -725,11 +725,11 @@ module design_1
   wire [7:0]la_storage_M00_AXI_WSTRB;
   wire la_storage_M00_AXI_WVALID;
   wire [0:0]la_storage_peripheral_aresetn;
-  wire la_storage_s2mm_introut;
+  (* DEBUG = "true" *) wire la_storage_s2mm_introut;
   wire m_aclk_1;
   wire [31:0]mem_dq_i_1;
   wire [0:0]proc_sys_reset_0_interconnect_aresetn;
-  (* DEBUG = "true" *) wire [0:0]proc_sys_reset_0_peripheral_aresetn;
+  wire [0:0]proc_sys_reset_0_peripheral_aresetn;
   wire [14:0]processing_system7_0_DDR_ADDR;
   wire [2:0]processing_system7_0_DDR_BA;
   wire processing_system7_0_DDR_CAS_N;
@@ -755,9 +755,9 @@ module design_1
   wire processing_system7_0_FIXED_IO_PS_SRSTB;
   wire ps7_0_FCLK_CLK1;
   wire ps7_0_FCLK_CLK2;
-  (* DEBUG = "true" *) (* MARK_DEBUG *) wire [2:0]ps7_0_GPIO_O;
-  (* DEBUG = "true" *) (* MARK_DEBUG *) wire ps7_0_SPI0_MOSI_O;
-  (* DEBUG = "true" *) (* MARK_DEBUG *) wire ps7_0_SPI0_SCLK_O;
+  wire [2:0]ps7_0_GPIO_O;
+  wire ps7_0_SPI0_MOSI_O;
+  wire ps7_0_SPI0_SCLK_O;
   wire ps7_0_UART_1_RxD;
   wire ps7_0_UART_1_TxD;
   wire rxd_232_1;
@@ -4061,7 +4061,7 @@ module la_storage_imp_PFMFBG
   wire S_AXIS_1_TLAST;
   wire S_AXIS_1_TREADY;
   wire S_AXIS_1_TVALID;
-  wire axi_dma_0_s2mm_introut;
+  (* DEBUG = "true" *) (* MARK_DEBUG *) wire axi_dma_0_s2mm_introut;
   wire [31:0]axi_interconnect_1_M00_AXI_AWADDR;
   wire [1:0]axi_interconnect_1_M00_AXI_AWBURST;
   wire [3:0]axi_interconnect_1_M00_AXI_AWCACHE;
@@ -4080,7 +4080,7 @@ module la_storage_imp_PFMFBG
   wire axi_interconnect_1_M00_AXI_WREADY;
   wire [7:0]axi_interconnect_1_M00_AXI_WSTRB;
   wire axi_interconnect_1_M00_AXI_WVALID;
-  (* DEBUG = "true" *) wire axi_resetn_1;
+  wire axi_resetn_1;
   wire ext_reset_in_1;
   wire [255:0]fifo_generator_0_M_AXIS_TDATA;
   wire fifo_generator_0_M_AXIS_TLAST;

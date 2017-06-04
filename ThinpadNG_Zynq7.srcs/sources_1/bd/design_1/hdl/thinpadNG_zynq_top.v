@@ -211,6 +211,10 @@ module thinpadNG_zynq_top(/*autoarg*/
     reg io_dir;
     reg bus_analyze_start;
     reg [20:0] bus_analyze_sample_cnt;
+
+    reg lactl_storage_enable,lactl_clear_overflow;
+    reg [23-5-1:0] lactl_sample_cnt; // 2^18 * 32Byte(256bit) = 8MB
+
     wire [19:0]emc_rtl_addr_wrap;
     wire [3:0]emc_rtl_ben_wrap;
     wire [0:0]emc_rtl_ce_n_wrap;
@@ -218,8 +222,15 @@ module thinpadNG_zynq_top(/*autoarg*/
     wire emc_rtl_wen_wrap;
 
     always @(*) begin
+        /* LA length register */
+        lactl_sample_cnt <= reg2port[96 +: 18];
+        /* LA control register */
+        lactl_clear_overflow <= reg2port[64+1];
+        lactl_storage_enable <= reg2port[64+0];
+        /* Bus analyzer register */
         bus_analyze_sample_cnt <= reg2port[32+20:32];
         bus_analyze_start <= reg2port[32+31]; //MSB
+        /* Memory R/W control register */
         io_enable <= reg2port[0];  // 1 for enable
         io_dir <= (~emc_rtl_wen & emc_rtl_oen) ? 1'b1 : 1'b0; // 1 for output
     end
@@ -297,13 +308,16 @@ module thinpadNG_zynq_top(/*autoarg*/
     );
 
     la_storage_pack LApack(
-        .rst_n                 (~la_rst_n),
+        .rst_n                 (la_rst_n),
         .la_fifo_aresetn       (la_fifo_aresetn),
         .la_storage_axis_tdata (la_storage_axis_tdata),
         .la_storage_axis_tlast (la_storage_axis_tlast),
         .la_storage_axis_tvalid(la_storage_axis_tvalid),
         .la_storage_axis_tready(la_storage_axis_tready),
         .lock_level            (lock_level),
+        .ctl_storage_enable    (lactl_storage_enable),
+        .ctl_clear_overflow    (lactl_clear_overflow),
+        .ctl_sample_cnt        (lactl_sample_cnt),
         .acq_data              (acq_data_out),
         .acq_data_valid        (acq_data_valid),
         .clk                   (la_fifo_aclk)

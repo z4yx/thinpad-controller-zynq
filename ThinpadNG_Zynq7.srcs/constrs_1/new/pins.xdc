@@ -322,11 +322,13 @@ connect_debug_port dbg_hub/clk [get_nets u_ila_0_rx_pixel_clk]
 
 connect_debug_port dbg_hub/clk [get_nets u_ila_0_CLK]
 
+connect_debug_port u_ila_0/probe1 [get_nets [list {LApack/selector[4]}]]
+
 create_debug_core u_ila_0 ila
 set_property ALL_PROBE_SAME_MU true [get_debug_cores u_ila_0]
 set_property ALL_PROBE_SAME_MU_CNT 2 [get_debug_cores u_ila_0]
 set_property C_ADV_TRIGGER false [get_debug_cores u_ila_0]
-set_property C_DATA_DEPTH 1024 [get_debug_cores u_ila_0]
+set_property C_DATA_DEPTH 2048 [get_debug_cores u_ila_0]
 set_property C_EN_STRG_QUAL true [get_debug_cores u_ila_0]
 set_property C_INPUT_PIPE_STAGES 0 [get_debug_cores u_ila_0]
 set_property C_TRIGIN_EN false [get_debug_cores u_ila_0]
@@ -339,27 +341,31 @@ connect_debug_port u_ila_0/probe0 [get_nets [list {acq_data_out[0]} {acq_data_ou
 create_debug_port u_ila_0 probe
 set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe1]
 set_property port_width 1 [get_debug_ports u_ila_0/probe1]
-connect_debug_port u_ila_0/probe1 [get_nets [list {LApack/selector[4]}]]
+connect_debug_port u_ila_0/probe1 [get_nets [list acq_data_valid]]
 create_debug_port u_ila_0 probe
-set_property PROBE_TYPE DATA [get_debug_ports u_ila_0/probe2]
-set_property port_width 256 [get_debug_ports u_ila_0/probe2]
-connect_debug_port u_ila_0/probe2 [get_nets [list {received_data[0]} {received_data[1]} {received_data[2]} {received_data[3]} {received_data[4]} {received_data[5]} {received_data[6]} {received_data[7]} {received_data[8]} {received_data[9]} {received_data[10]} {received_data[11]} {received_data[12]} {received_data[13]} {received_data[14]} {received_data[15]} {received_data[16]} {received_data[17]} {received_data[18]} {received_data[19]} {received_data[20]} {received_data[21]} {received_data[22]} {received_data[23]} {received_data[24]} {received_data[25]} {received_data[26]} {received_data[27]} {received_data[28]} {received_data[29]} {received_data[30]} {received_data[31]} {received_data[32]} {received_data[33]} {received_data[34]} {received_data[35]} {received_data[36]} {received_data[37]} {received_data[38]} {received_data[39]} {received_data[40]} {received_data[41]} {received_data[42]} {received_data[43]} {received_data[44]} {received_data[45]} {received_data[46]} {received_data[47]} {received_data[48]} {received_data[49]} {received_data[50]} {received_data[51]} {received_data[52]} {received_data[53]} {received_data[54]} {received_data[55]} {received_data[56]} {received_data[57]} {received_data[58]} {received_data[59]} {received_data[60]} {received_data[61]} {received_data[62]} {received_data[63]} {received_data[64]} {received_data[65]} {received_data[66]} {received_data[67]} {received_data[68]} {received_data[69]} {received_data[70]} {received_data[71]} {received_data[72]} {received_data[73]} {received_data[74]} {received_data[75]} {received_data[76]} {received_data[77]} {received_data[78]} {received_data[79]} {received_data[80]} {received_data[81]} {received_data[82]} {received_data[83]} {received_data[84]} {received_data[85]} {received_data[86]} {received_data[87]} {received_data[88]} {received_data[89]} {received_data[90]} {received_data[91]} {received_data[92]} {received_data[93]} {received_data[94]} {received_data[95]} {received_data[96]} {received_data[97]} {received_data[98]} {received_data[99]} {received_data[100]} {received_data[101]} {received_data[102]} {received_data[103]} {received_data[104]} {received_data[105]} {received_data[106]} {received_data[107]} {received_data[108]} {received_data[109]} {received_data[110]} {received_data[111]} {received_data[112]} {received_data[113]} {received_data[114]} {received_data[115]} {received_data[116]} {received_data[117]} {received_data[118]} {received_data[119]} {received_data[120]} {received_data[121]} {received_data[122]} {received_data[123]} {received_data[124]} {received_data[125]} {received_data[126]} {received_data[127]} {received_data[128]} {received_data[129]} {received_data[130]} {received_data[131]} {received_data[132]} {received_data[133]} {received_data[134]} {received_data[135]} {received_data[136]} {received_data[137]} {received_data[138]} {received_data[139]} {received_data[140]} {received_data[141]} {received_data[142]} {received_data[143]} {received_data[144]} {received_data[145]} {received_data[146]} {received_data[147]} {received_data[148]} {received_data[149]} {received_data[150]} {received_data[151]} {received_data[152]} {received_data[153]} {received_data[154]} {received_data[155]} {received_data[156]} {received_data[157]} {received_data[158]} {received_data[159]} {received_data[160]} {received_data[161]} {received_data[162]} {received_data[163]} {received_data[164]} {received_data[165]} {received_data[166]} {received_data[167]} {received_data[168]} {received_data[169]} {received_data[170]} {received_data[171]} {received_data[172]} {received_data[173]} {received_data[174]} {received_data[175]} {received_data[176]} {received_data[177]} {received_data[178]} {received_data[179]} {received_data[180]} {received_data[181]} {received_data[182]} {received_data[183]} {received_data[184]} {received_data[185]} {received_data[186]} {received_data[187]} {received_data[188]} {received_data[189]} {received_data[190]} {received_data[191]} {received_data[192]} {received_data[193]} {received_data[194]} {received_data[195]} {received_data[196]} {received_data[197]} {received_data[198]} {received_data[199]} {received_data[200]} {received_data[201]} {received_data[202]} {received_data[203]} {received_data[204]} {received_data[205]} {received_data[206]} {received_data[207]} {received_data[208]} {received_data[209]} {received_data[210]} {received_data[211]} {received_data[212]} {received_data[213]} {received_data[214]} {received_data[215]} {received_data[216]} {received_data[217]} {received_data[218]} {received_data[219]} {received_data[220]} {received_data[221]} {received_data[222]} {received_data[223]} {received_data[224]} {received_data[225]} {received_data[226]} {received_data[227]} {received_data[228]} {received_data[229]} {received_data[230]} {received_data[231]} {received_data[232]} {received_data[233]} {received_data[234]} {received_data[235]} {received_data[236]} {received_data[237]} {received_data[238]} {received_data[239]} {received_data[240]} {received_data[241]} {received_data[242]} {received_data[243]} {received_data[244]} {received_data[245]} {received_data[246]} {received_data[247]} {received_data[248]} {received_data[249]} {received_data[250]} {received_data[251]} {received_data[252]} {received_data[253]} {received_data[254]} {received_data[255]}]]
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe2]
+set_property port_width 1 [get_debug_ports u_ila_0/probe2]
+connect_debug_port u_ila_0/probe2 [get_nets [list LApack/la_overflow]]
 create_debug_port u_ila_0 probe
 set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe3]
 set_property port_width 1 [get_debug_ports u_ila_0/probe3]
-connect_debug_port u_ila_0/probe3 [get_nets [list acq_data_valid]]
+connect_debug_port u_ila_0/probe3 [get_nets [list LApack/la_storage_axis_tvalid]]
 create_debug_port u_ila_0 probe
 set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe4]
 set_property port_width 1 [get_debug_ports u_ila_0/probe4]
-connect_debug_port u_ila_0/probe4 [get_nets [list LApack/la_overflow]]
+connect_debug_port u_ila_0/probe4 [get_nets [list received_update]]
 create_debug_port u_ila_0 probe
 set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe5]
 set_property port_width 1 [get_debug_ports u_ila_0/probe5]
-connect_debug_port u_ila_0/probe5 [get_nets [list received_update]]
+connect_debug_port u_ila_0/probe5 [get_nets [list LApack/la_storage_axis_tlast]]
 create_debug_port u_ila_0 probe
 set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe6]
 set_property port_width 1 [get_debug_ports u_ila_0/probe6]
-connect_debug_port u_ila_0/probe6 [get_nets [list LApack/la_storage_axis_tvalid]]
+connect_debug_port u_ila_0/probe6 [get_nets [list LApack/la_storage_axis_tready]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe7]
+set_property port_width 1 [get_debug_ports u_ila_0/probe7]
+connect_debug_port u_ila_0/probe7 [get_nets [list LApack/ctl_storage_enable_sync]]
 set_property C_CLK_INPUT_FREQ_HZ 300000000 [get_debug_cores dbg_hub]
 set_property C_ENABLE_CLK_DIVIDER false [get_debug_cores dbg_hub]
 set_property C_USER_SCAN_CHAIN 1 [get_debug_cores dbg_hub]
