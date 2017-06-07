@@ -7,6 +7,7 @@ module la_receiver (
             raw_signal_update,
             lock_level,
             rx_pixel_clk,
+            sampler_idle,
 //input
             reset,
             refclkin,
@@ -31,6 +32,7 @@ output wire raw_signal_update;
 
 output wire[2:0]  lock_level;
 output wire rx_pixel_clk;
+output wire sampler_idle;
 
 wire[27:0] rxd1;
 wire rst_n;
@@ -66,6 +68,7 @@ packet_decoder decode(
 interpreter #(.CHANNEL(CHANNEL),.DATA_BITS(DATA_BITS)) data_interpreter(
     .clk        (rx_pixel_clk),
     .rst_n      (rst_n),
+    .sampler_idle(sampler_idle),
     .packet_type(acq_packet_type),
     .payload_valid(acq_data_valid),
     .payload    (acq_data_out[3 +: 48]),
