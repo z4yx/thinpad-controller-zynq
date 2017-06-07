@@ -11,11 +11,13 @@
 
 		// Parameters of Axi Slave Bus Interface S00_AXI
 		parameter integer C_S00_AXI_DATA_WIDTH	= 32,
-		parameter integer C_S00_AXI_ADDR_WIDTH	= 4
+        parameter integer PORT_TO_REG_WIDTH     = 256+32,
+		parameter integer C_S00_AXI_ADDR_WIDTH	= 6
 	)
 	(
 		// Users to add ports here
         output wire [127:0] reg2port,
+        input wire [PORT_TO_REG_WIDTH-1:0] port2reg,
 		// User ports ends
 		// Do not modify the ports beyond this line
 
@@ -46,9 +48,11 @@
 // Instantiation of Axi Bus Interface S00_AXI
 	axi_register_v1_0_S00_AXI # ( 
 		.C_S_AXI_DATA_WIDTH(C_S00_AXI_DATA_WIDTH),
+		.PORT_TO_REG_WIDTH(PORT_TO_REG_WIDTH),
 		.C_S_AXI_ADDR_WIDTH(C_S00_AXI_ADDR_WIDTH)
 	) axi_register_v1_0_S00_AXI_inst (
-	    .REG_TO_PORT(reg2port),
+        .REG_TO_PORT(reg2port),
+        .PORT_TO_REG(port2reg),
 		.S_AXI_ACLK(s00_axi_aclk),
 		.S_AXI_ARESETN(s00_axi_aresetn),
 		.S_AXI_AWADDR(s00_axi_awaddr),

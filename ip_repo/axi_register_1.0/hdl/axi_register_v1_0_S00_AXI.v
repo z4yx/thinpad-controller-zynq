@@ -10,12 +10,14 @@
 
 		// Width of S_AXI data bus
 		parameter integer C_S_AXI_DATA_WIDTH	= 32,
+		parameter integer PORT_TO_REG_WIDTH     = 256+32,
 		// Width of S_AXI address bus
-		parameter integer C_S_AXI_ADDR_WIDTH	= 4
+		parameter integer C_S_AXI_ADDR_WIDTH	= 6
 	)
 	(
 		// Users to add ports here
 		output wire [127:0] REG_TO_PORT,
+        input wire [PORT_TO_REG_WIDTH-1:0] PORT_TO_REG,
 
 		// User ports ends
 		// Do not modify the ports beyond this line
@@ -100,7 +102,7 @@
 	// ADDR_LSB = 2 for 32 bits (n downto 2)
 	// ADDR_LSB = 3 for 64 bits (n downto 3)
 	localparam integer ADDR_LSB = (C_S_AXI_DATA_WIDTH/32) + 1;
-	localparam integer OPT_MEM_ADDR_BITS = 1;
+	localparam integer OPT_MEM_ADDR_BITS = 3;
 	//----------------------------------------------
 	//-- Signals for user logic register space example
 	//------------------------------------------------
@@ -113,6 +115,8 @@
 	wire	 slv_reg_wren;
 	reg [C_S_AXI_DATA_WIDTH-1:0]	 reg_data_out;
 	integer	 byte_index;
+    reg [PORT_TO_REG_WIDTH-1:0] port2reg_sync1;
+    reg [PORT_TO_REG_WIDTH-1:0] port2reg_sync2;
 
 	// I/O Connections assignments
 
@@ -363,10 +367,20 @@
 	begin
 	      // Address decoding for reading registers
 	      case ( axi_araddr[ADDR_LSB+OPT_MEM_ADDR_BITS:ADDR_LSB] )
-	        2'h0   : reg_data_out <= slv_reg0;
-	        2'h1   : reg_data_out <= slv_reg1;
-	        2'h2   : reg_data_out <= slv_reg2;
-	        2'h3   : reg_data_out <= slv_reg3;
+	        4'h0   : reg_data_out <= slv_reg0;
+	        4'h1   : reg_data_out <= slv_reg1;
+	        4'h2   : reg_data_out <= slv_reg2;
+	        4'h3   : reg_data_out <= slv_reg3;
+	        4'h4   : reg_data_out <= port2reg_sync2[31:0];
+	        /* 5~7 reserved for now */
+            4'h8   : reg_data_out <= port2reg_sync2[32*1 +: 32];
+            4'h9   : reg_data_out <= port2reg_sync2[32*2 +: 32];
+            4'ha   : reg_data_out <= port2reg_sync2[32*3 +: 32];
+            4'hb   : reg_data_out <= port2reg_sync2[32*4 +: 32];
+            4'hc   : reg_data_out <= port2reg_sync2[32*5 +: 32];
+            4'hd   : reg_data_out <= port2reg_sync2[32*6 +: 32];
+            4'he   : reg_data_out <= port2reg_sync2[32*7 +: 32];
+            4'hf   : reg_data_out <= port2reg_sync2[32*8 +: 32];
 	        default : reg_data_out <= 0;
 	      endcase
 	end
@@ -380,6 +394,8 @@
 	    end 
 	  else
 	    begin    
+            port2reg_sync2 <= port2reg_sync1;
+            port2reg_sync1 <= PORT_TO_REG;
 	      // When there is a valid read address (S_AXI_ARVALID) with 
 	      // acceptance of read address by the slave (axi_arready), 
 	      // output the read dada 
