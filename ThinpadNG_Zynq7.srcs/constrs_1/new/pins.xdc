@@ -308,22 +308,13 @@ set_property IOSTANDARD LVCMOS33 [get_ports initb]
 set_property IOSTANDARD LVCMOS33 [get_ports done]
 
 
-connect_debug_port u_ila_0/clk [get_nets [list LA/rx/rx0/rx0/CLK]]
-connect_debug_port u_ila_0/probe0 [get_nets [list {LA/rx/rx0/rx_data[0]} {LA/rx/rx0/rx_data[1]} {LA/rx/rx0/rx_data[2]} {LA/rx/rx0/rx_data[3]} {LA/rx/rx0/rx_data[4]} {LA/rx/rx0/rx_data[5]} {LA/rx/rx0/rx_data[6]} {LA/rx/rx0/rx_data[7]} {LA/rx/rx0/rx_data[8]} {LA/rx/rx0/rx_data[9]} {LA/rx/rx0/rx_data[10]} {LA/rx/rx0/rx_data[11]} {LA/rx/rx0/rx_data[12]} {LA/rx/rx0/rx_data[13]} {LA/rx/rx0/rx_data[14]} {LA/rx/rx0/rx_data[15]} {LA/rx/rx0/rx_data[16]} {LA/rx/rx0/rx_data[17]} {LA/rx/rx0/rx_data[18]} {LA/rx/rx0/rx_data[19]} {LA/rx/rx0/rx_data[20]} {LA/rx/rx0/rx_data[21]} {LA/rx/rx0/rx_data[22]} {LA/rx/rx0/rx_data[23]} {LA/rx/rx0/rx_data[24]} {LA/rx/rx0/rx_data[25]} {LA/rx/rx0/rx_data[26]} {LA/rx/rx0/rx_data[27]}]]
-connect_debug_port u_ila_0/probe1 [get_nets [list {LA/rx/rx0/rx_mmcm_lckdpsbs[0]}]]
-connect_debug_port u_ila_0/probe2 [get_nets [list LA/rx/dummy]]
-connect_debug_port u_ila_0/probe3 [get_nets [list LA/rx/rx0/rx_mmcm_lckd]]
-connect_debug_port u_ila_0/probe4 [get_nets [list LA/rx/rx0/rx_mmcm_lckdps]]
-connect_debug_port u_ila_0/probe5 [get_nets [list LA/rx/rx0/reset]]
-connect_debug_port dbg_hub/clk [get_nets u_ila_0_CLK]
 
-connect_debug_port u_ila_0/clk [get_nets [list LA/inst/rx/rx0/rx0/rx_pixel_clk]]
-connect_debug_port dbg_hub/clk [get_nets u_ila_0_rx_pixel_clk]
 
-connect_debug_port dbg_hub/clk [get_nets u_ila_0_CLK]
 
-connect_debug_port u_ila_0/probe1 [get_nets [list {LApack/selector[4]}]]
 
+set_false_path -to [get_pins {LApack/sync_control/data_buf_reg[0][*]/D}]
+set_false_path -to [get_pins {LApack/sync_cnt/data_buf_reg[0][*]/D}]
+set_false_path -to [get_pins {block_design/design_1_i/axi_register_0/inst/axi_register_v1_0_S00_AXI_inst/port2reg_sync1_reg[*]/D}]
 create_debug_core u_ila_0 ila
 set_property ALL_PROBE_SAME_MU true [get_debug_cores u_ila_0]
 set_property ALL_PROBE_SAME_MU_CNT 2 [get_debug_cores u_ila_0]
@@ -334,7 +325,7 @@ set_property C_INPUT_PIPE_STAGES 0 [get_debug_cores u_ila_0]
 set_property C_TRIGIN_EN false [get_debug_cores u_ila_0]
 set_property C_TRIGOUT_EN false [get_debug_cores u_ila_0]
 set_property port_width 1 [get_debug_ports u_ila_0/clk]
-connect_debug_port u_ila_0/clk [get_nets [list LA/inst/rx/rx0/rx0/CLK]]
+connect_debug_port u_ila_0/clk [get_nets [list la_fifo_aclk]]
 set_property PROBE_TYPE DATA [get_debug_ports u_ila_0/probe0]
 set_property port_width 51 [get_debug_ports u_ila_0/probe0]
 connect_debug_port u_ila_0/probe0 [get_nets [list {acq_data_out[0]} {acq_data_out[1]} {acq_data_out[2]} {acq_data_out[3]} {acq_data_out[4]} {acq_data_out[5]} {acq_data_out[6]} {acq_data_out[7]} {acq_data_out[8]} {acq_data_out[9]} {acq_data_out[10]} {acq_data_out[11]} {acq_data_out[12]} {acq_data_out[13]} {acq_data_out[14]} {acq_data_out[15]} {acq_data_out[16]} {acq_data_out[17]} {acq_data_out[18]} {acq_data_out[19]} {acq_data_out[20]} {acq_data_out[21]} {acq_data_out[22]} {acq_data_out[23]} {acq_data_out[24]} {acq_data_out[25]} {acq_data_out[26]} {acq_data_out[27]} {acq_data_out[28]} {acq_data_out[29]} {acq_data_out[30]} {acq_data_out[31]} {acq_data_out[32]} {acq_data_out[33]} {acq_data_out[34]} {acq_data_out[35]} {acq_data_out[36]} {acq_data_out[37]} {acq_data_out[38]} {acq_data_out[39]} {acq_data_out[40]} {acq_data_out[41]} {acq_data_out[42]} {acq_data_out[43]} {acq_data_out[44]} {acq_data_out[45]} {acq_data_out[46]} {acq_data_out[47]} {acq_data_out[48]} {acq_data_out[49]} {acq_data_out[50]}]]

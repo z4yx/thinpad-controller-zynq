@@ -130,6 +130,7 @@ module thinpadNG_zynq_top(/*autoarg*/
     wire rxd_232;
     wire txd_232;
     wire [127:0]reg2port;
+    wire [256+32-1:0]port2reg;
     wire la_fifo_aclk;
     wire la_fifo_aresetn;
     wire la_rst_n;
@@ -196,6 +197,7 @@ module thinpadNG_zynq_top(/*autoarg*/
     .initb                      (initb                          ), // input
     .progb                      (progb[0:0]                     ), // output
     .reg2port                   (reg2port[127:0]                ), // output
+    .port2reg                   (port2reg),
     .rxd_232                    (rxd_232                        ), // input
     .txd_232                    (txd_232                        )  // output
 );
@@ -220,6 +222,8 @@ module thinpadNG_zynq_top(/*autoarg*/
     wire [0:0]emc_rtl_ce_n_wrap;
     wire [0:0]emc_rtl_oen_wrap;
     wire emc_rtl_wen_wrap;
+
+    wire[31:0] status_reg;
 
     always @(*) begin
         /* LA length register */
@@ -286,7 +290,9 @@ module thinpadNG_zynq_top(/*autoarg*/
 
     );
 
-    (* MARK_DEBUG = "TRUE" *) wire[2:0]  lock_level;
+    wire[2:0]  lock_level;
+    wire sampler_idle;
+    wire la_storage_overflow;
     (* MARK_DEBUG = "TRUE" *) wire[255:0] received_data;
     (* MARK_DEBUG = "TRUE" *) wire received_update;
 
@@ -302,6 +308,7 @@ module thinpadNG_zynq_top(/*autoarg*/
         .acq_data_out     (acq_data_out),
         .acq_data_valid   (acq_data_valid),
         .lock_level       (lock_level),
+        .sampler_idle     (sampler_idle),
         .rx_pixel_clk     (la_fifo_aclk), //clock from module
         .raw_signal_result(received_data),
         .raw_signal_update(received_update)
@@ -315,6 +322,7 @@ module thinpadNG_zynq_top(/*autoarg*/
         .la_storage_axis_tvalid(la_storage_axis_tvalid),
         .la_storage_axis_tready(la_storage_axis_tready),
         .lock_level            (lock_level),
+        .la_overflow           (la_storage_overflow),
         .ctl_storage_enable    (lactl_storage_enable),
         .ctl_clear_overflow    (lactl_clear_overflow),
         .ctl_sample_cnt        (lactl_sample_cnt),
@@ -322,6 +330,10 @@ module thinpadNG_zynq_top(/*autoarg*/
         .acq_data_valid        (acq_data_valid),
         .clk                   (la_fifo_aclk)
     );
+
+    assign status_reg = {27'b0,sampler_idle,la_storage_overflow,lock_level};
+    assign port2reg = {received_data, status_reg};
+
 
 endmodule
 

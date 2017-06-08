@@ -1,7 +1,7 @@
 //Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2016.4 (lin64) Build 1733598 Wed Dec 14 22:35:42 MST 2016
-//Date        : Sun Jun  4 14:27:55 2017
+//Date        : Sun Jun  4 20:26:04 2017
 //Host        : skyworks running 64-bit Ubuntu 16.04.2 LTS
 //Command     : generate_target design_1_wrapper.bd
 //Design      : design_1_wrapper
@@ -64,6 +64,7 @@ module design_1_wrapper
     la_storage_axis_tlast,
     la_storage_axis_tready,
     la_storage_axis_tvalid,
+    port2reg,
     progb,
     ps_perph_rstn,
     reg2port,
@@ -123,6 +124,7 @@ module design_1_wrapper
   input la_storage_axis_tlast;
   output la_storage_axis_tready;
   input la_storage_axis_tvalid;
+  input [287:0]port2reg;
   output [0:0]progb;
   output [0:0]ps_perph_rstn;
   output [127:0]reg2port;
@@ -460,6 +462,7 @@ module design_1_wrapper
   wire la_storage_axis_tlast;
   wire la_storage_axis_tready;
   wire la_storage_axis_tvalid;
+  wire [287:0]port2reg;
   wire [0:0]progb;
   wire [0:0]ps_perph_rstn;
   wire [127:0]reg2port;
@@ -527,6 +530,7 @@ module design_1_wrapper
         .la_storage_axis_tlast(la_storage_axis_tlast),
         .la_storage_axis_tready(la_storage_axis_tready),
         .la_storage_axis_tvalid(la_storage_axis_tvalid),
+        .port2reg(port2reg),
         .progb(progb),
         .ps_perph_rstn(ps_perph_rstn),
         .reg2port(reg2port),

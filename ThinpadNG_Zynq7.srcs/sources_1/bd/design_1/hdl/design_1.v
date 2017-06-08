@@ -1,7 +1,7 @@
 //Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2016.4 (lin64) Build 1733598 Wed Dec 14 22:35:42 MST 2016
-//Date        : Sun Jun  4 14:27:54 2017
+//Date        : Sun Jun  4 20:26:04 2017
 //Host        : skyworks running 64-bit Ubuntu 16.04.2 LTS
 //Command     : generate_target design_1.bd
 //Design      : design_1
@@ -375,6 +375,7 @@ module design_1
     la_storage_axis_tlast,
     la_storage_axis_tready,
     la_storage_axis_tvalid,
+    port2reg,
     progb,
     ps_perph_rstn,
     reg2port,
@@ -440,6 +441,7 @@ module design_1
   input la_storage_axis_tlast;
   output la_storage_axis_tready;
   input la_storage_axis_tvalid;
+  input [287:0]port2reg;
   output [0:0]progb;
   output [0:0]ps_perph_rstn;
   output [127:0]reg2port;
@@ -728,6 +730,7 @@ module design_1
   (* DEBUG = "true" *) wire la_storage_s2mm_introut;
   wire m_aclk_1;
   wire [31:0]mem_dq_i_1;
+  wire [287:0]port2reg_1;
   wire [0:0]proc_sys_reset_0_interconnect_aresetn;
   wire [0:0]proc_sys_reset_0_peripheral_aresetn;
   wire [14:0]processing_system7_0_DDR_ADDR;
@@ -804,6 +807,7 @@ module design_1
   assign la_storage_axis_tready = S_AXIS_1_TREADY;
   assign m_aclk_1 = la_fifo_aclk;
   assign mem_dq_i_1 = emc_rtl_dq_i[31:0];
+  assign port2reg_1 = port2reg[287:0];
   assign progb[0] = xlslice_0_Dout;
   assign ps7_0_UART_1_RxD = UART_1_rxd;
   assign ps_perph_rstn[0] = proc_sys_reset_0_peripheral_aresetn;
@@ -1161,14 +1165,15 @@ module design_1
         .S00_AXI_wstrb(S00_AXI_1_WSTRB),
         .S00_AXI_wvalid(S00_AXI_1_WVALID));
   design_1_axi_register_0_0 axi_register_0
-       (.reg2port(axi_register_0_reg2port),
+       (.port2reg(port2reg_1),
+        .reg2port(axi_register_0_reg2port),
         .s00_axi_aclk(processing_system7_0_FCLK_CLK0),
-        .s00_axi_araddr(axi_interconnect_0_M07_AXI_ARADDR[3:0]),
+        .s00_axi_araddr(axi_interconnect_0_M07_AXI_ARADDR[5:0]),
         .s00_axi_aresetn(proc_sys_reset_0_peripheral_aresetn),
         .s00_axi_arprot(axi_interconnect_0_M07_AXI_ARPROT),
         .s00_axi_arready(axi_interconnect_0_M07_AXI_ARREADY),
         .s00_axi_arvalid(axi_interconnect_0_M07_AXI_ARVALID),
-        .s00_axi_awaddr(axi_interconnect_0_M07_AXI_AWADDR[3:0]),
+        .s00_axi_awaddr(axi_interconnect_0_M07_AXI_AWADDR[5:0]),
         .s00_axi_awprot(axi_interconnect_0_M07_AXI_AWPROT),
         .s00_axi_awready(axi_interconnect_0_M07_AXI_AWREADY),
         .s00_axi_awvalid(axi_interconnect_0_M07_AXI_AWVALID),

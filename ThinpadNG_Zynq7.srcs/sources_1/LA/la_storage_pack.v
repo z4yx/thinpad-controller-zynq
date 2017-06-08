@@ -5,6 +5,7 @@ module la_storage_pack (
             la_storage_axis_tdata,
             la_storage_axis_tlast,
             la_storage_axis_tvalid,
+            la_overflow,
 //input
             clk,
             rst_n,
@@ -37,7 +38,7 @@ reg acq_data_valid_dly1;
 
 reg[4:0] selector;
 reg [51*5-1:0]tmp_data;
-(* MARK_DEBUG = "TRUE" *) reg la_overflow;
+output reg la_overflow;
 wire ctl_storage_enable_sync;
 wire ctl_clear_overflow_sync;
 wire[17:0] ctl_sample_cnt_sync;

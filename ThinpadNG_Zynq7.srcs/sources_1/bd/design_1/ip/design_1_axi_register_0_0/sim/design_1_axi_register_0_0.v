@@ -47,7 +47,7 @@
 // DO NOT MODIFY THIS FILE.
 
 
-// IP VLNV: user.org:user:axi_register:1.0
+// IP VLNV: user.org:user:axi_register:1.1
 // IP Revision: 2
 
 `timescale 1ns/1ps
@@ -55,6 +55,7 @@
 (* DowngradeIPIdentifiedWarnings = "yes" *)
 module design_1_axi_register_0_0 (
   reg2port,
+  port2reg,
   s00_axi_awaddr,
   s00_axi_awprot,
   s00_axi_awvalid,
@@ -79,8 +80,9 @@ module design_1_axi_register_0_0 (
 );
 
 output wire [127 : 0] reg2port;
+input wire [287 : 0] port2reg;
 (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI AWADDR" *)
-input wire [3 : 0] s00_axi_awaddr;
+input wire [5 : 0] s00_axi_awaddr;
 (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI AWPROT" *)
 input wire [2 : 0] s00_axi_awprot;
 (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI AWVALID" *)
@@ -102,7 +104,7 @@ output wire s00_axi_bvalid;
 (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI BREADY" *)
 input wire s00_axi_bready;
 (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI ARADDR" *)
-input wire [3 : 0] s00_axi_araddr;
+input wire [5 : 0] s00_axi_araddr;
 (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI ARPROT" *)
 input wire [2 : 0] s00_axi_arprot;
 (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 S00_AXI ARVALID" *)
@@ -124,9 +126,11 @@ input wire s00_axi_aresetn;
 
   axi_register_v1_0 #(
     .C_S00_AXI_DATA_WIDTH(32),  // Width of S_AXI data bus
-    .C_S00_AXI_ADDR_WIDTH(4)  // Width of S_AXI address bus
+    .C_S00_AXI_ADDR_WIDTH(6),  // Width of S_AXI address bus
+    .PORT_TO_REG_WIDTH(288)
   ) inst (
     .reg2port(reg2port),
+    .port2reg(port2reg),
     .s00_axi_awaddr(s00_axi_awaddr),
     .s00_axi_awprot(s00_axi_awprot),
     .s00_axi_awvalid(s00_axi_awvalid),
