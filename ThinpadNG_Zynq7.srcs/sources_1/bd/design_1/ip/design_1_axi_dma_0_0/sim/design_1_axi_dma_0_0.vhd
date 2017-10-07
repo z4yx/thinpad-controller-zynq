@@ -47,14 +47,14 @@
 -- DO NOT MODIFY THIS FILE.
 
 -- IP VLNV: xilinx.com:ip:axi_dma:7.1
--- IP Revision: 12
+-- IP Revision: 13
 
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 USE ieee.numeric_std.ALL;
 
-LIBRARY axi_dma_v7_1_12;
-USE axi_dma_v7_1_12.axi_dma;
+LIBRARY axi_dma_v7_1_13;
+USE axi_dma_v7_1_13.axi_dma;
 
 ENTITY design_1_axi_dma_0_0 IS
   PORT (
@@ -203,7 +203,7 @@ ARCHITECTURE design_1_axi_dma_0_0_arch OF design_1_axi_dma_0_0 IS
       m_axi_mm2s_aruser : OUT STD_LOGIC_VECTOR(3 DOWNTO 0);
       m_axi_mm2s_arvalid : OUT STD_LOGIC;
       m_axi_mm2s_arready : IN STD_LOGIC;
-      m_axi_mm2s_rdata : IN STD_LOGIC_VECTOR(63 DOWNTO 0);
+      m_axi_mm2s_rdata : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
       m_axi_mm2s_rresp : IN STD_LOGIC_VECTOR(1 DOWNTO 0);
       m_axi_mm2s_rlast : IN STD_LOGIC;
       m_axi_mm2s_rvalid : IN STD_LOGIC;
@@ -324,9 +324,9 @@ BEGIN
       C_MICRO_DMA => 0,
       C_INCLUDE_MM2S => 0,
       C_INCLUDE_MM2S_SF => 1,
-      C_MM2S_BURST_SIZE => 8,
+      C_MM2S_BURST_SIZE => 16,
       C_M_AXI_MM2S_ADDR_WIDTH => 32,
-      C_M_AXI_MM2S_DATA_WIDTH => 64,
+      C_M_AXI_MM2S_DATA_WIDTH => 32,
       C_M_AXIS_MM2S_TDATA_WIDTH => 32,
       C_INCLUDE_MM2S_DRE => 0,
       C_INCLUDE_S2MM => 1,
@@ -370,7 +370,7 @@ BEGIN
       m_axi_sg_rlast => '0',
       m_axi_sg_rvalid => '0',
       m_axi_mm2s_arready => '0',
-      m_axi_mm2s_rdata => STD_LOGIC_VECTOR(TO_UNSIGNED(0, 64)),
+      m_axi_mm2s_rdata => STD_LOGIC_VECTOR(TO_UNSIGNED(0, 32)),
       m_axi_mm2s_rresp => STD_LOGIC_VECTOR(TO_UNSIGNED(0, 2)),
       m_axi_mm2s_rlast => '0',
       m_axi_mm2s_rvalid => '0',

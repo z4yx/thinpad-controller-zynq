@@ -47,14 +47,14 @@
 -- DO NOT MODIFY THIS FILE.
 
 -- IP VLNV: xilinx.com:ip:axi_emc:3.0
--- IP Revision: 11
+-- IP Revision: 12
 
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 USE ieee.numeric_std.ALL;
 
-LIBRARY axi_emc_v3_0_11;
-USE axi_emc_v3_0_11.axi_emc;
+LIBRARY axi_emc_v3_0_12;
+USE axi_emc_v3_0_12.axi_emc;
 
 ENTITY design_1_axi_emc_0_0 IS
   PORT (

@@ -8,7 +8,7 @@
 `ifndef __THINPADNG_ZYNQ_TOP_V__
 `define __THINPADNG_ZYNQ_TOP_V__
 
-//`default_nettype none
+`default_nettype none
 
 `timescale 1ns/1ns
 
@@ -139,6 +139,14 @@ module thinpadNG_zynq_top(/*autoarg*/
     wire la_storage_axis_tready;
     wire la_storage_axis_tvalid;
 
+    wire [31:0]gpio_sw_i;
+    wire [31:0]gpio_sw_o;
+    wire [31:0]gpio_sw_t;
+    wire [23:0]pp_data_i;
+    wire [23:0]pp_data_o;
+    wire [23:0]pp_data_t;
+    wire pp_rd, pp_rs, pp_wr;
+
     design_1_wrapper block_design(/*autoinst*/
     .DDR_addr                   (DDR_addr[14:0]                 ), // inout
     .DDR_ba                     (DDR_ba[2:0]                    ), // inout
@@ -192,8 +200,18 @@ module thinpadNG_zynq_top(/*autoarg*/
     .emc_rtl_oen                (emc_rtl_oen[0:0]               ), // output
     .emc_rtl_wen                (emc_rtl_wen                    ), // output
     .gpio_rtl_0_tri_io          (gpio_rtl_0_tri_io[5:0]         ), // inout
-    .gpio_rtl_1_tri_io          (gpio_rtl_1_tri_io[31:0]        ), // inout
     .gpio_rtl_tri_io            (gpio_rtl_tri_io[31:0]          ), // inout
+    .gpio_sw_i                  (gpio_sw_i),
+    .gpio_sw_o                  (gpio_sw_o),
+    .gpio_sw_t                  (gpio_sw_t),
+    .pp_csel                (),
+    .pp_nrst                (),
+    .pp_data_i              (pp_data_i),
+    .pp_data_o              (pp_data_o),
+    .pp_data_t              (pp_data_t),
+    .pp_rd                  (pp_rd),
+    .pp_rs                  (pp_rs),
+    .pp_wr                  (pp_wr),
     .initb                      (initb                          ), // input
     .progb                      (progb[0:0]                     ), // output
     .reg2port                   (reg2port[127:0]                ), // output
@@ -208,6 +226,7 @@ module thinpadNG_zynq_top(/*autoarg*/
     parameter ADDR_PINS_OFFSET = 10'd2;
     parameter BE_PINS_AMOUNT = 10'd4;
     parameter IO_PINS_AMOUNT = 10'd32;
+    genvar i;
 
     reg io_enable;
     reg io_dir;
@@ -225,6 +244,33 @@ module thinpadNG_zynq_top(/*autoarg*/
 
     wire[31:0] status_reg;
 
+    // alt-mode of DIP switch pins 
+    generate 
+        for (i = 0; i < 32; i=i+1) begin
+            assign gpio_sw_i[i] = gpio_rtl_1_tri_io[i];
+            if(i < 24)begin 
+                assign pp_data_i[i] = gpio_rtl_1_tri_io[i];
+                assign gpio_rtl_1_tri_io[i] = gpio_sw_t[i] ?
+                    (pp_data_t[i] ? 1'bz : pp_data_o[i]) :
+                    gpio_sw_o[i];
+            end else if (i < 29) begin 
+                assign gpio_rtl_1_tri_io[i] = gpio_sw_t[i] ? 1'bz : gpio_sw_o[i];
+            end else if (i == 29) begin 
+                assign gpio_rtl_1_tri_io[i] = gpio_sw_t[i] ?
+                    (io_enable ? pp_rs: 1'bz) :
+                    gpio_sw_o[i];
+            end else if (i == 30) begin 
+                assign gpio_rtl_1_tri_io[i] = gpio_sw_t[i] ?
+                    (io_enable ? pp_rd: 1'bz) :
+                    gpio_sw_o[i];
+            end else if (i == 31) begin 
+                assign gpio_rtl_1_tri_io[i] = gpio_sw_t[i] ?
+                    (io_enable ? pp_wr: 1'bz) :
+                    gpio_sw_o[i];
+            end
+        end
+    endgenerate
+
     always @(*) begin
         /* LA length register */
         lactl_sample_cnt <= reg2port[96 +: 18];
@@ -240,7 +286,6 @@ module thinpadNG_zynq_top(/*autoarg*/
     end
     
     generate
-        genvar i;
         
         for (i = 0; i < ADDR_PINS_AMOUNT; i = i + 1) begin : gen2
             assign emc_rtl_addr_wrap[i] = io_enable ? emc_rtl_addr[i + ADDR_PINS_OFFSET] : 1'bz; 
@@ -293,11 +338,11 @@ module thinpadNG_zynq_top(/*autoarg*/
     wire[2:0]  lock_level;
     wire sampler_idle;
     wire la_storage_overflow;
-    (* MARK_DEBUG = "TRUE" *) wire[255:0] received_data;
-    (* MARK_DEBUG = "TRUE" *) wire received_update;
+    wire[255:0] received_data;
+    wire received_update;
 
-    (* MARK_DEBUG = "TRUE" *) wire[48+3-1:0] acq_data_out;
-    (* MARK_DEBUG = "TRUE" *) wire acq_data_valid;
+    wire[48+3-1:0] acq_data_out;
+    wire acq_data_valid;
     la_receiver_0 LA(
         .refclkin (clk_serdes),
         .reset    (~la_rst_n),
@@ -337,4 +382,5 @@ module thinpadNG_zynq_top(/*autoarg*/
 
 endmodule
 
+`default_nettype wire
 `endif

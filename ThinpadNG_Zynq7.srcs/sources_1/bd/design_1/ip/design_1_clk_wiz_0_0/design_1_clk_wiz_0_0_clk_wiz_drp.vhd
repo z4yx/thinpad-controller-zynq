@@ -565,12 +565,11 @@ config_reg <= load_enable_reg(0 to 30) & load_enable_reg_d;
    drdy => drdy,
    dwe => dwe,
   -- Status and control signals                
-   reset => reset,
+   reset => reset, 
    locked => locked_int,
    -- Clock in ports
    clk_in1 => clk_in1
  );
-
 mmcm_drp_inst: design_1_clk_wiz_0_0_mmcm_drp generic map (
   S1_CLKFBOUT_MULT          =>  20,
   S1_CLKFBOUT_PHASE         =>  0,

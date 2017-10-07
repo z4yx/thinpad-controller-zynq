@@ -364,13 +364,13 @@ module design_1_clk_wiz_0_0_mmcm_drp
       ram[11] = {7'h06, 16'h1000, S1_CLKOUT5[15:0]};
       ram[12] = (S1_CLKOUT0_FRAC_EN == 0) ?
                 {7'h07, 16'hC000, S1_CLKOUT5[31:16]}:
-                {7'h07, 16'hC000, S1_CLKOUT5[31:30], S1_CLKOUT0_FRAC_CALC[35:32],S1_CLKOUT5[25:16]}; 
+                {7'h07, 16'hC000, S1_CLKOUT5[31:30], S1_CLKOUT0_FRAC_CALC[35:32], S1_CLKOUT5[25:16]}; 
       
       // Store CLKOUT6 divide and phase
       ram[13] = {7'h12, 16'h1000, S1_CLKOUT6[15:0]};
       ram[14] = (S1_CLKFBOUT_FRAC_EN == 0) ?
                 {7'h13, 16'hC000, S1_CLKOUT6[31:16]}:
-                {7'h13, 16'hC000, S1_CLKOUT6[31:30], S1_CLKFBOUT_FRAC_CALC[35:32],S1_CLKOUT6[25:16]};
+                {7'h13, 16'hC000, S1_CLKOUT6[31:30], S1_CLKFBOUT_FRAC_CALC[35:32], S1_CLKOUT6[25:16]};
       
       // Store the input divider
       ram[15] = {7'h16, 16'hC000, {2'h0, S1_DIVCLK[23:22], S1_DIVCLK[11:0]} };
@@ -409,7 +409,7 @@ module design_1_clk_wiz_0_0_mmcm_drp
    always @(posedge SCLK) begin
    if (LOAD) begin 
       // Store the power bits
-      ram[23] <= {7'h28, 16'h0000, 16'hFFFF};
+      ram[23] = {7'h28, 16'h0000, 16'hFFFF};
       
       // Store CLKOUT0 divide and phase
       ram[24] <= (S2_CLKOUT0_FRAC_EN == 0) ?
@@ -439,13 +439,13 @@ module design_1_clk_wiz_0_0_mmcm_drp
       ram[34] <= {7'h06, 16'h1000, S2_CLKOUT5[15:0]};
       ram[35] <= (S2_CLKOUT0_FRAC_EN == 0) ?
                 {7'h07, 16'hC000, S2_CLKOUT5[31:16]}:
-                {7'h07, 16'hC000, S2_CLKOUT5[31:30], S2_CLKOUT0_FRAC_CALC[35:32],S2_CLKOUT5[25:16]};
+                {7'h07, 16'hC000, S2_CLKOUT5[31:30], S2_CLKOUT0_FRAC_CALC[35:32], S2_CLKOUT5[25:16]}; 
       
       // Store CLKOUT6 divide and phase
       ram[36] <= {7'h12, 16'h1000, S2_CLKOUT6[15:0]};
       ram[37] <= (S2_CLKFBOUT_FRAC_EN == 0) ?
                 {7'h13, 16'hC000, S2_CLKOUT6[31:16]}:
-                {7'h13, 16'hC000, S2_CLKOUT6[31:30], S2_CLKFBOUT_FRAC_CALC[35:32],S2_CLKOUT6[25:16]};
+                {7'h13, 16'hC000, S2_CLKOUT6[31:30], S2_CLKFBOUT_FRAC_CALC[35:32], S2_CLKOUT6[25:16]};
       
       // Store the input divider
       ram[38] <= {7'h16, 16'hC000, {2'h0, S2_DIVCLK[23:22], S2_DIVCLK[11:0]} };

@@ -160,5 +160,6 @@ set_property PACKAGE_PIN M7 [get_ports {gpio1[30]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {gpio1[31]}]
 set_property PACKAGE_PIN M5 [get_ports {gpio1[31]}]
 
+set_property BITSTREAM.GENERAL.COMPRESS TRUE [current_design]
 
 set_false_path -from [get_pins la/init_timer_hold_reg/C] -to [get_pins {la/init_timer_sync_reg[0]/D}]

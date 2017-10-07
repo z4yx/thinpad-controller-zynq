@@ -47,14 +47,14 @@
 -- DO NOT MODIFY THIS FILE.
 
 -- IP VLNV: xilinx.com:ip:axi_uartlite:2.0
--- IP Revision: 15
+-- IP Revision: 16
 
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 USE ieee.numeric_std.ALL;
 
-LIBRARY axi_uartlite_v2_0_15;
-USE axi_uartlite_v2_0_15.axi_uartlite;
+LIBRARY axi_uartlite_v2_0_16;
+USE axi_uartlite_v2_0_16.axi_uartlite;
 
 ENTITY design_1_axi_uartlite_0_0 IS
   PORT (

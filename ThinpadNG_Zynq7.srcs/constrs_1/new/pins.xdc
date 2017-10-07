@@ -307,57 +307,6 @@ set_property IOSTANDARD LVCMOS33 [get_ports {progb[0]}]
 set_property IOSTANDARD LVCMOS33 [get_ports initb]
 set_property IOSTANDARD LVCMOS33 [get_ports done]
 
-
-
-
-
-
 set_false_path -to [get_pins {LApack/sync_control/data_buf_reg[0][*]/D}]
 set_false_path -to [get_pins {LApack/sync_cnt/data_buf_reg[0][*]/D}]
 set_false_path -to [get_pins {block_design/design_1_i/axi_register_0/inst/axi_register_v1_0_S00_AXI_inst/port2reg_sync1_reg[*]/D}]
-create_debug_core u_ila_0 ila
-set_property ALL_PROBE_SAME_MU true [get_debug_cores u_ila_0]
-set_property ALL_PROBE_SAME_MU_CNT 2 [get_debug_cores u_ila_0]
-set_property C_ADV_TRIGGER false [get_debug_cores u_ila_0]
-set_property C_DATA_DEPTH 2048 [get_debug_cores u_ila_0]
-set_property C_EN_STRG_QUAL true [get_debug_cores u_ila_0]
-set_property C_INPUT_PIPE_STAGES 0 [get_debug_cores u_ila_0]
-set_property C_TRIGIN_EN false [get_debug_cores u_ila_0]
-set_property C_TRIGOUT_EN false [get_debug_cores u_ila_0]
-set_property port_width 1 [get_debug_ports u_ila_0/clk]
-connect_debug_port u_ila_0/clk [get_nets [list la_fifo_aclk]]
-set_property PROBE_TYPE DATA [get_debug_ports u_ila_0/probe0]
-set_property port_width 51 [get_debug_ports u_ila_0/probe0]
-connect_debug_port u_ila_0/probe0 [get_nets [list {acq_data_out[0]} {acq_data_out[1]} {acq_data_out[2]} {acq_data_out[3]} {acq_data_out[4]} {acq_data_out[5]} {acq_data_out[6]} {acq_data_out[7]} {acq_data_out[8]} {acq_data_out[9]} {acq_data_out[10]} {acq_data_out[11]} {acq_data_out[12]} {acq_data_out[13]} {acq_data_out[14]} {acq_data_out[15]} {acq_data_out[16]} {acq_data_out[17]} {acq_data_out[18]} {acq_data_out[19]} {acq_data_out[20]} {acq_data_out[21]} {acq_data_out[22]} {acq_data_out[23]} {acq_data_out[24]} {acq_data_out[25]} {acq_data_out[26]} {acq_data_out[27]} {acq_data_out[28]} {acq_data_out[29]} {acq_data_out[30]} {acq_data_out[31]} {acq_data_out[32]} {acq_data_out[33]} {acq_data_out[34]} {acq_data_out[35]} {acq_data_out[36]} {acq_data_out[37]} {acq_data_out[38]} {acq_data_out[39]} {acq_data_out[40]} {acq_data_out[41]} {acq_data_out[42]} {acq_data_out[43]} {acq_data_out[44]} {acq_data_out[45]} {acq_data_out[46]} {acq_data_out[47]} {acq_data_out[48]} {acq_data_out[49]} {acq_data_out[50]}]]
-create_debug_port u_ila_0 probe
-set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe1]
-set_property port_width 1 [get_debug_ports u_ila_0/probe1]
-connect_debug_port u_ila_0/probe1 [get_nets [list acq_data_valid]]
-create_debug_port u_ila_0 probe
-set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe2]
-set_property port_width 1 [get_debug_ports u_ila_0/probe2]
-connect_debug_port u_ila_0/probe2 [get_nets [list LApack/la_overflow]]
-create_debug_port u_ila_0 probe
-set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe3]
-set_property port_width 1 [get_debug_ports u_ila_0/probe3]
-connect_debug_port u_ila_0/probe3 [get_nets [list LApack/la_storage_axis_tvalid]]
-create_debug_port u_ila_0 probe
-set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe4]
-set_property port_width 1 [get_debug_ports u_ila_0/probe4]
-connect_debug_port u_ila_0/probe4 [get_nets [list received_update]]
-create_debug_port u_ila_0 probe
-set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe5]
-set_property port_width 1 [get_debug_ports u_ila_0/probe5]
-connect_debug_port u_ila_0/probe5 [get_nets [list LApack/la_storage_axis_tlast]]
-create_debug_port u_ila_0 probe
-set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe6]
-set_property port_width 1 [get_debug_ports u_ila_0/probe6]
-connect_debug_port u_ila_0/probe6 [get_nets [list LApack/la_storage_axis_tready]]
-create_debug_port u_ila_0 probe
-set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe7]
-set_property port_width 1 [get_debug_ports u_ila_0/probe7]
-connect_debug_port u_ila_0/probe7 [get_nets [list LApack/ctl_storage_enable_sync]]
-set_property C_CLK_INPUT_FREQ_HZ 300000000 [get_debug_cores dbg_hub]
-set_property C_ENABLE_CLK_DIVIDER false [get_debug_cores dbg_hub]
-set_property C_USER_SCAN_CHAIN 1 [get_debug_cores dbg_hub]
-connect_debug_port dbg_hub/clk [get_nets la_fifo_aclk]

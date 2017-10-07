@@ -50,7 +50,7 @@
 // IP VLNV: user.org:user:axi_register:1.1
 // IP Revision: 2
 
-(* X_CORE_INFO = "axi_register_v1_0,Vivado 2016.4" *)
+(* X_CORE_INFO = "axi_register_v1_0,Vivado 2017.1" *)
 (* CHECK_LICENSE_TYPE = "design_1_axi_register_0_0,axi_register_v1_0,{}" *)
 (* DowngradeIPIdentifiedWarnings = "yes" *)
 module design_1_axi_register_0_0 (
