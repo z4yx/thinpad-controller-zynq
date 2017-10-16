@@ -1,4 +1,4 @@
-create_clock -period 8.620 -name clkin1_p -waveform {0.000 3.690} [get_ports clkin1_p]
+create_generated_clock -name clk_uart16x -source [get_pins uart_clk/inst/mmcm_adv_inst/CLKOUT0] -divide_by 36 [get_pins cpld_emu/u3/clk_reg/Q]
 
 set_property PACKAGE_PIN Y6 [get_ports clk_out1]
 set_property PACKAGE_PIN Y5 [get_ports clk_out2]
@@ -13,17 +13,12 @@ set_property PACKAGE_PIN T19 [get_ports {progb[0]}]
 set_property PACKAGE_PIN N17 [get_ports initb]
 set_property PACKAGE_PIN P18 [get_ports done]
 
-#SERDES
-set_property -dict {PACKAGE_PIN N19 IOSTANDARD TMDS_33} [get_ports clkin1_p]
-set_property -dict {PACKAGE_PIN N20 IOSTANDARD TMDS_33} [get_ports clkin1_n]
-set_property -dict {PACKAGE_PIN V14 IOSTANDARD TMDS_33} [get_ports {datain1_p[0]}]
-set_property -dict {PACKAGE_PIN V15 IOSTANDARD TMDS_33} [get_ports {datain1_n[0]}]
-set_property -dict {PACKAGE_PIN U20 IOSTANDARD TMDS_33} [get_ports {datain1_p[1]}]
-set_property -dict {PACKAGE_PIN V20 IOSTANDARD TMDS_33} [get_ports {datain1_n[1]}]
-set_property -dict {PACKAGE_PIN R18 IOSTANDARD TMDS_33} [get_ports {datain1_p[2]}]
-set_property -dict {PACKAGE_PIN T18 IOSTANDARD TMDS_33} [get_ports {datain1_n[2]}]
-set_property -dict {PACKAGE_PIN Y13 IOSTANDARD TMDS_33} [get_ports {datain1_p[3]}]
-set_property -dict {PACKAGE_PIN AA13 IOSTANDARD TMDS_33} [get_ports {datain1_n[3]}]
+#CPLD
+set_property -dict {PACKAGE_PIN N19 IOSTANDARD LVCMOS33} [get_ports cpld_emu_wrn]
+set_property -dict {PACKAGE_PIN V14 IOSTANDARD LVCMOS33} [get_ports cpld_emu_rdn]
+set_property -dict {PACKAGE_PIN U20 IOSTANDARD LVCMOS33} [get_ports cpld_emu_tbre]
+set_property -dict {PACKAGE_PIN R18 IOSTANDARD LVCMOS33} [get_ports cpld_emu_tsre]
+set_property -dict {PACKAGE_PIN Y13 IOSTANDARD LVCMOS33} [get_ports cpld_emu_dataready]
 
 # GPIOs
 # leds
@@ -297,7 +292,7 @@ set_property PACKAGE_PIN L17 [get_ports {emc_rtl_ben_wrap[3]}]
 set_property IOSTANDARD LVCMOS33 [get_ports clk_out1]
 set_property IOSTANDARD LVCMOS33 [get_ports clk_out2]
 
-set_property IOSTANDARD LVCMOS33 [get_ports UART_1_rxd]
+set_property -dict {IOSTANDARD LVCMOS33 PULLUP true} [get_ports UART_1_rxd]
 set_property IOSTANDARD LVCMOS33 [get_ports UART_1_txd]
 
 set_property IOSTANDARD LVCMOS33 [get_ports SPI0_MOSI_O]
@@ -307,6 +302,7 @@ set_property IOSTANDARD LVCMOS33 [get_ports {progb[0]}]
 set_property IOSTANDARD LVCMOS33 [get_ports initb]
 set_property IOSTANDARD LVCMOS33 [get_ports done]
 
-set_false_path -to [get_pins {LApack/sync_control/data_buf_reg[0][*]/D}]
-set_false_path -to [get_pins {LApack/sync_cnt/data_buf_reg[0][*]/D}]
 set_false_path -to [get_pins {block_design/design_1_i/axi_register_0/inst/axi_register_v1_0_S00_AXI_inst/port2reg_sync1_reg[*]/D}]
+set_false_path -to [get_pins cpld_emu/u2/rxd1_reg/D]
+set_false_path -to [get_pins {uart_r/RxD_sync_reg[0]/D}]
+set_false_path -to [get_pins block_design/design_1_i/axi_uart16550_0/U0/XUART_I_1/UART16550_I_1/rx16550_1/sin_d1_reg/D]

@@ -15,13 +15,17 @@
 module thinpadNG_zynq_top(/*autoarg*/
     //Inputs
     UART_1_rxd, done, initb, 
+    cpld_emu_rdn, cpld_emu_wrn,
 
     //Outputs
     SPI0_MOSI_O, SPI0_SCLK_O, UART_1_txd, 
     clk_out1, clk_out2, emc_rtl_addr_wrap, emc_rtl_ben_wrap, 
     emc_rtl_ce_n_wrap, emc_rtl_oen_wrap, emc_rtl_wen_wrap, 
     progb, 
+    cpld_emu_tbre, cpld_emu_tsre, cpld_emu_dataready,
+`ifdef HS_DIFF_IN
     clkin1_p,  clkin1_n, datain1_p, datain1_n,
+`endif
 
     //Inouts
     DDR_addr, DDR_ba, DDR_cas_n, DDR_ck_n, 
@@ -73,8 +77,15 @@ module thinpadNG_zynq_top(/*autoarg*/
     inout [31:0]gpio_rtl_tri_io;
     input initb;
     output [0:0]progb;
+`ifdef HS_DIFF_IN
     input clkin1_p,  clkin1_n;            // lvds channel 1 clock input
     input [3:0]   datain1_p, datain1_n;           // lvds channel 1 data inputs
+`endif
+    input cpld_emu_rdn;
+    input cpld_emu_wrn;
+    output cpld_emu_dataready;
+    output cpld_emu_tbre;
+    output cpld_emu_tsre;
 
     wire [14:0]DDR_addr;
     wire [2:0]DDR_ba;
@@ -125,10 +136,18 @@ module thinpadNG_zynq_top(/*autoarg*/
     wire [31:0]gpio_rtl_tri_io;
     wire initb;
     wire [0:0]progb;
+`ifdef HS_DIFF_IN
     wire clkin1_p,  clkin1_n;            // lvds channel 1 clock input
     wire [3:0]   datain1_p, datain1_n;           // lvds channel 1 data inputs
-    wire rxd_232;
-    wire txd_232;
+`endif
+    wire cpld_emu_rdn;
+    wire cpld_emu_wrn;
+    wire cpld_emu_dataready;
+    wire cpld_emu_tbre;
+    wire cpld_emu_tsre;
+    wire cpld_emu_to16550;
+    wire cpld_emu_from16550;
+    wire [7:0]cpld_emu_data_o;
     wire [127:0]reg2port;
     wire [256+32-1:0]port2reg;
     wire la_fifo_aclk;
@@ -216,8 +235,12 @@ module thinpadNG_zynq_top(/*autoarg*/
     .progb                      (progb[0:0]                     ), // output
     .reg2port                   (reg2port[127:0]                ), // output
     .port2reg                   (port2reg),
-    .rxd_232                    (rxd_232                        ), // input
-    .txd_232                    (txd_232                        )  // output
+    .UART_CPLD_ctsn             (1'b0),
+    .UART_CPLD_dcdn             (1'b0),
+    .UART_CPLD_dsrn             (1'b0),
+    .UART_CPLD_ri               (1'b1), //actually rin
+    .UART_CPLD_rxd              (cpld_emu_to16550),
+    .UART_CPLD_txd              (cpld_emu_from16550)
 );
     
     // User logic
@@ -285,6 +308,8 @@ module thinpadNG_zynq_top(/*autoarg*/
         io_dir <= (~emc_rtl_wen & emc_rtl_oen) ? 1'b1 : 1'b0; // 1 for output
     end
     
+    wire [7:0] ram_bus_mux;
+    reg cpld_emu_rdn_sync;
     generate
         
         for (i = 0; i < ADDR_PINS_AMOUNT; i = i + 1) begin : gen2
@@ -296,7 +321,12 @@ module thinpadNG_zynq_top(/*autoarg*/
         end  
         
         for (i = 0; i < IO_PINS_AMOUNT; i = i + 1) begin : gen4
-            assign emc_rtl_dq_io[i] = (io_enable & ~emc_rtl_dq_t[i]) ? emc_rtl_dq_o[i] : 1'bz; 
+            if(i < 8)begin
+                assign ram_bus_mux[i] = ~cpld_emu_rdn_sync ? cpld_emu_data_o[i] : emc_rtl_dq_o[i];
+                assign emc_rtl_dq_io[i] = (~cpld_emu_rdn_sync | (io_enable & ~emc_rtl_dq_t[i])) ? ram_bus_mux[i] : 1'bz;
+            end else begin
+                assign emc_rtl_dq_io[i] = (io_enable & ~emc_rtl_dq_t[i]) ? emc_rtl_dq_o[i] : 1'bz; 
+            end
             assign emc_rtl_dq_i[i] = emc_rtl_dq_io[i];
         end  
     endgenerate
@@ -335,14 +365,16 @@ module thinpadNG_zynq_top(/*autoarg*/
 
     );
 
-    wire[2:0]  lock_level;
-    wire sampler_idle;
+    wire[2:0]  lock_level = 3'h0;
+    wire sampler_idle = 1'b0;
     wire la_storage_overflow;
     wire[255:0] received_data;
-    wire received_update;
+    wire received_update = 1'b0;
 
     wire[48+3-1:0] acq_data_out;
     wire acq_data_valid;
+
+`ifdef HS_DIFF_IN
     la_receiver_0 LA(
         .refclkin (clk_serdes),
         .reset    (~la_rst_n),
@@ -358,6 +390,7 @@ module thinpadNG_zynq_top(/*autoarg*/
         .raw_signal_result(received_data),
         .raw_signal_update(received_update)
     );
+ `endif
 
     la_storage_pack LApack(
         .rst_n                 (la_rst_n),
@@ -379,6 +412,77 @@ module thinpadNG_zynq_top(/*autoarg*/
     assign status_reg = {27'b0,sampler_idle,la_storage_overflow,lock_level};
     assign port2reg = {received_data, status_reg};
 
+    /*
+    wire cpld_clk, cpld_locked;
+    clk_wiz_0 uart_clk(.clk_in1(clk_out1),.clk_out1(cpld_clk),.resetn(ps_perph_rstn),.locked(cpld_locked));
+
+    uart_controller cpld_emu(
+        .data(emc_rtl_dq_i[7:0]),
+        .dout(cpld_emu_data_o),
+        .rst(cpld_locked),
+        .clk(cpld_clk), // 5529600Hz
+        .rxd(cpld_emu_from16550),
+        .rdn(cpld_emu_rdn_sync),
+        .wrn(cpld_emu_wrn),
+        .data_ready(cpld_emu_dataready),
+        .parity_error(),
+        .framing_error(),
+        .tbre(cpld_emu_tbre),
+        .tsre(cpld_emu_tsre),
+        .sdo(cpld_emu_to16550)
+    );
+    */
+
+    PULLUP pullup_wrn (.O(cpld_emu_wrn));
+    PULLUP pullup_rdn (.O(cpld_emu_rdn));
+
+    vio_0 uart_vio(
+        .clk(clk_out2),
+        .probe_in0({1'b0, cpld_emu_wrn, cpld_emu_rdn, cpld_emu_tsre, cpld_emu_tbre, cpld_emu_dataready})
+    );
+
+    reg [7:0] TxD_data,TxD_data0,TxD_data1;
+    reg [4:0] cpld_emu_wrn_sync;
+    reg TxD_start,tbre;
+
+    always @(posedge clk_out2) begin : proc_Tx
+        TxD_data0 <= emc_rtl_dq_i[7:0];
+        TxD_data1 <= TxD_data0;
+
+        cpld_emu_rdn_sync <= cpld_emu_rdn;
+        cpld_emu_wrn_sync <= {cpld_emu_wrn_sync[3:0],cpld_emu_wrn};
+
+        if(~cpld_emu_wrn_sync[1] & cpld_emu_wrn_sync[2])
+            TxD_data <= TxD_data1;
+        TxD_start <= cpld_emu_wrn_sync[1] & ~cpld_emu_wrn_sync[2];
+    end
+
+    always @(posedge clk_out2 or negedge cpld_emu_wrn) begin : proc_tbre
+        if(~cpld_emu_wrn) begin
+            tbre <= 0;
+        end else begin
+            tbre <= &cpld_emu_wrn_sync;
+        end
+    end
+
+    assign cpld_emu_tbre = tbre;
+
+    async_receiver #(.ClkFrequency(11059200),.Baud(9600))
+        uart_r(
+            .clk(clk_out2),
+            .rdn(cpld_emu_rdn_sync),
+            .RxD(cpld_emu_from16550),
+            .RxD_data_ready(cpld_emu_dataready),
+            .RxD_data(cpld_emu_data_o)
+        );
+    async_transmitter #(.ClkFrequency(11059200),.Baud(9600))
+        uart_t(
+            .clk(clk_out2),
+            .tsre(cpld_emu_tsre),
+            .TxD(cpld_emu_to16550),
+            .TxD_start(TxD_start),
+            .TxD_data(TxD_data)
+        );
 
 endmodule
 

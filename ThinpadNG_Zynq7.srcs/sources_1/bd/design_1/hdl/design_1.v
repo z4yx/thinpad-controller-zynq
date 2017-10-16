@@ -1,7 +1,7 @@
 //Copyright 1986-2017 Xilinx, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2017.1 (lin64) Build 1846317 Fri Apr 14 18:54:47 MDT 2017
-//Date        : Sat Oct  7 11:55:27 2017
+//Date        : Sun Oct 15 00:24:13 2017
 //Host        : nuc6i7 running 64-bit Ubuntu 16.04.2 LTS
 //Command     : generate_target design_1.bd
 //Design      : design_1
@@ -340,6 +340,20 @@ module design_1
     SPI0_SCLK_O,
     UART_1_rxd,
     UART_1_txd,
+    UART_CPLD_baudoutn,
+    UART_CPLD_ctsn,
+    UART_CPLD_dcdn,
+    UART_CPLD_ddis,
+    UART_CPLD_dsrn,
+    UART_CPLD_dtrn,
+    UART_CPLD_out1n,
+    UART_CPLD_out2n,
+    UART_CPLD_ri,
+    UART_CPLD_rtsn,
+    UART_CPLD_rxd,
+    UART_CPLD_rxrdyn,
+    UART_CPLD_txd,
+    UART_CPLD_txrdyn,
     bus_analyze_axis_tdata,
     bus_analyze_axis_tlast,
     bus_analyze_axis_tready,
@@ -386,9 +400,7 @@ module design_1
     pp_wr,
     progb,
     ps_perph_rstn,
-    reg2port,
-    rxd_232,
-    txd_232);
+    reg2port);
   inout [14:0]DDR_addr;
   inout [2:0]DDR_ba;
   inout DDR_cas_n;
@@ -414,6 +426,20 @@ module design_1
   output SPI0_SCLK_O;
   input UART_1_rxd;
   output UART_1_txd;
+  output UART_CPLD_baudoutn;
+  input UART_CPLD_ctsn;
+  input UART_CPLD_dcdn;
+  output UART_CPLD_ddis;
+  input UART_CPLD_dsrn;
+  output UART_CPLD_dtrn;
+  output UART_CPLD_out1n;
+  output UART_CPLD_out2n;
+  input UART_CPLD_ri;
+  output UART_CPLD_rtsn;
+  input UART_CPLD_rxd;
+  output UART_CPLD_rxrdyn;
+  output UART_CPLD_txd;
+  output UART_CPLD_txrdyn;
   input [31:0]bus_analyze_axis_tdata;
   input bus_analyze_axis_tlast;
   output bus_analyze_axis_tready;
@@ -461,8 +487,6 @@ module design_1
   output [0:0]progb;
   output [0:0]ps_perph_rstn;
   output [127:0]reg2port;
-  input rxd_232;
-  output txd_232;
 
   wire [23:0]LCD_data_in_1;
   wire [31:0]S00_AXI_1_ARADDR;
@@ -563,10 +587,10 @@ module design_1
   wire axi_interconnect_0_M00_AXI_WREADY;
   wire [3:0]axi_interconnect_0_M00_AXI_WSTRB;
   wire axi_interconnect_0_M00_AXI_WVALID;
-  wire [31:0]axi_interconnect_0_M01_AXI_ARADDR;
+  wire [12:0]axi_interconnect_0_M01_AXI_ARADDR;
   wire axi_interconnect_0_M01_AXI_ARREADY;
   wire axi_interconnect_0_M01_AXI_ARVALID;
-  wire [31:0]axi_interconnect_0_M01_AXI_AWADDR;
+  wire [12:0]axi_interconnect_0_M01_AXI_AWADDR;
   wire axi_interconnect_0_M01_AXI_AWREADY;
   wire axi_interconnect_0_M01_AXI_AWVALID;
   wire axi_interconnect_0_M01_AXI_BREADY;
@@ -739,8 +763,21 @@ module design_1
   wire [7:0]axi_interconnect_1_M00_AXI_WSTRB;
   wire axi_interconnect_1_M00_AXI_WVALID;
   wire [127:0]axi_register_0_reg2port;
-  wire axi_uartlite_0_interrupt;
-  wire axi_uartlite_0_tx;
+  wire axi_uart16550_0_UART_BAUDOUTn;
+  wire axi_uart16550_0_UART_CTSn;
+  wire axi_uart16550_0_UART_DCDn;
+  wire axi_uart16550_0_UART_DDIS;
+  wire axi_uart16550_0_UART_DSRn;
+  wire axi_uart16550_0_UART_DTRn;
+  wire axi_uart16550_0_UART_OUT1n;
+  wire axi_uart16550_0_UART_OUT2n;
+  wire axi_uart16550_0_UART_RI;
+  wire axi_uart16550_0_UART_RTSn;
+  wire axi_uart16550_0_UART_RXRDYn;
+  wire axi_uart16550_0_UART_RxD;
+  wire axi_uart16550_0_UART_TXRDYn;
+  wire axi_uart16550_0_UART_TxD;
+  wire axi_uart16550_0_ip2intc_irpt;
   wire [31:0]bus_analyze_axis_1_TDATA;
   wire bus_analyze_axis_1_TLAST;
   wire bus_analyze_axis_1_TREADY;
@@ -814,7 +851,6 @@ module design_1
   wire ps7_0_SPI0_SCLK_O;
   wire ps7_0_UART_1_RxD;
   wire ps7_0_UART_1_TxD;
-  wire rxd_232_1;
   wire s_aresetn_1;
   (* DEBUG = "true" *) (* MARK_DEBUG *) wire [2:0]xlconcat_0_dout;
   wire [2:0]xlconcat_1_dout;
@@ -828,8 +864,22 @@ module design_1
   assign S_AXIS_1_TLAST = la_storage_axis_tlast;
   assign S_AXIS_1_TVALID = la_storage_axis_tvalid;
   assign UART_1_txd = ps7_0_UART_1_TxD;
+  assign UART_CPLD_baudoutn = axi_uart16550_0_UART_BAUDOUTn;
+  assign UART_CPLD_ddis = axi_uart16550_0_UART_DDIS;
+  assign UART_CPLD_dtrn = axi_uart16550_0_UART_DTRn;
+  assign UART_CPLD_out1n = axi_uart16550_0_UART_OUT1n;
+  assign UART_CPLD_out2n = axi_uart16550_0_UART_OUT2n;
+  assign UART_CPLD_rtsn = axi_uart16550_0_UART_RTSn;
+  assign UART_CPLD_rxrdyn = axi_uart16550_0_UART_RXRDYn;
+  assign UART_CPLD_txd = axi_uart16550_0_UART_TxD;
+  assign UART_CPLD_txrdyn = axi_uart16550_0_UART_TXRDYn;
   assign axi_gpio_0_GPIO_TRI_I = gpio_rtl_tri_i[31:0];
   assign axi_gpio_1_GPIO_TRI_I = gpio_rtl_0_tri_i[5:0];
+  assign axi_uart16550_0_UART_CTSn = UART_CPLD_ctsn;
+  assign axi_uart16550_0_UART_DCDn = UART_CPLD_dcdn;
+  assign axi_uart16550_0_UART_DSRn = UART_CPLD_dsrn;
+  assign axi_uart16550_0_UART_RI = UART_CPLD_ri;
+  assign axi_uart16550_0_UART_RxD = UART_CPLD_rxd;
   assign bus_analyze_axis_1_TDATA = bus_analyze_axis_tdata[31:0];
   assign bus_analyze_axis_1_TLAST = bus_analyze_axis_tlast;
   assign bus_analyze_axis_1_TVALID = bus_analyze_axis_tvalid;
@@ -871,10 +921,8 @@ module design_1
   assign ps7_0_UART_1_RxD = UART_1_rxd;
   assign ps_perph_rstn[0] = proc_sys_reset_0_peripheral_aresetn;
   assign reg2port[127:0] = axi_register_0_reg2port;
-  assign rxd_232_1 = rxd_232;
   assign s_aresetn_1 = la_fifo_aresetn;
-  assign txd_232 = axi_uartlite_0_tx;
-  design_1_axi_apb_bridge_0_0 axi_apb_bridge_0
+  design_1_axi_apb_bridge_0_0 axi_apb_0
        (.m_apb_paddr(axi_apb_bridge_0_APB_M_PADDR),
         .m_apb_penable(axi_apb_bridge_0_APB_M_PENABLE),
         .m_apb_prdata(axi_apb_bridge_0_APB_M_PRDATA),
@@ -1298,15 +1346,26 @@ module design_1
         .s00_axi_wready(axi_interconnect_0_M07_AXI_WREADY),
         .s00_axi_wstrb(axi_interconnect_0_M07_AXI_WSTRB),
         .s00_axi_wvalid(axi_interconnect_0_M07_AXI_WVALID));
-  design_1_axi_uartlite_0_0 axi_uartlite_0
-       (.interrupt(axi_uartlite_0_interrupt),
-        .rx(rxd_232_1),
+  design_1_axi_uart16550_0_0 axi_uart16550_0
+       (.baudoutn(axi_uart16550_0_UART_BAUDOUTn),
+        .ctsn(axi_uart16550_0_UART_CTSn),
+        .dcdn(axi_uart16550_0_UART_DCDn),
+        .ddis(axi_uart16550_0_UART_DDIS),
+        .dsrn(axi_uart16550_0_UART_DSRn),
+        .dtrn(axi_uart16550_0_UART_DTRn),
+        .freeze(1'b0),
+        .ip2intc_irpt(axi_uart16550_0_ip2intc_irpt),
+        .out1n(axi_uart16550_0_UART_OUT1n),
+        .out2n(axi_uart16550_0_UART_OUT2n),
+        .rin(axi_uart16550_0_UART_RI),
+        .rtsn(axi_uart16550_0_UART_RTSn),
+        .rxrdyn(axi_uart16550_0_UART_RXRDYn),
         .s_axi_aclk(processing_system7_0_FCLK_CLK0),
-        .s_axi_araddr(axi_interconnect_0_M01_AXI_ARADDR[3:0]),
+        .s_axi_araddr(axi_interconnect_0_M01_AXI_ARADDR),
         .s_axi_aresetn(proc_sys_reset_0_peripheral_aresetn),
         .s_axi_arready(axi_interconnect_0_M01_AXI_ARREADY),
         .s_axi_arvalid(axi_interconnect_0_M01_AXI_ARVALID),
-        .s_axi_awaddr(axi_interconnect_0_M01_AXI_AWADDR[3:0]),
+        .s_axi_awaddr(axi_interconnect_0_M01_AXI_AWADDR),
         .s_axi_awready(axi_interconnect_0_M01_AXI_AWREADY),
         .s_axi_awvalid(axi_interconnect_0_M01_AXI_AWVALID),
         .s_axi_bready(axi_interconnect_0_M01_AXI_BREADY),
@@ -1320,7 +1379,9 @@ module design_1
         .s_axi_wready(axi_interconnect_0_M01_AXI_WREADY),
         .s_axi_wstrb(axi_interconnect_0_M01_AXI_WSTRB),
         .s_axi_wvalid(axi_interconnect_0_M01_AXI_WVALID),
-        .tx(axi_uartlite_0_tx));
+        .sin(axi_uart16550_0_UART_RxD),
+        .sout(axi_uart16550_0_UART_TxD),
+        .txrdyn(axi_uart16550_0_UART_TXRDYn));
   bus_analyze_imp_1PVRXT bus_analyze
        (.M00_ACLK(ps7_0_FCLK_CLK1),
         .M00_AXI_awaddr(axi_interconnect_1_M00_AXI_AWADDR),
@@ -1614,7 +1675,7 @@ module design_1
         .In2(done_1),
         .dout(xlconcat_0_dout));
   design_1_xlconcat_1_0 xlconcat_1
-       (.In0(axi_uartlite_0_interrupt),
+       (.In0(axi_uart16550_0_ip2intc_irpt),
         .In1(bus_analyze_s2mm_introut),
         .In2(la_storage_s2mm_introut),
         .dout(xlconcat_1_dout));
@@ -1901,10 +1962,10 @@ module design_1_axi_interconnect_0_0
   output M00_AXI_wvalid;
   input M01_ACLK;
   input M01_ARESETN;
-  output [31:0]M01_AXI_araddr;
+  output [12:0]M01_AXI_araddr;
   input M01_AXI_arready;
   output M01_AXI_arvalid;
-  output [31:0]M01_AXI_awaddr;
+  output [12:0]M01_AXI_awaddr;
   input M01_AXI_awready;
   output M01_AXI_awvalid;
   output M01_AXI_bready;
@@ -2210,10 +2271,10 @@ module design_1_axi_interconnect_0_0
   wire m00_couplers_to_axi_interconnect_0_WREADY;
   wire [3:0]m00_couplers_to_axi_interconnect_0_WSTRB;
   wire m00_couplers_to_axi_interconnect_0_WVALID;
-  wire [31:0]m01_couplers_to_axi_interconnect_0_ARADDR;
+  wire [12:0]m01_couplers_to_axi_interconnect_0_ARADDR;
   wire m01_couplers_to_axi_interconnect_0_ARREADY;
   wire m01_couplers_to_axi_interconnect_0_ARVALID;
-  wire [31:0]m01_couplers_to_axi_interconnect_0_AWADDR;
+  wire [12:0]m01_couplers_to_axi_interconnect_0_AWADDR;
   wire m01_couplers_to_axi_interconnect_0_AWREADY;
   wire m01_couplers_to_axi_interconnect_0_AWVALID;
   wire m01_couplers_to_axi_interconnect_0_BREADY;
@@ -2824,9 +2885,9 @@ module design_1_axi_interconnect_0_0
   assign M00_AXI_wvalid = m00_couplers_to_axi_interconnect_0_WVALID;
   assign M01_ACLK_1 = M01_ACLK;
   assign M01_ARESETN_1 = M01_ARESETN;
-  assign M01_AXI_araddr[31:0] = m01_couplers_to_axi_interconnect_0_ARADDR;
+  assign M01_AXI_araddr[12:0] = m01_couplers_to_axi_interconnect_0_ARADDR;
   assign M01_AXI_arvalid = m01_couplers_to_axi_interconnect_0_ARVALID;
-  assign M01_AXI_awaddr[31:0] = m01_couplers_to_axi_interconnect_0_AWADDR;
+  assign M01_AXI_awaddr[12:0] = m01_couplers_to_axi_interconnect_0_AWADDR;
   assign M01_AXI_awvalid = m01_couplers_to_axi_interconnect_0_AWVALID;
   assign M01_AXI_bready = m01_couplers_to_axi_interconnect_0_BREADY;
   assign M01_AXI_rready = m01_couplers_to_axi_interconnect_0_RREADY;
@@ -4926,10 +4987,10 @@ module m01_couplers_imp_I4GRPB
     S_AXI_wvalid);
   input M_ACLK;
   input M_ARESETN;
-  output [31:0]M_AXI_araddr;
+  output [12:0]M_AXI_araddr;
   input M_AXI_arready;
   output M_AXI_arvalid;
-  output [31:0]M_AXI_awaddr;
+  output [12:0]M_AXI_awaddr;
   input M_AXI_awready;
   output M_AXI_awvalid;
   output M_AXI_bready;
@@ -4987,10 +5048,10 @@ module m01_couplers_imp_I4GRPB
 
   wire S_ACLK_1;
   wire S_ARESETN_1;
-  wire [31:0]auto_pc_to_m01_couplers_ARADDR;
+  wire [12:0]auto_pc_to_m01_couplers_ARADDR;
   wire auto_pc_to_m01_couplers_ARREADY;
   wire auto_pc_to_m01_couplers_ARVALID;
-  wire [31:0]auto_pc_to_m01_couplers_AWADDR;
+  wire [12:0]auto_pc_to_m01_couplers_AWADDR;
   wire auto_pc_to_m01_couplers_AWREADY;
   wire auto_pc_to_m01_couplers_AWVALID;
   wire auto_pc_to_m01_couplers_BREADY;
@@ -5044,9 +5105,9 @@ module m01_couplers_imp_I4GRPB
   wire [3:0]m01_couplers_to_auto_pc_WSTRB;
   wire m01_couplers_to_auto_pc_WVALID;
 
-  assign M_AXI_araddr[31:0] = auto_pc_to_m01_couplers_ARADDR;
+  assign M_AXI_araddr[12:0] = auto_pc_to_m01_couplers_ARADDR;
   assign M_AXI_arvalid = auto_pc_to_m01_couplers_ARVALID;
-  assign M_AXI_awaddr[31:0] = auto_pc_to_m01_couplers_AWADDR;
+  assign M_AXI_awaddr[12:0] = auto_pc_to_m01_couplers_AWADDR;
   assign M_AXI_awvalid = auto_pc_to_m01_couplers_AWVALID;
   assign M_AXI_bready = auto_pc_to_m01_couplers_BREADY;
   assign M_AXI_rready = auto_pc_to_m01_couplers_RREADY;
@@ -5122,7 +5183,7 @@ module m01_couplers_imp_I4GRPB
         .m_axi_wready(auto_pc_to_m01_couplers_WREADY),
         .m_axi_wstrb(auto_pc_to_m01_couplers_WSTRB),
         .m_axi_wvalid(auto_pc_to_m01_couplers_WVALID),
-        .s_axi_araddr(m01_couplers_to_auto_pc_ARADDR),
+        .s_axi_araddr(m01_couplers_to_auto_pc_ARADDR[12:0]),
         .s_axi_arburst(m01_couplers_to_auto_pc_ARBURST),
         .s_axi_arcache(m01_couplers_to_auto_pc_ARCACHE),
         .s_axi_arid(m01_couplers_to_auto_pc_ARID),
@@ -5134,7 +5195,7 @@ module m01_couplers_imp_I4GRPB
         .s_axi_arregion(m01_couplers_to_auto_pc_ARREGION),
         .s_axi_arsize(m01_couplers_to_auto_pc_ARSIZE),
         .s_axi_arvalid(m01_couplers_to_auto_pc_ARVALID),
-        .s_axi_awaddr(m01_couplers_to_auto_pc_AWADDR),
+        .s_axi_awaddr(m01_couplers_to_auto_pc_AWADDR[12:0]),
         .s_axi_awburst(m01_couplers_to_auto_pc_AWBURST),
         .s_axi_awcache(m01_couplers_to_auto_pc_AWCACHE),
         .s_axi_awid(m01_couplers_to_auto_pc_AWID),

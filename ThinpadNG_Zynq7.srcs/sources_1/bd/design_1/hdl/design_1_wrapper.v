@@ -1,7 +1,7 @@
 //Copyright 1986-2017 Xilinx, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2017.1 (lin64) Build 1846317 Fri Apr 14 18:54:47 MDT 2017
-//Date        : Sat Oct  7 11:55:28 2017
+//Date        : Sun Oct 15 00:24:14 2017
 //Host        : nuc6i7 running 64-bit Ubuntu 16.04.2 LTS
 //Command     : generate_target design_1_wrapper.bd
 //Design      : design_1_wrapper
@@ -35,6 +35,20 @@ module design_1_wrapper
     SPI0_SCLK_O,
     UART_1_rxd,
     UART_1_txd,
+    UART_CPLD_baudoutn,
+    UART_CPLD_ctsn,
+    UART_CPLD_dcdn,
+    UART_CPLD_ddis,
+    UART_CPLD_dsrn,
+    UART_CPLD_dtrn,
+    UART_CPLD_out1n,
+    UART_CPLD_out2n,
+    UART_CPLD_ri,
+    UART_CPLD_rtsn,
+    UART_CPLD_rxd,
+    UART_CPLD_rxrdyn,
+    UART_CPLD_txd,
+    UART_CPLD_txrdyn,
     bus_analyze_axis_tdata,
     bus_analyze_axis_tlast,
     bus_analyze_axis_tready,
@@ -77,9 +91,7 @@ module design_1_wrapper
     pp_wr,
     progb,
     ps_perph_rstn,
-    reg2port,
-    rxd_232,
-    txd_232);
+    reg2port);
   inout [14:0]DDR_addr;
   inout [2:0]DDR_ba;
   inout DDR_cas_n;
@@ -105,6 +117,20 @@ module design_1_wrapper
   output SPI0_SCLK_O;
   input UART_1_rxd;
   output UART_1_txd;
+  output UART_CPLD_baudoutn;
+  input UART_CPLD_ctsn;
+  input UART_CPLD_dcdn;
+  output UART_CPLD_ddis;
+  input UART_CPLD_dsrn;
+  output UART_CPLD_dtrn;
+  output UART_CPLD_out1n;
+  output UART_CPLD_out2n;
+  input UART_CPLD_ri;
+  output UART_CPLD_rtsn;
+  input UART_CPLD_rxd;
+  output UART_CPLD_rxrdyn;
+  output UART_CPLD_txd;
+  output UART_CPLD_txrdyn;
   input [31:0]bus_analyze_axis_tdata;
   input bus_analyze_axis_tlast;
   output bus_analyze_axis_tready;
@@ -148,8 +174,6 @@ module design_1_wrapper
   output [0:0]progb;
   output [0:0]ps_perph_rstn;
   output [127:0]reg2port;
-  input rxd_232;
-  output txd_232;
 
   wire [14:0]DDR_addr;
   wire [2:0]DDR_ba;
@@ -176,6 +200,20 @@ module design_1_wrapper
   wire SPI0_SCLK_O;
   wire UART_1_rxd;
   wire UART_1_txd;
+  wire UART_CPLD_baudoutn;
+  wire UART_CPLD_ctsn;
+  wire UART_CPLD_dcdn;
+  wire UART_CPLD_ddis;
+  wire UART_CPLD_dsrn;
+  wire UART_CPLD_dtrn;
+  wire UART_CPLD_out1n;
+  wire UART_CPLD_out2n;
+  wire UART_CPLD_ri;
+  wire UART_CPLD_rtsn;
+  wire UART_CPLD_rxd;
+  wire UART_CPLD_rxrdyn;
+  wire UART_CPLD_txd;
+  wire UART_CPLD_txrdyn;
   wire [31:0]bus_analyze_axis_tdata;
   wire bus_analyze_axis_tlast;
   wire bus_analyze_axis_tready;
@@ -369,8 +407,6 @@ module design_1_wrapper
   wire [0:0]progb;
   wire [0:0]ps_perph_rstn;
   wire [127:0]reg2port;
-  wire rxd_232;
-  wire txd_232;
 
   design_1 design_1_i
        (.DDR_addr(DDR_addr),
@@ -398,6 +434,20 @@ module design_1_wrapper
         .SPI0_SCLK_O(SPI0_SCLK_O),
         .UART_1_rxd(UART_1_rxd),
         .UART_1_txd(UART_1_txd),
+        .UART_CPLD_baudoutn(UART_CPLD_baudoutn),
+        .UART_CPLD_ctsn(UART_CPLD_ctsn),
+        .UART_CPLD_dcdn(UART_CPLD_dcdn),
+        .UART_CPLD_ddis(UART_CPLD_ddis),
+        .UART_CPLD_dsrn(UART_CPLD_dsrn),
+        .UART_CPLD_dtrn(UART_CPLD_dtrn),
+        .UART_CPLD_out1n(UART_CPLD_out1n),
+        .UART_CPLD_out2n(UART_CPLD_out2n),
+        .UART_CPLD_ri(UART_CPLD_ri),
+        .UART_CPLD_rtsn(UART_CPLD_rtsn),
+        .UART_CPLD_rxd(UART_CPLD_rxd),
+        .UART_CPLD_rxrdyn(UART_CPLD_rxrdyn),
+        .UART_CPLD_txd(UART_CPLD_txd),
+        .UART_CPLD_txrdyn(UART_CPLD_txrdyn),
         .bus_analyze_axis_tdata(bus_analyze_axis_tdata),
         .bus_analyze_axis_tlast(bus_analyze_axis_tlast),
         .bus_analyze_axis_tready(bus_analyze_axis_tready),
@@ -444,9 +494,7 @@ module design_1_wrapper
         .pp_wr(pp_wr),
         .progb(progb),
         .ps_perph_rstn(ps_perph_rstn),
-        .reg2port(reg2port),
-        .rxd_232(rxd_232),
-        .txd_232(txd_232));
+        .reg2port(reg2port));
   IOBUF gpio_rtl_0_tri_iobuf_0
        (.I(gpio_rtl_0_tri_o_0),
         .IO(gpio_rtl_0_tri_io[0]),
