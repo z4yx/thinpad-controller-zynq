@@ -8,6 +8,9 @@
 `ifndef __THINPADNG_ZYNQ_TOP_V__
 `define __THINPADNG_ZYNQ_TOP_V__
 
+`define HS_DIFF_IN
+//`define EN_CPLD_UART
+
 `default_nettype none
 
 `timescale 1ns/1ns
@@ -15,14 +18,18 @@
 module thinpadNG_zynq_top(/*autoarg*/
     //Inputs
     UART_1_rxd, done, initb, 
+`ifdef EN_CPLD_UART
     cpld_emu_rdn, cpld_emu_wrn,
+`endif
 
     //Outputs
     SPI0_MOSI_O, SPI0_SCLK_O, UART_1_txd, 
     clk_out1, clk_out2, emc_rtl_addr_wrap, emc_rtl_ben_wrap, 
     emc_rtl_ce_n_wrap, emc_rtl_oen_wrap, emc_rtl_wen_wrap, 
     progb, 
+`ifdef EN_CPLD_UART
     cpld_emu_tbre, cpld_emu_tsre, cpld_emu_dataready,
+`endif
 `ifdef HS_DIFF_IN
     clkin1_p,  clkin1_n, datain1_p, datain1_n,
 `endif
@@ -81,11 +88,13 @@ module thinpadNG_zynq_top(/*autoarg*/
     input clkin1_p,  clkin1_n;            // lvds channel 1 clock input
     input [3:0]   datain1_p, datain1_n;           // lvds channel 1 data inputs
 `endif
+`ifdef EN_CPLD_UART
     input cpld_emu_rdn;
     input cpld_emu_wrn;
     output cpld_emu_dataready;
     output cpld_emu_tbre;
     output cpld_emu_tsre;
+`endif
 
     wire [14:0]DDR_addr;
     wire [2:0]DDR_ba;
@@ -140,12 +149,14 @@ module thinpadNG_zynq_top(/*autoarg*/
     wire clkin1_p,  clkin1_n;            // lvds channel 1 clock input
     wire [3:0]   datain1_p, datain1_n;           // lvds channel 1 data inputs
 `endif
+`ifdef EN_CPLD_UART
     wire cpld_emu_rdn;
     wire cpld_emu_wrn;
     wire cpld_emu_dataready;
     wire cpld_emu_tbre;
     wire cpld_emu_tsre;
-    wire cpld_emu_to16550;
+`endif
+    wire cpld_emu_to16550 = 1'b1;
     wire cpld_emu_from16550;
     wire [7:0]cpld_emu_data_o;
     wire [127:0]reg2port;
@@ -153,6 +164,7 @@ module thinpadNG_zynq_top(/*autoarg*/
     wire la_fifo_aclk;
     wire la_fifo_aresetn;
     wire la_rst_n;
+    wire la_rx_rst_n;
     wire [255:0]la_storage_axis_tdata;
     wire la_storage_axis_tlast;
     wire la_storage_axis_tready;
@@ -365,11 +377,11 @@ module thinpadNG_zynq_top(/*autoarg*/
 
     );
 
-    wire[2:0]  lock_level = 3'h0;
-    wire sampler_idle = 1'b0;
+    wire[2:0]  lock_level;
+    wire sampler_idle;
     wire la_storage_overflow;
     wire[255:0] received_data;
-    wire received_update = 1'b0;
+    wire received_update;
 
     wire[48+3-1:0] acq_data_out;
     wire acq_data_valid;
@@ -391,9 +403,13 @@ module thinpadNG_zynq_top(/*autoarg*/
         .raw_signal_update(received_update)
     );
  `endif
-
+    signal_sync #(.SYNC_CYCLE(2)) la_rx_rst_sync(
+        .clk(la_fifo_aclk),
+        .data_in(la_rst_n),
+        .data_out(la_rx_rst_n)
+    );
     la_storage_pack LApack(
-        .rst_n                 (la_rst_n),
+        .rst_n                 (la_rx_rst_n),
         .la_fifo_aresetn       (la_fifo_aresetn),
         .la_storage_axis_tdata (la_storage_axis_tdata),
         .la_storage_axis_tlast (la_storage_axis_tlast),
@@ -412,6 +428,8 @@ module thinpadNG_zynq_top(/*autoarg*/
     assign status_reg = {27'b0,sampler_idle,la_storage_overflow,lock_level};
     assign port2reg = {received_data, status_reg};
 
+    
+`ifdef EN_CPLD_UART
     /*
     wire cpld_clk, cpld_locked;
     clk_wiz_0 uart_clk(.clk_in1(clk_out1),.clk_out1(cpld_clk),.resetn(ps_perph_rstn),.locked(cpld_locked));
@@ -432,14 +450,10 @@ module thinpadNG_zynq_top(/*autoarg*/
         .sdo(cpld_emu_to16550)
     );
     */
+    
 
     PULLUP pullup_wrn (.O(cpld_emu_wrn));
     PULLUP pullup_rdn (.O(cpld_emu_rdn));
-
-    vio_0 uart_vio(
-        .clk(clk_out2),
-        .probe_in0({1'b0, cpld_emu_wrn, cpld_emu_rdn, cpld_emu_tsre, cpld_emu_tbre, cpld_emu_dataready})
-    );
 
     reg [7:0] TxD_data,TxD_data0,TxD_data1;
     reg [4:0] cpld_emu_wrn_sync;
@@ -484,6 +498,8 @@ module thinpadNG_zynq_top(/*autoarg*/
             .TxD_data(TxD_data)
         );
 
+`endif
+        
 endmodule
 
 `default_nettype wire

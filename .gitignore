@@ -2,3 +2,7 @@ ThinpadNG_Zynq7.tmp/
 ip_upgrade.log
 ipshared/
 .Xil/
+*_netlist.*
+*_stub.*
+*.dcp
+*.hwh
