@@ -321,7 +321,7 @@ module thinpadNG_zynq_top(/*autoarg*/
     end
     
     wire [7:0] ram_bus_mux;
-    reg cpld_emu_rdn_sync;
+    wire cpld_oe;
     generate
         
         for (i = 0; i < ADDR_PINS_AMOUNT; i = i + 1) begin : gen2
@@ -334,8 +334,8 @@ module thinpadNG_zynq_top(/*autoarg*/
         
         for (i = 0; i < IO_PINS_AMOUNT; i = i + 1) begin : gen4
             if(i < 8)begin
-                assign ram_bus_mux[i] = ~cpld_emu_rdn_sync ? cpld_emu_data_o[i] : emc_rtl_dq_o[i];
-                assign emc_rtl_dq_io[i] = (~cpld_emu_rdn_sync | (io_enable & ~emc_rtl_dq_t[i])) ? ram_bus_mux[i] : 1'bz;
+                assign ram_bus_mux[i] = cpld_oe ? cpld_emu_data_o[i] : emc_rtl_dq_o[i];
+                assign emc_rtl_dq_io[i] = (cpld_oe | (io_enable & ~emc_rtl_dq_t[i])) ? ram_bus_mux[i] : 1'bz;
             end else begin
                 assign emc_rtl_dq_io[i] = (io_enable & ~emc_rtl_dq_t[i]) ? emc_rtl_dq_o[i] : 1'bz; 
             end
@@ -457,7 +457,10 @@ module thinpadNG_zynq_top(/*autoarg*/
 
     reg [7:0] TxD_data,TxD_data0,TxD_data1;
     reg [4:0] cpld_emu_wrn_sync;
+    reg cpld_emu_rdn_sync;
     reg TxD_start,tbre;
+    
+    assign cpld_oe = ~cpld_emu_rdn_sync;
 
     always @(posedge clk_out2) begin : proc_Tx
         TxD_data0 <= emc_rtl_dq_i[7:0];
