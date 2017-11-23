@@ -19,7 +19,7 @@ parameter WRITE_CYCLE = 2;
 `define STATE_W_CYCLE 1
 
 reg [2:0] state;
-reg [3:0] cnt_write_cyc;
+reg [$clog2(WRITE_CYCLE):0] cnt_write_cyc;
 wire write_en;
 
 assign write_en = ~wr_n & ~ce_n;

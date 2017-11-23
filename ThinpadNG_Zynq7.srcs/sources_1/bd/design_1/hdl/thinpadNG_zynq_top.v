@@ -357,7 +357,8 @@ module thinpadNG_zynq_top(/*autoarg*/
     assign bus_analyze_axis_tlast = 0;
     */
     bus_analyze bus_analyzer(
-        .clk(bus_analyze_clk),
+        .clk(bus_analyze_clk),     //100M
+        .clk_frontend(clk_serdes), //200M
         .rst_n(bus_analyze_rst_n),
     
         .ram_addr_in(emc_rtl_addr_wrap),
@@ -377,6 +378,7 @@ module thinpadNG_zynq_top(/*autoarg*/
 
     );
 
+    wire la_exist;
     wire[2:0]  lock_level;
     wire sampler_idle;
     wire la_storage_overflow;
@@ -387,6 +389,7 @@ module thinpadNG_zynq_top(/*autoarg*/
     wire acq_data_valid;
 
 `ifdef HS_DIFF_IN
+    assign la_exist = 1'b1;
     la_receiver_0 LA(
         .refclkin (clk_serdes),
         .reset    (~la_rst_n),
@@ -425,7 +428,7 @@ module thinpadNG_zynq_top(/*autoarg*/
         .clk                   (la_fifo_aclk)
     );
 
-    assign status_reg = {27'b0,sampler_idle,la_storage_overflow,lock_level};
+    assign status_reg = {26'b0,la_exist,sampler_idle,la_storage_overflow,lock_level};
     assign port2reg = {received_data, status_reg};
 
     

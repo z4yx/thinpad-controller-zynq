@@ -300,7 +300,8 @@ set_property PACKAGE_PIN L17 [get_ports {emc_rtl_ben_wrap[3]}]
 set_property IOSTANDARD LVCMOS33 [get_ports clk_out1]
 set_property IOSTANDARD LVCMOS33 [get_ports clk_out2]
 
-set_property -dict {IOSTANDARD LVCMOS33 PULLUP true} [get_ports UART_1_rxd]
+set_property IOSTANDARD LVCMOS33 [get_ports UART_1_rxd]
+set_property PULLUP true [get_ports UART_1_rxd]
 set_property IOSTANDARD LVCMOS33 [get_ports UART_1_txd]
 
 set_property IOSTANDARD LVCMOS33 [get_ports SPI0_MOSI_O]
@@ -317,5 +318,4 @@ set_false_path -to [get_pins block_design/design_1_i/axi_uart16550_0/U0/XUART_I_
 set_false_path -to [get_pins {la_rx_rst_sync/data_buf_reg[0][0]/D}]
 set_false_path -to [get_pins {LApack/sync_cnt/data_buf_reg[0][*]/D}]
 set_false_path -to [get_pins {LApack/sync_control/data_buf_reg[0][*]/D}]
-
 

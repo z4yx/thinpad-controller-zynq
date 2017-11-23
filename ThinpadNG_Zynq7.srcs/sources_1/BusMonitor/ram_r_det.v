@@ -19,7 +19,7 @@ parameter READ_CYCLE = 2;
 `define STATE_R_CYCLE 1
 
 reg [2:0] state;
-reg [3:0] cnt_read_cyc;
+reg [$clog2(READ_CYCLE):0] cnt_read_cyc;
 wire read_en;
 
 assign read_en = ~rd_n & ~ce_n;
