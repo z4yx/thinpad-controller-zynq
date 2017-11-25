@@ -155,8 +155,10 @@ module thinpadNG_zynq_top(/*autoarg*/
     wire cpld_emu_dataready;
     wire cpld_emu_tbre;
     wire cpld_emu_tsre;
-`endif
+    wire cpld_emu_to16550;
+`else
     wire cpld_emu_to16550 = 1'b1;
+`endif
     wire cpld_emu_from16550;
     wire [7:0]cpld_emu_data_o;
     wire [127:0]reg2port;
@@ -459,38 +461,65 @@ module thinpadNG_zynq_top(/*autoarg*/
     PULLUP pullup_rdn (.O(cpld_emu_rdn));
 
     reg [7:0] TxD_data,TxD_data0,TxD_data1;
-    reg [4:0] cpld_emu_wrn_sync;
-    reg cpld_emu_rdn_sync;
-    reg TxD_start,tbre;
+    reg [2:0] cpld_emu_wrn_sync;
+    reg [2:0] cpld_emu_rdn_sync;
+    reg wrn_rise,tbre;
+    reg rdn_fall;
     
-    assign cpld_oe = ~cpld_emu_rdn_sync;
+    assign cpld_oe = ~cpld_emu_rdn;
 
-    always @(posedge clk_out2) begin : proc_Tx
+    always @(posedge bus_analyze_clk) begin : proc_Tx
         TxD_data0 <= emc_rtl_dq_i[7:0];
         TxD_data1 <= TxD_data0;
 
-        cpld_emu_rdn_sync <= cpld_emu_rdn;
-        cpld_emu_wrn_sync <= {cpld_emu_wrn_sync[3:0],cpld_emu_wrn};
+        cpld_emu_rdn_sync <= {cpld_emu_rdn_sync[1:0],cpld_emu_rdn};
+        cpld_emu_wrn_sync <= {cpld_emu_wrn_sync[1:0],cpld_emu_wrn};
 
         if(~cpld_emu_wrn_sync[1] & cpld_emu_wrn_sync[2])
             TxD_data <= TxD_data1;
-        TxD_start <= cpld_emu_wrn_sync[1] & ~cpld_emu_wrn_sync[2];
+        wrn_rise <= cpld_emu_wrn_sync[1] & ~cpld_emu_wrn_sync[2];
+        rdn_fall <= ~cpld_emu_rdn_sync[1] & cpld_emu_rdn_sync[2];
+    end
+
+    reg [7:0] TxD_data_sync;
+    wire tx_en, rx_ack;
+
+    always @(posedge clk_out2) begin
+        TxD_data_sync <= TxD_data;
     end
 
     always @(posedge clk_out2 or negedge cpld_emu_wrn) begin : proc_tbre
         if(~cpld_emu_wrn) begin
             tbre <= 0;
-        end else begin
-            tbre <= &cpld_emu_wrn_sync;
+        end else if(!cpld_emu_tsre) begin
+            tbre <= 1;
         end
     end
 
     assign cpld_emu_tbre = tbre;
 
+    flag_sync tx_flag(
+        .clkA        (bus_analyze_clk),
+        .clkB        (clk_out2),
+        .FlagIn_clkA (wrn_rise),
+        .FlagOut_clkB(tx_en),
+        .a_rst_n     (ps_perph_rstn),
+        .b_rst_n     (ps_perph_rstn)
+    );
+
+    flag_sync rx_flag(
+        .clkA        (bus_analyze_clk),
+        .clkB        (clk_out2),
+        .FlagIn_clkA (rdn_fall),
+        .FlagOut_clkB(rx_ack),
+        .a_rst_n     (ps_perph_rstn),
+        .b_rst_n     (ps_perph_rstn)
+    );
+
     async_receiver #(.ClkFrequency(11059200),.Baud(9600))
         uart_r(
             .clk(clk_out2),
-            .rdn(cpld_emu_rdn_sync),
+            .rdn(~rx_ack),
             .RxD(cpld_emu_from16550),
             .RxD_data_ready(cpld_emu_dataready),
             .RxD_data(cpld_emu_data_o)
@@ -500,8 +529,8 @@ module thinpadNG_zynq_top(/*autoarg*/
             .clk(clk_out2),
             .tsre(cpld_emu_tsre),
             .TxD(cpld_emu_to16550),
-            .TxD_start(TxD_start),
-            .TxD_data(TxD_data)
+            .TxD_start(tx_en),
+            .TxD_data(TxD_data_sync)
         );
 
 `endif

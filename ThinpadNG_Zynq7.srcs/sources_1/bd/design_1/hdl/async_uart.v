@@ -104,7 +104,7 @@ generate
 endgenerate
 
 ////////////////////////////////
-(* mark_debug = "true" *) reg [3:0] RxD_state = 0;
+reg [3:0] RxD_state = 0;
 
 `ifdef SIMULATION
 wire RxD_bit = RxD;
@@ -120,7 +120,7 @@ always @(posedge clk) if(OversamplingTick) RxD_sync <= {RxD_sync[0], RxD};
 
 // and filter it
 reg [1:0] Filter_cnt = 2'b11;
-(* mark_debug = "true" *) reg RxD_bit = 1'b1;
+reg RxD_bit = 1'b1;
 
 always @(posedge clk)
 if(OversamplingTick)
@@ -139,7 +139,7 @@ function integer log2(input integer v); begin log2=0; while(v>>log2) log2=log2+1
 localparam l2o = log2(Oversampling);
 reg [l2o-2:0] OversamplingCnt = 0;
 always @(posedge clk) if(OversamplingTick) OversamplingCnt <= (RxD_state==0) ? 1'd0 : OversamplingCnt + 1'd1;
-(* mark_debug = "true" *) wire sampleNow = OversamplingTick && (OversamplingCnt==Oversampling/2-1);
+wire sampleNow = OversamplingTick && (OversamplingCnt==Oversampling/2-1);
 `endif
 
 // now we can accumulate the RxD bits in a shift-register
