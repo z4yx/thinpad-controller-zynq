@@ -1,7 +1,7 @@
 //Copyright 1986-2017 Xilinx, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2017.1 (lin64) Build 1846317 Fri Apr 14 18:54:47 MDT 2017
-//Date        : Tue Nov 21 20:19:03 2017
+//Date        : Sat Dec  2 15:13:35 2017
 //Host        : nuc6i7 running 64-bit Ubuntu 16.04.2 LTS
 //Command     : generate_target design_1_wrapper.bd
 //Design      : design_1_wrapper
@@ -91,7 +91,18 @@ module design_1_wrapper
     pp_wr,
     progb,
     ps_perph_rstn,
-    reg2port);
+    reg2port,
+    vid_in_clk,
+    vid_io_in_active_video,
+    vid_io_in_data,
+    vid_io_in_field,
+    vid_io_in_hblank,
+    vid_io_in_hsync,
+    vid_io_in_reset,
+    vid_io_in_vblank,
+    vid_io_in_vsync,
+    vid_overflow,
+    vtc_locked);
   inout [14:0]DDR_addr;
   inout [2:0]DDR_ba;
   inout DDR_cas_n;
@@ -174,6 +185,17 @@ module design_1_wrapper
   output [0:0]progb;
   output [0:0]ps_perph_rstn;
   output [127:0]reg2port;
+  input vid_in_clk;
+  input vid_io_in_active_video;
+  input [23:0]vid_io_in_data;
+  input vid_io_in_field;
+  input vid_io_in_hblank;
+  input vid_io_in_hsync;
+  input vid_io_in_reset;
+  input vid_io_in_vblank;
+  input vid_io_in_vsync;
+  output vid_overflow;
+  output [0:0]vtc_locked;
 
   wire [14:0]DDR_addr;
   wire [2:0]DDR_ba;
@@ -407,6 +429,17 @@ module design_1_wrapper
   wire [0:0]progb;
   wire [0:0]ps_perph_rstn;
   wire [127:0]reg2port;
+  wire vid_in_clk;
+  wire vid_io_in_active_video;
+  wire [23:0]vid_io_in_data;
+  wire vid_io_in_field;
+  wire vid_io_in_hblank;
+  wire vid_io_in_hsync;
+  wire vid_io_in_reset;
+  wire vid_io_in_vblank;
+  wire vid_io_in_vsync;
+  wire vid_overflow;
+  wire [0:0]vtc_locked;
 
   design_1 design_1_i
        (.DDR_addr(DDR_addr),
@@ -494,7 +527,18 @@ module design_1_wrapper
         .pp_wr(pp_wr),
         .progb(progb),
         .ps_perph_rstn(ps_perph_rstn),
-        .reg2port(reg2port));
+        .reg2port(reg2port),
+        .vid_in_clk(vid_in_clk),
+        .vid_io_in_active_video(vid_io_in_active_video),
+        .vid_io_in_data(vid_io_in_data),
+        .vid_io_in_field(vid_io_in_field),
+        .vid_io_in_hblank(vid_io_in_hblank),
+        .vid_io_in_hsync(vid_io_in_hsync),
+        .vid_io_in_reset(vid_io_in_reset),
+        .vid_io_in_vblank(vid_io_in_vblank),
+        .vid_io_in_vsync(vid_io_in_vsync),
+        .vid_overflow(vid_overflow),
+        .vtc_locked(vtc_locked));
   IOBUF gpio_rtl_0_tri_iobuf_0
        (.I(gpio_rtl_0_tri_o_0),
         .IO(gpio_rtl_0_tri_io[0]),

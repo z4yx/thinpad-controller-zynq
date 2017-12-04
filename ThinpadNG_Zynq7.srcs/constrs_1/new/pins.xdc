@@ -14,6 +14,21 @@ set_property PACKAGE_PIN T19 [get_ports {progb[0]}]
 set_property PACKAGE_PIN N17 [get_ports initb]
 set_property PACKAGE_PIN P18 [get_ports done]
 
+set_property -dict {PACKAGE_PIN Y8 IOSTANDARD LVCMOS33} [get_ports dvi_clk]
+set_property CLOCK_DEDICATED_ROUTE FALSE [get_nets {dvi_clk_IBUF}]
+
+set_property -dict {PACKAGE_PIN AA16 IOSTANDARD LVCMOS33} [get_ports dvi_hs]
+set_property -dict {PACKAGE_PIN AB16 IOSTANDARD LVCMOS33} [get_ports dvi_vs]
+set_property -dict {PACKAGE_PIN AB5 IOSTANDARD LVCMOS33} [get_ports dvi_de]
+set_property -dict {PACKAGE_PIN AB7 IOSTANDARD LVCMOS33} [get_ports dvi_d[0]]
+set_property -dict {PACKAGE_PIN AB9 IOSTANDARD LVCMOS33} [get_ports dvi_d[1]]
+set_property -dict {PACKAGE_PIN U10 IOSTANDARD LVCMOS33} [get_ports dvi_d[2]]
+set_property -dict {PACKAGE_PIN W6 IOSTANDARD LVCMOS33} [get_ports dvi_d[3]]
+set_property -dict {PACKAGE_PIN W7 IOSTANDARD LVCMOS33} [get_ports dvi_d[4]]
+set_property -dict {PACKAGE_PIN W8 IOSTANDARD LVCMOS33} [get_ports dvi_d[5]]
+set_property -dict {PACKAGE_PIN U11 IOSTANDARD LVCMOS33} [get_ports dvi_d[6]]
+set_property -dict {PACKAGE_PIN AB10 IOSTANDARD LVCMOS33} [get_ports dvi_d[7]]
+
 #CPLD
 set_property -dict {PACKAGE_PIN N19 IOSTANDARD LVCMOS33} [get_ports cpld_emu_wrn]
 set_property -dict {PACKAGE_PIN V14 IOSTANDARD LVCMOS33} [get_ports cpld_emu_rdn]

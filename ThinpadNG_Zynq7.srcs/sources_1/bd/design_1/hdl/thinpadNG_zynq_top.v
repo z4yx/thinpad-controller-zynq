@@ -18,6 +18,7 @@
 module thinpadNG_zynq_top(/*autoarg*/
     //Inputs
     UART_1_rxd, done, initb, 
+    dvi_clk, dvi_hs, dvi_vs, dvi_de, dvi_d,
 `ifdef EN_CPLD_UART
     cpld_emu_rdn, cpld_emu_wrn,
 `endif
@@ -84,6 +85,9 @@ module thinpadNG_zynq_top(/*autoarg*/
     inout [31:0]gpio_rtl_tri_io;
     input initb;
     output [0:0]progb;
+    input dvi_clk;
+    input dvi_de,dvi_vs,dvi_hs;
+    input [7:0]dvi_d;
 `ifdef HS_DIFF_IN
     input clkin1_p,  clkin1_n;            // lvds channel 1 clock input
     input [3:0]   datain1_p, datain1_n;           // lvds channel 1 data inputs
@@ -145,6 +149,8 @@ module thinpadNG_zynq_top(/*autoarg*/
     wire [31:0]gpio_rtl_tri_io;
     wire initb;
     wire [0:0]progb;
+    wire dvi_clk;
+    wire dvi_de,dvi_vs,dvi_hs;
 `ifdef HS_DIFF_IN
     wire clkin1_p,  clkin1_n;            // lvds channel 1 clock input
     wire [3:0]   datain1_p, datain1_n;           // lvds channel 1 data inputs
@@ -179,6 +185,14 @@ module thinpadNG_zynq_top(/*autoarg*/
     wire [23:0]pp_data_o;
     wire [23:0]pp_data_t;
     wire pp_rd, pp_rs, pp_wr;
+
+    wire vid_overflow, vtc_locked;
+    wire vid_in_clk;
+    (* IOB = "true" *) reg [23:0]vid_io_in_data;
+    (* IOB = "true" *) reg vid_io_in_hsync;
+    (* IOB = "true" *) reg vid_io_in_vsync;
+    (* IOB = "true" *) reg vid_io_in_active_video;
+    reg vid_io_in_reset;
 
     design_1_wrapper block_design(/*autoinst*/
     .DDR_addr                   (DDR_addr[14:0]                 ), // inout
@@ -245,6 +259,14 @@ module thinpadNG_zynq_top(/*autoarg*/
     .pp_rd                  (pp_rd),
     .pp_rs                  (pp_rs),
     .pp_wr                  (pp_wr),
+    .vid_overflow           (vid_overflow),
+    .vtc_locked             (vtc_locked),
+    .vid_in_clk             (vid_in_clk),
+    .vid_io_in_data         (vid_io_in_data),
+    .vid_io_in_hsync        (vid_io_in_hsync),
+    .vid_io_in_vsync        (vid_io_in_vsync),
+    .vid_io_in_active_video (vid_io_in_active_video),
+    .vid_io_in_reset        (vid_io_in_reset),
     .initb                      (initb                          ), // input
     .progb                      (progb[0:0]                     ), // output
     .reg2port                   (reg2port[127:0]                ), // output
@@ -265,6 +287,7 @@ module thinpadNG_zynq_top(/*autoarg*/
     parameter IO_PINS_AMOUNT = 10'd32;
     genvar i;
 
+    reg vid_reset_sync,vid_reset;
     reg io_enable;
     reg io_dir;
     reg bus_analyze_start;
@@ -317,7 +340,8 @@ module thinpadNG_zynq_top(/*autoarg*/
         /* Bus analyzer register */
         bus_analyze_sample_cnt <= reg2port[32+20:32];
         bus_analyze_start <= reg2port[32+31]; //MSB
-        /* Memory R/W control register */
+        /* I/O control register */
+        vid_reset <= reg2port[1]; // active high
         io_enable <= reg2port[0];  // 1 for enable
         io_dir <= (~emc_rtl_wen & emc_rtl_oen) ? 1'b1 : 1'b0; // 1 for output
     end
@@ -348,6 +372,20 @@ module thinpadNG_zynq_top(/*autoarg*/
     assign emc_rtl_ce_n_wrap = io_enable ? emc_rtl_ce_n : 1'bz; 
     assign emc_rtl_oen_wrap = io_enable ? emc_rtl_oen : 1'bz; 
     assign emc_rtl_wen_wrap = io_enable ? emc_rtl_wen : 1'bz; 
+
+    assign vid_in_clk = ~dvi_clk;
+    always @(negedge dvi_clk) begin : proc_vid
+        vid_io_in_active_video <= dvi_de;
+        vid_io_in_vsync <= dvi_vs;
+        vid_io_in_hsync <= dvi_hs;
+        vid_io_in_data <= {
+            dvi_d[7:5], 5'h0, //R
+            dvi_d[1:0], 6'h0, //B
+            dvi_d[4:2], 5'h0  //G
+        };
+        vid_io_in_reset <= vid_reset_sync;
+        vid_reset_sync <= vid_reset;
+    end
     
     /*
     reg [31:0] test_data;
@@ -430,7 +468,7 @@ module thinpadNG_zynq_top(/*autoarg*/
         .clk                   (la_fifo_aclk)
     );
 
-    assign status_reg = {26'b0,la_exist,sampler_idle,la_storage_overflow,lock_level};
+    assign status_reg = {24'b0,vtc_locked,vid_overflow,la_exist,sampler_idle,la_storage_overflow,lock_level};
     assign port2reg = {received_data, status_reg};
 
     
