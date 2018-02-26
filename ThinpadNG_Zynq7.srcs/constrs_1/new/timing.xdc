@@ -2,6 +2,8 @@ create_clock -period 6.667 -name dvi_clk -add [get_ports dvi_clk]
 set_input_delay -clock [get_clocks dvi_clk] -max -add_delay  [expr 6.667 - 1.2] [get_ports {dvi_d[*] dvi_hs dvi_de dvi_vs}] -clock_fall
 set_input_delay -clock [get_clocks dvi_clk] -min -add_delay  1.3 [get_ports {dvi_d[*] dvi_hs dvi_de dvi_vs}] -clock_fall
 
+set_false_path -to [get_ports gpio_rtl_1_tri_io[*] gpio_rtl_0_tri_io[*]]
+set_false_path -from [get_ports gpio_rtl_tri_io[*] ]
 
 set_false_path -to [get_pins {block_design/design_1_i/axi_register_0/inst/axi_register_v1_0_S00_AXI_inst/port2reg_sync1_reg[*]/D}]
 set_false_path -to [get_pins {uart_r/RxD_sync_reg[0]/D}]

@@ -8,7 +8,7 @@
 `ifndef __THINPADNG_ZYNQ_TOP_V__
 `define __THINPADNG_ZYNQ_TOP_V__
 
-//`define HS_DIFF_IN
+`define HS_DIFF_IN
 `define EN_CPLD_UART
 
 `default_nettype none
