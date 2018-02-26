@@ -1,4 +1,4 @@
-// (c) Copyright 1995-2017 Xilinx, Inc. All rights reserved.
+// (c) Copyright 1995-2018 Xilinx, Inc. All rights reserved.
 // 
 // This file contains confidential and proprietary information
 // of Xilinx, Inc. and is protected under U.S. and
@@ -48,7 +48,7 @@
 
 
 // IP VLNV: xilinx.com:ip:axis_data_fifo:1.1
-// IP Revision: 13
+// IP Revision: 15
 
 `timescale 1ns/1ps
 
@@ -69,8 +69,10 @@ module design_1_axis_data_fifo_0_0 (
   axis_rd_data_count
 );
 
+(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME S_RSTIF, POLARITY ACTIVE_LOW, TYPE INTERCONNECT" *)
 (* X_INTERFACE_INFO = "xilinx.com:signal:reset:1.0 S_RSTIF RST" *)
 input wire s_axis_aresetn;
+(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME S_CLKIF, FREQ_HZ 100000000, PHASE 0.000, CLK_DOMAIN design_1_ps7_0_0_FCLK_CLK1, ASSOCIATED_BUSIF S_AXIS:M_AXIS, ASSOCIATED_RESET s_axis_aresetn, ASSOCIATED_CLKEN s_axis_aclken" *)
 (* X_INTERFACE_INFO = "xilinx.com:signal:clock:1.0 S_CLKIF CLK" *)
 input wire s_axis_aclk;
 (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 S_AXIS TVALID" *)
@@ -79,6 +81,7 @@ input wire s_axis_tvalid;
 output wire s_axis_tready;
 (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 S_AXIS TDATA" *)
 input wire [31 : 0] s_axis_tdata;
+(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME S_AXIS, TDATA_NUM_BYTES 4, TDEST_WIDTH 0, TID_WIDTH 0, TUSER_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 0, HAS_TKEEP 0, HAS_TLAST 1, FREQ_HZ 100000000, PHASE 0.000, CLK_DOMAIN design_1_ps7_0_0_FCLK_CLK1, LAYERED_METADATA undef" *)
 (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 S_AXIS TLAST" *)
 input wire s_axis_tlast;
 (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 M_AXIS TVALID" *)
@@ -87,13 +90,14 @@ output wire m_axis_tvalid;
 input wire m_axis_tready;
 (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 M_AXIS TDATA" *)
 output wire [31 : 0] m_axis_tdata;
+(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME M_AXIS, TDATA_NUM_BYTES 4, TDEST_WIDTH 0, TID_WIDTH 0, TUSER_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 0, HAS_TKEEP 0, HAS_TLAST 1, FREQ_HZ 100000000, PHASE 0.000, CLK_DOMAIN design_1_ps7_0_0_FCLK_CLK1, LAYERED_METADATA undef" *)
 (* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 M_AXIS TLAST" *)
 output wire m_axis_tlast;
 output wire [31 : 0] axis_data_count;
 output wire [31 : 0] axis_wr_data_count;
 output wire [31 : 0] axis_rd_data_count;
 
-  axis_data_fifo_v1_1_13_axis_data_fifo #(
+  axis_data_fifo_v1_1_15_axis_data_fifo #(
     .C_FAMILY("zynq"),
     .C_AXIS_TDATA_WIDTH(32),
     .C_AXIS_TID_WIDTH(1),

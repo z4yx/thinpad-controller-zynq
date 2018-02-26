@@ -44,9 +44,13 @@
 # 
 # THIS COPYRIGHT NOTICE AND DISCLAIMER MUST BE RETAINED AS
 # PART OF THIS FILE AT ALL TIMES.
+
+
+set_false_path -to [get_pins -hier *cdc_to*/D]
+
 ## INFO: Level CDC Crossing in AXI DMA
   set_false_path -to [get_pins -hier *cdc_to*/D]
 ##  set_false_path -to [get_pins -hierarchical -filter {NAME =~*/*rstblk*/*CLR}]
-  set_false_path -from [get_cells -hierarchical -filter {NAME =~*/*rstblk*/*rst_reg_reg[*]}]
-  set_false_path -to [get_pins -hierarchical -filter {NAME =~*/*rstblk*/*PRE}]
+#  set_false_path -from [get_cells -hierarchical -filter {NAME =~*/*rstblk*/*rst_reg_reg[*]}]
+#  set_false_path -to [get_pins -hierarchical -filter {NAME =~*/*rstblk*/*PRE}]
 

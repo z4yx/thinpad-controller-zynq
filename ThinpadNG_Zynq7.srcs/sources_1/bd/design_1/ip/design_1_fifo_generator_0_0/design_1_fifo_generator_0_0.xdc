@@ -3,6 +3,7 @@
  
  
  
+
 ################################################################################
 # (c) Copyright 2009 - 2013 Xilinx, Inc. All rights reserved.
 # 
@@ -57,8 +58,6 @@
 #------------------------------------------------------------------------------#
 # Set false path on the asynchronous AXI reset port (s_aresetn) to the inputs of synchronizers
 
-  
-set_false_path -through [get_ports s_aresetn] -to [get_pins -of [get_cells -hier -filter name=~*rstblk*/*] -filter {REF_PIN_NAME == PRE}]  
 
 
 ################################################################################

@@ -1,4 +1,4 @@
--- (c) Copyright 1995-2017 Xilinx, Inc. All rights reserved.
+-- (c) Copyright 1995-2018 Xilinx, Inc. All rights reserved.
 -- 
 -- This file contains confidential and proprietary information
 -- of Xilinx, Inc. and is protected under U.S. and
@@ -47,14 +47,14 @@
 -- DO NOT MODIFY THIS FILE.
 
 -- IP VLNV: xilinx.com:ip:axi_emc:3.0
--- IP Revision: 12
+-- IP Revision: 14
 
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 USE ieee.numeric_std.ALL;
 
-LIBRARY axi_emc_v3_0_12;
-USE axi_emc_v3_0_12.axi_emc;
+LIBRARY axi_emc_v3_0_14;
+USE axi_emc_v3_0_14.axi_emc;
 
 ENTITY design_1_axi_emc_0_0 IS
   PORT (
@@ -297,61 +297,67 @@ ARCHITECTURE design_1_axi_emc_0_0_arch OF design_1_axi_emc_0_0 IS
     );
   END COMPONENT axi_emc;
   ATTRIBUTE X_INTERFACE_INFO : STRING;
-  ATTRIBUTE X_INTERFACE_INFO OF s_axi_aclk: SIGNAL IS "xilinx.com:signal:clock:1.0 aclk CLK";
-  ATTRIBUTE X_INTERFACE_INFO OF s_axi_aresetn: SIGNAL IS "xilinx.com:signal:reset:1.0 aresetn RST";
-  ATTRIBUTE X_INTERFACE_INFO OF rdclk: SIGNAL IS "xilinx.com:signal:clock:1.0 rdclk CLK";
-  ATTRIBUTE X_INTERFACE_INFO OF s_axi_mem_awid: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI_MEM AWID";
-  ATTRIBUTE X_INTERFACE_INFO OF s_axi_mem_awaddr: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI_MEM AWADDR";
-  ATTRIBUTE X_INTERFACE_INFO OF s_axi_mem_awlen: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI_MEM AWLEN";
-  ATTRIBUTE X_INTERFACE_INFO OF s_axi_mem_awsize: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI_MEM AWSIZE";
-  ATTRIBUTE X_INTERFACE_INFO OF s_axi_mem_awburst: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI_MEM AWBURST";
-  ATTRIBUTE X_INTERFACE_INFO OF s_axi_mem_awlock: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI_MEM AWLOCK";
-  ATTRIBUTE X_INTERFACE_INFO OF s_axi_mem_awcache: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI_MEM AWCACHE";
-  ATTRIBUTE X_INTERFACE_INFO OF s_axi_mem_awprot: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI_MEM AWPROT";
-  ATTRIBUTE X_INTERFACE_INFO OF s_axi_mem_awvalid: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI_MEM AWVALID";
-  ATTRIBUTE X_INTERFACE_INFO OF s_axi_mem_awready: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI_MEM AWREADY";
-  ATTRIBUTE X_INTERFACE_INFO OF s_axi_mem_wdata: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI_MEM WDATA";
-  ATTRIBUTE X_INTERFACE_INFO OF s_axi_mem_wstrb: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI_MEM WSTRB";
-  ATTRIBUTE X_INTERFACE_INFO OF s_axi_mem_wlast: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI_MEM WLAST";
-  ATTRIBUTE X_INTERFACE_INFO OF s_axi_mem_wvalid: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI_MEM WVALID";
-  ATTRIBUTE X_INTERFACE_INFO OF s_axi_mem_wready: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI_MEM WREADY";
-  ATTRIBUTE X_INTERFACE_INFO OF s_axi_mem_bid: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI_MEM BID";
-  ATTRIBUTE X_INTERFACE_INFO OF s_axi_mem_bresp: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI_MEM BRESP";
-  ATTRIBUTE X_INTERFACE_INFO OF s_axi_mem_bvalid: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI_MEM BVALID";
-  ATTRIBUTE X_INTERFACE_INFO OF s_axi_mem_bready: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI_MEM BREADY";
-  ATTRIBUTE X_INTERFACE_INFO OF s_axi_mem_arid: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI_MEM ARID";
-  ATTRIBUTE X_INTERFACE_INFO OF s_axi_mem_araddr: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI_MEM ARADDR";
-  ATTRIBUTE X_INTERFACE_INFO OF s_axi_mem_arlen: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI_MEM ARLEN";
-  ATTRIBUTE X_INTERFACE_INFO OF s_axi_mem_arsize: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI_MEM ARSIZE";
-  ATTRIBUTE X_INTERFACE_INFO OF s_axi_mem_arburst: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI_MEM ARBURST";
-  ATTRIBUTE X_INTERFACE_INFO OF s_axi_mem_arlock: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI_MEM ARLOCK";
-  ATTRIBUTE X_INTERFACE_INFO OF s_axi_mem_arcache: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI_MEM ARCACHE";
-  ATTRIBUTE X_INTERFACE_INFO OF s_axi_mem_arprot: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI_MEM ARPROT";
-  ATTRIBUTE X_INTERFACE_INFO OF s_axi_mem_arvalid: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI_MEM ARVALID";
-  ATTRIBUTE X_INTERFACE_INFO OF s_axi_mem_arready: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI_MEM ARREADY";
-  ATTRIBUTE X_INTERFACE_INFO OF s_axi_mem_rid: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI_MEM RID";
-  ATTRIBUTE X_INTERFACE_INFO OF s_axi_mem_rdata: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI_MEM RDATA";
-  ATTRIBUTE X_INTERFACE_INFO OF s_axi_mem_rresp: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI_MEM RRESP";
-  ATTRIBUTE X_INTERFACE_INFO OF s_axi_mem_rlast: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI_MEM RLAST";
-  ATTRIBUTE X_INTERFACE_INFO OF s_axi_mem_rvalid: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI_MEM RVALID";
-  ATTRIBUTE X_INTERFACE_INFO OF s_axi_mem_rready: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI_MEM RREADY";
-  ATTRIBUTE X_INTERFACE_INFO OF mem_dq_i: SIGNAL IS "xilinx.com:interface:emc:1.0 EMC_INTF DQ_I";
-  ATTRIBUTE X_INTERFACE_INFO OF mem_dq_o: SIGNAL IS "xilinx.com:interface:emc:1.0 EMC_INTF DQ_O";
-  ATTRIBUTE X_INTERFACE_INFO OF mem_dq_t: SIGNAL IS "xilinx.com:interface:emc:1.0 EMC_INTF DQ_T";
-  ATTRIBUTE X_INTERFACE_INFO OF mem_a: SIGNAL IS "xilinx.com:interface:emc:1.0 EMC_INTF ADDR";
-  ATTRIBUTE X_INTERFACE_INFO OF mem_ce: SIGNAL IS "xilinx.com:interface:emc:1.0 EMC_INTF CE";
-  ATTRIBUTE X_INTERFACE_INFO OF mem_cen: SIGNAL IS "xilinx.com:interface:emc:1.0 EMC_INTF CE_N";
-  ATTRIBUTE X_INTERFACE_INFO OF mem_oen: SIGNAL IS "xilinx.com:interface:emc:1.0 EMC_INTF OEN";
-  ATTRIBUTE X_INTERFACE_INFO OF mem_wen: SIGNAL IS "xilinx.com:interface:emc:1.0 EMC_INTF WEN";
-  ATTRIBUTE X_INTERFACE_INFO OF mem_ben: SIGNAL IS "xilinx.com:interface:emc:1.0 EMC_INTF BEN";
-  ATTRIBUTE X_INTERFACE_INFO OF mem_qwen: SIGNAL IS "xilinx.com:interface:emc:1.0 EMC_INTF QWEN";
-  ATTRIBUTE X_INTERFACE_INFO OF mem_rpn: SIGNAL IS "xilinx.com:interface:emc:1.0 EMC_INTF RPN";
-  ATTRIBUTE X_INTERFACE_INFO OF mem_adv_ldn: SIGNAL IS "xilinx.com:interface:emc:1.0 EMC_INTF ADV_LDN";
-  ATTRIBUTE X_INTERFACE_INFO OF mem_lbon: SIGNAL IS "xilinx.com:interface:emc:1.0 EMC_INTF LBON";
-  ATTRIBUTE X_INTERFACE_INFO OF mem_cken: SIGNAL IS "xilinx.com:interface:emc:1.0 EMC_INTF CLKEN";
-  ATTRIBUTE X_INTERFACE_INFO OF mem_rnw: SIGNAL IS "xilinx.com:interface:emc:1.0 EMC_INTF RNW";
-  ATTRIBUTE X_INTERFACE_INFO OF mem_cre: SIGNAL IS "xilinx.com:interface:emc:1.0 EMC_INTF CRE";
+  ATTRIBUTE X_INTERFACE_PARAMETER : STRING;
   ATTRIBUTE X_INTERFACE_INFO OF mem_wait: SIGNAL IS "xilinx.com:interface:emc:1.0 EMC_INTF WAIT";
+  ATTRIBUTE X_INTERFACE_INFO OF mem_cre: SIGNAL IS "xilinx.com:interface:emc:1.0 EMC_INTF CRE";
+  ATTRIBUTE X_INTERFACE_INFO OF mem_rnw: SIGNAL IS "xilinx.com:interface:emc:1.0 EMC_INTF RNW";
+  ATTRIBUTE X_INTERFACE_INFO OF mem_cken: SIGNAL IS "xilinx.com:interface:emc:1.0 EMC_INTF CLKEN";
+  ATTRIBUTE X_INTERFACE_INFO OF mem_lbon: SIGNAL IS "xilinx.com:interface:emc:1.0 EMC_INTF LBON";
+  ATTRIBUTE X_INTERFACE_INFO OF mem_adv_ldn: SIGNAL IS "xilinx.com:interface:emc:1.0 EMC_INTF ADV_LDN";
+  ATTRIBUTE X_INTERFACE_INFO OF mem_rpn: SIGNAL IS "xilinx.com:interface:emc:1.0 EMC_INTF RPN";
+  ATTRIBUTE X_INTERFACE_INFO OF mem_qwen: SIGNAL IS "xilinx.com:interface:emc:1.0 EMC_INTF QWEN";
+  ATTRIBUTE X_INTERFACE_INFO OF mem_ben: SIGNAL IS "xilinx.com:interface:emc:1.0 EMC_INTF BEN";
+  ATTRIBUTE X_INTERFACE_INFO OF mem_wen: SIGNAL IS "xilinx.com:interface:emc:1.0 EMC_INTF WEN";
+  ATTRIBUTE X_INTERFACE_INFO OF mem_oen: SIGNAL IS "xilinx.com:interface:emc:1.0 EMC_INTF OEN";
+  ATTRIBUTE X_INTERFACE_INFO OF mem_cen: SIGNAL IS "xilinx.com:interface:emc:1.0 EMC_INTF CE_N";
+  ATTRIBUTE X_INTERFACE_INFO OF mem_ce: SIGNAL IS "xilinx.com:interface:emc:1.0 EMC_INTF CE";
+  ATTRIBUTE X_INTERFACE_INFO OF mem_a: SIGNAL IS "xilinx.com:interface:emc:1.0 EMC_INTF ADDR";
+  ATTRIBUTE X_INTERFACE_INFO OF mem_dq_t: SIGNAL IS "xilinx.com:interface:emc:1.0 EMC_INTF DQ_T";
+  ATTRIBUTE X_INTERFACE_INFO OF mem_dq_o: SIGNAL IS "xilinx.com:interface:emc:1.0 EMC_INTF DQ_O";
+  ATTRIBUTE X_INTERFACE_PARAMETER OF mem_dq_i: SIGNAL IS "XIL_INTERFACENAME EMC_INTF, BOARD.ASSOCIATED_PARAM EMC_BOARD_INTERFACE";
+  ATTRIBUTE X_INTERFACE_INFO OF mem_dq_i: SIGNAL IS "xilinx.com:interface:emc:1.0 EMC_INTF DQ_I";
+  ATTRIBUTE X_INTERFACE_INFO OF s_axi_mem_rready: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI_MEM RREADY";
+  ATTRIBUTE X_INTERFACE_INFO OF s_axi_mem_rvalid: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI_MEM RVALID";
+  ATTRIBUTE X_INTERFACE_INFO OF s_axi_mem_rlast: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI_MEM RLAST";
+  ATTRIBUTE X_INTERFACE_INFO OF s_axi_mem_rresp: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI_MEM RRESP";
+  ATTRIBUTE X_INTERFACE_INFO OF s_axi_mem_rdata: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI_MEM RDATA";
+  ATTRIBUTE X_INTERFACE_INFO OF s_axi_mem_rid: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI_MEM RID";
+  ATTRIBUTE X_INTERFACE_INFO OF s_axi_mem_arready: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI_MEM ARREADY";
+  ATTRIBUTE X_INTERFACE_INFO OF s_axi_mem_arvalid: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI_MEM ARVALID";
+  ATTRIBUTE X_INTERFACE_INFO OF s_axi_mem_arprot: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI_MEM ARPROT";
+  ATTRIBUTE X_INTERFACE_INFO OF s_axi_mem_arcache: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI_MEM ARCACHE";
+  ATTRIBUTE X_INTERFACE_INFO OF s_axi_mem_arlock: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI_MEM ARLOCK";
+  ATTRIBUTE X_INTERFACE_INFO OF s_axi_mem_arburst: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI_MEM ARBURST";
+  ATTRIBUTE X_INTERFACE_INFO OF s_axi_mem_arsize: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI_MEM ARSIZE";
+  ATTRIBUTE X_INTERFACE_INFO OF s_axi_mem_arlen: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI_MEM ARLEN";
+  ATTRIBUTE X_INTERFACE_INFO OF s_axi_mem_araddr: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI_MEM ARADDR";
+  ATTRIBUTE X_INTERFACE_INFO OF s_axi_mem_arid: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI_MEM ARID";
+  ATTRIBUTE X_INTERFACE_INFO OF s_axi_mem_bready: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI_MEM BREADY";
+  ATTRIBUTE X_INTERFACE_INFO OF s_axi_mem_bvalid: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI_MEM BVALID";
+  ATTRIBUTE X_INTERFACE_INFO OF s_axi_mem_bresp: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI_MEM BRESP";
+  ATTRIBUTE X_INTERFACE_INFO OF s_axi_mem_bid: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI_MEM BID";
+  ATTRIBUTE X_INTERFACE_INFO OF s_axi_mem_wready: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI_MEM WREADY";
+  ATTRIBUTE X_INTERFACE_INFO OF s_axi_mem_wvalid: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI_MEM WVALID";
+  ATTRIBUTE X_INTERFACE_INFO OF s_axi_mem_wlast: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI_MEM WLAST";
+  ATTRIBUTE X_INTERFACE_INFO OF s_axi_mem_wstrb: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI_MEM WSTRB";
+  ATTRIBUTE X_INTERFACE_INFO OF s_axi_mem_wdata: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI_MEM WDATA";
+  ATTRIBUTE X_INTERFACE_INFO OF s_axi_mem_awready: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI_MEM AWREADY";
+  ATTRIBUTE X_INTERFACE_INFO OF s_axi_mem_awvalid: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI_MEM AWVALID";
+  ATTRIBUTE X_INTERFACE_INFO OF s_axi_mem_awprot: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI_MEM AWPROT";
+  ATTRIBUTE X_INTERFACE_INFO OF s_axi_mem_awcache: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI_MEM AWCACHE";
+  ATTRIBUTE X_INTERFACE_INFO OF s_axi_mem_awlock: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI_MEM AWLOCK";
+  ATTRIBUTE X_INTERFACE_INFO OF s_axi_mem_awburst: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI_MEM AWBURST";
+  ATTRIBUTE X_INTERFACE_INFO OF s_axi_mem_awsize: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI_MEM AWSIZE";
+  ATTRIBUTE X_INTERFACE_INFO OF s_axi_mem_awlen: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI_MEM AWLEN";
+  ATTRIBUTE X_INTERFACE_INFO OF s_axi_mem_awaddr: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI_MEM AWADDR";
+  ATTRIBUTE X_INTERFACE_PARAMETER OF s_axi_mem_awid: SIGNAL IS "XIL_INTERFACENAME S_AXI_MEM, DATA_WIDTH 32, PROTOCOL AXI4, FREQ_HZ 50000000, ID_WIDTH 12, ADDR_WIDTH 32, AWUSER_WIDTH 0, ARUSER_WIDTH 0, WUSER_WIDTH 0, RUSER_WIDTH 0, BUSER_WIDTH 0, READ_WRITE_MODE READ_WRITE, HAS_BURST 1, HAS_LOCK 1, HAS_PROT 1, HAS_CACHE 1, HAS_QOS 0, HAS_REGION 0, HAS_WSTRB 1, HAS_BRESP 1, HAS_RRESP 1, SUPPORTS_NARROW_BURST 0, NUM_READ_OUTSTANDING 8, NUM_WRITE_OUTSTANDING 8, MAX_BURST_LENGTH 16, PHASE 0.000, CLK_DOMAIN design_1_ps7_0_0_FCLK_CLK0, NUM_READ_THREADS 1, NUM_WRITE_THREADS 1, RUSER_BITS_PER_BYTE 0, WUSER_BITS_PER_BYTE 0";
+  ATTRIBUTE X_INTERFACE_INFO OF s_axi_mem_awid: SIGNAL IS "xilinx.com:interface:aximm:1.0 S_AXI_MEM AWID";
+  ATTRIBUTE X_INTERFACE_PARAMETER OF rdclk: SIGNAL IS "XIL_INTERFACENAME rdclk, ASSOCIATED_BUSIF EMC_INTF, FREQ_HZ 50000000, PHASE 0.000, CLK_DOMAIN design_1_ps7_0_0_FCLK_CLK0";
+  ATTRIBUTE X_INTERFACE_INFO OF rdclk: SIGNAL IS "xilinx.com:signal:clock:1.0 rdclk CLK";
+  ATTRIBUTE X_INTERFACE_PARAMETER OF s_axi_aresetn: SIGNAL IS "XIL_INTERFACENAME aresetn, POLARITY ACTIVE_LOW";
+  ATTRIBUTE X_INTERFACE_INFO OF s_axi_aresetn: SIGNAL IS "xilinx.com:signal:reset:1.0 aresetn RST";
+  ATTRIBUTE X_INTERFACE_PARAMETER OF s_axi_aclk: SIGNAL IS "XIL_INTERFACENAME aclk, ASSOCIATED_BUSIF s_axi_mem:s_axi_reg, ASSOCIATED_RESET s_axi_aresetn, FREQ_HZ 50000000, PHASE 0.000, CLK_DOMAIN design_1_ps7_0_0_FCLK_CLK0";
+  ATTRIBUTE X_INTERFACE_INFO OF s_axi_aclk: SIGNAL IS "xilinx.com:signal:clock:1.0 aclk CLK";
 BEGIN
   U0 : axi_emc
     GENERIC MAP (
