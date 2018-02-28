@@ -389,9 +389,9 @@ module thinpadNG_zynq_top(/*autoarg*/
         vid_io_in_vsync <= dvi_vs;
         vid_io_in_hsync <= dvi_hs;
         vid_io_in_data <= {
-            dvi_d[7:5], 5'h0, //R
-            dvi_d[1:0], 6'h0, //B
-            dvi_d[4:2], 5'h0  //G
+            dvi_d[7:5], dvi_d[7:5], dvi_d[7:6], //R
+            {4{dvi_d[1:0]}}, //B
+            dvi_d[4:2], dvi_d[4:2], dvi_d[4:3]  //G
         };
         vid_io_in_reset <= vid_reset_sync;
         vid_reset_sync <= vid_reset;
