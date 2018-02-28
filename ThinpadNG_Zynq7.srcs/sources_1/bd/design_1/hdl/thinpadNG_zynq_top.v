@@ -22,6 +22,7 @@ module thinpadNG_zynq_top(/*autoarg*/
 `ifdef EN_CPLD_UART
     cpld_emu_rdn, cpld_emu_wrn,
 `endif
+    tap_tdo,
 
     //Outputs
     SPI0_MOSI_O, SPI0_SCLK_O, UART_1_txd, 
@@ -34,6 +35,7 @@ module thinpadNG_zynq_top(/*autoarg*/
 `ifdef HS_DIFF_IN
     clkin1_p,  clkin1_n, datain1_p, datain1_n,
 `endif
+    tap_tck,    tap_tdi,    tap_tms,
 
     //Inouts
     DDR_addr, DDR_ba, DDR_cas_n, DDR_ck_n, 
@@ -99,6 +101,10 @@ module thinpadNG_zynq_top(/*autoarg*/
     output cpld_emu_tbre;
     output cpld_emu_tsre;
 `endif
+    output wire tap_tck;
+    output wire tap_tdi;
+    input  wire tap_tdo;
+    output wire tap_tms;
 
     wire [14:0]DDR_addr;
     wire [2:0]DDR_ba;
@@ -269,6 +275,10 @@ module thinpadNG_zynq_top(/*autoarg*/
     .vid_io_in_reset        (vid_io_in_reset),
     .initb                      (initb                          ), // input
     .progb                      (progb[0:0]                     ), // output
+    .tap_tck_0                  (tap_tck),
+    .tap_tdi_0                  (tap_tdi),
+    .tap_tdo_0                  (tap_tdo),
+    .tap_tms_0                  (tap_tms),
     .reg2port                   (reg2port[127:0]                ), // output
     .port2reg                   (port2reg),
     .UART_CPLD_ctsn             (1'b0),

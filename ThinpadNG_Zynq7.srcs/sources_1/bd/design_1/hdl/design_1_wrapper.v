@@ -1,8 +1,8 @@
 //Copyright 1986-2017 Xilinx, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2017.3 (lin64) Build 2018833 Wed Oct  4 19:58:07 MDT 2017
-//Date        : Mon Feb 26 01:09:14 2018
-//Host        : nuc6i7 running 64-bit Ubuntu 16.04.3 LTS
+//Date        : Mon Feb 26 11:02:52 2018
+//Host        : nuc6i7 running 64-bit Ubuntu 16.04.4 LTS
 //Command     : generate_target design_1_wrapper.bd
 //Design      : design_1_wrapper
 //Purpose     : IP block netlist
@@ -92,6 +92,10 @@ module design_1_wrapper
     progb,
     ps_perph_rstn,
     reg2port,
+    tap_tck_0,
+    tap_tdi_0,
+    tap_tdo_0,
+    tap_tms_0,
     vid_in_clk,
     vid_io_in_active_video,
     vid_io_in_data,
@@ -185,6 +189,10 @@ module design_1_wrapper
   output [0:0]progb;
   output [0:0]ps_perph_rstn;
   output [127:0]reg2port;
+  output tap_tck_0;
+  output tap_tdi_0;
+  input tap_tdo_0;
+  output tap_tms_0;
   input vid_in_clk;
   input vid_io_in_active_video;
   input [23:0]vid_io_in_data;
@@ -429,6 +437,10 @@ module design_1_wrapper
   wire [0:0]progb;
   wire [0:0]ps_perph_rstn;
   wire [127:0]reg2port;
+  wire tap_tck_0;
+  wire tap_tdi_0;
+  wire tap_tdo_0;
+  wire tap_tms_0;
   wire vid_in_clk;
   wire vid_io_in_active_video;
   wire [23:0]vid_io_in_data;
@@ -528,6 +540,10 @@ module design_1_wrapper
         .progb(progb),
         .ps_perph_rstn(ps_perph_rstn),
         .reg2port(reg2port),
+        .tap_tck_0(tap_tck_0),
+        .tap_tdi_0(tap_tdi_0),
+        .tap_tdo_0(tap_tdo_0),
+        .tap_tms_0(tap_tms_0),
         .vid_in_clk(vid_in_clk),
         .vid_io_in_active_video(vid_io_in_active_video),
         .vid_io_in_data(vid_io_in_data),
