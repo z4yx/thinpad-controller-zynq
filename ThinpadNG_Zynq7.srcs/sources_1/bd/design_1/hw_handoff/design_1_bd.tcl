@@ -121,6 +121,110 @@ if { $nRet != 0 } {
 ##################################################################
 
 
+# Hierarchical cell: rgb8to24
+proc create_hier_cell_rgb8to24 { parentCell nameHier } {
+
+  variable script_folder
+
+  if { $parentCell eq "" || $nameHier eq "" } {
+     catch {common::send_msg_id "BD_TCL-102" "ERROR" "create_hier_cell_rgb8to24() - Empty argument(s)!"}
+     return
+  }
+
+  # Get object for parentCell
+  set parentObj [get_bd_cells $parentCell]
+  if { $parentObj == "" } {
+     catch {common::send_msg_id "BD_TCL-100" "ERROR" "Unable to find parent cell <$parentCell>!"}
+     return
+  }
+
+  # Make sure parentObj is hier blk
+  set parentType [get_property TYPE $parentObj]
+  if { $parentType ne "hier" } {
+     catch {common::send_msg_id "BD_TCL-101" "ERROR" "Parent <$parentObj> has TYPE = <$parentType>. Expected to be <hier>."}
+     return
+  }
+
+  # Save current instance; Restore later
+  set oldCurInst [current_bd_instance .]
+
+  # Set parent object as current
+  current_bd_instance $parentObj
+
+  # Create cell and set as current instance
+  set hier_obj [create_bd_cell -type hier $nameHier]
+  current_bd_instance $hier_obj
+
+  # Create interface pins
+
+  # Create pins
+  create_bd_pin -dir I -from 7 -to 0 Din
+  create_bd_pin -dir O -from 23 -to 0 dout
+
+  # Create instance: high2bit, and set properties
+  set high2bit [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlslice:1.0 high2bit ]
+  set_property -dict [ list \
+   CONFIG.DIN_FROM {2} \
+   CONFIG.DIN_TO {1} \
+   CONFIG.DIN_WIDTH {3} \
+   CONFIG.DOUT_WIDTH {2} \
+ ] $high2bit
+
+  # Create instance: high2bit1, and set properties
+  set high2bit1 [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlslice:1.0 high2bit1 ]
+  set_property -dict [ list \
+   CONFIG.DIN_FROM {2} \
+   CONFIG.DIN_TO {1} \
+   CONFIG.DIN_WIDTH {3} \
+   CONFIG.DOUT_WIDTH {2} \
+ ] $high2bit1
+
+  # Create instance: rgb8_b, and set properties
+  set rgb8_b [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlslice:1.0 rgb8_b ]
+  set_property -dict [ list \
+   CONFIG.DIN_FROM {1} \
+   CONFIG.DIN_TO {0} \
+   CONFIG.DIN_WIDTH {8} \
+   CONFIG.DOUT_WIDTH {2} \
+ ] $rgb8_b
+
+  # Create instance: rgb8_g, and set properties
+  set rgb8_g [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlslice:1.0 rgb8_g ]
+  set_property -dict [ list \
+   CONFIG.DIN_FROM {4} \
+   CONFIG.DIN_TO {2} \
+   CONFIG.DIN_WIDTH {8} \
+   CONFIG.DOUT_WIDTH {3} \
+ ] $rgb8_g
+
+  # Create instance: rgb8_r, and set properties
+  set rgb8_r [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlslice:1.0 rgb8_r ]
+  set_property -dict [ list \
+   CONFIG.DIN_FROM {7} \
+   CONFIG.DIN_TO {5} \
+   CONFIG.DIN_WIDTH {8} \
+   CONFIG.DOUT_WIDTH {3} \
+ ] $rgb8_r
+
+  # Create instance: xlconcat_0, and set properties
+  set xlconcat_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlconcat:2.1 xlconcat_0 ]
+  set_property -dict [ list \
+   CONFIG.NUM_PORTS {10} \
+ ] $xlconcat_0
+
+  # Create port connections
+  connect_bd_net -net fifo_generator_0_m_axis_tdata [get_bd_pins Din] [get_bd_pins rgb8_b/Din] [get_bd_pins rgb8_g/Din] [get_bd_pins rgb8_r/Din]
+  connect_bd_net -net high2bit1_Dout [get_bd_pins high2bit1/Dout] [get_bd_pins xlconcat_0/In5]
+  connect_bd_net -net high2bit_Dout [get_bd_pins high2bit/Dout] [get_bd_pins xlconcat_0/In2]
+  connect_bd_net -net rgb8_b_Dout [get_bd_pins rgb8_b/Dout] [get_bd_pins xlconcat_0/In6] [get_bd_pins xlconcat_0/In7] [get_bd_pins xlconcat_0/In8] [get_bd_pins xlconcat_0/In9]
+  connect_bd_net -net rgb8_g_Dout [get_bd_pins high2bit1/Din] [get_bd_pins rgb8_g/Dout] [get_bd_pins xlconcat_0/In3] [get_bd_pins xlconcat_0/In4]
+  connect_bd_net -net rgb8_r_Dout [get_bd_pins high2bit/Din] [get_bd_pins rgb8_r/Dout] [get_bd_pins xlconcat_0/In0] [get_bd_pins xlconcat_0/In1]
+  connect_bd_net -net xlconcat_0_dout [get_bd_pins dout] [get_bd_pins xlconcat_0/dout]
+
+  # Restore current instance
+  current_bd_instance $oldCurInst
+}
+
 # Hierarchical cell: video_capture
 proc create_hier_cell_video_capture { parentCell nameHier } {
 
@@ -159,20 +263,57 @@ proc create_hier_cell_video_capture { parentCell nameHier } {
   create_bd_intf_pin -mode Master -vlnv xilinx.com:interface:aximm_rtl:1.0 M00_AXI
   create_bd_intf_pin -mode Slave -vlnv xilinx.com:interface:aximm_rtl:1.0 dma_ctrl
   create_bd_intf_pin -mode Slave -vlnv xilinx.com:interface:aximm_rtl:1.0 v_tc_ctrl
-  create_bd_intf_pin -mode Slave -vlnv xilinx.com:interface:vid_io_rtl:1.0 vid_io_in
+  create_bd_intf_pin -mode Slave -vlnv xilinx.com:interface:axis_rtl:1.0 vid_axis
+  create_bd_intf_pin -mode Slave -vlnv xilinx.com:interface:video_timing_rtl:2.0 vid_timing_in
 
   # Create pins
   create_bd_pin -dir O -from 0 -to 0 aresetn
   create_bd_pin -dir I axi_clk
   create_bd_pin -dir O dma_interrupt
   create_bd_pin -dir I ext_reset_in
+  create_bd_pin -dir O -from 9 -to 0 fifo_count
   create_bd_pin -dir O overflow
+  create_bd_pin -dir I -type rst vid_axis_rst_n
   create_bd_pin -dir I vid_in_clk
-  create_bd_pin -dir I -type rst vid_io_in_reset
   create_bd_pin -dir O -from 0 -to 0 vtc_locked
+
+  # Create instance: fifo_generator_0, and set properties
+  set fifo_generator_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:fifo_generator:13.2 fifo_generator_0 ]
+  set_property -dict [ list \
+   CONFIG.Clock_Type_AXI {Independent_Clock} \
+   CONFIG.Empty_Threshold_Assert_Value_axis {509} \
+   CONFIG.Empty_Threshold_Assert_Value_rach {13} \
+   CONFIG.Empty_Threshold_Assert_Value_rdch {1021} \
+   CONFIG.Empty_Threshold_Assert_Value_wach {13} \
+   CONFIG.Empty_Threshold_Assert_Value_wdch {1021} \
+   CONFIG.Empty_Threshold_Assert_Value_wrch {13} \
+   CONFIG.Enable_Data_Counts_axis {true} \
+   CONFIG.Enable_Safety_Circuit {true} \
+   CONFIG.Enable_TLAST {true} \
+   CONFIG.FIFO_Application_Type_axis {Data_FIFO} \
+   CONFIG.FIFO_Implementation_axis {Independent_Clocks_Block_RAM} \
+   CONFIG.FIFO_Implementation_rach {Independent_Clocks_Distributed_RAM} \
+   CONFIG.FIFO_Implementation_rdch {Independent_Clocks_Block_RAM} \
+   CONFIG.FIFO_Implementation_wach {Independent_Clocks_Distributed_RAM} \
+   CONFIG.FIFO_Implementation_wdch {Independent_Clocks_Block_RAM} \
+   CONFIG.FIFO_Implementation_wrch {Independent_Clocks_Distributed_RAM} \
+   CONFIG.Full_Flags_Reset_Value {1} \
+   CONFIG.Full_Threshold_Assert_Value_axis {511} \
+   CONFIG.Full_Threshold_Assert_Value_rach {15} \
+   CONFIG.Full_Threshold_Assert_Value_wach {15} \
+   CONFIG.Full_Threshold_Assert_Value_wrch {15} \
+   CONFIG.INTERFACE_TYPE {AXI_STREAM} \
+   CONFIG.Input_Depth_axis {512} \
+   CONFIG.Overflow_Flag_AXI {true} \
+   CONFIG.Reset_Type {Asynchronous_Reset} \
+   CONFIG.TUSER_WIDTH {1} \
+ ] $fifo_generator_0
 
   # Create instance: proc_sys_reset_0, and set properties
   set proc_sys_reset_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:proc_sys_reset:5.0 proc_sys_reset_0 ]
+
+  # Create instance: rgb8to24
+  create_hier_cell_rgb8to24 $hier_obj rgb8to24
 
   # Create instance: smartconnect_0, and set properties
   set smartconnect_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:smartconnect:1.0 smartconnect_0 ]
@@ -228,13 +369,6 @@ proc create_hier_cell_video_capture { parentCell nameHier } {
    CONFIG.vertical_sync_generation {true} \
  ] $v_tc_0
 
-  # Create instance: v_vid_in_axi4s_0, and set properties
-  set v_vid_in_axi4s_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:v_vid_in_axi4s:4.0 v_vid_in_axi4s_0 ]
-  set_property -dict [ list \
-   CONFIG.C_HAS_ASYNC_CLK {1} \
-   CONFIG.C_PIXELS_PER_CLOCK {1} \
- ] $v_vid_in_axi4s_0
-
   # Create instance: xlconstant_0, and set properties
   set xlconstant_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlconstant:1.1 xlconstant_0 ]
 
@@ -247,32 +381,35 @@ proc create_hier_cell_video_capture { parentCell nameHier } {
  ] $xlslice_0
 
   # Create interface connections
-  connect_bd_intf_net -intf_net Conn1 [get_bd_intf_pins vid_io_in] [get_bd_intf_pins v_vid_in_axi4s_0/vid_io_in]
+  connect_bd_intf_net -intf_net Conn1 [get_bd_intf_pins vid_timing_in] [get_bd_intf_pins v_tc_0/vtiming_in]
+  connect_bd_intf_net -intf_net Conn2 [get_bd_intf_pins vid_axis] [get_bd_intf_pins fifo_generator_0/S_AXIS]
   connect_bd_intf_net -intf_net dma_ctrl_1 [get_bd_intf_pins dma_ctrl] [get_bd_intf_pins v_frmbuf_wr_0/s_axi_CTRL]
   connect_bd_intf_net -intf_net smartconnect_0_M00_AXI [get_bd_intf_pins M00_AXI] [get_bd_intf_pins smartconnect_0/M00_AXI]
   connect_bd_intf_net -intf_net v_frmbuf_wr_0_m_axi_mm_video [get_bd_intf_pins smartconnect_0/S00_AXI] [get_bd_intf_pins v_frmbuf_wr_0/m_axi_mm_video]
   connect_bd_intf_net -intf_net v_tc_ctrl_1 [get_bd_intf_pins v_tc_ctrl] [get_bd_intf_pins v_tc_0/ctrl]
-  connect_bd_intf_net -intf_net v_vid_in_axi4s_0_video_out [get_bd_intf_pins v_frmbuf_wr_0/s_axis_video] [get_bd_intf_pins v_vid_in_axi4s_0/video_out]
-  set_property -dict [ list \
-HDL_ATTRIBUTE.DEBUG {true} \
- ] [get_bd_intf_nets v_vid_in_axi4s_0_video_out]
-  connect_bd_intf_net -intf_net v_vid_in_axi4s_0_vtiming_out [get_bd_intf_pins v_tc_0/vtiming_in] [get_bd_intf_pins v_vid_in_axi4s_0/vtiming_out]
 
   # Create port connections
-  connect_bd_net -net axi_clk_1 [get_bd_pins axi_clk] [get_bd_pins proc_sys_reset_0/slowest_sync_clk] [get_bd_pins smartconnect_0/aclk] [get_bd_pins v_frmbuf_wr_0/ap_clk] [get_bd_pins v_tc_0/s_axi_aclk] [get_bd_pins v_vid_in_axi4s_0/aclk]
+  connect_bd_net -net axi_clk_1 [get_bd_pins axi_clk] [get_bd_pins fifo_generator_0/m_aclk] [get_bd_pins proc_sys_reset_0/slowest_sync_clk] [get_bd_pins smartconnect_0/aclk] [get_bd_pins v_frmbuf_wr_0/ap_clk] [get_bd_pins v_tc_0/s_axi_aclk]
   connect_bd_net -net ext_reset_in_1 [get_bd_pins ext_reset_in] [get_bd_pins proc_sys_reset_0/ext_reset_in]
-  connect_bd_net -net proc_sys_reset_0_interconnect_aresetn [get_bd_pins proc_sys_reset_0/interconnect_aresetn] [get_bd_pins smartconnect_0/aresetn]
-  connect_bd_net -net proc_sys_reset_0_peripheral_aresetn [get_bd_pins aresetn] [get_bd_pins proc_sys_reset_0/peripheral_aresetn] [get_bd_pins v_frmbuf_wr_0/ap_rst_n] [get_bd_pins v_tc_0/s_axi_aresetn] [get_bd_pins v_vid_in_axi4s_0/aresetn]
-  connect_bd_net -net v_frmbuf_wr_0_interrupt [get_bd_pins dma_interrupt] [get_bd_pins v_frmbuf_wr_0/interrupt]
-  connect_bd_net -net v_tc_0_intc_if [get_bd_pins v_tc_0/intc_if] [get_bd_pins xlslice_0/Din]
-  connect_bd_net -net v_vid_in_axi4s_0_overflow [get_bd_pins overflow] [get_bd_pins v_vid_in_axi4s_0/overflow]
+  connect_bd_net -net fifo_generator_0_axis_overflow [get_bd_pins overflow] [get_bd_pins fifo_generator_0/axis_overflow]
+  connect_bd_net -net fifo_generator_0_axis_wr_data_count [get_bd_pins fifo_count] [get_bd_pins fifo_generator_0/axis_wr_data_count]
   set_property -dict [ list \
 HDL_ATTRIBUTE.DEBUG {true} \
- ] [get_bd_nets v_vid_in_axi4s_0_overflow]
-  connect_bd_net -net vid_in_clk_1 [get_bd_pins vid_in_clk] [get_bd_pins v_tc_0/clk] [get_bd_pins v_vid_in_axi4s_0/vid_io_in_clk]
-  connect_bd_net -net vid_io_in_reset_1 [get_bd_pins vid_io_in_reset] [get_bd_pins v_vid_in_axi4s_0/vid_io_in_reset]
-  connect_bd_net -net xlconstant_0_dout [get_bd_pins v_tc_0/clken] [get_bd_pins v_tc_0/det_clken] [get_bd_pins v_tc_0/resetn] [get_bd_pins v_tc_0/s_axi_aclken] [get_bd_pins v_vid_in_axi4s_0/aclken] [get_bd_pins v_vid_in_axi4s_0/vid_io_in_ce] [get_bd_pins xlconstant_0/dout]
-  connect_bd_net -net xlslice_0_Dout [get_bd_pins vtc_locked] [get_bd_pins v_vid_in_axi4s_0/axis_enable] [get_bd_pins xlslice_0/Dout]
+ ] [get_bd_nets fifo_generator_0_axis_wr_data_count]
+  connect_bd_net -net fifo_generator_0_m_axis_tdata [get_bd_pins fifo_generator_0/m_axis_tdata] [get_bd_pins rgb8to24/Din]
+  connect_bd_net -net fifo_generator_0_m_axis_tlast [get_bd_pins fifo_generator_0/m_axis_tlast] [get_bd_pins v_frmbuf_wr_0/s_axis_video_TLAST]
+  connect_bd_net -net fifo_generator_0_m_axis_tuser [get_bd_pins fifo_generator_0/m_axis_tuser] [get_bd_pins v_frmbuf_wr_0/s_axis_video_TUSER]
+  connect_bd_net -net fifo_generator_0_m_axis_tvalid [get_bd_pins fifo_generator_0/m_axis_tvalid] [get_bd_pins v_frmbuf_wr_0/s_axis_video_TVALID]
+  connect_bd_net -net proc_sys_reset_0_interconnect_aresetn [get_bd_pins proc_sys_reset_0/interconnect_aresetn] [get_bd_pins smartconnect_0/aresetn]
+  connect_bd_net -net proc_sys_reset_0_peripheral_aresetn [get_bd_pins aresetn] [get_bd_pins proc_sys_reset_0/peripheral_aresetn] [get_bd_pins v_frmbuf_wr_0/ap_rst_n] [get_bd_pins v_tc_0/s_axi_aresetn]
+  connect_bd_net -net s_aresetn_0_1 [get_bd_pins vid_axis_rst_n] [get_bd_pins fifo_generator_0/s_aresetn]
+  connect_bd_net -net v_frmbuf_wr_0_interrupt [get_bd_pins dma_interrupt] [get_bd_pins v_frmbuf_wr_0/interrupt]
+  connect_bd_net -net v_frmbuf_wr_0_s_axis_video_TREADY [get_bd_pins fifo_generator_0/m_axis_tready] [get_bd_pins v_frmbuf_wr_0/s_axis_video_TREADY]
+  connect_bd_net -net v_tc_0_intc_if [get_bd_pins v_tc_0/intc_if] [get_bd_pins xlslice_0/Din]
+  connect_bd_net -net vid_in_clk_1 [get_bd_pins vid_in_clk] [get_bd_pins fifo_generator_0/s_aclk] [get_bd_pins v_tc_0/clk]
+  connect_bd_net -net xlconcat_0_dout [get_bd_pins rgb8to24/dout] [get_bd_pins v_frmbuf_wr_0/s_axis_video_TDATA]
+  connect_bd_net -net xlconstant_0_dout [get_bd_pins v_tc_0/clken] [get_bd_pins v_tc_0/det_clken] [get_bd_pins v_tc_0/resetn] [get_bd_pins v_tc_0/s_axi_aclken] [get_bd_pins xlconstant_0/dout]
+  connect_bd_net -net xlslice_0_Dout [get_bd_pins vtc_locked] [get_bd_pins xlslice_0/Dout]
   set_property -dict [ list \
 HDL_ATTRIBUTE.DEBUG {true} \
  ] [get_bd_nets xlslice_0_Dout]
@@ -393,9 +530,6 @@ proc create_hier_cell_la_storage { parentCell nameHier } {
   # Create port connections
   connect_bd_net -net ARESETN_1 [get_bd_pins axi_interconnect_1/ARESETN] [get_bd_pins proc_sys_reset_0/interconnect_aresetn]
   connect_bd_net -net axi_dma_0_s2mm_introut [get_bd_pins s2mm_introut] [get_bd_pins axi_dma_0/s2mm_introut]
-  set_property -dict [ list \
-HDL_ATTRIBUTE.DEBUG {true} \
- ] [get_bd_nets axi_dma_0_s2mm_introut]
   connect_bd_net -net axi_resetn_1 [get_bd_pins axi_resetn] [get_bd_pins axi_dma_0/axi_resetn]
   connect_bd_net -net ext_reset_in_1 [get_bd_pins ext_reset_in] [get_bd_pins proc_sys_reset_0/ext_reset_in]
   connect_bd_net -net m_aclk_1 [get_bd_pins fifo_aclk] [get_bd_pins fifo_generator_0/s_aclk]
@@ -499,9 +633,6 @@ proc create_hier_cell_bus_analyze { parentCell nameHier } {
   # Create port connections
   connect_bd_net -net ARESETN_1 [get_bd_pins axi_interconnect_1/ARESETN] [get_bd_pins proc_sys_reset_0/interconnect_aresetn]
   connect_bd_net -net axi_dma_0_s2mm_introut [get_bd_pins s2mm_introut] [get_bd_pins axi_dma_0/s2mm_introut]
-  set_property -dict [ list \
-HDL_ATTRIBUTE.DEBUG {true} \
- ] [get_bd_nets axi_dma_0_s2mm_introut]
   connect_bd_net -net axi_resetn_1 [get_bd_pins axi_resetn] [get_bd_pins axi_dma_0/axi_resetn]
   connect_bd_net -net ext_reset_in_1 [get_bd_pins ext_reset_in] [get_bd_pins proc_sys_reset_0/ext_reset_in]
   connect_bd_net -net proc_sys_reset_0_peripheral_aresetn [get_bd_pins peripheral_aresetn] [get_bd_pins axi_interconnect_1/M00_ARESETN] [get_bd_pins axi_interconnect_1/S00_ARESETN] [get_bd_pins axis_data_fifo_0/s_axis_aresetn] [get_bd_pins proc_sys_reset_0/peripheral_aresetn]
@@ -576,7 +707,20 @@ proc create_root_design { parentCell } {
    CONFIG.TID_WIDTH {0} \
    CONFIG.TUSER_WIDTH {0} \
    ] $la_storage_axis
-  set vid_io_in [ create_bd_intf_port -mode Slave -vlnv xilinx.com:interface:vid_io_rtl:1.0 vid_io_in ]
+  set vid_axis [ create_bd_intf_port -mode Slave -vlnv xilinx.com:interface:axis_rtl:1.0 vid_axis ]
+  set_property -dict [ list \
+   CONFIG.FREQ_HZ {150000000} \
+   CONFIG.HAS_TKEEP {0} \
+   CONFIG.HAS_TLAST {1} \
+   CONFIG.HAS_TREADY {1} \
+   CONFIG.HAS_TSTRB {0} \
+   CONFIG.LAYERED_METADATA {undef} \
+   CONFIG.TDATA_NUM_BYTES {1} \
+   CONFIG.TDEST_WIDTH {0} \
+   CONFIG.TID_WIDTH {0} \
+   CONFIG.TUSER_WIDTH {1} \
+   ] $vid_axis
+  set vid_timing_in [ create_bd_intf_port -mode Slave -vlnv xilinx.com:interface:video_timing_rtl:2.0 vid_timing_in ]
 
   # Create ports
   set SPI0_MOSI_O [ create_bd_port -dir O SPI0_MOSI_O ]
@@ -622,14 +766,14 @@ proc create_root_design { parentCell } {
   set tap_tdi_0 [ create_bd_port -dir O tap_tdi_0 ]
   set tap_tdo_0 [ create_bd_port -dir I tap_tdo_0 ]
   set tap_tms_0 [ create_bd_port -dir O tap_tms_0 ]
+  set vid_axis_rst_n [ create_bd_port -dir I -type rst vid_axis_rst_n ]
+  set vid_fifo_count [ create_bd_port -dir O -from 9 -to 0 vid_fifo_count ]
   set vid_in_clk [ create_bd_port -dir I -type clk vid_in_clk ]
   set_property -dict [ list \
+   CONFIG.ASSOCIATED_BUSIF {vid_axis} \
+   CONFIG.ASSOCIATED_RESET {vid_axis_rst_n} \
    CONFIG.FREQ_HZ {150000000} \
  ] $vid_in_clk
-  set vid_io_in_reset [ create_bd_port -dir I -type rst vid_io_in_reset ]
-  set_property -dict [ list \
-   CONFIG.POLARITY {ACTIVE_HIGH} \
- ] $vid_io_in_reset
   set vid_overflow [ create_bd_port -dir O vid_overflow ]
   set vtc_locked [ create_bd_port -dir O -from 0 -to 0 vtc_locked ]
 
@@ -1583,6 +1727,10 @@ proc create_root_design { parentCell } {
 
   # Create interface connections
   connect_bd_intf_net -intf_net S00_AXI_1 [get_bd_intf_pins axi_interconnect_0/S00_AXI] [get_bd_intf_pins ps7_0/M_AXI_GP0]
+  connect_bd_intf_net -intf_net S_AXIS_0_1 [get_bd_intf_ports vid_axis] [get_bd_intf_pins video_capture/vid_axis]
+  set_property -dict [ list \
+HDL_ATTRIBUTE.DEBUG {true} \
+ ] [get_bd_intf_nets S_AXIS_0_1]
   connect_bd_intf_net -intf_net S_AXIS_1 [get_bd_intf_ports la_storage_axis] [get_bd_intf_pins la_storage/S_AXIS]
   connect_bd_intf_net -intf_net S_AXI_LITE_1 [get_bd_intf_pins axi_interconnect_0/M05_AXI] [get_bd_intf_pins la_storage/S_AXI_LITE]
   connect_bd_intf_net -intf_net axi_apb_bridge_0_APB_M [get_bd_intf_pins axi_apb_0/APB_M] [get_bd_intf_pins parallel_apb_adapter_0/APB]
@@ -1608,7 +1756,10 @@ proc create_root_design { parentCell } {
   connect_bd_intf_net -intf_net ps7_0_UART_1 [get_bd_intf_ports UART_1] [get_bd_intf_pins ps7_0/UART_1]
   connect_bd_intf_net -intf_net smartconnect_0_M00_AXI [get_bd_intf_pins ps7_0/S_AXI_HP1] [get_bd_intf_pins video_capture/M00_AXI]
   connect_bd_intf_net -intf_net v_tc_ctrl_1 [get_bd_intf_pins axi_interconnect_0/M10_AXI] [get_bd_intf_pins video_capture/v_tc_ctrl]
-  connect_bd_intf_net -intf_net vid_io_in_1 [get_bd_intf_ports vid_io_in] [get_bd_intf_pins video_capture/vid_io_in]
+  connect_bd_intf_net -intf_net vtiming_in_0_1 [get_bd_intf_ports vid_timing_in] [get_bd_intf_pins video_capture/vid_timing_in]
+  set_property -dict [ list \
+HDL_ATTRIBUTE.DEBUG {true} \
+ ] [get_bd_intf_nets vtiming_in_0_1]
 
   # Create port connections
   connect_bd_net -net LCD_data_in_1 [get_bd_ports pp_data_i] [get_bd_pins parallel_apb_adapter_0/LCD_data_in]
@@ -1654,18 +1805,19 @@ proc create_root_design { parentCell } {
   connect_bd_net -net ps7_0_GPIO_O [get_bd_pins ps7_0/GPIO_O] [get_bd_pins xlslice_0/Din]
   connect_bd_net -net ps7_0_SPI0_MOSI_O [get_bd_ports SPI0_MOSI_O] [get_bd_pins ps7_0/SPI0_MOSI_O]
   connect_bd_net -net ps7_0_SPI0_SCLK_O [get_bd_ports SPI0_SCLK_O] [get_bd_pins ps7_0/SPI0_SCLK_O]
+  connect_bd_net -net s_aresetn_0_1 [get_bd_ports vid_axis_rst_n] [get_bd_pins video_capture/vid_axis_rst_n]
+  set_property -dict [ list \
+HDL_ATTRIBUTE.DEBUG {true} \
+ ] [get_bd_nets s_aresetn_0_1]
   connect_bd_net -net s_aresetn_1 [get_bd_ports la_fifo_aresetn] [get_bd_pins la_storage/s_aresetn]
   connect_bd_net -net tap_tdo_0_1 [get_bd_ports tap_tdo_0] [get_bd_pins debug_bridge_axi2jtag/tap_tdo]
   connect_bd_net -net vid_in_clk_1 [get_bd_ports vid_in_clk] [get_bd_pins video_capture/vid_in_clk]
-  connect_bd_net -net vid_io_in_reset_1 [get_bd_ports vid_io_in_reset] [get_bd_pins video_capture/vid_io_in_reset]
   connect_bd_net -net video_capture_aresetn [get_bd_pins axi_interconnect_0/M10_ARESETN] [get_bd_pins axi_interconnect_0/M11_ARESETN] [get_bd_pins video_capture/aresetn]
+  connect_bd_net -net video_capture_axis_wr_data_count_0 [get_bd_ports vid_fifo_count] [get_bd_pins video_capture/fifo_count]
   connect_bd_net -net video_capture_dma_interrupt [get_bd_pins video_capture/dma_interrupt] [get_bd_pins xlconcat_1/In3]
   connect_bd_net -net video_capture_overflow [get_bd_ports vid_overflow] [get_bd_pins video_capture/overflow]
   connect_bd_net -net video_capture_vtc_locked [get_bd_ports vtc_locked] [get_bd_pins video_capture/vtc_locked]
   connect_bd_net -net xlconcat_0_dout [get_bd_pins ps7_0/GPIO_I] [get_bd_pins xlconcat_0/dout]
-  set_property -dict [ list \
-HDL_ATTRIBUTE.DEBUG {true} \
- ] [get_bd_nets xlconcat_0_dout]
   connect_bd_net -net xlconcat_1_dout [get_bd_pins ps7_0/IRQ_F2P] [get_bd_pins xlconcat_1/dout]
   connect_bd_net -net xlconstant_0_dout [get_bd_pins xlconcat_0/In0] [get_bd_pins xlconstant_0/dout]
   connect_bd_net -net xlslice_0_Dout [get_bd_ports progb] [get_bd_pins xlslice_0/Dout]

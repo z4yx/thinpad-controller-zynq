@@ -1,8 +1,8 @@
 //Copyright 1986-2017 Xilinx, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2017.3 (lin64) Build 2018833 Wed Oct  4 19:58:07 MDT 2017
-//Date        : Mon Feb 26 11:02:52 2018
-//Host        : nuc6i7 running 64-bit Ubuntu 16.04.4 LTS
+//Date        : Tue Aug 21 12:06:16 2018
+//Host        : nuc6i7 running 64-bit Ubuntu 18.04.1 LTS
 //Command     : generate_target design_1_wrapper.bd
 //Design      : design_1_wrapper
 //Purpose     : IP block netlist
@@ -96,16 +96,18 @@ module design_1_wrapper
     tap_tdi_0,
     tap_tdo_0,
     tap_tms_0,
+    vid_axis_rst_n,
+    vid_axis_tdata,
+    vid_axis_tlast,
+    vid_axis_tready,
+    vid_axis_tuser,
+    vid_axis_tvalid,
+    vid_fifo_count,
     vid_in_clk,
-    vid_io_in_active_video,
-    vid_io_in_data,
-    vid_io_in_field,
-    vid_io_in_hblank,
-    vid_io_in_hsync,
-    vid_io_in_reset,
-    vid_io_in_vblank,
-    vid_io_in_vsync,
     vid_overflow,
+    vid_timing_in_active_video,
+    vid_timing_in_hsync,
+    vid_timing_in_vsync,
     vtc_locked);
   inout [14:0]DDR_addr;
   inout [2:0]DDR_ba;
@@ -193,16 +195,18 @@ module design_1_wrapper
   output tap_tdi_0;
   input tap_tdo_0;
   output tap_tms_0;
+  input vid_axis_rst_n;
+  input [7:0]vid_axis_tdata;
+  input vid_axis_tlast;
+  output vid_axis_tready;
+  input [0:0]vid_axis_tuser;
+  input vid_axis_tvalid;
+  output [9:0]vid_fifo_count;
   input vid_in_clk;
-  input vid_io_in_active_video;
-  input [23:0]vid_io_in_data;
-  input vid_io_in_field;
-  input vid_io_in_hblank;
-  input vid_io_in_hsync;
-  input vid_io_in_reset;
-  input vid_io_in_vblank;
-  input vid_io_in_vsync;
   output vid_overflow;
+  input vid_timing_in_active_video;
+  input vid_timing_in_hsync;
+  input vid_timing_in_vsync;
   output [0:0]vtc_locked;
 
   wire [14:0]DDR_addr;
@@ -441,16 +445,18 @@ module design_1_wrapper
   wire tap_tdi_0;
   wire tap_tdo_0;
   wire tap_tms_0;
+  wire vid_axis_rst_n;
+  wire [7:0]vid_axis_tdata;
+  wire vid_axis_tlast;
+  wire vid_axis_tready;
+  wire [0:0]vid_axis_tuser;
+  wire vid_axis_tvalid;
+  wire [9:0]vid_fifo_count;
   wire vid_in_clk;
-  wire vid_io_in_active_video;
-  wire [23:0]vid_io_in_data;
-  wire vid_io_in_field;
-  wire vid_io_in_hblank;
-  wire vid_io_in_hsync;
-  wire vid_io_in_reset;
-  wire vid_io_in_vblank;
-  wire vid_io_in_vsync;
   wire vid_overflow;
+  wire vid_timing_in_active_video;
+  wire vid_timing_in_hsync;
+  wire vid_timing_in_vsync;
   wire [0:0]vtc_locked;
 
   design_1 design_1_i
@@ -544,16 +550,18 @@ module design_1_wrapper
         .tap_tdi_0(tap_tdi_0),
         .tap_tdo_0(tap_tdo_0),
         .tap_tms_0(tap_tms_0),
+        .vid_axis_rst_n(vid_axis_rst_n),
+        .vid_axis_tdata(vid_axis_tdata),
+        .vid_axis_tlast(vid_axis_tlast),
+        .vid_axis_tready(vid_axis_tready),
+        .vid_axis_tuser(vid_axis_tuser),
+        .vid_axis_tvalid(vid_axis_tvalid),
+        .vid_fifo_count(vid_fifo_count),
         .vid_in_clk(vid_in_clk),
-        .vid_io_in_active_video(vid_io_in_active_video),
-        .vid_io_in_data(vid_io_in_data),
-        .vid_io_in_field(vid_io_in_field),
-        .vid_io_in_hblank(vid_io_in_hblank),
-        .vid_io_in_hsync(vid_io_in_hsync),
-        .vid_io_in_reset(vid_io_in_reset),
-        .vid_io_in_vblank(vid_io_in_vblank),
-        .vid_io_in_vsync(vid_io_in_vsync),
         .vid_overflow(vid_overflow),
+        .vid_timing_in_active_video(vid_timing_in_active_video),
+        .vid_timing_in_hsync(vid_timing_in_hsync),
+        .vid_timing_in_vsync(vid_timing_in_vsync),
         .vtc_locked(vtc_locked));
   IOBUF gpio_rtl_0_tri_iobuf_0
        (.I(gpio_rtl_0_tri_o_0),

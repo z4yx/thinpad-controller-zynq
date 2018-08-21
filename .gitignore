@@ -6,3 +6,7 @@ ipshared/
 *_stub.*
 *.dcp
 *.hwh
+ThinpadNG_Zynq7.cache/
+ThinpadNG_Zynq7.hw/
+ThinpadNG_Zynq7.ip_user_files/
+ThinpadNG_Zynq7.runs/

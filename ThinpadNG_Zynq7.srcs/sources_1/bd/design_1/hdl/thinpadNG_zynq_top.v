@@ -193,12 +193,18 @@ module thinpadNG_zynq_top(/*autoarg*/
     wire pp_rd, pp_rs, pp_wr;
 
     wire vid_overflow, vtc_locked;
+    wire [9:0]vid_fifo_count;
     wire vid_in_clk;
-    (* IOB = "true" *) reg [23:0]vid_io_in_data;
+    (* IOB = "true" *) reg [7:0]vid_io_in_data;
     (* IOB = "true" *) reg vid_io_in_hsync;
     (* IOB = "true" *) reg vid_io_in_vsync;
     (* IOB = "true" *) reg vid_io_in_active_video;
-    reg vid_io_in_reset;
+    wire vid_axis_rst_n;
+    wire [7:0]vid_axis_tdata;
+    wire vid_axis_tlast;
+    wire vid_axis_tready;
+    wire [0:0]vid_axis_tuser;
+    wire vid_axis_tvalid;
 
     design_1_wrapper block_design(/*autoinst*/
     .DDR_addr                   (DDR_addr[14:0]                 ), // inout
@@ -266,13 +272,18 @@ module thinpadNG_zynq_top(/*autoarg*/
     .pp_rs                  (pp_rs),
     .pp_wr                  (pp_wr),
     .vid_overflow           (vid_overflow),
+    .vid_fifo_count         (vid_fifo_count),
     .vtc_locked             (vtc_locked),
     .vid_in_clk             (vid_in_clk),
-    .vid_io_in_data         (vid_io_in_data),
-    .vid_io_in_hsync        (vid_io_in_hsync),
-    .vid_io_in_vsync        (vid_io_in_vsync),
-    .vid_io_in_active_video (vid_io_in_active_video),
-    .vid_io_in_reset        (vid_io_in_reset),
+    .vid_timing_in_hsync        (vid_io_in_hsync),
+    .vid_timing_in_vsync        (vid_io_in_vsync),
+    .vid_timing_in_active_video (vid_io_in_active_video),
+    .vid_axis_rst_n            (vid_axis_rst_n),
+    .vid_axis_tdata            (vid_axis_tdata),
+    .vid_axis_tlast            (vid_axis_tlast),
+    .vid_axis_tready           (vid_axis_tready),
+    .vid_axis_tuser            (vid_axis_tuser),
+    .vid_axis_tvalid           (vid_axis_tvalid),
     .initb                      (initb                          ), // input
     .progb                      (progb[0:0]                     ), // output
     .tap_tck_0                  (tap_tck),
@@ -297,7 +308,7 @@ module thinpadNG_zynq_top(/*autoarg*/
     parameter IO_PINS_AMOUNT = 10'd32;
     genvar i;
 
-    reg vid_reset_sync,vid_reset;
+    reg capture_start_in;
     reg io_enable;
     reg io_dir;
     reg bus_analyze_start;
@@ -351,7 +362,7 @@ module thinpadNG_zynq_top(/*autoarg*/
         bus_analyze_sample_cnt <= reg2port[32+20:32];
         bus_analyze_start <= reg2port[32+31]; //MSB
         /* I/O control register */
-        vid_reset <= reg2port[1]; // active high
+        capture_start_in <= reg2port[1]; // active high
         io_enable <= reg2port[0];  // 1 for enable
         io_dir <= (~emc_rtl_wen & emc_rtl_oen) ? 1'b1 : 1'b0; // 1 for output
     end
@@ -388,14 +399,34 @@ module thinpadNG_zynq_top(/*autoarg*/
         vid_io_in_active_video <= dvi_de;
         vid_io_in_vsync <= dvi_vs;
         vid_io_in_hsync <= dvi_hs;
-        vid_io_in_data <= {
-            dvi_d[7:5], dvi_d[7:5], dvi_d[7:6], //R
-            {4{dvi_d[1:0]}}, //B
-            dvi_d[4:2], dvi_d[4:2], dvi_d[4:3]  //G
-        };
-        vid_io_in_reset <= vid_reset_sync;
-        vid_reset_sync <= vid_reset;
+        vid_io_in_data <= dvi_d;
     end
+
+    wire image_capture_reset_n;
+    xpm_cdc_async_rst #(
+      .DEST_SYNC_FF    (2), // integer; range: 2-10
+      .INIT_SYNC_FF    (0), // integer; 0=disable simulation init values, 1=enable simulation init values
+      .RST_ACTIVE_HIGH (0)  // integer; 0=active low reset, 1=active high reset
+    ) reset_of_image_capture (
+      .src_arst  (vtc_locked),
+      .dest_clk  (vid_in_clk),
+      .dest_arst (image_capture_reset_n)
+    );
+
+    image_capture capture(
+        .start     (capture_start_in),
+        .pixel     (vid_io_in_data),
+        .hs        (vid_io_in_hsync),
+        .vs        (vid_io_in_vsync),
+        .de        (vid_io_in_active_video),
+        .axis_valid(vid_axis_tvalid),
+        .axis_last (vid_axis_tlast),
+        .axis_user (vid_axis_tuser),
+        .axis_data (vid_axis_tdata),
+        .reset_o_n (vid_axis_rst_n),
+        .rst_n     (image_capture_reset_n),
+        .clk       (vid_in_clk)
+    );
     
     /*
     reg [31:0] test_data;
@@ -478,7 +509,8 @@ module thinpadNG_zynq_top(/*autoarg*/
         .clk                   (la_fifo_aclk)
     );
 
-    assign status_reg = {24'b0,vtc_locked,vid_overflow,la_exist,sampler_idle,la_storage_overflow,lock_level};
+    assign status_reg = {14'b0,vid_fifo_count,
+                        vtc_locked,vid_overflow,la_exist,sampler_idle,la_storage_overflow,lock_level};
     assign port2reg = {received_data, status_reg};
 
     

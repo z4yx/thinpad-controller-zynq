@@ -2,10 +2,10 @@
 <Root MajorVersion="0" MinorVersion="33">
   <CompositeFile CompositeFileTopName="design_1" CanBeSetAsTop="false" CanDisplayChildGraph="true">
     <Description>Composite Fileset</Description>
-    <Generation Name="SYNTHESIS" State="GENERATED" Timestamp="1519614177"/>
-    <Generation Name="IMPLEMENTATION" State="GENERATED" Timestamp="1519614177"/>
-    <Generation Name="SIMULATION" State="GENERATED" Timestamp="1519614177"/>
-    <Generation Name="HW_HANDOFF" State="GENERATED" Timestamp="1519614177"/>
+    <Generation Name="SYNTHESIS" State="GENERATED" Timestamp="1534824381"/>
+    <Generation Name="IMPLEMENTATION" State="GENERATED" Timestamp="1534824381"/>
+    <Generation Name="SIMULATION" State="GENERATED" Timestamp="1534824381"/>
+    <Generation Name="HW_HANDOFF" State="GENERATED" Timestamp="1534824381"/>
     <FileCollection Name="SOURCES" Type="SOURCES">
       <File Name="ip/design_1_ps7_0_0/design_1_ps7_0_0.xci" Type="IP">
         <Instance HierarchyPath="ps7_0"/>
@@ -207,14 +207,6 @@
         <UsedIn Val="IMPLEMENTATION"/>
         <UsedIn Val="SIMULATION"/>
       </File>
-      <File Name="ip/design_1_v_vid_in_axi4s_0_0/design_1_v_vid_in_axi4s_0_0.xci" Type="IP">
-        <Instance HierarchyPath="video_capture/v_vid_in_axi4s_0"/>
-        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
-        <Library Name="xil_defaultlib"/>
-        <UsedIn Val="SYNTHESIS"/>
-        <UsedIn Val="IMPLEMENTATION"/>
-        <UsedIn Val="SIMULATION"/>
-      </File>
       <File Name="ip/design_1_smartconnect_0_0/design_1_smartconnect_0_0.xci" Type="IP">
         <Instance HierarchyPath="video_capture/smartconnect_0"/>
         <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
@@ -263,6 +255,22 @@
         <UsedIn Val="IMPLEMENTATION"/>
         <UsedIn Val="SIMULATION"/>
       </File>
+      <File Name="ip/design_1_debug_bridge_0_0/design_1_debug_bridge_0_0.xci" Type="IP">
+        <Instance HierarchyPath="debug_bridge_axi2jtag"/>
+        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
+        <Library Name="xil_defaultlib"/>
+        <UsedIn Val="SYNTHESIS"/>
+        <UsedIn Val="IMPLEMENTATION"/>
+        <UsedIn Val="SIMULATION"/>
+      </File>
+      <File Name="ip/design_1_fifo_generator_0_1/design_1_fifo_generator_0_1.xci" Type="IP">
+        <Instance HierarchyPath="video_capture/fifo_generator_0"/>
+        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
+        <Library Name="xil_defaultlib"/>
+        <UsedIn Val="SYNTHESIS"/>
+        <UsedIn Val="IMPLEMENTATION"/>
+        <UsedIn Val="SIMULATION"/>
+      </File>
       <File Name="synth/design_1.v" Type="Verilog">
         <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="false" IsStatusTracked="false"/>
         <Library Name="xil_defaultlib"/>
@@ -274,8 +282,48 @@
         <Library Name="xil_defaultlib"/>
         <UsedIn Val="SIMULATION"/>
       </File>
-      <File Name="ip/design_1_debug_bridge_0_0/design_1_debug_bridge_0_0.xci" Type="IP">
-        <Instance HierarchyPath="debug_bridge_axi2jtag"/>
+      <File Name="ip/design_1_rgb8_g_0/design_1_rgb8_g_0.xci" Type="IP">
+        <Instance HierarchyPath="video_capture/rgb8to24/rgb8_r"/>
+        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
+        <Library Name="xil_defaultlib"/>
+        <UsedIn Val="SYNTHESIS"/>
+        <UsedIn Val="IMPLEMENTATION"/>
+        <UsedIn Val="SIMULATION"/>
+      </File>
+      <File Name="ip/design_1_rgb8_b_0/design_1_rgb8_b_0.xci" Type="IP">
+        <Instance HierarchyPath="video_capture/rgb8to24/rgb8_g"/>
+        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
+        <Library Name="xil_defaultlib"/>
+        <UsedIn Val="SYNTHESIS"/>
+        <UsedIn Val="IMPLEMENTATION"/>
+        <UsedIn Val="SIMULATION"/>
+      </File>
+      <File Name="ip/design_1_xlslice_1_0/design_1_xlslice_1_0.xci" Type="IP">
+        <Instance HierarchyPath="video_capture/rgb8to24/rgb8_b"/>
+        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
+        <Library Name="xil_defaultlib"/>
+        <UsedIn Val="SYNTHESIS"/>
+        <UsedIn Val="IMPLEMENTATION"/>
+        <UsedIn Val="SIMULATION"/>
+      </File>
+      <File Name="ip/design_1_xlconcat_0_1/design_1_xlconcat_0_1.xci" Type="IP">
+        <Instance HierarchyPath="video_capture/rgb8to24/xlconcat_0"/>
+        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
+        <Library Name="xil_defaultlib"/>
+        <UsedIn Val="SYNTHESIS"/>
+        <UsedIn Val="IMPLEMENTATION"/>
+        <UsedIn Val="SIMULATION"/>
+      </File>
+      <File Name="ip/design_1_high2bit_0/design_1_high2bit_0.xci" Type="IP">
+        <Instance HierarchyPath="video_capture/rgb8to24/high2bit1"/>
+        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
+        <Library Name="xil_defaultlib"/>
+        <UsedIn Val="SYNTHESIS"/>
+        <UsedIn Val="IMPLEMENTATION"/>
+        <UsedIn Val="SIMULATION"/>
+      </File>
+      <File Name="ip/design_1_xlslice_1_1/design_1_xlslice_1_1.xci" Type="IP">
+        <Instance HierarchyPath="video_capture/rgb8to24/high2bit"/>
         <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
         <Library Name="xil_defaultlib"/>
         <UsedIn Val="SYNTHESIS"/>

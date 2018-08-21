@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<bd:repository xmlns:bd="http://www.xilinx.com/bd" bd:BoundaryCRC="0x179D8F85D4AD3B29" bd:device="xc7z020clg484-1" bd:isValidated="true" bd:synthFlowMode="Hierarchical" bd:tool_version="2017.3" bd:top="design_1" bd:version="1.00.a">
+<bd:repository xmlns:bd="http://www.xilinx.com/bd" bd:BoundaryCRC="0x248CA156E767C172" bd:device="xc7z020clg484-1" bd:isValidated="true" bd:synthFlowMode="Hierarchical" bd:tool_version="2017.3" bd:top="design_1" bd:version="1.00.a">
 
   <spirit:component xmlns:spirit="http://www.spiritconsortium.org/XMLSchema/SPIRIT/1685-2009">
     <spirit:vendor>xilinx.com</spirit:vendor>
@@ -403,10 +403,126 @@
         <spirit:abstractionType spirit:library="interface" spirit:name="uart_rtl" spirit:vendor="xilinx.com" spirit:version="1.0"/>
       </spirit:busInterface>
       <spirit:busInterface>
-        <spirit:name>vid_io_in</spirit:name>
+        <spirit:name>vid_axis</spirit:name>
         <spirit:slave/>
-        <spirit:busType spirit:library="interface" spirit:name="vid_io" spirit:vendor="xilinx.com" spirit:version="1.0"/>
-        <spirit:abstractionType spirit:library="interface" spirit:name="vid_io_rtl" spirit:vendor="xilinx.com" spirit:version="1.0"/>
+        <spirit:busType spirit:library="interface" spirit:name="axis" spirit:vendor="xilinx.com" spirit:version="1.0"/>
+        <spirit:abstractionType spirit:library="interface" spirit:name="axis_rtl" spirit:vendor="xilinx.com" spirit:version="1.0"/>
+        <spirit:parameters>
+          <spirit:parameter>
+            <spirit:name>TDATA_NUM_BYTES</spirit:name>
+            <spirit:value>1</spirit:value>
+            <spirit:vendorExtensions>
+              <bd:configElementInfos>
+                <bd:configElementInfo bd:valueSource="user"/>
+              </bd:configElementInfos>
+            </spirit:vendorExtensions>
+          </spirit:parameter>
+          <spirit:parameter>
+            <spirit:name>TDEST_WIDTH</spirit:name>
+            <spirit:value>0</spirit:value>
+            <spirit:vendorExtensions>
+              <bd:configElementInfos>
+                <bd:configElementInfo bd:valueSource="user"/>
+              </bd:configElementInfos>
+            </spirit:vendorExtensions>
+          </spirit:parameter>
+          <spirit:parameter>
+            <spirit:name>TID_WIDTH</spirit:name>
+            <spirit:value>0</spirit:value>
+            <spirit:vendorExtensions>
+              <bd:configElementInfos>
+                <bd:configElementInfo bd:valueSource="user"/>
+              </bd:configElementInfos>
+            </spirit:vendorExtensions>
+          </spirit:parameter>
+          <spirit:parameter>
+            <spirit:name>TUSER_WIDTH</spirit:name>
+            <spirit:value>1</spirit:value>
+            <spirit:vendorExtensions>
+              <bd:configElementInfos>
+                <bd:configElementInfo bd:valueSource="user"/>
+              </bd:configElementInfos>
+            </spirit:vendorExtensions>
+          </spirit:parameter>
+          <spirit:parameter>
+            <spirit:name>HAS_TREADY</spirit:name>
+            <spirit:value>1</spirit:value>
+            <spirit:vendorExtensions>
+              <bd:configElementInfos>
+                <bd:configElementInfo bd:valueSource="user"/>
+              </bd:configElementInfos>
+            </spirit:vendorExtensions>
+          </spirit:parameter>
+          <spirit:parameter>
+            <spirit:name>HAS_TSTRB</spirit:name>
+            <spirit:value>0</spirit:value>
+            <spirit:vendorExtensions>
+              <bd:configElementInfos>
+                <bd:configElementInfo bd:valueSource="user"/>
+              </bd:configElementInfos>
+            </spirit:vendorExtensions>
+          </spirit:parameter>
+          <spirit:parameter>
+            <spirit:name>HAS_TKEEP</spirit:name>
+            <spirit:value>0</spirit:value>
+            <spirit:vendorExtensions>
+              <bd:configElementInfos>
+                <bd:configElementInfo bd:valueSource="user"/>
+              </bd:configElementInfos>
+            </spirit:vendorExtensions>
+          </spirit:parameter>
+          <spirit:parameter>
+            <spirit:name>HAS_TLAST</spirit:name>
+            <spirit:value>1</spirit:value>
+            <spirit:vendorExtensions>
+              <bd:configElementInfos>
+                <bd:configElementInfo bd:valueSource="user"/>
+              </bd:configElementInfos>
+            </spirit:vendorExtensions>
+          </spirit:parameter>
+          <spirit:parameter>
+            <spirit:name>FREQ_HZ</spirit:name>
+            <spirit:value>150000000</spirit:value>
+            <spirit:vendorExtensions>
+              <bd:configElementInfos>
+                <bd:configElementInfo bd:valueSource="user"/>
+              </bd:configElementInfos>
+            </spirit:vendorExtensions>
+          </spirit:parameter>
+          <spirit:parameter>
+            <spirit:name>PHASE</spirit:name>
+            <spirit:value>0.000</spirit:value>
+            <spirit:vendorExtensions>
+              <bd:configElementInfos>
+                <bd:configElementInfo bd:valueSource="default"/>
+              </bd:configElementInfos>
+            </spirit:vendorExtensions>
+          </spirit:parameter>
+          <spirit:parameter>
+            <spirit:name>CLK_DOMAIN</spirit:name>
+            <spirit:value>design_1_vid_in_clk</spirit:value>
+            <spirit:vendorExtensions>
+              <bd:configElementInfos>
+                <bd:configElementInfo bd:valueSource="default"/>
+              </bd:configElementInfos>
+            </spirit:vendorExtensions>
+          </spirit:parameter>
+          <spirit:parameter>
+            <spirit:name>LAYERED_METADATA</spirit:name>
+            <spirit:value>undef</spirit:value>
+            <spirit:vendorExtensions>
+              <bd:configElementInfos>
+                <bd:configElementInfo bd:valueSource="user"/>
+              </bd:configElementInfos>
+            </spirit:vendorExtensions>
+          </spirit:parameter>
+        </spirit:parameters>
+      </spirit:busInterface>
+      <spirit:busInterface>
+        <spirit:name>vid_timing_in</spirit:name>
+        <spirit:slave/>
+        <spirit:busType spirit:library="interface" spirit:name="video_timing" spirit:vendor="xilinx.com" spirit:version="2.0"/>
+        <spirit:abstractionType spirit:library="interface" spirit:name="video_timing_rtl" spirit:vendor="xilinx.com" spirit:version="2.0"/>
       </spirit:busInterface>
       <spirit:busInterface>
         <spirit:name>CLK.CLK_OUT1</spirit:name>
@@ -840,10 +956,28 @@
               </bd:configElementInfos>
             </spirit:vendorExtensions>
           </spirit:parameter>
+          <spirit:parameter>
+            <spirit:name>ASSOCIATED_BUSIF</spirit:name>
+            <spirit:value>vid_axis</spirit:value>
+            <spirit:vendorExtensions>
+              <bd:configElementInfos>
+                <bd:configElementInfo bd:valueSource="user"/>
+              </bd:configElementInfos>
+            </spirit:vendorExtensions>
+          </spirit:parameter>
+          <spirit:parameter>
+            <spirit:name>ASSOCIATED_RESET</spirit:name>
+            <spirit:value>vid_axis_rst_n</spirit:value>
+            <spirit:vendorExtensions>
+              <bd:configElementInfos>
+                <bd:configElementInfo bd:valueSource="user"/>
+              </bd:configElementInfos>
+            </spirit:vendorExtensions>
+          </spirit:parameter>
         </spirit:parameters>
       </spirit:busInterface>
       <spirit:busInterface>
-        <spirit:name>RST.VID_IO_IN_RESET</spirit:name>
+        <spirit:name>RST.VID_AXIS_RST_N</spirit:name>
         <spirit:displayName>Reset</spirit:displayName>
         <spirit:description>Reset</spirit:description>
         <spirit:busType spirit:library="signal" spirit:name="reset" spirit:vendor="xilinx.com" spirit:version="1.0"/>
@@ -855,17 +989,17 @@
               <spirit:name>RST</spirit:name>
             </spirit:logicalPort>
             <spirit:physicalPort>
-              <spirit:name>vid_io_in_reset</spirit:name>
+              <spirit:name>vid_axis_rst_n</spirit:name>
             </spirit:physicalPort>
           </spirit:portMap>
         </spirit:portMaps>
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>POLARITY</spirit:name>
-            <spirit:value>ACTIVE_HIGH</spirit:value>
+            <spirit:value>ACTIVE_LOW</spirit:value>
             <spirit:vendorExtensions>
               <bd:configElementInfos>
-                <bd:configElementInfo bd:valueSource="user"/>
+                <bd:configElementInfo bd:valueSource="default"/>
               </bd:configElementInfos>
             </spirit:vendorExtensions>
           </spirit:parameter>
@@ -1174,12 +1308,6 @@
           </spirit:wire>
         </spirit:port>
         <spirit:port>
-          <spirit:name>vid_io_in_reset</spirit:name>
-          <spirit:wire>
-            <spirit:direction>in</spirit:direction>
-          </spirit:wire>
-        </spirit:port>
-        <spirit:port>
           <spirit:name>vid_overflow</spirit:name>
           <spirit:wire>
             <spirit:direction>out</spirit:direction>
@@ -1217,6 +1345,22 @@
           <spirit:name>tap_tdo_0</spirit:name>
           <spirit:wire>
             <spirit:direction>in</spirit:direction>
+          </spirit:wire>
+        </spirit:port>
+        <spirit:port>
+          <spirit:name>vid_axis_rst_n</spirit:name>
+          <spirit:wire>
+            <spirit:direction>in</spirit:direction>
+          </spirit:wire>
+        </spirit:port>
+        <spirit:port>
+          <spirit:name>vid_fifo_count</spirit:name>
+          <spirit:wire>
+            <spirit:direction>out</spirit:direction>
+            <spirit:vector>
+              <spirit:left>9</spirit:left>
+              <spirit:right>0</spirit:right>
+            </spirit:vector>
           </spirit:wire>
         </spirit:port>
       </spirit:ports>
@@ -2100,6 +2244,7 @@
         <spirit:internalPortReference spirit:componentRef="clk_wiz_0" spirit:portRef="clk_in1"/>
         <spirit:internalPortReference spirit:componentRef="proc_sys_reset_0" spirit:portRef="slowest_sync_clk"/>
         <spirit:internalPortReference spirit:componentRef="ps7_0" spirit:portRef="M_AXI_GP0_ACLK"/>
+        <spirit:internalPortReference spirit:componentRef="debug_bridge_axi2jtag" spirit:portRef="s_axi_aclk"/>
         <spirit:internalPortReference spirit:componentRef="bus_analyze" spirit:portRef="s_axi_lite_aclk"/>
         <spirit:internalPortReference spirit:componentRef="la_storage" spirit:portRef="s_axi_lite_aclk"/>
         <spirit:internalPortReference spirit:componentRef="axi_interconnect_0" spirit:portRef="ACLK"/>
@@ -2114,7 +2259,6 @@
         <spirit:internalPortReference spirit:componentRef="axi_interconnect_0" spirit:portRef="M07_ACLK"/>
         <spirit:internalPortReference spirit:componentRef="axi_interconnect_0" spirit:portRef="M08_ACLK"/>
         <spirit:internalPortReference spirit:componentRef="axi_interconnect_0" spirit:portRef="M09_ACLK"/>
-        <spirit:internalPortReference spirit:componentRef="debug_bridge_axi2jtag" spirit:portRef="s_axi_aclk"/>
         <spirit:internalPortReference spirit:componentRef="axi_interconnect_0" spirit:portRef="M12_ACLK"/>
       </spirit:adHocConnection>
       <spirit:adHocConnection>
@@ -2145,6 +2289,7 @@
         <spirit:internalPortReference spirit:componentRef="axi_gpio_2" spirit:portRef="s_axi_aresetn"/>
         <spirit:internalPortReference spirit:componentRef="axi_uart16550_0" spirit:portRef="s_axi_aresetn"/>
         <spirit:internalPortReference spirit:componentRef="clk_wiz_0" spirit:portRef="s_axi_aresetn"/>
+        <spirit:internalPortReference spirit:componentRef="debug_bridge_axi2jtag" spirit:portRef="s_axi_aresetn"/>
         <spirit:internalPortReference spirit:componentRef="bus_analyze" spirit:portRef="axi_resetn"/>
         <spirit:internalPortReference spirit:componentRef="la_storage" spirit:portRef="axi_resetn"/>
         <spirit:internalPortReference spirit:componentRef="axi_interconnect_0" spirit:portRef="S00_ARESETN"/>
@@ -2158,7 +2303,6 @@
         <spirit:internalPortReference spirit:componentRef="axi_interconnect_0" spirit:portRef="M07_ARESETN"/>
         <spirit:internalPortReference spirit:componentRef="axi_interconnect_0" spirit:portRef="M08_ARESETN"/>
         <spirit:internalPortReference spirit:componentRef="axi_interconnect_0" spirit:portRef="M09_ARESETN"/>
-        <spirit:internalPortReference spirit:componentRef="debug_bridge_axi2jtag" spirit:portRef="s_axi_aresetn"/>
         <spirit:internalPortReference spirit:componentRef="axi_interconnect_0" spirit:portRef="M12_ARESETN"/>
       </spirit:adHocConnection>
       <spirit:adHocConnection>
@@ -2188,10 +2332,6 @@
         <spirit:name>xlconcat_0_dout</spirit:name>
         <spirit:internalPortReference spirit:componentRef="xlconcat_0" spirit:portRef="dout"/>
         <spirit:internalPortReference spirit:componentRef="ps7_0" spirit:portRef="GPIO_I"/>
-        <bd:hdl_attributes>
-          <bd:hdl_attribute bd:name="DEBUG" bd:value="true"/>
-          <bd:hdl_attribute bd:name="MARK_DEBUG" bd:value="true"/>
-        </bd:hdl_attributes>
       </spirit:adHocConnection>
       <spirit:adHocConnection>
         <spirit:name>initb_1</spirit:name>
@@ -2240,9 +2380,6 @@
         <spirit:name>bus_analyze_s2mm_introut</spirit:name>
         <spirit:internalPortReference spirit:componentRef="bus_analyze" spirit:portRef="s2mm_introut"/>
         <spirit:internalPortReference spirit:componentRef="xlconcat_1" spirit:portRef="In1"/>
-        <bd:hdl_attributes>
-          <bd:hdl_attribute bd:name="DEBUG" bd:value="true"/>
-        </bd:hdl_attributes>
       </spirit:adHocConnection>
       <spirit:adHocConnection>
         <spirit:name>axi_emc_0_mem_a</spirit:name>
@@ -2308,9 +2445,6 @@
         <spirit:name>la_storage_s2mm_introut</spirit:name>
         <spirit:internalPortReference spirit:componentRef="la_storage" spirit:portRef="s2mm_introut"/>
         <spirit:internalPortReference spirit:componentRef="xlconcat_1" spirit:portRef="In2"/>
-        <bd:hdl_attributes>
-          <bd:hdl_attribute bd:name="DEBUG" bd:value="true"/>
-        </bd:hdl_attributes>
       </spirit:adHocConnection>
       <spirit:adHocConnection>
         <spirit:name>la_storage_peripheral_aresetn</spirit:name>
@@ -2399,11 +2533,6 @@
         <spirit:internalPortReference spirit:componentRef="xlconcat_1" spirit:portRef="In3"/>
       </spirit:adHocConnection>
       <spirit:adHocConnection>
-        <spirit:name>vid_io_in_reset_1</spirit:name>
-        <spirit:externalPortReference spirit:portRef="vid_io_in_reset"/>
-        <spirit:internalPortReference spirit:componentRef="video_capture" spirit:portRef="vid_io_in_reset"/>
-      </spirit:adHocConnection>
-      <spirit:adHocConnection>
         <spirit:name>video_capture_overflow</spirit:name>
         <spirit:internalPortReference spirit:componentRef="video_capture" spirit:portRef="overflow"/>
         <spirit:externalPortReference spirit:portRef="vid_overflow"/>
@@ -2439,6 +2568,23 @@
         <spirit:externalPortReference spirit:portRef="tap_tdo_0"/>
         <spirit:internalPortReference spirit:componentRef="debug_bridge_axi2jtag" spirit:portRef="tap_tdo"/>
       </spirit:adHocConnection>
+      <spirit:adHocConnection>
+        <spirit:name>s_aresetn_0_1</spirit:name>
+        <spirit:externalPortReference spirit:portRef="vid_axis_rst_n"/>
+        <spirit:internalPortReference spirit:componentRef="video_capture" spirit:portRef="vid_axis_rst_n"/>
+        <bd:hdl_attributes>
+          <bd:hdl_attribute bd:name="DEBUG" bd:value="true"/>
+          <bd:hdl_attribute bd:name="MARK_DEBUG" bd:value="true"/>
+        </bd:hdl_attributes>
+      </spirit:adHocConnection>
+      <spirit:adHocConnection>
+        <spirit:name>video_capture_axis_wr_data_count_0</spirit:name>
+        <spirit:internalPortReference spirit:componentRef="video_capture" spirit:portRef="fifo_count"/>
+        <spirit:externalPortReference spirit:portRef="vid_fifo_count"/>
+        <bd:hdl_attributes>
+          <bd:hdl_attribute bd:name="DEBUG" bd:value="true"/>
+        </bd:hdl_attributes>
+      </spirit:adHocConnection>
     </spirit:adHocConnections>
     <spirit:hierConnections>
       <spirit:hierConnection spirit:interfaceRef="DDR/processing_system7_0_DDR">
@@ -2465,8 +2611,19 @@
       <spirit:hierConnection spirit:interfaceRef="UART_CPLD/axi_uart16550_0_UART">
         <spirit:activeInterface spirit:busRef="UART" spirit:componentRef="axi_uart16550_0"/>
       </spirit:hierConnection>
-      <spirit:hierConnection spirit:interfaceRef="vid_io_in/vid_io_in_1">
-        <spirit:activeInterface spirit:busRef="vid_io_in" spirit:componentRef="video_capture"/>
+      <spirit:hierConnection spirit:interfaceRef="vid_axis/S_AXIS_0_1">
+        <spirit:activeInterface spirit:busRef="vid_axis" spirit:componentRef="video_capture"/>
+        <bd:hdl_attributes>
+          <bd:hdl_attribute bd:name="DEBUG" bd:value="true"/>
+          <bd:hdl_attribute bd:name="MARK_DEBUG" bd:value="true"/>
+        </bd:hdl_attributes>
+      </spirit:hierConnection>
+      <spirit:hierConnection spirit:interfaceRef="vid_timing_in/vtiming_in_0_1">
+        <spirit:activeInterface spirit:busRef="vid_timing_in" spirit:componentRef="video_capture"/>
+        <bd:hdl_attributes>
+          <bd:hdl_attribute bd:name="DEBUG" bd:value="true"/>
+          <bd:hdl_attribute bd:name="MARK_DEBUG" bd:value="true"/>
+        </bd:hdl_attributes>
       </spirit:hierConnection>
     </spirit:hierConnections>
   </spirit:design>
@@ -6480,13 +6637,19 @@
         <spirit:abstractionType spirit:library="interface" spirit:name="aximm_rtl" spirit:vendor="xilinx.com" spirit:version="1.0"/>
       </spirit:busInterface>
       <spirit:busInterface>
-        <spirit:name>vid_io_in</spirit:name>
+        <spirit:name>vid_axis</spirit:name>
         <spirit:slave/>
-        <spirit:busType spirit:library="interface" spirit:name="vid_io" spirit:vendor="xilinx.com" spirit:version="1.0"/>
-        <spirit:abstractionType spirit:library="interface" spirit:name="vid_io_rtl" spirit:vendor="xilinx.com" spirit:version="1.0"/>
+        <spirit:busType spirit:library="interface" spirit:name="axis" spirit:vendor="xilinx.com" spirit:version="1.0"/>
+        <spirit:abstractionType spirit:library="interface" spirit:name="axis_rtl" spirit:vendor="xilinx.com" spirit:version="1.0"/>
       </spirit:busInterface>
       <spirit:busInterface>
-        <spirit:name>RST.VID_IO_IN_RESET</spirit:name>
+        <spirit:name>vid_timing_in</spirit:name>
+        <spirit:slave/>
+        <spirit:busType spirit:library="interface" spirit:name="video_timing" spirit:vendor="xilinx.com" spirit:version="2.0"/>
+        <spirit:abstractionType spirit:library="interface" spirit:name="video_timing_rtl" spirit:vendor="xilinx.com" spirit:version="2.0"/>
+      </spirit:busInterface>
+      <spirit:busInterface>
+        <spirit:name>RST.VID_AXIS_RST_N</spirit:name>
         <spirit:displayName>Reset</spirit:displayName>
         <spirit:description>Reset</spirit:description>
         <spirit:busType spirit:library="signal" spirit:name="reset" spirit:vendor="xilinx.com" spirit:version="1.0"/>
@@ -6498,7 +6661,7 @@
               <spirit:name>RST</spirit:name>
             </spirit:logicalPort>
             <spirit:physicalPort>
-              <spirit:name>vid_io_in_reset</spirit:name>
+              <spirit:name>vid_axis_rst_n</spirit:name>
             </spirit:physicalPort>
           </spirit:portMap>
         </spirit:portMaps>
@@ -6542,12 +6705,6 @@
           </spirit:wire>
         </spirit:port>
         <spirit:port>
-          <spirit:name>vid_io_in_reset</spirit:name>
-          <spirit:wire>
-            <spirit:direction>in</spirit:direction>
-          </spirit:wire>
-        </spirit:port>
-        <spirit:port>
           <spirit:name>ext_reset_in</spirit:name>
           <spirit:wire>
             <spirit:direction>in</spirit:direction>
@@ -6565,6 +6722,22 @@
             <spirit:direction>out</spirit:direction>
             <spirit:vector>
               <spirit:left>0</spirit:left>
+              <spirit:right>0</spirit:right>
+            </spirit:vector>
+          </spirit:wire>
+        </spirit:port>
+        <spirit:port>
+          <spirit:name>vid_axis_rst_n</spirit:name>
+          <spirit:wire>
+            <spirit:direction>in</spirit:direction>
+          </spirit:wire>
+        </spirit:port>
+        <spirit:port>
+          <spirit:name>fifo_count</spirit:name>
+          <spirit:wire>
+            <spirit:direction>out</spirit:direction>
+            <spirit:vector>
+              <spirit:left>9</spirit:left>
               <spirit:right>0</spirit:right>
             </spirit:vector>
           </spirit:wire>
@@ -6639,13 +6812,31 @@
         </spirit:configurableElementValues>
       </spirit:componentInstance>
       <spirit:componentInstance>
-        <spirit:instanceName>v_vid_in_axi4s_0</spirit:instanceName>
-        <spirit:componentRef spirit:library="ip" spirit:name="v_vid_in_axi4s" spirit:vendor="xilinx.com" spirit:version="4.0"/>
+        <spirit:instanceName>fifo_generator_0</spirit:instanceName>
+        <spirit:componentRef spirit:library="ip" spirit:name="fifo_generator" spirit:vendor="xilinx.com" spirit:version="13.2"/>
         <spirit:configurableElementValues>
-          <spirit:configurableElementValue spirit:referenceId="bd:xciName">design_1_v_vid_in_axi4s_0_0</spirit:configurableElementValue>
-          <spirit:configurableElementValue spirit:referenceId="C_PIXELS_PER_CLOCK">1</spirit:configurableElementValue>
-          <spirit:configurableElementValue spirit:referenceId="C_HAS_ASYNC_CLK">1</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="bd:xciName">design_1_fifo_generator_0_1</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="INTERFACE_TYPE">AXI_STREAM</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="Full_Flags_Reset_Value">1</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="Clock_Type_AXI">Independent_Clock</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="TUSER_WIDTH">1</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="Enable_TLAST">true</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="FIFO_Implementation_wach">Independent_Clocks_Distributed_RAM</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="FIFO_Implementation_wdch">Independent_Clocks_Block_RAM</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="FIFO_Implementation_wrch">Independent_Clocks_Distributed_RAM</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="FIFO_Implementation_rach">Independent_Clocks_Distributed_RAM</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="FIFO_Implementation_rdch">Independent_Clocks_Block_RAM</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="FIFO_Implementation_axis">Independent_Clocks_Block_RAM</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="FIFO_Application_Type_axis">Data_FIFO</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="Input_Depth_axis">512</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="Enable_Data_Counts_axis">true</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="Overflow_Flag_AXI">true</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="Enable_Safety_Circuit">true</spirit:configurableElementValue>
         </spirit:configurableElementValues>
+      </spirit:componentInstance>
+      <spirit:componentInstance>
+        <spirit:instanceName>rgb8to24</spirit:instanceName>
+        <spirit:componentRef spirit:library="BlockDiagram/design_1_imp/video_capture_imp" spirit:name="rgb8to24" spirit:vendor="xilinx.com" spirit:version="1.00.a"/>
       </spirit:componentInstance>
     </spirit:componentInstances>
     <spirit:interconnections>
@@ -6653,20 +6844,6 @@
         <spirit:name>v_frmbuf_wr_0_m_axi_mm_video</spirit:name>
         <spirit:activeInterface spirit:busRef="m_axi_mm_video" spirit:componentRef="v_frmbuf_wr_0"/>
         <spirit:activeInterface spirit:busRef="S00_AXI" spirit:componentRef="smartconnect_0"/>
-      </spirit:interconnection>
-      <spirit:interconnection>
-        <spirit:name>v_vid_in_axi4s_0_video_out</spirit:name>
-        <spirit:activeInterface spirit:busRef="video_out" spirit:componentRef="v_vid_in_axi4s_0"/>
-        <spirit:activeInterface spirit:busRef="s_axis_video" spirit:componentRef="v_frmbuf_wr_0"/>
-        <bd:hdl_attributes>
-          <bd:hdl_attribute bd:name="DEBUG" bd:value="true"/>
-          <bd:hdl_attribute bd:name="MARK_DEBUG" bd:value="true"/>
-        </bd:hdl_attributes>
-      </spirit:interconnection>
-      <spirit:interconnection>
-        <spirit:name>v_vid_in_axi4s_0_vtiming_out</spirit:name>
-        <spirit:activeInterface spirit:busRef="vtiming_out" spirit:componentRef="v_vid_in_axi4s_0"/>
-        <spirit:activeInterface spirit:busRef="vtiming_in" spirit:componentRef="v_tc_0"/>
       </spirit:interconnection>
     </spirit:interconnections>
     <spirit:adHocConnections>
@@ -6682,7 +6859,7 @@
         <spirit:internalPortReference spirit:componentRef="smartconnect_0" spirit:portRef="aclk"/>
         <spirit:internalPortReference spirit:componentRef="v_frmbuf_wr_0" spirit:portRef="ap_clk"/>
         <spirit:internalPortReference spirit:componentRef="v_tc_0" spirit:portRef="s_axi_aclk"/>
-        <spirit:internalPortReference spirit:componentRef="v_vid_in_axi4s_0" spirit:portRef="aclk"/>
+        <spirit:internalPortReference spirit:componentRef="fifo_generator_0" spirit:portRef="m_aclk"/>
       </spirit:adHocConnection>
       <spirit:adHocConnection>
         <spirit:name>proc_sys_reset_0_peripheral_aresetn</spirit:name>
@@ -6690,23 +6867,17 @@
         <spirit:externalPortReference spirit:portRef="aresetn"/>
         <spirit:internalPortReference spirit:componentRef="v_frmbuf_wr_0" spirit:portRef="ap_rst_n"/>
         <spirit:internalPortReference spirit:componentRef="v_tc_0" spirit:portRef="s_axi_aresetn"/>
-        <spirit:internalPortReference spirit:componentRef="v_vid_in_axi4s_0" spirit:portRef="aresetn"/>
       </spirit:adHocConnection>
       <spirit:adHocConnection>
         <spirit:name>vid_in_clk_1</spirit:name>
         <spirit:externalPortReference spirit:portRef="vid_in_clk"/>
         <spirit:internalPortReference spirit:componentRef="v_tc_0" spirit:portRef="clk"/>
-        <spirit:internalPortReference spirit:componentRef="v_vid_in_axi4s_0" spirit:portRef="vid_io_in_clk"/>
+        <spirit:internalPortReference spirit:componentRef="fifo_generator_0" spirit:portRef="s_aclk"/>
       </spirit:adHocConnection>
       <spirit:adHocConnection>
         <spirit:name>v_frmbuf_wr_0_interrupt</spirit:name>
         <spirit:internalPortReference spirit:componentRef="v_frmbuf_wr_0" spirit:portRef="interrupt"/>
         <spirit:externalPortReference spirit:portRef="dma_interrupt"/>
-      </spirit:adHocConnection>
-      <spirit:adHocConnection>
-        <spirit:name>vid_io_in_reset_1</spirit:name>
-        <spirit:externalPortReference spirit:portRef="vid_io_in_reset"/>
-        <spirit:internalPortReference spirit:componentRef="v_vid_in_axi4s_0" spirit:portRef="vid_io_in_reset"/>
       </spirit:adHocConnection>
       <spirit:adHocConnection>
         <spirit:name>xlconstant_0_dout</spirit:name>
@@ -6715,8 +6886,6 @@
         <spirit:internalPortReference spirit:componentRef="v_tc_0" spirit:portRef="s_axi_aclken"/>
         <spirit:internalPortReference spirit:componentRef="v_tc_0" spirit:portRef="det_clken"/>
         <spirit:internalPortReference spirit:componentRef="v_tc_0" spirit:portRef="resetn"/>
-        <spirit:internalPortReference spirit:componentRef="v_vid_in_axi4s_0" spirit:portRef="vid_io_in_ce"/>
-        <spirit:internalPortReference spirit:componentRef="v_vid_in_axi4s_0" spirit:portRef="aclken"/>
       </spirit:adHocConnection>
       <spirit:adHocConnection>
         <spirit:name>ext_reset_in_1</spirit:name>
@@ -6732,16 +6901,61 @@
         <spirit:name>xlslice_0_Dout</spirit:name>
         <spirit:internalPortReference spirit:componentRef="xlslice_0" spirit:portRef="Dout"/>
         <spirit:externalPortReference spirit:portRef="vtc_locked"/>
-        <spirit:internalPortReference spirit:componentRef="v_vid_in_axi4s_0" spirit:portRef="axis_enable"/>
         <bd:hdl_attributes>
           <bd:hdl_attribute bd:name="DEBUG" bd:value="true"/>
           <bd:hdl_attribute bd:name="MARK_DEBUG" bd:value="true"/>
         </bd:hdl_attributes>
       </spirit:adHocConnection>
       <spirit:adHocConnection>
-        <spirit:name>v_vid_in_axi4s_0_overflow</spirit:name>
-        <spirit:internalPortReference spirit:componentRef="v_vid_in_axi4s_0" spirit:portRef="overflow"/>
+        <spirit:name>fifo_generator_0_axis_overflow</spirit:name>
+        <spirit:internalPortReference spirit:componentRef="fifo_generator_0" spirit:portRef="axis_overflow"/>
         <spirit:externalPortReference spirit:portRef="overflow"/>
+        <bd:hdl_attributes>
+          <bd:hdl_attribute bd:name="DEBUG" bd:value="true"/>
+        </bd:hdl_attributes>
+      </spirit:adHocConnection>
+      <spirit:adHocConnection>
+        <spirit:name>fifo_generator_0_m_axis_tvalid</spirit:name>
+        <spirit:internalPortReference spirit:componentRef="fifo_generator_0" spirit:portRef="m_axis_tvalid"/>
+        <spirit:internalPortReference spirit:componentRef="v_frmbuf_wr_0" spirit:portRef="s_axis_video_TVALID"/>
+      </spirit:adHocConnection>
+      <spirit:adHocConnection>
+        <spirit:name>fifo_generator_0_m_axis_tuser</spirit:name>
+        <spirit:internalPortReference spirit:componentRef="fifo_generator_0" spirit:portRef="m_axis_tuser"/>
+        <spirit:internalPortReference spirit:componentRef="v_frmbuf_wr_0" spirit:portRef="s_axis_video_TUSER"/>
+      </spirit:adHocConnection>
+      <spirit:adHocConnection>
+        <spirit:name>fifo_generator_0_m_axis_tlast</spirit:name>
+        <spirit:internalPortReference spirit:componentRef="fifo_generator_0" spirit:portRef="m_axis_tlast"/>
+        <spirit:internalPortReference spirit:componentRef="v_frmbuf_wr_0" spirit:portRef="s_axis_video_TLAST"/>
+      </spirit:adHocConnection>
+      <spirit:adHocConnection>
+        <spirit:name>v_frmbuf_wr_0_s_axis_video_TREADY</spirit:name>
+        <spirit:internalPortReference spirit:componentRef="v_frmbuf_wr_0" spirit:portRef="s_axis_video_TREADY"/>
+        <spirit:internalPortReference spirit:componentRef="fifo_generator_0" spirit:portRef="m_axis_tready"/>
+      </spirit:adHocConnection>
+      <spirit:adHocConnection>
+        <spirit:name>s_aresetn_0_1</spirit:name>
+        <spirit:externalPortReference spirit:portRef="vid_axis_rst_n"/>
+        <spirit:internalPortReference spirit:componentRef="fifo_generator_0" spirit:portRef="s_aresetn"/>
+        <bd:hdl_attributes>
+          <bd:hdl_attribute bd:name="DEBUG" bd:value="true"/>
+        </bd:hdl_attributes>
+      </spirit:adHocConnection>
+      <spirit:adHocConnection>
+        <spirit:name>xlconcat_0_dout</spirit:name>
+        <spirit:internalPortReference spirit:componentRef="rgb8to24" spirit:portRef="dout"/>
+        <spirit:internalPortReference spirit:componentRef="v_frmbuf_wr_0" spirit:portRef="s_axis_video_TDATA"/>
+      </spirit:adHocConnection>
+      <spirit:adHocConnection>
+        <spirit:name>fifo_generator_0_m_axis_tdata</spirit:name>
+        <spirit:internalPortReference spirit:componentRef="fifo_generator_0" spirit:portRef="m_axis_tdata"/>
+        <spirit:internalPortReference spirit:componentRef="rgb8to24" spirit:portRef="Din"/>
+      </spirit:adHocConnection>
+      <spirit:adHocConnection>
+        <spirit:name>fifo_generator_0_axis_wr_data_count</spirit:name>
+        <spirit:internalPortReference spirit:componentRef="fifo_generator_0" spirit:portRef="axis_wr_data_count"/>
+        <spirit:externalPortReference spirit:portRef="fifo_count"/>
         <bd:hdl_attributes>
           <bd:hdl_attribute bd:name="DEBUG" bd:value="true"/>
           <bd:hdl_attribute bd:name="MARK_DEBUG" bd:value="true"/>
@@ -6758,10 +6972,175 @@
       <spirit:hierConnection spirit:interfaceRef="dma_ctrl/dma_ctrl_1">
         <spirit:activeInterface spirit:busRef="s_axi_CTRL" spirit:componentRef="v_frmbuf_wr_0"/>
       </spirit:hierConnection>
-      <spirit:hierConnection spirit:interfaceRef="vid_io_in/Conn1">
-        <spirit:activeInterface spirit:busRef="vid_io_in" spirit:componentRef="v_vid_in_axi4s_0"/>
+      <spirit:hierConnection spirit:interfaceRef="vid_axis/Conn2">
+        <spirit:activeInterface spirit:busRef="S_AXIS" spirit:componentRef="fifo_generator_0"/>
+        <bd:hdl_attributes>
+          <bd:hdl_attribute bd:name="DEBUG" bd:value="true"/>
+        </bd:hdl_attributes>
+      </spirit:hierConnection>
+      <spirit:hierConnection spirit:interfaceRef="vid_timing_in/Conn1">
+        <spirit:activeInterface spirit:busRef="vtiming_in" spirit:componentRef="v_tc_0"/>
+        <bd:hdl_attributes>
+          <bd:hdl_attribute bd:name="DEBUG" bd:value="true"/>
+        </bd:hdl_attributes>
       </spirit:hierConnection>
     </spirit:hierConnections>
+  </spirit:design>
+
+  <spirit:component xmlns:spirit="http://www.spiritconsortium.org/XMLSchema/SPIRIT/1685-2009">
+    <spirit:vendor>xilinx.com</spirit:vendor>
+    <spirit:library>BlockDiagram/design_1_imp/video_capture_imp</spirit:library>
+    <spirit:name>rgb8to24</spirit:name>
+    <spirit:version>1.00.a</spirit:version>
+    <spirit:model>
+      <spirit:views>
+        <spirit:view>
+          <spirit:name>BlockDiagram</spirit:name>
+          <spirit:envIdentifier>:vivado.xilinx.com:</spirit:envIdentifier>
+          <spirit:hierarchyRef spirit:library="BlockDiagram/design_1_imp/video_capture_imp" spirit:name="rgb8to24_imp" spirit:vendor="xilinx.com" spirit:version="1.00.a"/>
+        </spirit:view>
+      </spirit:views>
+      <spirit:ports>
+        <spirit:port>
+          <spirit:name>Din</spirit:name>
+          <spirit:wire>
+            <spirit:direction>in</spirit:direction>
+            <spirit:vector>
+              <spirit:left>7</spirit:left>
+              <spirit:right>0</spirit:right>
+            </spirit:vector>
+          </spirit:wire>
+        </spirit:port>
+        <spirit:port>
+          <spirit:name>dout</spirit:name>
+          <spirit:wire>
+            <spirit:direction>out</spirit:direction>
+            <spirit:vector>
+              <spirit:left>23</spirit:left>
+              <spirit:right>0</spirit:right>
+            </spirit:vector>
+          </spirit:wire>
+        </spirit:port>
+      </spirit:ports>
+    </spirit:model>
+  </spirit:component>
+
+  <spirit:design xmlns:spirit="http://www.spiritconsortium.org/XMLSchema/SPIRIT/1685-2009">
+    <spirit:vendor>xilinx.com</spirit:vendor>
+    <spirit:library>BlockDiagram/design_1_imp/video_capture_imp</spirit:library>
+    <spirit:name>rgb8to24_imp</spirit:name>
+    <spirit:version>1.00.a</spirit:version>
+    <spirit:componentInstances>
+      <spirit:componentInstance>
+        <spirit:instanceName>rgb8_r</spirit:instanceName>
+        <spirit:componentRef spirit:library="ip" spirit:name="xlslice" spirit:vendor="xilinx.com" spirit:version="1.0"/>
+        <spirit:configurableElementValues>
+          <spirit:configurableElementValue spirit:referenceId="bd:xciName">design_1_rgb8_g_0</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="DIN_TO">5</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="DIN_FROM">7</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="DIN_WIDTH">8</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="DOUT_WIDTH">3</spirit:configurableElementValue>
+        </spirit:configurableElementValues>
+      </spirit:componentInstance>
+      <spirit:componentInstance>
+        <spirit:instanceName>rgb8_g</spirit:instanceName>
+        <spirit:componentRef spirit:library="ip" spirit:name="xlslice" spirit:vendor="xilinx.com" spirit:version="1.0"/>
+        <spirit:configurableElementValues>
+          <spirit:configurableElementValue spirit:referenceId="bd:xciName">design_1_rgb8_b_0</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="DIN_TO">2</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="DIN_FROM">4</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="DIN_WIDTH">8</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="DOUT_WIDTH">3</spirit:configurableElementValue>
+        </spirit:configurableElementValues>
+      </spirit:componentInstance>
+      <spirit:componentInstance>
+        <spirit:instanceName>rgb8_b</spirit:instanceName>
+        <spirit:componentRef spirit:library="ip" spirit:name="xlslice" spirit:vendor="xilinx.com" spirit:version="1.0"/>
+        <spirit:configurableElementValues>
+          <spirit:configurableElementValue spirit:referenceId="bd:xciName">design_1_xlslice_1_0</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="DIN_TO">0</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="DIN_FROM">1</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="DIN_WIDTH">8</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="DOUT_WIDTH">2</spirit:configurableElementValue>
+        </spirit:configurableElementValues>
+      </spirit:componentInstance>
+      <spirit:componentInstance>
+        <spirit:instanceName>xlconcat_0</spirit:instanceName>
+        <spirit:componentRef spirit:library="ip" spirit:name="xlconcat" spirit:vendor="xilinx.com" spirit:version="2.1"/>
+        <spirit:configurableElementValues>
+          <spirit:configurableElementValue spirit:referenceId="bd:xciName">design_1_xlconcat_0_1</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="NUM_PORTS">10</spirit:configurableElementValue>
+        </spirit:configurableElementValues>
+      </spirit:componentInstance>
+      <spirit:componentInstance>
+        <spirit:instanceName>high2bit1</spirit:instanceName>
+        <spirit:componentRef spirit:library="ip" spirit:name="xlslice" spirit:vendor="xilinx.com" spirit:version="1.0"/>
+        <spirit:configurableElementValues>
+          <spirit:configurableElementValue spirit:referenceId="bd:xciName">design_1_high2bit_0</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="DIN_TO">1</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="DIN_FROM">2</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="DIN_WIDTH">3</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="DOUT_WIDTH">2</spirit:configurableElementValue>
+        </spirit:configurableElementValues>
+      </spirit:componentInstance>
+      <spirit:componentInstance>
+        <spirit:instanceName>high2bit</spirit:instanceName>
+        <spirit:componentRef spirit:library="ip" spirit:name="xlslice" spirit:vendor="xilinx.com" spirit:version="1.0"/>
+        <spirit:configurableElementValues>
+          <spirit:configurableElementValue spirit:referenceId="bd:xciName">design_1_xlslice_1_1</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="DIN_TO">1</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="DIN_FROM">2</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="DIN_WIDTH">3</spirit:configurableElementValue>
+          <spirit:configurableElementValue spirit:referenceId="DOUT_WIDTH">2</spirit:configurableElementValue>
+        </spirit:configurableElementValues>
+      </spirit:componentInstance>
+    </spirit:componentInstances>
+    <spirit:adHocConnections>
+      <spirit:adHocConnection>
+        <spirit:name>rgb8_r_Dout</spirit:name>
+        <spirit:internalPortReference spirit:componentRef="rgb8_r" spirit:portRef="Dout"/>
+        <spirit:internalPortReference spirit:componentRef="xlconcat_0" spirit:portRef="In0"/>
+        <spirit:internalPortReference spirit:componentRef="xlconcat_0" spirit:portRef="In1"/>
+        <spirit:internalPortReference spirit:componentRef="high2bit" spirit:portRef="Din"/>
+      </spirit:adHocConnection>
+      <spirit:adHocConnection>
+        <spirit:name>rgb8_g_Dout</spirit:name>
+        <spirit:internalPortReference spirit:componentRef="rgb8_g" spirit:portRef="Dout"/>
+        <spirit:internalPortReference spirit:componentRef="xlconcat_0" spirit:portRef="In3"/>
+        <spirit:internalPortReference spirit:componentRef="xlconcat_0" spirit:portRef="In4"/>
+        <spirit:internalPortReference spirit:componentRef="high2bit1" spirit:portRef="Din"/>
+      </spirit:adHocConnection>
+      <spirit:adHocConnection>
+        <spirit:name>rgb8_b_Dout</spirit:name>
+        <spirit:internalPortReference spirit:componentRef="rgb8_b" spirit:portRef="Dout"/>
+        <spirit:internalPortReference spirit:componentRef="xlconcat_0" spirit:portRef="In6"/>
+        <spirit:internalPortReference spirit:componentRef="xlconcat_0" spirit:portRef="In7"/>
+        <spirit:internalPortReference spirit:componentRef="xlconcat_0" spirit:portRef="In8"/>
+        <spirit:internalPortReference spirit:componentRef="xlconcat_0" spirit:portRef="In9"/>
+      </spirit:adHocConnection>
+      <spirit:adHocConnection>
+        <spirit:name>high2bit_Dout</spirit:name>
+        <spirit:internalPortReference spirit:componentRef="high2bit" spirit:portRef="Dout"/>
+        <spirit:internalPortReference spirit:componentRef="xlconcat_0" spirit:portRef="In2"/>
+      </spirit:adHocConnection>
+      <spirit:adHocConnection>
+        <spirit:name>high2bit1_Dout</spirit:name>
+        <spirit:internalPortReference spirit:componentRef="high2bit1" spirit:portRef="Dout"/>
+        <spirit:internalPortReference spirit:componentRef="xlconcat_0" spirit:portRef="In5"/>
+      </spirit:adHocConnection>
+      <spirit:adHocConnection>
+        <spirit:name>fifo_generator_0_m_axis_tdata</spirit:name>
+        <spirit:externalPortReference spirit:portRef="Din"/>
+        <spirit:internalPortReference spirit:componentRef="rgb8_g" spirit:portRef="Din"/>
+        <spirit:internalPortReference spirit:componentRef="rgb8_b" spirit:portRef="Din"/>
+        <spirit:internalPortReference spirit:componentRef="rgb8_r" spirit:portRef="Din"/>
+      </spirit:adHocConnection>
+      <spirit:adHocConnection>
+        <spirit:name>xlconcat_0_dout</spirit:name>
+        <spirit:internalPortReference spirit:componentRef="xlconcat_0" spirit:portRef="dout"/>
+        <spirit:externalPortReference spirit:portRef="dout"/>
+      </spirit:adHocConnection>
+    </spirit:adHocConnections>
   </spirit:design>
 
   <spirit:component xmlns:spirit="http://www.spiritconsortium.org/XMLSchema/SPIRIT/1685-2009">
@@ -7105,10 +7484,6 @@
         <spirit:name>axi_dma_0_s2mm_introut</spirit:name>
         <spirit:internalPortReference spirit:componentRef="axi_dma_0" spirit:portRef="s2mm_introut"/>
         <spirit:externalPortReference spirit:portRef="s2mm_introut"/>
-        <bd:hdl_attributes>
-          <bd:hdl_attribute bd:name="DEBUG" bd:value="true"/>
-          <bd:hdl_attribute bd:name="MARK_DEBUG" bd:value="true"/>
-        </bd:hdl_attributes>
       </spirit:adHocConnection>
       <spirit:adHocConnection>
         <spirit:name>axi_resetn_1</spirit:name>
@@ -7875,10 +8250,6 @@
         <spirit:name>axi_dma_0_s2mm_introut</spirit:name>
         <spirit:internalPortReference spirit:componentRef="axi_dma_0" spirit:portRef="s2mm_introut"/>
         <spirit:externalPortReference spirit:portRef="s2mm_introut"/>
-        <bd:hdl_attributes>
-          <bd:hdl_attribute bd:name="DEBUG" bd:value="true"/>
-          <bd:hdl_attribute bd:name="MARK_DEBUG" bd:value="true"/>
-        </bd:hdl_attributes>
       </spirit:adHocConnection>
       <spirit:adHocConnection>
         <spirit:name>axi_resetn_1</spirit:name>
@@ -8410,6 +8781,36 @@
         </spirit:segments>
       </spirit:addressSpace>
     </spirit:addressSpaces>
+  </spirit:component>
+
+  <spirit:component xmlns:spirit="http://www.spiritconsortium.org/XMLSchema/SPIRIT/1685-2009">
+    <spirit:vendor>xilinx.com</spirit:vendor>
+    <spirit:library>Addressing/video_capture/smartconnect_0</spirit:library>
+    <spirit:name>smartconnect</spirit:name>
+    <spirit:version>1.0</spirit:version>
+    <spirit:busInterfaces>
+      <spirit:busInterface>
+        <spirit:name>S00_AXI</spirit:name>
+        <spirit:slave>
+          <spirit:memoryMapRef spirit:memoryMapRef="S00_AXI"/>
+        </spirit:slave>
+        <spirit:busType spirit:library="interface" spirit:name="aximm" spirit:vendor="xilinx.com" spirit:version="1.0"/>
+        <spirit:abstractionType spirit:library="interface" spirit:name="aximm_rtl" spirit:vendor="xilinx.com" spirit:version="1.0"/>
+      </spirit:busInterface>
+    </spirit:busInterfaces>
+    <spirit:memoryMaps>
+      <spirit:memoryMap>
+        <spirit:name>S00_AXI</spirit:name>
+        <spirit:addressBlock>
+          <spirit:name>Reg</spirit:name>
+          <spirit:baseAddress>0</spirit:baseAddress>
+          <spirit:range>64K</spirit:range>
+          <spirit:width>32</spirit:width>
+          <spirit:usage>register</spirit:usage>
+        </spirit:addressBlock>
+      </spirit:memoryMap>
+    </spirit:memoryMaps>
+    <spirit:addressSpaces/>
   </spirit:component>
 
   <spirit:component xmlns:spirit="http://www.spiritconsortium.org/XMLSchema/SPIRIT/1685-2009">
