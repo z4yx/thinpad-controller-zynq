@@ -16,10 +16,10 @@ module sample_ctl (
     output wire axis_tlast
 );
 
-(* mark_debug = "true" *) reg [20:0] sample_cnt;
+reg [20:0] sample_cnt;
 
 reg fifo_valid;
-(* mark_debug = "true" *) reg axis_valid_;
+reg axis_valid_;
 reg int_valid[0:1];
 reg [31:0] int_data[0:1];
 

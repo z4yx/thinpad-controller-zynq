@@ -36,7 +36,7 @@ wire ram_ce_n;
 wire[3:0] ram_be_n;
 wire addr_changed;
 
-(* mark_debug = "true" *) wire w_assert, r_assert;
+wire w_assert, r_assert;
 
 signal_sync #(.SYNC_CYCLE(2)) rst_sync(
     .clk      (clk_frontend),
@@ -95,14 +95,14 @@ ram_r_det #(
 
 reg[3:0] oper;
 wire[19:0] record_addr;
-(* mark_debug = "true" *) wire[31:0] record_dq;
+wire[31:0] record_dq;
 wire[3:0] record_be_n;
 wire[31:0] fifo_to_controller;
 reg fifo_wreq;
 wire fifo_full;
-(* mark_debug = "true" *) wire fifo_rreq;
-(* mark_debug = "true" *) wire fifo_empty;
-(* mark_debug = "true" *) wire sample_en;
+wire fifo_rreq;
+wire fifo_empty;
+wire sample_en;
 
 
 signal_sync #(
@@ -126,13 +126,13 @@ always @(posedge clk_frontend) begin : proc_oper
     end
 end
 
-(* mark_debug = "true" *) reg write_error;
+reg write_error;
 wire new_sample_change;
 wire new_sample_valid_dly;
-(* mark_debug = "true" *) wire new_sample_strobe = new_sample_valid_dly & new_sample_change;
+wire new_sample_strobe = new_sample_valid_dly & new_sample_change;
 wire new_sample_valid_sync;
 wire [20:0] new_sample_cnt_sync;
-(* mark_debug = "true" *) wire sample_en_sync;
+wire sample_en_sync;
 
 always @(posedge clk_frontend) begin : proc_write
     if(rst_frontend) begin
