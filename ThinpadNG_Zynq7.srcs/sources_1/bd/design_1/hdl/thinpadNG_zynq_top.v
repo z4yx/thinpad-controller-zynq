@@ -15,7 +15,10 @@
 
 `timescale 1ns/1ns
 
-module thinpadNG_zynq_top(/*autoarg*/
+module thinpadNG_zynq_top #(
+    parameter thinpad_rev = 3 // override in project settings
+)
+(/*autoarg*/
     //Inputs
     UART_1_rxd, done, initb, 
     dvi_clk, dvi_hs, dvi_vs, dvi_de, dvi_d,
@@ -302,10 +305,10 @@ module thinpadNG_zynq_top(/*autoarg*/
     
     // User logic
     // high_impedence wrapper for axi_emc
-    parameter ADDR_PINS_AMOUNT = 10'd20;
-    parameter ADDR_PINS_OFFSET = 10'd2;
-    parameter BE_PINS_AMOUNT = 10'd4;
-    parameter IO_PINS_AMOUNT = 10'd32;
+    localparam ADDR_PINS_AMOUNT = 10'd20;
+    localparam ADDR_PINS_OFFSET = 10'd2;
+    localparam BE_PINS_AMOUNT = 10'd4;
+    localparam IO_PINS_AMOUNT = 10'd32;
     genvar i;
 
     reg capture_start_in;
@@ -459,6 +462,9 @@ module thinpadNG_zynq_top(/*autoarg*/
 
     );
 
+    wire xvc_present;
+    assign xvc_present = (thinpad_rev>=3) ? 1'b1 : 1'b0;
+
     wire la_exist;
     wire[2:0]  lock_level;
     wire sampler_idle;
@@ -470,23 +476,27 @@ module thinpadNG_zynq_top(/*autoarg*/
     wire acq_data_valid;
 
 `ifdef HS_DIFF_IN
-    assign la_exist = 1'b1;
-    la_receiver_0 LA(
-        .refclkin (clk_serdes),
-        .reset    (~la_rst_n),
-        .clkin1_p (clkin1_p),
-        .clkin1_n (clkin1_n),
-        .datain1_p(datain1_p),
-        .datain1_n(datain1_n),
-        .acq_data_out     (acq_data_out),
-        .acq_data_valid   (acq_data_valid),
-        .lock_level       (lock_level),
-        .sampler_idle     (sampler_idle),
-        .rx_pixel_clk     (la_fifo_aclk), //clock from module
-        .raw_signal_result(received_data),
-        .raw_signal_update(received_update)
-    );
- `endif
+generate
+    if(thinpad_rev>2) begin
+        assign la_exist = 1'b1;
+        la_receiver_0 LA(
+            .refclkin (clk_serdes),
+            .reset    (~la_rst_n),
+            .clkin1_p (clkin1_p),
+            .clkin1_n (clkin1_n),
+            .datain1_p(datain1_p),
+            .datain1_n(datain1_n),
+            .acq_data_out     (acq_data_out),
+            .acq_data_valid   (acq_data_valid),
+            .lock_level       (lock_level),
+            .sampler_idle     (sampler_idle),
+            .rx_pixel_clk     (la_fifo_aclk), //clock from module
+            .raw_signal_result(received_data),
+            .raw_signal_update(received_update)
+        );
+    end
+endgenerate
+`endif
     signal_sync #(.SYNC_CYCLE(2)) la_rx_rst_sync(
         .clk(la_fifo_aclk),
         .data_in(la_rst_n),
@@ -509,7 +519,10 @@ module thinpadNG_zynq_top(/*autoarg*/
         .clk                   (la_fifo_aclk)
     );
 
-    assign status_reg = {14'b0,vid_fifo_count,
+    wire [2:0] thinpad_rev_fixed = thinpad_rev;
+
+    assign status_reg = {xvc_present,thinpad_rev_fixed,4'b0,
+                        6'b0,vid_fifo_count,
                         vtc_locked,vid_overflow,la_exist,sampler_idle,la_storage_overflow,lock_level};
     assign port2reg = {received_data, status_reg};
 
