@@ -1,96 +1,93 @@
+/*
+    clk_frontend: 6ns/cycle
+
+*/
+
+`include "analyzer_defs.svh"
 module bus_analyze (
-    input wire clk,
-    input wire clk_frontend,
-    input wire rst_n,
+    input logic clk,
+    input logic clk_frontend,
+    input logic rst_n,
     
-    input wire[19:0] ram_addr_in,
-    input wire[31:0] ram_dq_in,
-    input wire ram_wr_n_in,
-    input wire ram_rd_n_in,
-    input wire ram_ce_n_in,
-    input wire[3:0] ram_be_n_in,
+    input logic[19:0] ram_addr_in,
+    input logic[31:0] ram_dq_in,
+    input logic ram_we_n_in,
+    input logic ram_oe_n_in,
+    input logic ram_ce_n_in,
+    input logic[3:0] ram_be_n_in,
 
-    input wire[20:0] new_sample_cnt,
-    input wire new_sample_valid,
+    input logic[20:0] new_sample_cnt,
+    input logic new_sample_valid,
 
-    output wire[31:0] axis_data,
-    output wire axis_valid,
-    input wire axis_ready,
-    output wire axis_tlast
+    output logic[127:0] axis_data,
+    output logic axis_valid,
+    input logic axis_ready,
+    output logic axis_tlast
 );
 
-wire rst_frontend;
+parameter CNT_WIDTH = 4;
 
-wire[19:0] ram_addr_sync;
-wire[31:0] ram_dq_sync;
-wire ram_wr_n_sync;
-wire ram_rd_n_sync;
-wire ram_ce_n_sync;
-wire[3:0] ram_be_n_sync;
+logic rst_frontend;
 
-wire[19:0] ram_addr;
-wire[31:0] ram_dq;
-wire ram_wr_n;
-wire ram_rd_n;
-wire ram_ce_n;
-wire[3:0] ram_be_n;
-wire addr_changed;
-
-wire w_assert, r_assert;
-
-signal_sync #(.SYNC_CYCLE(2)) rst_sync(
-    .clk      (clk_frontend),
-    .data_in  (~rst_n),
-    .data_out (rst_frontend)
+transition_info_if #(.SIG_WIDTH(20),.CNT_WIDTH(CNT_WIDTH)) 
+    ram_addr(clk_frontend, rst_frontend);
+signal_preprocess #(.CNT_WIDTH(CNT_WIDTH),.SIG_WIDTH(20))
+    trans_addr(
+    .data_in(ram_addr_in),
+    .info(ram_addr)
 );
 
-signal_sync #(
-    .DATA_WIDTH(20+32+3+4), 
-    .SYNC_CYCLE(2)
-)sync_inst(
-    .clk     (clk_frontend),
-    .data_in ({ram_addr_in, ram_dq_in, ram_wr_n_in, ram_rd_n_in, ram_ce_n_in, ram_be_n_in}),
-    .data_out({ram_addr_sync, ram_dq_sync, ram_wr_n_sync, ram_rd_n_sync, ram_ce_n_sync, ram_be_n_sync})
+transition_info_if #(.SIG_WIDTH(32),.CNT_WIDTH(CNT_WIDTH)) 
+    ram_dq(clk_frontend, rst_frontend);
+signal_preprocess #(.CNT_WIDTH(CNT_WIDTH),.SIG_WIDTH(32))
+    trans_dq(
+    .data_in(ram_dq_in),
+    .info(ram_dq)
 );
 
-signal_sync #(
-    .DATA_WIDTH(32+3+4), 
-    .SYNC_CYCLE(3)
-)sync_inst2(
-    .clk     (clk_frontend),
-    .data_in ({ram_dq_sync, ram_wr_n_sync, ram_rd_n_sync, ram_ce_n_sync, ram_be_n_sync}),
-    .data_out({ram_dq, ram_wr_n, ram_rd_n, ram_ce_n, ram_be_n})
+transition_info_if #(.SIG_WIDTH(1),.CNT_WIDTH(CNT_WIDTH)) 
+    ram_we_n(clk_frontend, rst_frontend);
+signal_preprocess #(.CNT_WIDTH(CNT_WIDTH),.SIG_WIDTH(1))
+    trans_wr(
+    .data_in(ram_we_n_in),
+    .info(ram_we_n)
 );
 
-transition_det #(
-    .DATA_WIDTH(20)
-)addr_t_det(
-    .clk     (clk_frontend),
-    .rst     (rst_frontend),
-    .data_in (ram_addr_sync),
-    .data_out(ram_addr),
-    .changed (addr_changed)
+transition_info_if #(.SIG_WIDTH(1),.CNT_WIDTH(CNT_WIDTH)) 
+    ram_oe_n(clk_frontend, rst_frontend);
+signal_preprocess #(.CNT_WIDTH(CNT_WIDTH),.SIG_WIDTH(1))
+    trans_rd(
+    .data_in(ram_oe_n_in),
+    .info(ram_oe_n)
 );
 
-ram_w_det #(
-    .WRITE_CYCLE(2)
-)w_det(
-    .clk     (clk_frontend),
-    .rst_n   (~rst_frontend),
-    .wr_n    (ram_wr_n),
-    .ce_n    (ram_ce_n),
-    .w_assert(w_assert)
+transition_info_if #(.SIG_WIDTH(1),.CNT_WIDTH(CNT_WIDTH)) 
+    ram_ce_n(clk_frontend, rst_frontend);
+signal_preprocess #(.CNT_WIDTH(CNT_WIDTH),.SIG_WIDTH(1))
+    trans_ce(
+    .data_in(ram_ce_n_in),
+    .info(ram_ce_n)
 );
 
-ram_r_det #(
-    .READ_CYCLE(2)
-)r_det(
-    .clk     (clk_frontend),
-    .rst_n   (~rst_frontend),
-    .change_addr(addr_changed),
-    .rd_n    (ram_rd_n),
-    .ce_n    (ram_ce_n),
-    .r_assert(r_assert)
+transition_info_if #(.SIG_WIDTH(4),.CNT_WIDTH(CNT_WIDTH)) 
+    ram_be_n(clk_frontend, rst_frontend);
+signal_preprocess #(.CNT_WIDTH(CNT_WIDTH),.SIG_WIDTH(1))
+    trans_be(
+    .data_in(ram_be_n_in),
+    .info(ram_be_n)
+);
+
+logic w_assert, r_assert;
+transaction_timing_if w_timing, r_timing;
+
+fsm_read read_analyze(
+    .ram_addr,
+    .ram_dq,
+    .ram_we_n,
+    .ram_oe_n,
+    .ram_ce_n,
+    .ram_be_n,
+    .timing(r_timing)
 );
 
 reg[3:0] oper;
