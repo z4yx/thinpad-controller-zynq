@@ -5,6 +5,8 @@ ipshared/
 *_netlist.*
 *_stub.*
 *.dcp
+*.veo
+*.vho
 *.hwh
 ThinpadNG_Zynq7.cache/
 ThinpadNG_Zynq7.hw/

@@ -1,0 +1,44 @@
+variables:
+  GIT_SUBMODULE_STRATEGY: recursive
+  PROJECT_NAME: "ThinpadNG_Zynq7"
+  VIVADO_PATH: "/opt/Xilinx/Vivado/2018.1/bin/vivado"
+
+
+# all files in ip dir except *.xci are ignored, so the generated result will be cleaned every build
+# to avoid generating from scratch every time, the dir should be cached
+cache:
+  key: "$CI_COMMIT_REF_SLUG"
+  paths:
+    - ${PROJECT_NAME}.srcs/ip
+    - ${PROJECT_NAME}.sim
+    - ${PROJECT_NAME}.runs
+    - ${PROJECT_NAME}.cache
+
+stages:
+  - generate_ip
+  - generate_bitstream
+
+before_script:
+  # the cached ip configuration file might be out of date, we should always use the newest one
+  - git checkout ${PROJECT_NAME}.srcs/
+
+out_of_context_module_runs:
+  stage: generate_ip
+  script:
+    - docker run -t --rm -v $PWD:/home/vivado/project vivado:2018.1 ${VIVADO_PATH} -mode tcl -source tools/build_ip.tcl ${PROJECT_NAME}.xpr
+  artifacts:
+    paths:
+      - ${PROJECT_NAME}.runs/*/runme.log
+
+impl_1:
+  stage: generate_bitstream
+  script:
+    - docker run -t --rm -v $PWD:/home/vivado/project vivado:2018.1 ${VIVADO_PATH} -mode tcl -source tools/build_bitstream.tcl ${PROJECT_NAME}.xpr
+  artifacts:
+    paths:
+      - ${PROJECT_NAME}.runs/impl_1/thinpadNG_zynq_top.bit
+      - ${PROJECT_NAME}.runs/impl_1/runme.log
+    when: always
+
+
+
