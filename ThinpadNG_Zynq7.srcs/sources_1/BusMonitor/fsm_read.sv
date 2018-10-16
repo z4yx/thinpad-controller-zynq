@@ -8,7 +8,7 @@ module fsm_read(
     transition_info_if.sink ram_ce_n,
     transition_info_if.sink ram_be_n,
     transaction_timing_if.src timing,
-    logic read_assert
+    output logic read_assert
 );
 
 parameter ADDR_WIDTH = 20;
@@ -22,6 +22,7 @@ logic oe_satisfied, ce_satisfied;
 logic be_satisfied;
 logic [31:0] dq_buf;
 logic [ADDR_WIDTH-1:0] addr_buf;
+logic [3:0] be_buf;
 logic clk, rst;
 logic all_satisfied, all_satisfied_last;
 
@@ -37,6 +38,7 @@ assign ce_satisfied = ram_ce_n.count>=CYCLE_tACE && ram_ce_n.data==1'b0;
 assign read_assert = all_satisfied & ~all_satisfied_last;
 assign timing.addr = addr_buf;
 assign timing.data = dq_buf;
+assign timing.be_n = be_buf;
 
 assign timing.ce_before = ram_ce_n.count;
 assign timing.oe_before = ram_oe_n.count;
@@ -48,6 +50,7 @@ assign timing.addr_before = ram_addr.count;
 always_ff @(posedge clk)begin
     dq_buf <= ram_dq.data;
     addr_buf <= ram_addr.data;
+    be_buf <= ram_be_n.data;
 end
 
 always_ff @(posedge clk) begin

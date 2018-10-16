@@ -25,7 +25,7 @@ module bus_analyze (
     output logic axis_tlast
 );
 
-parameter CNT_WIDTH = 4;
+parameter CNT_WIDTH = 6;
 
 logic rst_frontend;
 
@@ -78,60 +78,81 @@ signal_preprocess #(.CNT_WIDTH(CNT_WIDTH),.SIG_WIDTH(1))
 );
 
 logic w_assert, r_assert;
-transaction_timing_if w_timing, r_timing;
+transaction_timing_if #(.ADDR_WIDTH(20), .CNT_WIDTH(CNT_WIDTH)) w_timing;
+transaction_timing_if #(.ADDR_WIDTH(20), .CNT_WIDTH(CNT_WIDTH)) r_timing;
 
-fsm_read read_analyze(
+fsm_read #(.ADDR_WIDTH(ADDR_WIDTH)) read_analyze(
     .ram_addr,
     .ram_dq,
     .ram_we_n,
     .ram_oe_n,
     .ram_ce_n,
     .ram_be_n,
+    .read_assert(r_assert),
     .timing(r_timing)
 );
 
-reg[3:0] oper;
-wire[19:0] record_addr;
-wire[31:0] record_dq;
-wire[3:0] record_be_n;
-wire[31:0] fifo_to_controller;
-reg fifo_wreq;
-wire fifo_full;
-wire fifo_rreq;
-wire fifo_empty;
-wire sample_en;
-
-
-signal_sync #(
-    .DATA_WIDTH(20+32+4), 
-    .SYNC_CYCLE(3)
-)delay_cyc(
-    .clk     (clk_frontend),
-    .data_in ({ram_addr, ram_dq, ram_be_n}),
-    .data_out({record_addr,record_dq,record_be_n})
+fsm_write #(.ADDR_WIDTH(ADDR_WIDTH),.CNT_WIDTH(CNT_WIDTH)) read_analyze(
+    .ram_addr,
+    .ram_dq,
+    .ram_we_n,
+    .ram_oe_n,
+    .ram_ce_n,
+    .ram_be_n,
+    .write_assert(w_assert),
+    .timing(w_timing)
 );
 
-always @(posedge clk_frontend) begin : proc_oper
-    if(rst_frontend) begin
-        oper <= 0;
-    end else if(w_assert) begin
-        oper <= 1;
-    end else if(r_assert) begin
-        oper <= 2;
-    end else begin 
-        oper <= 0;
+sram_analyze_record_t record;
+
+always_ff @(posedge clk_frontend) begin
+    record.op_read <= r_assert;
+    record.op_write <= w_assert;
+    record.resvd1 <= 0;
+    record.resvd2 <= 0;
+    record.const0 <= 0;
+    if(w_assert)begin
+        record.addr      <= w_timing.addr;
+        record.dq        <= w_timing.data;
+        record.be_n      <= w_timing.be_n;
+        record.oe_n      <= w_timing.oe_n;
+        record.ce_before <= w_timing.ce_before;
+        record.oe_before <= w_timing.oe_before;
+        record.be_before <= w_timing.be_before;
+        record.we_before <= w_timing.we_before;
+        record.data_before <= w_timing.data_before;
+        record.addr_before <= w_timing.addr_before;
+    end else if(r_assert)begin
+        record.addr      <= r_timing.addr;
+        record.dq        <= r_timing.data;
+        record.be_n      <= r_timing.be_n;
+        // record.oe_n      <= r_timing.oe_n;
+        record.ce_before <= r_timing.ce_before;
+        record.oe_before <= r_timing.oe_before;
+        record.be_before <= r_timing.be_before;
+        record.we_before <= r_timing.we_before;
+        record.data_before <= r_timing.data_before;
+        record.addr_before <= r_timing.addr_before;
     end
 end
 
-reg write_error;
-wire new_sample_change;
-wire new_sample_valid_dly;
-wire new_sample_strobe = new_sample_valid_dly & new_sample_change;
-wire new_sample_valid_sync;
-wire [20:0] new_sample_cnt_sync;
-wire sample_en_sync;
+logic fifo_wreq;
+logic fifo_full;
+logic write_error;
+logic sample_en;
+logic sample_en_sync;
 
-always @(posedge clk_frontend) begin : proc_write
+logic fifo_rreq;
+logic fifo_empty;
+
+logic [127:0] fifo_to_controller;
+logic new_sample_change;
+logic new_sample_valid_dly;
+logic new_sample_strobe = new_sample_valid_dly & new_sample_change;
+logic new_sample_valid_sync;
+logic [20:0] new_sample_cnt_sync;
+
+always_ff @(posedge clk_frontend) begin : proc_write
     if(rst_frontend) begin
         write_error <= 0;
         fifo_wreq <= 0;
@@ -154,7 +175,7 @@ sample_fifo front_fifo(
     .wr_clk(clk_frontend),
     .rd_clk(clk),
     .rst(~sample_en),
-    .din({4'b0, record_addr, record_be_n, oper, record_dq}),
+    .din(record),
     .dout(fifo_to_controller),
     .wr_en(fifo_wreq),
     .full(fifo_full),
