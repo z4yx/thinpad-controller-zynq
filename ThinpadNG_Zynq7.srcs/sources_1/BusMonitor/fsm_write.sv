@@ -13,6 +13,7 @@ module fsm_write(
 parameter ADDR_WIDTH = 20;
 parameter CNT_WIDTH = 4;
 
+logic [CNT_WIDTH-1:0] ce_before_buf;
 logic [CNT_WIDTH-1:0] oe_before_buf;
 logic [CNT_WIDTH-1:0] be_before_buf;
 logic [CNT_WIDTH-1:0] we_before_buf;

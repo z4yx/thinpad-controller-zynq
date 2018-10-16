@@ -12,7 +12,7 @@ modport sink(input clk, rst, changed, count, data);
 
 endinterface
 
-interface transaction_timing_if #(ADDR_WIDTH=20,CNT_WIDTH=4);
+interface transaction_timing_if #(ADDR_WIDTH=20,CNT_WIDTH=4) ();
 
 logic [31:0] data;
 logic [ADDR_WIDTH-1:0] addr;
@@ -21,8 +21,8 @@ logic oe_n;
 
 logic [CNT_WIDTH-1:0] ce_before, oe_before, be_before, we_before, data_before, addr_before;
 
-modport src(output data, addr, be_n, ce_before, oe_before, be_before, we_before, data_before, addr_before);
-modport sink(input data, addr, oe_n, ce_before, oe_before, be_before, we_before, data_before, addr_before);
+modport src(output data, addr, be_n, oe_n, ce_before, oe_before, be_before, we_before, data_before, addr_before);
+modport sink(input data, addr, be_n, oe_n, ce_before, oe_before, be_before, we_before, data_before, addr_before);
 
 endinterface
 

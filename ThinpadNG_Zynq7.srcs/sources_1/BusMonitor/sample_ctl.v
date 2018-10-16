@@ -6,11 +6,11 @@ module sample_ctl (
     input wire[20:0] new_sample_cnt,
     input wire new_sample_strobe,
 
-    input wire[31:0] fifo_data,
+    input wire[127:0] fifo_data,
     input wire fifo_empty,
     output wire fifo_rreq,
 
-    output reg[31:0] axis_data,
+    output reg[127:0] axis_data,
     output wire axis_valid,
     input wire axis_ready,
     output wire axis_tlast
@@ -21,29 +21,35 @@ reg [20:0] sample_cnt;
 reg fifo_valid;
 reg axis_valid_;
 reg int_valid[0:1];
-reg [31:0] int_data[0:1];
+reg [127:0] int_data[0:1];
 
 assign axis_tlast  = (sample_cnt == 1);
 assign fifo_rreq = axis_ready & ~fifo_empty;
 assign axis_valid = axis_valid_ & sample_en;
 
-always @(posedge clk or negedge rst_n) begin : proc_buf
+always @(posedge clk or negedge rst_n) begin : proc_ctl
     if(~rst_n) begin
         fifo_valid <= 0;
         int_valid[0] <= 0;
         int_valid[1] <= 0;
+        axis_valid_ <= 0;
     end else begin
         if(axis_ready)begin 
             fifo_valid <= fifo_rreq;
             int_valid[0] <= fifo_valid;
             int_valid[1] <= int_valid[0];
             axis_valid_ <= int_valid[1];
-            int_data[0] <= fifo_data;
-            int_data[1] <= int_data[0];
-            axis_data <= int_data[1];
         end else begin 
             // axis_valid_ <= 0;
         end
+    end
+end
+
+always @(posedge clk) begin : proc_dat
+    if(axis_ready)begin 
+        int_data[0] <= fifo_data;
+        int_data[1] <= int_data[0];
+        axis_data <= int_data[1];
     end
 end
 

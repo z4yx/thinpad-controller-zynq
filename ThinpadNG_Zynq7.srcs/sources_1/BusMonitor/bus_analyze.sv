@@ -29,6 +29,14 @@ parameter CNT_WIDTH = 6;
 
 logic rst_frontend;
 
+signal_sync #(
+    .SYNC_CYCLE(2)
+) rst_sync(
+    .clk     (clk_frontend),
+    .data_in (~rst_n),
+    .data_out(rst_frontend)
+);
+
 transition_info_if #(.SIG_WIDTH(20),.CNT_WIDTH(CNT_WIDTH)) 
     ram_addr(clk_frontend, rst_frontend);
 signal_preprocess #(.CNT_WIDTH(CNT_WIDTH),.SIG_WIDTH(20))
@@ -71,17 +79,17 @@ signal_preprocess #(.CNT_WIDTH(CNT_WIDTH),.SIG_WIDTH(1))
 
 transition_info_if #(.SIG_WIDTH(4),.CNT_WIDTH(CNT_WIDTH)) 
     ram_be_n(clk_frontend, rst_frontend);
-signal_preprocess #(.CNT_WIDTH(CNT_WIDTH),.SIG_WIDTH(1))
+signal_preprocess #(.CNT_WIDTH(CNT_WIDTH),.SIG_WIDTH(4))
     trans_be(
     .data_in(ram_be_n_in),
     .info(ram_be_n)
 );
 
 logic w_assert, r_assert;
-transaction_timing_if #(.ADDR_WIDTH(20), .CNT_WIDTH(CNT_WIDTH)) w_timing;
-transaction_timing_if #(.ADDR_WIDTH(20), .CNT_WIDTH(CNT_WIDTH)) r_timing;
+transaction_timing_if #(.ADDR_WIDTH(20), .CNT_WIDTH(CNT_WIDTH)) w_timing();
+transaction_timing_if #(.ADDR_WIDTH(20), .CNT_WIDTH(CNT_WIDTH)) r_timing();
 
-fsm_read #(.ADDR_WIDTH(ADDR_WIDTH)) read_analyze(
+fsm_read #(.ADDR_WIDTH(20)) read_analyze(
     .ram_addr,
     .ram_dq,
     .ram_we_n,
@@ -92,7 +100,7 @@ fsm_read #(.ADDR_WIDTH(ADDR_WIDTH)) read_analyze(
     .timing(r_timing)
 );
 
-fsm_write #(.ADDR_WIDTH(ADDR_WIDTH),.CNT_WIDTH(CNT_WIDTH)) read_analyze(
+fsm_write #(.ADDR_WIDTH(20),.CNT_WIDTH(CNT_WIDTH)) write_analyze(
     .ram_addr,
     .ram_dq,
     .ram_we_n,
@@ -171,7 +179,7 @@ signal_sync #(
     .data_out(sample_en_sync)
 );
 
-sample_fifo front_fifo(
+anaylzer_fifo front_fifo(
     .wr_clk(clk_frontend),
     .rd_clk(clk),
     .rst(~sample_en),
@@ -197,6 +205,7 @@ transition_det new_sample(
     .rst     (~rst_n),
     .data_in (new_sample_valid_sync),
     .data_out(new_sample_valid_dly),
+    .changing(),
     .changed (new_sample_change)
 );
 
