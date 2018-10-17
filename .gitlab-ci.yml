@@ -1,7 +1,7 @@
 variables:
   GIT_SUBMODULE_STRATEGY: recursive
   PROJECT_NAME: "ThinpadNG_Zynq7"
-  VIVADO_PATH: "/opt/Xilinx/Vivado/2018.1/bin/vivado"
+  VIVADO_PATH: "/opt/Xilinx/Vivado/2017.3/bin/vivado"
 
 
 # all files in ip dir except *.xci are ignored, so the generated result will be cleaned every build
