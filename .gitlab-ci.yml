@@ -24,16 +24,18 @@ before_script:
 
 out_of_context_module_runs:
   stage: generate_ip
+  image: vivado2017:2017.3
   script:
-    - docker run -t --rm -v $PWD:/home/vivado/project vivado:2018.1 ${VIVADO_PATH} -mode tcl -source tools/build_ip.tcl ${PROJECT_NAME}.xpr
+    - ${VIVADO_PATH} -mode tcl -source tools/build_ip.tcl ${PROJECT_NAME}.xpr
   artifacts:
     paths:
       - ${PROJECT_NAME}.runs/*/runme.log
 
 impl_1:
   stage: generate_bitstream
+  image: vivado2017:2017.3
   script:
-    - docker run -t --rm -v $PWD:/home/vivado/project vivado:2018.1 ${VIVADO_PATH} -mode tcl -source tools/build_bitstream.tcl ${PROJECT_NAME}.xpr
+    - ${VIVADO_PATH} -mode tcl -source tools/build_bitstream.tcl ${PROJECT_NAME}.xpr
   artifacts:
     paths:
       - ${PROJECT_NAME}.runs/impl_1/thinpadNG_zynq_top.bit
