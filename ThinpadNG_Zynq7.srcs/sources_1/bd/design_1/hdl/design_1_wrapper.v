@@ -1,8 +1,8 @@
 //Copyright 1986-2017 Xilinx, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2017.3 (lin64) Build 2018833 Wed Oct  4 19:58:07 MDT 2017
-//Date        : Tue Aug 21 12:06:16 2018
-//Host        : nuc6i7 running 64-bit Ubuntu 18.04.1 LTS
+//Date        : Tue Oct 16 22:12:14 2018
+//Host        : cqtestlab running 64-bit Deepin 15.7
 //Command     : generate_target design_1_wrapper.bd
 //Design      : design_1_wrapper
 //Purpose     : IP block netlist
@@ -148,7 +148,7 @@ module design_1_wrapper
   output UART_CPLD_rxrdyn;
   output UART_CPLD_txd;
   output UART_CPLD_txrdyn;
-  input [31:0]bus_analyze_axis_tdata;
+  input [127:0]bus_analyze_axis_tdata;
   input bus_analyze_axis_tlast;
   output bus_analyze_axis_tready;
   input bus_analyze_axis_tvalid;
@@ -248,7 +248,7 @@ module design_1_wrapper
   wire UART_CPLD_rxrdyn;
   wire UART_CPLD_txd;
   wire UART_CPLD_txrdyn;
-  wire [31:0]bus_analyze_axis_tdata;
+  wire [127:0]bus_analyze_axis_tdata;
   wire bus_analyze_axis_tlast;
   wire bus_analyze_axis_tready;
   wire bus_analyze_axis_tvalid;

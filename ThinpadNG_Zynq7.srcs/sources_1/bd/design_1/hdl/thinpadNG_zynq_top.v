@@ -134,7 +134,7 @@ module thinpadNG_zynq_top #(
     wire SPI0_SCLK_O;
     wire UART_1_rxd;
     wire UART_1_txd;
-    wire [31:0]bus_analyze_axis_tdata;
+    wire [127:0]bus_analyze_axis_tdata;
     wire bus_analyze_axis_tlast;
     wire bus_analyze_axis_tready;
     wire bus_analyze_axis_tvalid;
@@ -447,8 +447,8 @@ module thinpadNG_zynq_top #(
     
         .ram_addr_in(emc_rtl_addr_wrap),
         .ram_dq_in(emc_rtl_dq_io),
-        .ram_wr_n_in(emc_rtl_wen_wrap),
-        .ram_rd_n_in(emc_rtl_oen_wrap),
+        .ram_we_n_in(emc_rtl_wen_wrap),
+        .ram_oe_n_in(emc_rtl_oen_wrap),
         .ram_ce_n_in(emc_rtl_ce_n_wrap),
         .ram_be_n_in(emc_rtl_ben_wrap),
 
