@@ -9,7 +9,8 @@ variables:
 cache:
   key: "$CI_COMMIT_REF_SLUG"
   paths:
-    - ${PROJECT_NAME}.srcs/ip
+    - ${PROJECT_NAME}.srcs/sources_1/ip
+    - ${PROJECT_NAME}.srcs/sources_1/bd
     - ${PROJECT_NAME}.sim
     - ${PROJECT_NAME}.runs
     - ${PROJECT_NAME}.cache
