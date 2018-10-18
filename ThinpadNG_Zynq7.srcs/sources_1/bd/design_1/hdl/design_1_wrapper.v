@@ -1,7 +1,7 @@
 //Copyright 1986-2017 Xilinx, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2017.3 (lin64) Build 2018833 Wed Oct  4 19:58:07 MDT 2017
-//Date        : Tue Oct 16 22:12:14 2018
+//Date        : Wed Oct 17 18:47:40 2018
 //Host        : cqtestlab running 64-bit Deepin 15.7
 //Command     : generate_target design_1_wrapper.bd
 //Design      : design_1_wrapper
