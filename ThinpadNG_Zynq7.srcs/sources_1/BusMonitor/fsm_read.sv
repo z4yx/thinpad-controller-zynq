@@ -41,7 +41,7 @@ assign timing.data = dq_buf;
 assign timing.be_n = be_buf;
 
 assign timing.ce_before = ram_ce_n.count;
-assign timing.oe_before = 0;
+assign timing.oe_n = 0;
 assign timing.oe_before = ram_oe_n.count;
 assign timing.be_before = ram_be_n.count;
 assign timing.we_before = ram_we_n.count;

@@ -20,20 +20,23 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
+`include "analyzer_defs.svh"
+`default_nettype none
 module analyzer_tb(
 
     );
 
 parameter DATA_CNT_TOTAL = 1000;
 
-reg clk = 0;
 reg rst_n = 0;
+reg clk_frontend = 0;
+reg clk_amba = 0;
 reg clk_ramctl = 0;
 
 reg[20:0] new_sample_cnt;
 reg new_sample_valid = 0;
 
-wire[31:0] axis_data;
+wire[127:0] axis_data;
 wire axis_valid;
 wire axis_ready=1;
 wire axis_tlast;
@@ -103,12 +106,13 @@ two_port ram_ctl(/*autoinst*/
            .dataenable2(dbus_ram_byteenable));
 
 bus_analyze analyzer(
-    .clk             (clk),
+    .clk             (clk_amba),
+    .clk_frontend    (clk_frontend),
     .rst_n           (rst_n),
     .ram_addr_in     (base_ram_address),
     .ram_dq_in       (base_ram_data),
-    .ram_wr_n_in     (base_ram_we_n),
-    .ram_rd_n_in     (base_ram_oe_n),
+    .ram_we_n_in     (base_ram_we_n),
+    .ram_oe_n_in     (base_ram_oe_n),
     .ram_ce_n_in     (base_ram_ce_n),
     .ram_be_n_in     (~base_ram_be),
     .new_sample_cnt  (new_sample_cnt),
@@ -119,17 +123,18 @@ bus_analyze analyzer(
     .axis_tlast      (axis_tlast)
 );
 
-always #5 clk = ~clk;
-
-always #15 clk_ramctl = ~clk_ramctl;
+always #5  clk_amba = ~clk_amba; // 100M
+always #3  clk_frontend = ~clk_frontend; // 166M
+always #15 clk_ramctl = ~clk_ramctl; // 30M
 
 initial begin : gen
     integer i;
     wait(rst_n==1);
+    repeat(10) @(negedge clk_ramctl);
     i = 0;
     forever begin 
         ibus_ram_address = {i,2'b0};
-        ibus_ram_byteenable = 4'hf;
+        ibus_ram_byteenable = $random()&4'hf;
         ibus_ram_read = 1;
         i = i+1;
         dbus_ram_address = {i,2'b0};//($random()&8'hff)<<2;
@@ -137,34 +142,30 @@ initial begin : gen
         dbus_ram_read = ~dbus_ram_write;
         dbus_ram_byteenable = $random()&4'hf;
         dbus_ram_wrdata = $random();
-        repeat(4) @(posedge clk_ramctl);
-        #1;
+        repeat(1) @(negedge clk_ramctl);
     end
 end
 
 initial begin 
-    repeat(5) @(posedge clk);
+    repeat(5) @(posedge clk_amba);
     #1 rst_n = 1;
 end
 
-reg[31:0] last_out = 0;
+sram_analyze_record_t last_out = 0;
 reg[20:0] cnt = 0;
-integer finished = 0;
-always@(posedge clk)
+event finished;
+always@(posedge clk_amba)
 begin 
     if(axis_valid & axis_ready)begin 
         cnt = cnt+1;
-        if(cnt[0])
-            last_out = axis_data;
-        else
-            $display("%x", {axis_data,last_out});
+        last_out = axis_data;
         if(cnt == DATA_CNT_TOTAL)begin 
             $display("test end");
             if(~axis_tlast)begin
                 $error("tlast not high");
                 $stop;
             end
-            finished = 1;
+            -> finished;
         end
         else if(cnt > DATA_CNT_TOTAL) begin
             $stop;
@@ -178,18 +179,18 @@ end
 
 initial begin 
     wait(rst_n==1);
-    @(posedge clk);
-    #1;
+    repeat(10) @(negedge clk_amba);
+    @(negedge clk_amba);
     new_sample_cnt = DATA_CNT_TOTAL;
     new_sample_valid = 1;
-    wait(finished==1);
+    @(finished);
     new_sample_valid = 0;
-    finished = 0;
     cnt = 0;
-    @(posedge clk);
-    #1;
+    @(negedge clk_amba);
     new_sample_cnt = DATA_CNT_TOTAL;
     new_sample_valid = 1;
+    @(negedge clk_amba);
+    new_sample_valid = 0;
 end
 
 endmodule

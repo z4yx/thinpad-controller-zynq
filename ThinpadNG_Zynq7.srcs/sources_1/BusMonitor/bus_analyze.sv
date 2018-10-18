@@ -134,7 +134,7 @@ always_ff @(posedge clk_frontend) begin
         record.addr      <= r_timing.addr;
         record.dq        <= r_timing.data;
         record.be_n      <= r_timing.be_n;
-        // record.oe_n      <= r_timing.oe_n;
+        record.oe_n      <= r_timing.oe_n;
         record.ce_before <= r_timing.ce_before;
         record.oe_before <= r_timing.oe_before;
         record.be_before <= r_timing.be_before;
@@ -156,7 +156,7 @@ logic fifo_empty;
 logic [127:0] fifo_to_controller;
 logic new_sample_change;
 logic new_sample_valid_dly;
-logic new_sample_strobe = new_sample_valid_dly & new_sample_change;
+wire new_sample_strobe = new_sample_valid_dly & new_sample_change;
 logic new_sample_valid_sync;
 logic [20:0] new_sample_cnt_sync;
 

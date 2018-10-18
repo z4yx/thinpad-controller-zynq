@@ -56,7 +56,7 @@ stable_counter #(
     .CNT_WIDTH(CNT_WIDTH)
 )cnt_inst(
     .clk,
-    .rst(reset_counter),
+    .rst(reset_counter|rst),
     .count(info.count)
 );
 
