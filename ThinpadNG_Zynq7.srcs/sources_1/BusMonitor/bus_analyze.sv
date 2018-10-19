@@ -29,12 +29,14 @@ parameter CNT_WIDTH = 6;
 
 logic rst_frontend;
 
-signal_sync #(
-    .SYNC_CYCLE(2)
-) rst_sync(
-    .clk     (clk_frontend),
-    .data_in (~rst_n),
-    .data_out(rst_frontend)
+xpm_cdc_async_rst #(
+    .DEST_SYNC_FF    (2), // integer; range: 2-10
+    .INIT_SYNC_FF    (0), // integer; 0=disable simulation init values, 1=enable simulation init values
+    .RST_ACTIVE_HIGH (1)  // integer; 0=active low reset, 1=active high reset
+) reset_of_image_capture (
+    .src_arst  (~rst_n),
+    .dest_clk  (clk_frontend),
+    .dest_arst (rst_frontend)
 );
 
 transition_info_if #(.SIG_WIDTH(20),.CNT_WIDTH(CNT_WIDTH)) 
@@ -171,12 +173,16 @@ always_ff @(posedge clk_frontend) begin : proc_write
     end
 end
 
-signal_sync #(
-    .SYNC_CYCLE(2)
-) sync_sample_en(
-    .clk     (clk_frontend),
-    .data_in (sample_en),
-    .data_out(sample_en_sync)
+xpm_cdc_array_single #(
+  .DEST_SYNC_FF   (2), // integer; range: 2-10
+  .INIT_SYNC_FF   (0), // integer; 0=disable simulation init values, 1=enable simulation init values
+  .SIM_ASSERT_CHK (0), // integer; 0=disable simulation messages, 1=enable simulation messages
+  .SRC_INPUT_REG  (0), // integer; 0=do not register input, 1=register input
+  .WIDTH          (1)  // integer; range: 1-1024
+) sync_sample_en (
+  .src_in   (sample_en),
+  .dest_clk (clk_frontend),
+  .dest_out (sample_en_sync)
 );
 
 anaylzer_fifo front_fifo(

@@ -32,13 +32,16 @@ logic reset_counter;
 assign clk = info.clk;
 assign rst = info.rst;
 
-signal_sync #(
-    .DATA_WIDTH(SIG_WIDTH), 
-    .SYNC_CYCLE(1)
-)sync_inst(
-    .clk,
-    .data_in,
-    .data_out(synced)
+xpm_cdc_array_single #(
+  .DEST_SYNC_FF   (2), // integer; range: 2-10
+  .INIT_SYNC_FF   (0), // integer; 0=disable simulation init values, 1=enable simulation init values
+  .SIM_ASSERT_CHK (0), // integer; 0=disable simulation messages, 1=enable simulation messages
+  .SRC_INPUT_REG  (0), // integer; 0=do not register input, 1=register input
+  .WIDTH          (SIG_WIDTH)  // integer; range: 1-1024
+) sig_sync (
+  .src_in   (data_in),
+  .dest_clk (clk),
+  .dest_out (synced)
 );
 
 transition_det #(

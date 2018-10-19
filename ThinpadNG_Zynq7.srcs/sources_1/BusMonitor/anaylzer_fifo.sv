@@ -11,6 +11,17 @@ module anaylzer_fifo(
     output logic empty
 );
 
+logic dest_arst;
+xpm_cdc_async_rst #(
+    .DEST_SYNC_FF    (2), // integer; range: 2-10
+    .INIT_SYNC_FF    (0), // integer; 0=disable simulation init values, 1=enable simulation init values
+    .RST_ACTIVE_HIGH (1)  // integer; 0=active low reset, 1=active high reset
+) reset_of_fifo (
+    .src_arst  (rst),
+    .dest_clk  (wr_clk),
+    .dest_arst (dest_arst)
+);
+
 // xpm_fifo_async: Asynchronous FIFO
 // Xilinx Parameterized Macro, Version 2016.4
 xpm_fifo_async # (
@@ -31,7 +42,7 @@ xpm_fifo_async # (
 .CDC_SYNC_STAGES (2), //positive integer
 .WAKEUP_TIME (0) //positive integer; 0 or 2;
 ) xpm_fifo_async_inst (
-.rst (rst),
+.rst (dest_arst),
 .wr_clk (wr_clk),
 .wr_en (wr_en),
 .din (din),
