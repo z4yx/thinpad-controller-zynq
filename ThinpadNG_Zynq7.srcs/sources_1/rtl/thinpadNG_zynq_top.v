@@ -431,19 +431,17 @@ module thinpadNG_zynq_top #(
         .clk       (vid_in_clk)
     );
     
-    /*
-    reg [31:0] test_data;
-    always@(posedge bus_analyze_clk)begin
-        test_data <= test_data + bus_analyze_axis_tready;
-        bus_analyze_axis_tvalid <= bus_analyze_axis_tready;
-    end
-    assign bus_analyze_axis_tdata = test_data;
-    assign bus_analyze_axis_tlast = 0;
-    */
+    wire pll_bus_analyzer_locked, clk_frontend;
+    clk_bus_analyzer pll_bus_analyzer(
+        .clk_in1(bus_analyze_clk),
+        .clk_out1(clk_frontend),
+        .resetn(bus_analyze_rst_n),
+        .locked(pll_bus_analyzer_locked)
+    );
     bus_analyze bus_analyzer(
         .clk(bus_analyze_clk),     //100M
-        .clk_frontend(clk_serdes), //200M
-        .rst_n(bus_analyze_rst_n),
+        .clk_frontend(clk_frontend), //250M
+        .rst_n(pll_bus_analyzer_locked),
     
         .ram_addr_in(emc_rtl_addr_wrap),
         .ram_dq_in(emc_rtl_dq_io),

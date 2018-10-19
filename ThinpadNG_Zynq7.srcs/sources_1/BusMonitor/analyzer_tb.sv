@@ -124,7 +124,7 @@ bus_analyze analyzer(
 );
 
 always #5  clk_amba = ~clk_amba; // 100M
-always #3  clk_frontend = ~clk_frontend; // 166M
+always #2  clk_frontend = ~clk_frontend; // 250M
 always #15 clk_ramctl = ~clk_ramctl; // 30M
 
 initial begin : gen

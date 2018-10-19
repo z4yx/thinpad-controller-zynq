@@ -1,8 +1,3 @@
-/*
-    clk_frontend: 6ns/cycle
-
-*/
-
 `include "analyzer_defs.svh"
 module bus_analyze (
     input logic clk,
@@ -25,6 +20,11 @@ module bus_analyze (
     output logic axis_tlast
 );
 
+function integer div_ceil(integer a,b);
+    return (a+b-1)/b;
+endfunction
+
+parameter CLK_FRONTEND_CYCLE_PS = 4000; // 4ns
 parameter CNT_WIDTH = 6;
 
 logic rst_frontend;
@@ -91,7 +91,13 @@ logic w_assert, r_assert;
 transaction_timing_if #(.ADDR_WIDTH(20), .CNT_WIDTH(CNT_WIDTH)) w_timing();
 transaction_timing_if #(.ADDR_WIDTH(20), .CNT_WIDTH(CNT_WIDTH)) r_timing();
 
-fsm_read #(.ADDR_WIDTH(20)) read_analyze(
+fsm_read #(
+    .ADDR_WIDTH(20),
+    .CYCLE_tAA(div_ceil(10000,CLK_FRONTEND_CYCLE_PS)),
+    .CYCLE_tDOE(div_ceil(6000,CLK_FRONTEND_CYCLE_PS)),
+    .CYCLE_tBA(div_ceil(6000,CLK_FRONTEND_CYCLE_PS)),
+    .CYCLE_tACE(div_ceil(10000,CLK_FRONTEND_CYCLE_PS))
+    ) read_analyze(
     .ram_addr,
     .ram_dq,
     .ram_we_n,
