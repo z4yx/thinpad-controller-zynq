@@ -22,6 +22,14 @@
 
 `include "analyzer_defs.svh"
 `default_nettype none
+typedef struct packed{
+    logic[31:0] dq_o;
+    logic[19:0] a;
+    logic wen;
+    logic oen;
+    logic cen;
+    logic[3:0] ben;
+}sram_pin_t;
 module analyzer_tb(
 
     );
@@ -41,13 +49,11 @@ wire axis_valid;
 wire axis_ready=1;
 wire axis_tlast;
 
-wire[31:0] base_ram_data, base_ram_data_o;
-wire[19:0] base_ram_address;
+reg host_selected=0;
+wire[31:0] dq;
+sram_pin_t t1,t2,s1;
+assign dq = s1.oen ? s1.dq_o : {32{1'bz}};
 wire[1:0] dummy_addr;
-wire base_ram_we_n;
-wire base_ram_oe_n;
-wire base_ram_ce_n=0;
-wire[3:0] base_ram_be;
 
 reg [23:0]ibus_ram_address;
 wire [31:0]ibus_ram_rddata;
@@ -63,32 +69,32 @@ reg [3:0]dbus_ram_byteenable=0;
 reg dbus_ram_read=0;
 reg dbus_ram_write=0;
 
-assign base_ram_data = base_ram_oe_n ? base_ram_data_o : {32{1'bz}};
-
 AS7C34098A base1(/*autoinst*/
-            .DataIO(base_ram_data[15:0]),
-            .Address(base_ram_address[17:0]),
-            .OE_n(base_ram_oe_n),
-            .CE_n(base_ram_ce_n),
-            .WE_n(base_ram_we_n),
-            .LB_n(~base_ram_be[0]),
-            .UB_n(~base_ram_be[1]));
+            .DataIO(dq[15:0]),
+            .Address(s1.a[17:0]),
+            .OE_n(s1.oen),
+            .CE_n(s1.cen),
+            .WE_n(s1.wen),
+            .LB_n(s1.ben[0]),
+            .UB_n(s1.ben[1]));
 AS7C34098A base2(/*autoinst*/
-            .DataIO(base_ram_data[31:16]),
-            .Address(base_ram_address[17:0]),
-            .OE_n(base_ram_oe_n),
-            .CE_n(base_ram_ce_n),
-            .WE_n(base_ram_we_n),
-            .LB_n(~base_ram_be[2]),
-            .UB_n(~base_ram_be[3]));
+            .DataIO(dq[31:16]),
+            .Address(s1.a[17:0]),
+            .OE_n(s1.oen),
+            .CE_n(s1.cen),
+            .WE_n(s1.wen),
+            .LB_n(s1.ben[2]),
+            .UB_n(s1.ben[3]));
+
+assign t1.cen = 1'b0;
 two_port ram_ctl(/*autoinst*/
-           .ram_data_i(base_ram_data),
-           .ram_data_o(base_ram_data_o),
-           .ram_address({base_ram_address,dummy_addr}),
-           .ram_wr_n(base_ram_we_n),
-           .ram_rd_n(base_ram_oe_n),
-           .dataenable(base_ram_be),
-           
+           .ram_data_i(dq),
+           .ram_data_o(t1.dq_o),
+           .ram_address({t1.a,dummy_addr}),
+           .ram_wr_n(t1.wen),
+           .ram_rd_n(t1.oen),
+           .ram_be_n(t1.ben),
+
            .rst_n(rst_n),
            .clk2x(clk_ramctl),
 
@@ -109,12 +115,12 @@ bus_analyze analyzer(
     .clk             (clk_amba),
     .clk_frontend    (clk_frontend),
     .rst_n           (rst_n),
-    .ram_addr_in     (base_ram_address),
-    .ram_dq_in       (base_ram_data),
-    .ram_we_n_in     (base_ram_we_n),
-    .ram_oe_n_in     (base_ram_oe_n),
-    .ram_ce_n_in     (base_ram_ce_n),
-    .ram_be_n_in     (~base_ram_be),
+    .ram_addr_in     (s1.a),
+    .ram_dq_in       (dq),
+    .ram_we_n_in     (s1.wen),
+    .ram_oe_n_in     (s1.oen),
+    .ram_ce_n_in     (s1.cen),
+    .ram_be_n_in     (s1.ben),
     .new_sample_cnt  (new_sample_cnt),
     .new_sample_valid(new_sample_valid),
     .axis_data       (axis_data),
@@ -123,6 +129,14 @@ bus_analyze analyzer(
     .axis_tlast      (axis_tlast)
 );
 
+always_comb begin
+    if(host_selected == 0)
+        s1 = t1;
+    else
+        s1 = t2;
+    
+end
+
 always #5  clk_amba = ~clk_amba; // 100M
 always #2  clk_frontend = ~clk_frontend; // 250M
 always #15 clk_ramctl = ~clk_ramctl; // 30M
@@ -130,24 +144,48 @@ always #15 clk_ramctl = ~clk_ramctl; // 30M
 initial begin : gen
     integer i;
     wait(rst_n==1);
-    repeat(10) @(negedge clk_ramctl);
     i = 0;
-    forever begin 
+    repeat(8) begin // regular access tests
         ibus_ram_address = {i,2'b0};
         ibus_ram_byteenable = $random()&4'hf;
         ibus_ram_read = 1;
         i = i+1;
         dbus_ram_address = {i,2'b0};//($random()&8'hff)<<2;
-        dbus_ram_write = $random()&1;
+        dbus_ram_write = 1;//$random()&1;
         dbus_ram_read = ~dbus_ram_write;
         dbus_ram_byteenable = $random()&4'hf;
         dbus_ram_wrdata = $random();
-        repeat(1) @(negedge clk_ramctl);
+        repeat(4) @(negedge clk_ramctl);
+    end
+
+    t2 = 0;
+    t2 = ~t2; // fill all "1"
+    host_selected = 1;
+    repeat(1000)begin 
+        if($random()%100>87)begin 
+            t2.dq_o = $random();
+        end
+        if($random()%100>87)begin 
+            t2.a = $random();
+        end
+        if($random()%100>87)begin 
+            t2.ben = $random();
+        end
+        if($random()%100>87)begin 
+            t2.wen ^= 1;
+        end
+        if($random()%100>87)begin 
+            t2.oen ^= 1;
+        end
+        if($random()%100>87)begin 
+            t2.cen ^= 1;
+        end
+        #1;
     end
 end
 
 initial begin 
-    repeat(5) @(posedge clk_amba);
+    repeat(5) @(posedge clk_ramctl);
     #1 rst_n = 1;
 end
 
