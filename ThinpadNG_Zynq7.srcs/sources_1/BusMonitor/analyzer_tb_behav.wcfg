@@ -12,15 +12,15 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="210470000fs"></ZoomStartTime>
-      <ZoomEndTime time="510053912fs"></ZoomEndTime>
-      <Cursor1Time time="334000000fs"></Cursor1Time>
+      <ZoomStartTime time="1853550000fs"></ZoomStartTime>
+      <ZoomEndTime time="2153133912fs"></ZoomEndTime>
+      <Cursor1Time time="1898000000fs"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="257"></NameColumnWidth>
       <ValueColumnWidth column_width="75"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="34" />
+   <WVObjectSize size="32" />
    <wvobject type="array" fp_name="/analyzer_tb/cnt">
       <obj_property name="ElementShortName">cnt[20:0]</obj_property>
       <obj_property name="ObjectShortName">cnt[20:0]</obj_property>
@@ -107,17 +107,11 @@
       <obj_property name="CustomSignalColor">#FFFF00</obj_property>
       <obj_property name="UseCustomSignalColor">true</obj_property>
    </wvobject>
-   <wvobject type="array" fp_name="/analyzer_tb/analyzer/read_analyze/ram_oe_n/count">
-      <obj_property name="ElementShortName">count[5:0]</obj_property>
-      <obj_property name="ObjectShortName">count[5:0]</obj_property>
-   </wvobject>
    <wvobject type="logic" fp_name="/analyzer_tb/analyzer/read_analyze/oe_satisfied">
       <obj_property name="ElementShortName">oe_satisfied</obj_property>
       <obj_property name="ObjectShortName">oe_satisfied</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/analyzer_tb/analyzer/read_analyze/timing/oe_before">
-      <obj_property name="ElementShortName">oe_before[5:0]</obj_property>
-      <obj_property name="ObjectShortName">oe_before[5:0]</obj_property>
+      <obj_property name="CustomSignalColor">#FFFF00</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
    </wvobject>
    <wvobject type="array" fp_name="/analyzer_tb/s1">
       <obj_property name="ElementShortName">s1</obj_property>

@@ -34,7 +34,7 @@ module analyzer_tb(
 
     );
 
-parameter DATA_CNT_TOTAL = 1000;
+parameter DATA_CNT_TOTAL = 40;
 parameter FRONTEND_CLK_PS = 4000;
 
 reg rst_n = 0;
@@ -162,7 +162,7 @@ initial begin : gen
     t2 = 0;
     t2 = ~t2; // fill all "1"
     host_selected = 1;
-    repeat(1000)begin 
+    repeat(10000)begin 
         if($random()%100>87)begin 
             t2.dq_o = $random();
         end
