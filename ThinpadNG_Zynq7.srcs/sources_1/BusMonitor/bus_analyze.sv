@@ -93,6 +93,7 @@ transaction_timing_if #(.ADDR_WIDTH(20), .CNT_WIDTH(CNT_WIDTH)) r_timing();
 
 fsm_read #(
     .ADDR_WIDTH(20),
+    .CNT_WIDTH(CNT_WIDTH),
     .CYCLE_tAA(div_ceil(10000,CLK_FRONTEND_CYCLE_PS)),
     .CYCLE_tDOE(div_ceil(6000,CLK_FRONTEND_CYCLE_PS)),
     .CYCLE_tBA(div_ceil(6000,CLK_FRONTEND_CYCLE_PS)),
@@ -132,6 +133,10 @@ always_ff @(posedge clk_frontend) begin
         record.dq        <= w_timing.data;
         record.be_n      <= w_timing.be_n;
         record.oe_n      <= w_timing.oe_n;
+        record.next_be_n <= w_timing.next_be_n;
+        record.next_we_n <= w_timing.next_we_n;
+        record.next_ce_n <= w_timing.next_ce_n;
+        record.next_oe_n <= w_timing.next_oe_n;
         record.ce_before <= w_timing.ce_before;
         record.oe_before <= w_timing.oe_before;
         record.be_before <= w_timing.be_before;
@@ -143,6 +148,10 @@ always_ff @(posedge clk_frontend) begin
         record.dq        <= r_timing.data;
         record.be_n      <= r_timing.be_n;
         record.oe_n      <= r_timing.oe_n;
+        record.next_be_n <= r_timing.next_be_n;
+        record.next_we_n <= r_timing.next_we_n;
+        record.next_ce_n <= r_timing.next_ce_n;
+        record.next_oe_n <= r_timing.next_oe_n;
         record.ce_before <= r_timing.ce_before;
         record.oe_before <= r_timing.oe_before;
         record.be_before <= r_timing.be_before;

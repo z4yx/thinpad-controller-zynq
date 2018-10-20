@@ -166,19 +166,19 @@ initial begin : gen
         if($random()%100>87)begin 
             t2.dq_o = $random();
         end
-        if($random()%100>87)begin 
+        if($random()%100>94)begin 
             t2.a = $random();
         end
-        if($random()%100>87)begin 
+        if($random()%100>85)begin 
             t2.ben = $random();
         end
-        if($random()%100>87)begin 
+        if($random()%100>92)begin 
             t2.wen ^= 1;
         end
-        if($random()%100>87)begin 
+        if($random()%100>90)begin 
             t2.oen ^= 1;
         end
-        if($random()%100>87)begin 
+        if($random()%100>90)begin 
             t2.cen ^= 1;
         end
         #1;
@@ -201,11 +201,11 @@ task print_record();
     if(rec.op_write == rec.op_read)
         $stop;
     tmp = rec.op_read ? 8'h52 : 8'h57;
-    off = rec.op_read ? 0 : 1;
-    $display("%0t: %h %c %b %h",$time,rec.addr,tmp,rec.be_n,rec.dq);
-    $display("    ce:%0d oe:%0d be:%0d we:%0d dq:%0d a:%0d",
-        (rec.ce_before+off)*ns, (rec.oe_before+off)*ns, (rec.be_before+off)*ns,
-        (rec.we_before+off)*ns, (rec.data_before+off)*ns, (rec.addr_before+off)*ns);
+    off = 1;
+    $display("%0t: %h %c %b->%b %h",$time,rec.addr,tmp,rec.be_n,rec.next_be_n,rec.dq);
+    $display("    ce:%0d 0->%b oe:%0d %b->%b we:%0d x->%b be:%0d dq:%0d a:%0d",
+        (rec.ce_before+off)*ns, rec.next_ce_n, (rec.oe_before+off)*ns, rec.oe_n, rec.next_oe_n,
+        (rec.we_before+off)*ns, rec.next_we_n, (rec.be_before+off)*ns, (rec.data_before+off)*ns, (rec.addr_before+off)*ns);
 endtask
 always@(posedge clk_amba)
 begin 

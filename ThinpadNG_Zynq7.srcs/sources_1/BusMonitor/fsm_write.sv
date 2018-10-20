@@ -28,6 +28,7 @@ logic data_prepare_state;
 logic ce_controlled;
 logic we_controlled;
 logic be_controlled;
+logic be_rising_bits;
 
 always_ff @(posedge ram_addr.clk)begin
     ce_before_buf <= ram_ce_n.count;
@@ -47,7 +48,8 @@ end
 
 assign ce_controlled = ram_ce_n.changed & data_prepare_state;
 assign we_controlled = ram_we_n.changed & data_prepare_state;
-assign be_controlled = ram_be_n.changed & data_prepare_state;
+assign be_controlled = be_rising_bits & data_prepare_state;
+assign be_rising_bits = |((ram_be_n.data^be_buf)&ram_be_n.data);
 
 always_ff @(posedge ram_addr.clk)begin
     timing.ce_before <= ce_before_buf;
@@ -57,7 +59,11 @@ always_ff @(posedge ram_addr.clk)begin
     timing.data_before <= data_before_buf;
     timing.addr_before <= addr_before_buf;
     timing.be_n <= be_buf;
+    timing.next_be_n <= ram_be_n.data;
+    timing.next_we_n <= ram_we_n.data;
+    timing.next_ce_n <= ram_ce_n.data;
     timing.oe_n <= oe_buf;
+    timing.next_oe_n <= ram_oe_n.data;
     timing.addr <= addr_buf;
     timing.data <= dq_buf;
 
