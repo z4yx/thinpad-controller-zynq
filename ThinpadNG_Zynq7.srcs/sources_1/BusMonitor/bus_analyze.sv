@@ -28,13 +28,14 @@ parameter CLK_FRONTEND_CYCLE_PS = 4000; // 4ns
 parameter CNT_WIDTH = 6;
 
 logic rst_frontend;
+logic sampler_en;
 
 xpm_cdc_async_rst #(
     .DEST_SYNC_FF    (2), // integer; range: 2-10
     .INIT_SYNC_FF    (0), // integer; 0=disable simulation init values, 1=enable simulation init values
     .RST_ACTIVE_HIGH (1)  // integer; 0=active low reset, 1=active high reset
 ) reset_of_image_capture (
-    .src_arst  (~rst_n),
+    .src_arst  (~(rst_n & sampler_en)),
     .dest_clk  (clk_frontend),
     .dest_arst (rst_frontend)
 );
@@ -164,9 +165,6 @@ end
 logic fifo_wreq;
 logic fifo_full;
 logic write_error;
-logic sample_en;
-logic sample_en_sync;
-
 logic fifo_rreq;
 logic fifo_empty;
 
@@ -182,28 +180,16 @@ always_ff @(posedge clk_frontend) begin : proc_write
         write_error <= 0;
         fifo_wreq <= 0;
     end else begin
-        fifo_wreq <= (w_assert | r_assert) & sample_en_sync;
+        fifo_wreq <= (w_assert | r_assert);
         if(fifo_full && fifo_wreq)
             write_error <= 1;
     end
 end
 
-xpm_cdc_array_single #(
-  .DEST_SYNC_FF   (2), // integer; range: 2-10
-  .INIT_SYNC_FF   (0), // integer; 0=disable simulation init values, 1=enable simulation init values
-  .SIM_ASSERT_CHK (0), // integer; 0=disable simulation messages, 1=enable simulation messages
-  .SRC_INPUT_REG  (0), // integer; 0=do not register input, 1=register input
-  .WIDTH          (1)  // integer; range: 1-1024
-) sync_sample_en (
-  .src_in   (sample_en),
-  .dest_clk (clk_frontend),
-  .dest_out (sample_en_sync)
-);
-
 anaylzer_fifo front_fifo(
     .wr_clk(clk_frontend),
     .rd_clk(clk),
-    .rst(~sample_en),
+    .rst(rst_frontend),
     .din(record),
     .dout(fifo_to_controller),
     .wr_en(fifo_wreq),
@@ -233,7 +219,7 @@ transition_det new_sample(
 sample_ctl ctl(
     .clk              (clk),
     .rst_n            (rst_n),
-    .sample_en        (sample_en),
+    .sample_en        (sampler_en),
     .new_sample_cnt   (new_sample_cnt_sync),
     .new_sample_strobe(new_sample_strobe),
     .fifo_data        (fifo_to_controller),
