@@ -36,10 +36,14 @@ impl_1:
   stage: generate_bitstream
   image: vivado2017:2017.3
   script:
-    - ${VIVADO_PATH} -mode tcl -source tools/build_bitstream.tcl ${PROJECT_NAME}.xpr
+    - ${VIVADO_PATH} -mode tcl -source tools/build_bitstream.tcl ${PROJECT_NAME}.xpr -tclargs 2
+    - cp ${PROJECT_NAME}.runs/impl_1/thinpadNG_zynq_top.sysdef thinpadNG_zynq_top_rev2.hdf
+    - ${VIVADO_PATH} -mode tcl -source tools/build_bitstream.tcl ${PROJECT_NAME}.xpr -tclargs 3
+    - cp ${PROJECT_NAME}.runs/impl_1/thinpadNG_zynq_top.sysdef thinpadNG_zynq_top_rev3.hdf
   artifacts:
     paths:
-      - ${PROJECT_NAME}.runs/impl_1/thinpadNG_zynq_top.bit
+      - thinpadNG_zynq_top_rev2.hdf
+      - thinpadNG_zynq_top_rev3.hdf
       - ${PROJECT_NAME}.runs/impl_1/runme.log
     when: always
 
