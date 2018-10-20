@@ -4,12 +4,12 @@ module bus_analyze (
     input logic clk_frontend,
     input logic rst_n,
     
-    input logic[19:0] ram_addr_in,
-    input logic[31:0] ram_dq_in,
-    input logic ram_we_n_in,
-    input logic ram_oe_n_in,
-    input logic ram_ce_n_in,
-    input logic[3:0] ram_be_n_in,
+    input bit[19:0] ram_addr_in,
+    input bit[31:0] ram_dq_in,
+    input bit ram_we_n_in,
+    input bit ram_oe_n_in,
+    input bit ram_ce_n_in,
+    input bit[3:0] ram_be_n_in,
 
     input logic[20:0] new_sample_cnt,
     input logic new_sample_valid,
@@ -20,7 +20,7 @@ module bus_analyze (
     output logic axis_tlast
 );
 
-function integer div_ceil(integer a,b);
+function integer div_ceil(input integer a,b);
     return (a+b-1)/b;
 endfunction
 

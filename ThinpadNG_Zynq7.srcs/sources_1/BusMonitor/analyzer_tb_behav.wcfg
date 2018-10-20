@@ -12,15 +12,15 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="472610000fs"></ZoomStartTime>
-      <ZoomEndTime time="933678742fs"></ZoomEndTime>
-      <Cursor1Time time="573087000fs"></Cursor1Time>
+      <ZoomStartTime time="1136850000fs"></ZoomStartTime>
+      <ZoomEndTime time="1244370104fs"></ZoomEndTime>
+      <Cursor1Time time="1230000000fs"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="257"></NameColumnWidth>
       <ValueColumnWidth column_width="79"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="38" />
+   <WVObjectSize size="31" />
    <wvobject type="array" fp_name="/analyzer_tb/cnt">
       <obj_property name="ElementShortName">cnt[20:0]</obj_property>
       <obj_property name="ObjectShortName">cnt[20:0]</obj_property>
@@ -138,86 +138,46 @@
       <obj_property name="ObjectShortName">w_assert</obj_property>
    </wvobject>
    <wvobject type="array" fp_name="/analyzer_tb/analyzer/ram_addr/data">
+      <obj_property name="DisplayName">FullPathName</obj_property>
       <obj_property name="ElementShortName">data[19:0]</obj_property>
       <obj_property name="ObjectShortName">data[19:0]</obj_property>
       <obj_property name="CustomSignalColor">#FF0080</obj_property>
       <obj_property name="UseCustomSignalColor">true</obj_property>
    </wvobject>
-   <wvobject type="logic" fp_name="/analyzer_tb/analyzer/ram_addr/changed">
-      <obj_property name="DisplayName">FullPathName</obj_property>
-      <obj_property name="ElementShortName">changed</obj_property>
-      <obj_property name="ObjectShortName">changed</obj_property>
-      <obj_property name="CustomSignalColor">#FF0080</obj_property>
-      <obj_property name="UseCustomSignalColor">true</obj_property>
-   </wvobject>
    <wvobject type="array" fp_name="/analyzer_tb/analyzer/ram_dq/data">
+      <obj_property name="DisplayName">FullPathName</obj_property>
       <obj_property name="ElementShortName">data[31:0]</obj_property>
       <obj_property name="ObjectShortName">data[31:0]</obj_property>
-      <obj_property name="CustomSignalColor">#D2691E</obj_property>
-      <obj_property name="UseCustomSignalColor">true</obj_property>
-   </wvobject>
-   <wvobject type="logic" fp_name="/analyzer_tb/analyzer/ram_dq/changed">
-      <obj_property name="DisplayName">FullPathName</obj_property>
-      <obj_property name="ElementShortName">changed</obj_property>
-      <obj_property name="ObjectShortName">changed</obj_property>
-      <obj_property name="CustomSignalColor">#D2691E</obj_property>
-      <obj_property name="UseCustomSignalColor">true</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/analyzer_tb/analyzer/ram_we_n/data">
-      <obj_property name="ElementShortName">data[0:0]</obj_property>
-      <obj_property name="ObjectShortName">data[0:0]</obj_property>
-      <obj_property name="CustomSignalColor">#00FFFF</obj_property>
-      <obj_property name="UseCustomSignalColor">true</obj_property>
-   </wvobject>
-   <wvobject type="logic" fp_name="/analyzer_tb/analyzer/ram_we_n/changed">
-      <obj_property name="DisplayName">FullPathName</obj_property>
-      <obj_property name="ElementShortName">changed</obj_property>
-      <obj_property name="ObjectShortName">changed</obj_property>
-      <obj_property name="CustomSignalColor">#00FFFF</obj_property>
-      <obj_property name="UseCustomSignalColor">true</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/analyzer_tb/analyzer/ram_oe_n/data">
-      <obj_property name="ElementShortName">data[0:0]</obj_property>
-      <obj_property name="ObjectShortName">data[0:0]</obj_property>
-      <obj_property name="CustomSignalColor">#FFFF00</obj_property>
-      <obj_property name="UseCustomSignalColor">true</obj_property>
-   </wvobject>
-   <wvobject type="logic" fp_name="/analyzer_tb/analyzer/ram_oe_n/changed">
-      <obj_property name="DisplayName">FullPathName</obj_property>
-      <obj_property name="ElementShortName">changed</obj_property>
-      <obj_property name="ObjectShortName">changed</obj_property>
-      <obj_property name="CustomSignalColor">#FFFF00</obj_property>
-      <obj_property name="UseCustomSignalColor">true</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/analyzer_tb/analyzer/ram_ce_n/data">
-      <obj_property name="ElementShortName">data[0:0]</obj_property>
-      <obj_property name="ObjectShortName">data[0:0]</obj_property>
-      <obj_property name="CustomSignalColor">#FF00FF</obj_property>
-      <obj_property name="UseCustomSignalColor">true</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/analyzer_tb/analyzer/trans_ce/cnt_inst/count">
-      <obj_property name="ElementShortName">count[5:0]</obj_property>
-      <obj_property name="ObjectShortName">count[5:0]</obj_property>
-   </wvobject>
-   <wvobject type="logic" fp_name="/analyzer_tb/analyzer/ram_ce_n/changed">
-      <obj_property name="DisplayName">FullPathName</obj_property>
-      <obj_property name="ElementShortName">changed</obj_property>
-      <obj_property name="ObjectShortName">changed</obj_property>
-      <obj_property name="CustomSignalColor">#FF00FF</obj_property>
+      <obj_property name="CustomSignalColor">#00FF7F</obj_property>
       <obj_property name="UseCustomSignalColor">true</obj_property>
    </wvobject>
    <wvobject type="array" fp_name="/analyzer_tb/analyzer/ram_be_n/data">
+      <obj_property name="DisplayName">FullPathName</obj_property>
       <obj_property name="ElementShortName">data[3:0]</obj_property>
       <obj_property name="ObjectShortName">data[3:0]</obj_property>
       <obj_property name="CustomSignalColor">#FFA500</obj_property>
       <obj_property name="UseCustomSignalColor">true</obj_property>
       <obj_property name="Radix">BINARYRADIX</obj_property>
    </wvobject>
-   <wvobject type="logic" fp_name="/analyzer_tb/analyzer/ram_be_n/changed">
+   <wvobject type="logic" fp_name="/analyzer_tb/analyzer/ram_we_n/data[0]">
       <obj_property name="DisplayName">FullPathName</obj_property>
-      <obj_property name="ElementShortName">changed</obj_property>
-      <obj_property name="ObjectShortName">changed</obj_property>
-      <obj_property name="CustomSignalColor">#FFA500</obj_property>
+      <obj_property name="ElementShortName">[0]</obj_property>
+      <obj_property name="ObjectShortName">[0]</obj_property>
+      <obj_property name="CustomSignalColor">#00FFFF</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/analyzer_tb/analyzer/ram_ce_n/data[0]">
+      <obj_property name="DisplayName">FullPathName</obj_property>
+      <obj_property name="ElementShortName">[0]</obj_property>
+      <obj_property name="ObjectShortName">[0]</obj_property>
+      <obj_property name="CustomSignalColor">#FAAFBE</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/analyzer_tb/analyzer/ram_oe_n/data[0]">
+      <obj_property name="DisplayName">FullPathName</obj_property>
+      <obj_property name="ElementShortName">[0]</obj_property>
+      <obj_property name="ObjectShortName">[0]</obj_property>
+      <obj_property name="CustomSignalColor">#FFFF00</obj_property>
       <obj_property name="UseCustomSignalColor">true</obj_property>
    </wvobject>
    <wvobject type="array" fp_name="/analyzer_tb/s1">
