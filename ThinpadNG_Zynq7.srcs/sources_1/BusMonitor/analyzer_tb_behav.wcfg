@@ -12,102 +12,118 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="251500000fs"></ZoomStartTime>
-      <ZoomEndTime time="673000001fs"></ZoomEndTime>
-      <Cursor1Time time="399000000fs"></Cursor1Time>
+      <ZoomStartTime time="472610000fs"></ZoomStartTime>
+      <ZoomEndTime time="933678742fs"></ZoomEndTime>
+      <Cursor1Time time="573087000fs"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="257"></NameColumnWidth>
-      <ValueColumnWidth column_width="83"></ValueColumnWidth>
+      <ValueColumnWidth column_width="79"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="40" />
+   <WVObjectSize size="38" />
    <wvobject type="array" fp_name="/analyzer_tb/cnt">
       <obj_property name="ElementShortName">cnt[20:0]</obj_property>
       <obj_property name="ObjectShortName">cnt[20:0]</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/analyzer_tb/last_out">
-      <obj_property name="ElementShortName">last_out</obj_property>
-      <obj_property name="ObjectShortName">last_out</obj_property>
-      <obj_property name="isExpanded"></obj_property>
-      <wvobject type="logic" fp_name="/analyzer_tb/last_out.op_read">
-         <obj_property name="ElementShortName">.op_read</obj_property>
-         <obj_property name="ObjectShortName">.op_read</obj_property>
-      </wvobject>
-      <wvobject type="logic" fp_name="/analyzer_tb/last_out.op_write">
-         <obj_property name="ElementShortName">.op_write</obj_property>
-         <obj_property name="ObjectShortName">.op_write</obj_property>
-      </wvobject>
-      <wvobject type="array" fp_name="/analyzer_tb/last_out.resvd1">
-         <obj_property name="ElementShortName">.resvd1[3:0]</obj_property>
-         <obj_property name="ObjectShortName">.resvd1[3:0]</obj_property>
-      </wvobject>
-      <wvobject type="array" fp_name="/analyzer_tb/last_out.addr">
-         <obj_property name="ElementShortName">.addr[19:0]</obj_property>
-         <obj_property name="ObjectShortName">.addr[19:0]</obj_property>
-      </wvobject>
-      <wvobject type="array" fp_name="/analyzer_tb/last_out.ce_before">
-         <obj_property name="ElementShortName">.ce_before[5:0]</obj_property>
-         <obj_property name="ObjectShortName">.ce_before[5:0]</obj_property>
-         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
-      </wvobject>
-      <wvobject type="array" fp_name="/analyzer_tb/last_out.resvd2">
-         <obj_property name="ElementShortName">.resvd2[26:0]</obj_property>
-         <obj_property name="ObjectShortName">.resvd2[26:0]</obj_property>
-      </wvobject>
-      <wvobject type="array" fp_name="/analyzer_tb/last_out.be_n">
-         <obj_property name="ElementShortName">.be_n[3:0]</obj_property>
-         <obj_property name="ObjectShortName">.be_n[3:0]</obj_property>
-         <obj_property name="Radix">BINARYRADIX</obj_property>
-      </wvobject>
-      <wvobject type="logic" fp_name="/analyzer_tb/last_out.oe_n">
-         <obj_property name="ElementShortName">.oe_n</obj_property>
-         <obj_property name="ObjectShortName">.oe_n</obj_property>
-      </wvobject>
-      <wvobject type="array" fp_name="/analyzer_tb/last_out.const0">
-         <obj_property name="ElementShortName">.const0[1:0]</obj_property>
-         <obj_property name="ObjectShortName">.const0[1:0]</obj_property>
-      </wvobject>
-      <wvobject type="array" fp_name="/analyzer_tb/last_out.oe_before">
-         <obj_property name="ElementShortName">.oe_before[5:0]</obj_property>
-         <obj_property name="ObjectShortName">.oe_before[5:0]</obj_property>
-         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
-      </wvobject>
-      <wvobject type="array" fp_name="/analyzer_tb/last_out.be_before">
-         <obj_property name="ElementShortName">.be_before[5:0]</obj_property>
-         <obj_property name="ObjectShortName">.be_before[5:0]</obj_property>
-         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
-      </wvobject>
-      <wvobject type="array" fp_name="/analyzer_tb/last_out.we_before">
-         <obj_property name="ElementShortName">.we_before[5:0]</obj_property>
-         <obj_property name="ObjectShortName">.we_before[5:0]</obj_property>
-         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
-      </wvobject>
-      <wvobject type="array" fp_name="/analyzer_tb/last_out.data_before">
-         <obj_property name="ElementShortName">.data_before[5:0]</obj_property>
-         <obj_property name="ObjectShortName">.data_before[5:0]</obj_property>
-         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
-      </wvobject>
-      <wvobject type="array" fp_name="/analyzer_tb/last_out.addr_before">
-         <obj_property name="ElementShortName">.addr_before[5:0]</obj_property>
-         <obj_property name="ObjectShortName">.addr_before[5:0]</obj_property>
-         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
-      </wvobject>
-      <wvobject type="array" fp_name="/analyzer_tb/last_out.dq">
-         <obj_property name="ElementShortName">.dq[31:0]</obj_property>
-         <obj_property name="ObjectShortName">.dq[31:0]</obj_property>
-      </wvobject>
+      <obj_property name="CustomSignalColor">#A0A0A4</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
    </wvobject>
    <wvobject type="logic" fp_name="/analyzer_tb/axis_valid">
       <obj_property name="ElementShortName">axis_valid</obj_property>
       <obj_property name="ObjectShortName">axis_valid</obj_property>
+      <obj_property name="CustomSignalColor">#A0A0A4</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
    </wvobject>
    <wvobject type="logic" fp_name="/analyzer_tb/axis_ready">
       <obj_property name="ElementShortName">axis_ready</obj_property>
       <obj_property name="ObjectShortName">axis_ready</obj_property>
+      <obj_property name="CustomSignalColor">#A0A0A4</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
    </wvobject>
    <wvobject type="logic" fp_name="/analyzer_tb/axis_tlast">
       <obj_property name="ElementShortName">axis_tlast</obj_property>
       <obj_property name="ObjectShortName">axis_tlast</obj_property>
+      <obj_property name="CustomSignalColor">#A0A0A4</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/analyzer_tb/rec">
+      <obj_property name="ElementShortName">rec</obj_property>
+      <obj_property name="ObjectShortName">rec</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+      <obj_property name="CustomSignalColor">#808080</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <wvobject type="logic" fp_name="/analyzer_tb/rec.op_read">
+         <obj_property name="ElementShortName">.op_read</obj_property>
+         <obj_property name="ObjectShortName">.op_read</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/analyzer_tb/rec.op_write">
+         <obj_property name="ElementShortName">.op_write</obj_property>
+         <obj_property name="ObjectShortName">.op_write</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/analyzer_tb/rec.resvd1">
+         <obj_property name="ElementShortName">.resvd1[3:0]</obj_property>
+         <obj_property name="ObjectShortName">.resvd1[3:0]</obj_property>
+         <obj_property name="CustomSignalColor">#808080</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/analyzer_tb/rec.addr">
+         <obj_property name="ElementShortName">.addr[19:0]</obj_property>
+         <obj_property name="ObjectShortName">.addr[19:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/analyzer_tb/rec.ce_before">
+         <obj_property name="ElementShortName">.ce_before[5:0]</obj_property>
+         <obj_property name="ObjectShortName">.ce_before[5:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/analyzer_tb/rec.resvd2">
+         <obj_property name="ElementShortName">.resvd2[26:0]</obj_property>
+         <obj_property name="ObjectShortName">.resvd2[26:0]</obj_property>
+         <obj_property name="CustomSignalColor">#808080</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/analyzer_tb/rec.be_n">
+         <obj_property name="ElementShortName">.be_n[3:0]</obj_property>
+         <obj_property name="ObjectShortName">.be_n[3:0]</obj_property>
+         <obj_property name="Radix">BINARYRADIX</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/analyzer_tb/rec.oe_n">
+         <obj_property name="ElementShortName">.oe_n</obj_property>
+         <obj_property name="ObjectShortName">.oe_n</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/analyzer_tb/rec.const0">
+         <obj_property name="ElementShortName">.const0[1:0]</obj_property>
+         <obj_property name="ObjectShortName">.const0[1:0]</obj_property>
+         <obj_property name="CustomSignalColor">#808080</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/analyzer_tb/rec.oe_before">
+         <obj_property name="ElementShortName">.oe_before[5:0]</obj_property>
+         <obj_property name="ObjectShortName">.oe_before[5:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/analyzer_tb/rec.be_before">
+         <obj_property name="ElementShortName">.be_before[5:0]</obj_property>
+         <obj_property name="ObjectShortName">.be_before[5:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/analyzer_tb/rec.we_before">
+         <obj_property name="ElementShortName">.we_before[5:0]</obj_property>
+         <obj_property name="ObjectShortName">.we_before[5:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/analyzer_tb/rec.data_before">
+         <obj_property name="ElementShortName">.data_before[5:0]</obj_property>
+         <obj_property name="ObjectShortName">.data_before[5:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/analyzer_tb/rec.addr_before">
+         <obj_property name="ElementShortName">.addr_before[5:0]</obj_property>
+         <obj_property name="ObjectShortName">.addr_before[5:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/analyzer_tb/rec.dq">
+         <obj_property name="ElementShortName">.dq[31:0]</obj_property>
+         <obj_property name="ObjectShortName">.dq[31:0]</obj_property>
+      </wvobject>
    </wvobject>
    <wvobject type="logic" fp_name="/analyzer_tb/rst_n">
       <obj_property name="ElementShortName">rst_n</obj_property>
@@ -179,6 +195,10 @@
       <obj_property name="CustomSignalColor">#FF00FF</obj_property>
       <obj_property name="UseCustomSignalColor">true</obj_property>
    </wvobject>
+   <wvobject type="array" fp_name="/analyzer_tb/analyzer/trans_ce/cnt_inst/count">
+      <obj_property name="ElementShortName">count[5:0]</obj_property>
+      <obj_property name="ObjectShortName">count[5:0]</obj_property>
+   </wvobject>
    <wvobject type="logic" fp_name="/analyzer_tb/analyzer/ram_ce_n/changed">
       <obj_property name="DisplayName">FullPathName</obj_property>
       <obj_property name="ElementShortName">changed</obj_property>
@@ -189,7 +209,7 @@
    <wvobject type="array" fp_name="/analyzer_tb/analyzer/ram_be_n/data">
       <obj_property name="ElementShortName">data[3:0]</obj_property>
       <obj_property name="ObjectShortName">data[3:0]</obj_property>
-      <obj_property name="CustomSignalColor">#808000</obj_property>
+      <obj_property name="CustomSignalColor">#FFA500</obj_property>
       <obj_property name="UseCustomSignalColor">true</obj_property>
       <obj_property name="Radix">BINARYRADIX</obj_property>
    </wvobject>
@@ -197,34 +217,49 @@
       <obj_property name="DisplayName">FullPathName</obj_property>
       <obj_property name="ElementShortName">changed</obj_property>
       <obj_property name="ObjectShortName">changed</obj_property>
-      <obj_property name="CustomSignalColor">#808000</obj_property>
+      <obj_property name="CustomSignalColor">#FFA500</obj_property>
       <obj_property name="UseCustomSignalColor">true</obj_property>
    </wvobject>
-   <wvobject type="array" fp_name="/analyzer_tb/base_ram_data">
-      <obj_property name="ElementShortName">base_ram_data[31:0]</obj_property>
-      <obj_property name="ObjectShortName">base_ram_data[31:0]</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/analyzer_tb/base_ram_address">
-      <obj_property name="ElementShortName">base_ram_address[19:0]</obj_property>
-      <obj_property name="ObjectShortName">base_ram_address[19:0]</obj_property>
-   </wvobject>
-   <wvobject type="logic" fp_name="/analyzer_tb/base_ram_we_n">
-      <obj_property name="ElementShortName">base_ram_we_n</obj_property>
-      <obj_property name="ObjectShortName">base_ram_we_n</obj_property>
-   </wvobject>
-   <wvobject type="logic" fp_name="/analyzer_tb/base_ram_oe_n">
-      <obj_property name="ElementShortName">base_ram_oe_n</obj_property>
-      <obj_property name="ObjectShortName">base_ram_oe_n</obj_property>
-   </wvobject>
-   <wvobject type="logic" fp_name="/analyzer_tb/base_ram_ce_n">
-      <obj_property name="ElementShortName">base_ram_ce_n</obj_property>
-      <obj_property name="ObjectShortName">base_ram_ce_n</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/analyzer_tb/base_ram_be">
-      <obj_property name="ElementShortName">base_ram_be[3:0]</obj_property>
-      <obj_property name="ObjectShortName">base_ram_be[3:0]</obj_property>
+   <wvobject type="array" fp_name="/analyzer_tb/s1">
+      <obj_property name="ElementShortName">s1</obj_property>
+      <obj_property name="ObjectShortName">s1</obj_property>
+      <obj_property name="CustomSignalColor">#808080</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
       <obj_property name="isExpanded"></obj_property>
-      <obj_property name="Radix">BINARYRADIX</obj_property>
+      <wvobject type="array" fp_name="/analyzer_tb/s1.dq_o">
+         <obj_property name="ElementShortName">.dq_o[31:0]</obj_property>
+         <obj_property name="ObjectShortName">.dq_o[31:0]</obj_property>
+         <obj_property name="CustomSignalColor">#808080</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/analyzer_tb/s1.a">
+         <obj_property name="ElementShortName">.a[19:0]</obj_property>
+         <obj_property name="ObjectShortName">.a[19:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/analyzer_tb/s1.wen">
+         <obj_property name="ElementShortName">.wen</obj_property>
+         <obj_property name="ObjectShortName">.wen</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/analyzer_tb/s1.oen">
+         <obj_property name="ElementShortName">.oen</obj_property>
+         <obj_property name="ObjectShortName">.oen</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/analyzer_tb/s1.cen">
+         <obj_property name="ElementShortName">.cen</obj_property>
+         <obj_property name="ObjectShortName">.cen</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/analyzer_tb/s1.ben">
+         <obj_property name="ElementShortName">.ben[3:0]</obj_property>
+         <obj_property name="ObjectShortName">.ben[3:0]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject type="array" fp_name="/analyzer_tb/dq">
+      <obj_property name="ElementShortName">dq[31:0]</obj_property>
+      <obj_property name="ObjectShortName">dq[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="divider127" type="divider">
+      <obj_property name="label">controller</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
    </wvobject>
    <wvobject type="logic" fp_name="/analyzer_tb/clk_ramctl">
       <obj_property name="ElementShortName">clk_ramctl</obj_property>

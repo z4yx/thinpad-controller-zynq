@@ -30,13 +30,12 @@ logic we_controlled;
 logic be_controlled;
 
 always_ff @(posedge ram_addr.clk)begin
-    /* 0-based to 1-based */
-    ce_before_buf <= ram_ce_n.count+1;
-    oe_before_buf <= ram_oe_n.count+1;
-    be_before_buf <= ram_be_n.count+1;
-    we_before_buf <= ram_we_n.count+1;
-    data_before_buf <= ram_dq.count+1;
-    addr_before_buf <= ram_addr.count+1;
+    ce_before_buf <= ram_ce_n.count;
+    oe_before_buf <= ram_oe_n.count;
+    be_before_buf <= ram_be_n.count;
+    we_before_buf <= ram_we_n.count;
+    data_before_buf <= ram_dq.count;
+    addr_before_buf <= ram_addr.count;
     be_buf <= ram_be_n.data;
     oe_buf <= ram_oe_n.data;
     dq_buf <= ram_dq.data;

@@ -35,6 +35,7 @@ module analyzer_tb(
     );
 
 parameter DATA_CNT_TOTAL = 1000;
+parameter FRONTEND_CLK_PS = 4000;
 
 reg rst_n = 0;
 reg clk_frontend = 0;
@@ -111,7 +112,7 @@ two_port ram_ctl(/*autoinst*/
            .wr2(dbus_ram_write),
            .dataenable2(dbus_ram_byteenable));
 
-bus_analyze analyzer(
+bus_analyze #(.CLK_FRONTEND_CYCLE_PS(FRONTEND_CLK_PS)) analyzer(
     .clk             (clk_amba),
     .clk_frontend    (clk_frontend),
     .rst_n           (rst_n),
@@ -138,7 +139,7 @@ always_comb begin
 end
 
 always #5  clk_amba = ~clk_amba; // 100M
-always #2  clk_frontend = ~clk_frontend; // 250M
+always #(FRONTEND_CLK_PS/2000)  clk_frontend = ~clk_frontend; // 250M
 always #15 clk_ramctl = ~clk_ramctl; // 30M
 
 initial begin : gen
@@ -189,14 +190,29 @@ initial begin
     #1 rst_n = 1;
 end
 
-sram_analyze_record_t last_out = 0;
+sram_analyze_record_t rec = 0;
 reg[20:0] cnt = 0;
 event finished;
+
+task print_record();
+    automatic reg [7:0] tmp;
+    automatic reg [15:0] ns,off;
+    ns = FRONTEND_CLK_PS/1000;
+    if(rec.op_write == rec.op_read)
+        $stop;
+    tmp = rec.op_read ? 8'h52 : 8'h57;
+    off = rec.op_read ? 0 : 1;
+    $display("%0t: %h %c %b %h",$time,rec.addr,tmp,rec.be_n,rec.dq);
+    $display("    ce:%0d oe:%0d be:%0d we:%0d dq:%0d a:%0d",
+        (rec.ce_before+off)*ns, (rec.oe_before+off)*ns, (rec.be_before+off)*ns,
+        (rec.we_before+off)*ns, (rec.data_before+off)*ns, (rec.addr_before+off)*ns);
+endtask
 always@(posedge clk_amba)
 begin 
     if(axis_valid & axis_ready)begin 
         cnt = cnt+1;
-        last_out = axis_data;
+        rec = axis_data;
+        print_record();
         if(cnt == DATA_CNT_TOTAL)begin 
             $display("test end");
             if(~axis_tlast)begin
