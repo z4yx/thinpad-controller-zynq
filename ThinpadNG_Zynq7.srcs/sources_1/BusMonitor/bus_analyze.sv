@@ -13,6 +13,7 @@ module bus_analyze (
 
     input logic[20:0] new_sample_cnt,
     input logic new_sample_valid,
+    output logic fifo_overflow,
 
     output logic[127:0] axis_data,
     output logic axis_valid,
@@ -164,7 +165,7 @@ end
 
 logic fifo_wreq;
 logic fifo_full;
-logic write_error;
+logic fifo_overflow;
 logic fifo_rreq;
 logic fifo_empty;
 
@@ -177,12 +178,12 @@ logic [20:0] new_sample_cnt_sync;
 
 always_ff @(posedge clk_frontend) begin : proc_write
     if(rst_frontend) begin
-        write_error <= 0;
+        fifo_overflow <= 0;
         fifo_wreq <= 0;
     end else begin
         fifo_wreq <= (w_assert | r_assert);
         if(fifo_full && fifo_wreq)
-            write_error <= 1;
+            fifo_overflow <= 1;
     end
 end
 

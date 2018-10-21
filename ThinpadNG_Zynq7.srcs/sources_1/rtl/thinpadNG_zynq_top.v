@@ -432,6 +432,7 @@ module thinpadNG_zynq_top #(
     );
     
     wire pll_bus_analyzer_locked, clk_frontend;
+    wire bus_analyzer_ovf;
     clk_bus_analyzer pll_bus_analyzer(
         .clk_in1(bus_analyze_clk),
         .clk_out1(clk_frontend),
@@ -452,6 +453,7 @@ module thinpadNG_zynq_top #(
 
         .new_sample_cnt(bus_analyze_sample_cnt),
         .new_sample_valid(bus_analyze_start),
+        .fifo_overflow(bus_analyzer_ovf),
 
         .axis_data(bus_analyze_axis_tdata),
         .axis_valid(bus_analyze_axis_tvalid),
@@ -520,7 +522,7 @@ endgenerate
     wire [2:0] thinpad_rev_fixed = thinpad_rev;
 
     assign status_reg = {xvc_present,thinpad_rev_fixed,4'b0,
-                        6'b0,vid_fifo_count,
+                        5'b0,bus_analyzer_ovf,vid_fifo_count,
                         vtc_locked,vid_overflow,la_exist,sampler_idle,la_storage_overflow,lock_level};
     assign port2reg = {received_data, status_reg};
 
