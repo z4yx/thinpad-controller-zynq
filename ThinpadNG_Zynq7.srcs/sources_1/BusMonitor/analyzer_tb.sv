@@ -191,6 +191,7 @@ initial begin
 end
 
 sram_analyze_record_t rec = 0;
+logic [127:0] rec_unpacked;
 reg[20:0] cnt = 0;
 event finished;
 
@@ -212,6 +213,12 @@ begin
     if(axis_valid & axis_ready)begin 
         cnt = cnt+1;
         rec = axis_data;
+        rec_unpacked = rec;
+        repeat(16)begin
+            $write("0x%x,",rec_unpacked[7:0]);
+            rec_unpacked >>= 8;
+        end
+        $write("\n");
         print_record();
         if(cnt == DATA_CNT_TOTAL)begin 
             $display("test end");
