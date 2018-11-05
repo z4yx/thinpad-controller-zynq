@@ -7065,7 +7065,7 @@
         </spirit:configurableElementValues>
       </spirit:componentInstance>
       <spirit:componentInstance>
-        <spirit:instanceName>xlconcat_0</spirit:instanceName>
+        <spirit:instanceName>RBG2DMA</spirit:instanceName>
         <spirit:componentRef spirit:library="ip" spirit:name="xlconcat" spirit:vendor="xilinx.com" spirit:version="2.1"/>
         <spirit:configurableElementValues>
           <spirit:configurableElementValue spirit:referenceId="bd:xciName">design_1_xlconcat_0_1</spirit:configurableElementValue>
@@ -7073,7 +7073,7 @@
         </spirit:configurableElementValues>
       </spirit:componentInstance>
       <spirit:componentInstance>
-        <spirit:instanceName>high2bit1</spirit:instanceName>
+        <spirit:instanceName>high2bit_1</spirit:instanceName>
         <spirit:componentRef spirit:library="ip" spirit:name="xlslice" spirit:vendor="xilinx.com" spirit:version="1.0"/>
         <spirit:configurableElementValues>
           <spirit:configurableElementValue spirit:referenceId="bd:xciName">design_1_high2bit_0</spirit:configurableElementValue>
@@ -7097,38 +7097,6 @@
     </spirit:componentInstances>
     <spirit:adHocConnections>
       <spirit:adHocConnection>
-        <spirit:name>rgb8_r_Dout</spirit:name>
-        <spirit:internalPortReference spirit:componentRef="rgb8_r" spirit:portRef="Dout"/>
-        <spirit:internalPortReference spirit:componentRef="xlconcat_0" spirit:portRef="In0"/>
-        <spirit:internalPortReference spirit:componentRef="xlconcat_0" spirit:portRef="In1"/>
-        <spirit:internalPortReference spirit:componentRef="high2bit" spirit:portRef="Din"/>
-      </spirit:adHocConnection>
-      <spirit:adHocConnection>
-        <spirit:name>rgb8_g_Dout</spirit:name>
-        <spirit:internalPortReference spirit:componentRef="rgb8_g" spirit:portRef="Dout"/>
-        <spirit:internalPortReference spirit:componentRef="xlconcat_0" spirit:portRef="In3"/>
-        <spirit:internalPortReference spirit:componentRef="xlconcat_0" spirit:portRef="In4"/>
-        <spirit:internalPortReference spirit:componentRef="high2bit1" spirit:portRef="Din"/>
-      </spirit:adHocConnection>
-      <spirit:adHocConnection>
-        <spirit:name>rgb8_b_Dout</spirit:name>
-        <spirit:internalPortReference spirit:componentRef="rgb8_b" spirit:portRef="Dout"/>
-        <spirit:internalPortReference spirit:componentRef="xlconcat_0" spirit:portRef="In6"/>
-        <spirit:internalPortReference spirit:componentRef="xlconcat_0" spirit:portRef="In7"/>
-        <spirit:internalPortReference spirit:componentRef="xlconcat_0" spirit:portRef="In8"/>
-        <spirit:internalPortReference spirit:componentRef="xlconcat_0" spirit:portRef="In9"/>
-      </spirit:adHocConnection>
-      <spirit:adHocConnection>
-        <spirit:name>high2bit_Dout</spirit:name>
-        <spirit:internalPortReference spirit:componentRef="high2bit" spirit:portRef="Dout"/>
-        <spirit:internalPortReference spirit:componentRef="xlconcat_0" spirit:portRef="In2"/>
-      </spirit:adHocConnection>
-      <spirit:adHocConnection>
-        <spirit:name>high2bit1_Dout</spirit:name>
-        <spirit:internalPortReference spirit:componentRef="high2bit1" spirit:portRef="Dout"/>
-        <spirit:internalPortReference spirit:componentRef="xlconcat_0" spirit:portRef="In5"/>
-      </spirit:adHocConnection>
-      <spirit:adHocConnection>
         <spirit:name>fifo_generator_0_m_axis_tdata</spirit:name>
         <spirit:externalPortReference spirit:portRef="Din"/>
         <spirit:internalPortReference spirit:componentRef="rgb8_g" spirit:portRef="Din"/>
@@ -7137,8 +7105,40 @@
       </spirit:adHocConnection>
       <spirit:adHocConnection>
         <spirit:name>xlconcat_0_dout</spirit:name>
-        <spirit:internalPortReference spirit:componentRef="xlconcat_0" spirit:portRef="dout"/>
+        <spirit:internalPortReference spirit:componentRef="RBG2DMA" spirit:portRef="dout"/>
         <spirit:externalPortReference spirit:portRef="dout"/>
+      </spirit:adHocConnection>
+      <spirit:adHocConnection>
+        <spirit:name>rgb8_r_Dout</spirit:name>
+        <spirit:internalPortReference spirit:componentRef="rgb8_r" spirit:portRef="Dout"/>
+        <spirit:internalPortReference spirit:componentRef="high2bit" spirit:portRef="Din"/>
+        <spirit:internalPortReference spirit:componentRef="RBG2DMA" spirit:portRef="In9"/>
+        <spirit:internalPortReference spirit:componentRef="RBG2DMA" spirit:portRef="In8"/>
+      </spirit:adHocConnection>
+      <spirit:adHocConnection>
+        <spirit:name>high2bit_Dout</spirit:name>
+        <spirit:internalPortReference spirit:componentRef="high2bit" spirit:portRef="Dout"/>
+        <spirit:internalPortReference spirit:componentRef="RBG2DMA" spirit:portRef="In7"/>
+      </spirit:adHocConnection>
+      <spirit:adHocConnection>
+        <spirit:name>high2bit1_Dout</spirit:name>
+        <spirit:internalPortReference spirit:componentRef="high2bit_1" spirit:portRef="Dout"/>
+        <spirit:internalPortReference spirit:componentRef="RBG2DMA" spirit:portRef="In0"/>
+      </spirit:adHocConnection>
+      <spirit:adHocConnection>
+        <spirit:name>rgb8_g_Dout</spirit:name>
+        <spirit:internalPortReference spirit:componentRef="rgb8_g" spirit:portRef="Dout"/>
+        <spirit:internalPortReference spirit:componentRef="RBG2DMA" spirit:portRef="In1"/>
+        <spirit:internalPortReference spirit:componentRef="high2bit_1" spirit:portRef="Din"/>
+        <spirit:internalPortReference spirit:componentRef="RBG2DMA" spirit:portRef="In2"/>
+      </spirit:adHocConnection>
+      <spirit:adHocConnection>
+        <spirit:name>rgb8_b_Dout</spirit:name>
+        <spirit:internalPortReference spirit:componentRef="rgb8_b" spirit:portRef="Dout"/>
+        <spirit:internalPortReference spirit:componentRef="RBG2DMA" spirit:portRef="In3"/>
+        <spirit:internalPortReference spirit:componentRef="RBG2DMA" spirit:portRef="In4"/>
+        <spirit:internalPortReference spirit:componentRef="RBG2DMA" spirit:portRef="In5"/>
+        <spirit:internalPortReference spirit:componentRef="RBG2DMA" spirit:portRef="In6"/>
       </spirit:adHocConnection>
     </spirit:adHocConnections>
   </spirit:design>
