@@ -25,30 +25,30 @@ preplace inst proc_sys_reset_0 -pg 1 -lvl 3 -y 440 -defaultsOSRD
 preplace inst v_frmbuf_wr_0 -pg 1 -lvl 3 -y 170 -defaultsOSRD
 preplace inst fifo_generator_0 -pg 1 -lvl 1 -y 230 -defaultsOSRD
 preplace netloc Conn1 1 0 3 NJ 600 NJ 600 NJ
-preplace netloc v_frmbuf_wr_0_s_axis_video_TREADY 1 1 2 390 180 680J
+preplace netloc v_frmbuf_wr_0_s_axis_video_TREADY 1 1 2 N 190 790J
 preplace netloc Conn2 1 0 1 NJ
-preplace netloc axi_clk_1 1 0 4 50 380 NJ 380 660 350 NJ
-preplace netloc v_tc_ctrl_1 1 0 3 NJ 570 NJ 570 640J
+preplace netloc axi_clk_1 1 0 4 30 20 NJ 20 810 340 1400J
+preplace netloc v_tc_ctrl_1 1 0 3 NJ 570 NJ 570 780J
 preplace netloc fifo_generator_0_m_axis_tdata 1 1 1 390
-preplace netloc s_aresetn_0_1 1 0 1 40J
-preplace netloc fifo_generator_0_m_axis_tlast 1 1 2 390 160 680J
-preplace netloc dma_ctrl_1 1 0 3 NJ 50 NJ 50 680J
+preplace netloc s_aresetn_0_1 1 0 1 30J
+preplace netloc fifo_generator_0_m_axis_tlast 1 1 2 N 170 780J
+preplace netloc dma_ctrl_1 1 0 3 NJ 50 NJ 50 830J
 preplace netloc smartconnect_0_M00_AXI 1 4 1 NJ
-preplace netloc v_frmbuf_wr_0_m_axi_mm_video 1 3 1 1170
+preplace netloc v_frmbuf_wr_0_m_axi_mm_video 1 3 1 1400
 preplace netloc v_frmbuf_wr_0_interrupt 1 3 2 NJ 180 NJ
-preplace netloc proc_sys_reset_0_interconnect_aresetn 1 3 1 1160
-preplace netloc xlconcat_0_dout 1 2 1 680J
-preplace netloc xlconstant_0_dout 1 2 1 670
+preplace netloc proc_sys_reset_0_interconnect_aresetn 1 3 1 1390
+preplace netloc xlconcat_0_dout 1 2 1 830J
+preplace netloc xlconstant_0_dout 1 2 1 820
 preplace netloc ext_reset_in_1 1 0 3 NJ 420 NJ 420 NJ
 preplace netloc v_tc_0_intc_if 1 3 1 NJ
-preplace netloc proc_sys_reset_0_peripheral_aresetn 1 2 3 680 530 1170 480 NJ
-preplace netloc fifo_generator_0_axis_overflow 1 1 4 NJ 330 NJ 330 1150J 280 NJ
-preplace netloc vid_in_clk_1 1 0 3 30 390 NJ 390 650J
-preplace netloc fifo_generator_0_axis_wr_data_count 1 1 4 NJ 290 640J 300 1160J 260 NJ
-preplace netloc fifo_generator_0_m_axis_tuser 1 1 2 400 190 NJ
-preplace netloc fifo_generator_0_m_axis_tvalid 1 1 2 410 210 NJ
+preplace netloc proc_sys_reset_0_peripheral_aresetn 1 2 3 830 350 1380 480 NJ
+preplace netloc fifo_generator_0_axis_overflow 1 1 4 390J 320 NJ 320 1390J 280 NJ
+preplace netloc vid_in_clk_1 1 0 3 40 40 NJ 40 800J
+preplace netloc fifo_generator_0_axis_wr_data_count 1 1 4 NJ 290 790J 300 1380J 260 NJ
+preplace netloc fifo_generator_0_m_axis_tuser 1 1 2 390 200 830J
+preplace netloc fifo_generator_0_m_axis_tvalid 1 1 2 400 210 NJ
 preplace netloc xlslice_0_Dout 1 4 1 NJ
-levelinfo -pg 1 -10 230 530 920 1310 1470 -top 0 -bot 790
+levelinfo -pg 1 -10 230 670 1143 1540 1700 -top 0 -bot 970
 ",
 }
 0
