@@ -18,6 +18,7 @@ cache:
 stages:
   - generate_ip
   - generate_bitstream
+  - deploy
 
 out_of_context_module_runs:
   stage: generate_ip
@@ -47,5 +48,9 @@ impl_1:
       - ${PROJECT_NAME}.runs/impl_1/runme.log
     when: always
 
+trigger_build:
+  stage: deploy
+  script:
+    - "curl -X POST -F token=cfdca0271a3ce95241ba49f857fc16 -F ref=petalinux1603 https://git.net9.org/api/v4/projects/1184/trigger/pipeline"
 
 
