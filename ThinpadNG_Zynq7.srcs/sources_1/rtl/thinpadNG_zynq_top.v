@@ -558,7 +558,10 @@ endgenerate
     reg [2:0] cpld_emu_rdn_sync;
     reg wrn_rise,tbre;
     reg rdn_fall;
+    reg data_ready;
+    wire uart_rx_flag;
     
+    assign cpld_emu_dataready = data_ready;
     assign cpld_oe = ~cpld_emu_rdn;
 
     always @(posedge bus_analyze_clk) begin : proc_Tx
@@ -572,6 +575,11 @@ endgenerate
             TxD_data <= TxD_data1;
         wrn_rise <= cpld_emu_wrn_sync[1] & ~cpld_emu_wrn_sync[2];
         rdn_fall <= ~cpld_emu_rdn_sync[1] & cpld_emu_rdn_sync[2];
+        
+        if(rdn_fall)
+            data_ready <= 1'b0;
+        else if(uart_rx_flag)
+            data_ready <= 1'b1;
     end
 
     reg [7:0] TxD_data_sync;
@@ -601,10 +609,10 @@ endgenerate
     );
 
     flag_sync rx_flag(
-        .clkA        (bus_analyze_clk),
-        .clkB        (clk_out2),
-        .FlagIn_clkA (rdn_fall),
-        .FlagOut_clkB(rx_ack),
+        .clkA        (clk_out2),
+        .clkB        (bus_analyze_clk),
+        .FlagIn_clkA (rx_ack),
+        .FlagOut_clkB(uart_rx_flag),
         .a_rst_n     (ps_perph_rstn),
         .b_rst_n     (ps_perph_rstn)
     );
@@ -614,7 +622,7 @@ endgenerate
             .clk(clk_out2),
             .rdn(~rx_ack),
             .RxD(cpld_emu_from16550),
-            .RxD_data_ready(cpld_emu_dataready),
+            .RxD_data_ready(rx_ack),
             .RxD_data(cpld_emu_data_o)
         );
     async_transmitter #(.ClkFrequency(11059200),.Baud(9600))
