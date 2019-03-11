@@ -557,7 +557,6 @@ endgenerate
     reg [2:0] cpld_emu_wrn_sync;
     reg [2:0] cpld_emu_rdn_sync;
     reg wrn_rise,tbre;
-    reg rdn_fall;
     reg data_ready;
     wire uart_rx_flag;
     
@@ -574,9 +573,8 @@ endgenerate
         if(~cpld_emu_wrn_sync[1] & cpld_emu_wrn_sync[2])
             TxD_data <= TxD_data1;
         wrn_rise <= cpld_emu_wrn_sync[1] & ~cpld_emu_wrn_sync[2];
-        rdn_fall <= ~cpld_emu_rdn_sync[1] & cpld_emu_rdn_sync[2];
         
-        if(rdn_fall)
+        if(~cpld_emu_rdn_sync[1] & cpld_emu_rdn_sync[2]) //rdn_fall
             data_ready <= 1'b0;
         else if(uart_rx_flag)
             data_ready <= 1'b1;
