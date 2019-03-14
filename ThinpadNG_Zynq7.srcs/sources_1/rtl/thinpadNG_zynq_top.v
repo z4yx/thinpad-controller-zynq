@@ -38,7 +38,7 @@ module thinpadNG_zynq_top #(
 `ifdef HS_DIFF_IN
     clkin1_p,  clkin1_n, datain1_p, datain1_n,
 `endif
-    tap_tck,    tap_tdi,    tap_tms,
+    tap_tck,    tap_tdi,    tap_tms, // tck=aclk/8
 
     //Inouts
     DDR_addr, DDR_ba, DDR_cas_n, DDR_ck_n, 

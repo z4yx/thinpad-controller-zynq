@@ -8,7 +8,9 @@ ipshared/
 *.veo
 *.vho
 *.hwh
+*.hdf
 ThinpadNG_Zynq7.cache/
 ThinpadNG_Zynq7.hw/
 ThinpadNG_Zynq7.ip_user_files/
 ThinpadNG_Zynq7.runs/
+ThinpadNG_Zynq7.sim/sim_1/behav/xsim/

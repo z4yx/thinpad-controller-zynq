@@ -3,7 +3,7 @@
 <!--                                                         -->
 <!-- Copyright 1986-2017 Xilinx, Inc. All Rights Reserved.   -->
 
-<Project Version="7" Minor="32" Path="/home/zhang/ThinpadNG_Zynq7/ThinpadNG_Zynq7.xpr">
+<Project Version="7" Minor="32" Path="/home/zhang/Projects/ThinpadNG_Zynq7/ThinpadNG_Zynq7.xpr">
   <DefaultLaunch Dir="$PRUNDIR"/>
   <Configuration>
     <Option Name="Id" Val="227810793db84b7a9a10fdf584e8b238"/>
@@ -59,53 +59,17 @@
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_xlconstant_0_0/design_1_xlconstant_0_0.xci">
-          <Proxy FileSetName="design_1_xlconstant_0_0"/>
-        </CompFileExtendedInfo>
         <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axi_gpio_0_0/design_1_axi_gpio_0_0.xci">
           <Proxy FileSetName="design_1_axi_gpio_0_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axi_gpio_0_1/design_1_axi_gpio_0_1.xci">
-          <Proxy FileSetName="design_1_axi_gpio_0_1"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axi_gpio_1_0/design_1_axi_gpio_1_0.xci">
-          <Proxy FileSetName="design_1_axi_gpio_1_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axi_emc_0_0/design_1_axi_emc_0_0.xci">
-          <Proxy FileSetName="design_1_axi_emc_0_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axi_register_0_0/design_1_axi_register_0_0.xci">
-          <Proxy FileSetName="design_1_axi_register_0_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axi_dma_0_0/design_1_axi_dma_0_0.xci">
-          <Proxy FileSetName="design_1_axi_dma_0_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_proc_sys_reset_0_1/design_1_proc_sys_reset_0_1.xci">
-          <Proxy FileSetName="design_1_proc_sys_reset_0_1"/>
         </CompFileExtendedInfo>
         <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_xlconcat_0_0/design_1_xlconcat_0_0.xci">
           <Proxy FileSetName="design_1_xlconcat_0_0"/>
         </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_clk_wiz_0_0/design_1_clk_wiz_0_0.xci">
-          <Proxy FileSetName="design_1_clk_wiz_0_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_ps7_0_0/design_1_ps7_0_0.xci">
-          <Proxy FileSetName="design_1_ps7_0_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_proc_sys_reset_0_0/design_1_proc_sys_reset_0_0.xci">
-          <Proxy FileSetName="design_1_proc_sys_reset_0_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_xlslice_0_0/design_1_xlslice_0_0.xci">
-          <Proxy FileSetName="design_1_xlslice_0_0"/>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_xlconstant_0_0/design_1_xlconstant_0_0.xci">
+          <Proxy FileSetName="design_1_xlconstant_0_0"/>
         </CompFileExtendedInfo>
         <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axis_data_fifo_0_0/design_1_axis_data_fifo_0_0.xci">
           <Proxy FileSetName="design_1_axis_data_fifo_0_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_xlconcat_1_0/design_1_xlconcat_1_0.xci">
-          <Proxy FileSetName="design_1_xlconcat_1_0"/>
-        </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/ip_0/bd_c443_axi_jtag_0.xci">
-          <Proxy FileSetName="bd_c443_axi_jtag_0"/>
         </CompFileExtendedInfo>
         <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axi_dma_0_1/design_1_axi_dma_0_1.xci">
           <Proxy FileSetName="design_1_axi_dma_0_1"/>
@@ -169,6 +133,42 @@
         </CompFileExtendedInfo>
         <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_xlslice_1_1/design_1_xlslice_1_1.xci">
           <Proxy FileSetName="design_1_xlslice_1_1"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/ip_0/bd_c443_axi_jtag_0.xci">
+          <Proxy FileSetName="bd_c443_axi_jtag_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_clk_wiz_0_0/design_1_clk_wiz_0_0.xci">
+          <Proxy FileSetName="design_1_clk_wiz_0_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_ps7_0_0/design_1_ps7_0_0.xci">
+          <Proxy FileSetName="design_1_ps7_0_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_proc_sys_reset_0_1/design_1_proc_sys_reset_0_1.xci">
+          <Proxy FileSetName="design_1_proc_sys_reset_0_1"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_xlconcat_1_0/design_1_xlconcat_1_0.xci">
+          <Proxy FileSetName="design_1_xlconcat_1_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axi_dma_0_0/design_1_axi_dma_0_0.xci">
+          <Proxy FileSetName="design_1_axi_dma_0_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axi_register_0_0/design_1_axi_register_0_0.xci">
+          <Proxy FileSetName="design_1_axi_register_0_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axi_emc_0_0/design_1_axi_emc_0_0.xci">
+          <Proxy FileSetName="design_1_axi_emc_0_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axi_gpio_1_0/design_1_axi_gpio_1_0.xci">
+          <Proxy FileSetName="design_1_axi_gpio_1_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_axi_gpio_0_1/design_1_axi_gpio_0_1.xci">
+          <Proxy FileSetName="design_1_axi_gpio_0_1"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_proc_sys_reset_0_0/design_1_proc_sys_reset_0_0.xci">
+          <Proxy FileSetName="design_1_proc_sys_reset_0_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="design_1.bd" FileRelPathName="ip/design_1_xlslice_0_0/design_1_xlslice_0_0.xci">
+          <Proxy FileSetName="design_1_xlslice_0_0"/>
         </CompFileExtendedInfo>
       </File>
       <File Path="$PSRCDIR/sources_1/rtl/async_uart.v">
@@ -967,7 +967,7 @@
       <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2017">
         <ReportConfig Name="design_1_clk_wiz_0_0_synth_1_synth_report_utilization_0" Spec="report_utilization" RunStep="synth_design" ReportFile="design_1_clk_wiz_0_0_utilization_synth.rpt" Version="1" Minor="0">
           <ReportConfigOption Name="dummy_option" Type="string"/>
-          <ReportConfigOutputOption Name="pb" Type="string" Value=""/>
+          <ReportConfigOutputOption Name="pb" Type="string" Value="design_1_clk_wiz_0_0_utilization_synth.pb"/>
         </ReportConfig>
         <ReportConfig Name="design_1_clk_wiz_0_0_synth_1_synth_synthesis_report_0" Spec="" RunStep="synth_design" ReportFile="design_1_clk_wiz_0_0.vds">
           <ReportConfigOption Name="dummy_option" Type="string"/>
@@ -1001,7 +1001,7 @@
       <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2017">
         <ReportConfig Name="design_1_xlslice_0_0_synth_1_synth_report_utilization_0" Spec="report_utilization" RunStep="synth_design" ReportFile="design_1_xlslice_0_0_utilization_synth.rpt" Version="1" Minor="0">
           <ReportConfigOption Name="dummy_option" Type="string"/>
-          <ReportConfigOutputOption Name="pb" Type="string" Value=""/>
+          <ReportConfigOutputOption Name="pb" Type="string" Value="design_1_xlslice_0_0_utilization_synth.pb"/>
         </ReportConfig>
         <ReportConfig Name="design_1_xlslice_0_0_synth_1_synth_synthesis_report_0" Spec="" RunStep="synth_design" ReportFile="design_1_xlslice_0_0.vds">
           <ReportConfigOption Name="dummy_option" Type="string"/>
@@ -1018,7 +1018,7 @@
       <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2017">
         <ReportConfig Name="design_1_xlconcat_0_0_synth_1_synth_report_utilization_0" Spec="report_utilization" RunStep="synth_design" ReportFile="design_1_xlconcat_0_0_utilization_synth.rpt" Version="1" Minor="0">
           <ReportConfigOption Name="dummy_option" Type="string"/>
-          <ReportConfigOutputOption Name="pb" Type="string" Value=""/>
+          <ReportConfigOutputOption Name="pb" Type="string" Value="design_1_xlconcat_0_0_utilization_synth.pb"/>
         </ReportConfig>
         <ReportConfig Name="design_1_xlconcat_0_0_synth_1_synth_synthesis_report_0" Spec="" RunStep="synth_design" ReportFile="design_1_xlconcat_0_0.vds">
           <ReportConfigOption Name="dummy_option" Type="string"/>
@@ -1035,7 +1035,7 @@
       <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2017">
         <ReportConfig Name="design_1_xlconstant_0_0_synth_1_synth_report_utilization_0" Spec="report_utilization" RunStep="synth_design" ReportFile="design_1_xlconstant_0_0_utilization_synth.rpt" Version="1" Minor="0">
           <ReportConfigOption Name="dummy_option" Type="string"/>
-          <ReportConfigOutputOption Name="pb" Type="string" Value=""/>
+          <ReportConfigOutputOption Name="pb" Type="string" Value="design_1_xlconstant_0_0_utilization_synth.pb"/>
         </ReportConfig>
         <ReportConfig Name="design_1_xlconstant_0_0_synth_1_synth_synthesis_report_0" Spec="" RunStep="synth_design" ReportFile="design_1_xlconstant_0_0.vds">
           <ReportConfigOption Name="dummy_option" Type="string"/>
@@ -1052,7 +1052,7 @@
       <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2017">
         <ReportConfig Name="design_1_axi_gpio_0_0_synth_1_synth_report_utilization_0" Spec="report_utilization" RunStep="synth_design" ReportFile="design_1_axi_gpio_0_0_utilization_synth.rpt" Version="1" Minor="0">
           <ReportConfigOption Name="dummy_option" Type="string"/>
-          <ReportConfigOutputOption Name="pb" Type="string" Value=""/>
+          <ReportConfigOutputOption Name="pb" Type="string" Value="design_1_axi_gpio_0_0_utilization_synth.pb"/>
         </ReportConfig>
         <ReportConfig Name="design_1_axi_gpio_0_0_synth_1_synth_synthesis_report_0" Spec="" RunStep="synth_design" ReportFile="design_1_axi_gpio_0_0.vds">
           <ReportConfigOption Name="dummy_option" Type="string"/>
@@ -1069,7 +1069,7 @@
       <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2017">
         <ReportConfig Name="design_1_axi_gpio_0_1_synth_1_synth_report_utilization_0" Spec="report_utilization" RunStep="synth_design" ReportFile="design_1_axi_gpio_0_1_utilization_synth.rpt" Version="1" Minor="0">
           <ReportConfigOption Name="dummy_option" Type="string"/>
-          <ReportConfigOutputOption Name="pb" Type="string" Value=""/>
+          <ReportConfigOutputOption Name="pb" Type="string" Value="design_1_axi_gpio_0_1_utilization_synth.pb"/>
         </ReportConfig>
         <ReportConfig Name="design_1_axi_gpio_0_1_synth_1_synth_synthesis_report_0" Spec="" RunStep="synth_design" ReportFile="design_1_axi_gpio_0_1.vds">
           <ReportConfigOption Name="dummy_option" Type="string"/>
@@ -1086,7 +1086,7 @@
       <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2017">
         <ReportConfig Name="design_1_axi_gpio_1_0_synth_1_synth_report_utilization_0" Spec="report_utilization" RunStep="synth_design" ReportFile="design_1_axi_gpio_1_0_utilization_synth.rpt" Version="1" Minor="0">
           <ReportConfigOption Name="dummy_option" Type="string"/>
-          <ReportConfigOutputOption Name="pb" Type="string" Value=""/>
+          <ReportConfigOutputOption Name="pb" Type="string" Value="design_1_axi_gpio_1_0_utilization_synth.pb"/>
         </ReportConfig>
         <ReportConfig Name="design_1_axi_gpio_1_0_synth_1_synth_synthesis_report_0" Spec="" RunStep="synth_design" ReportFile="design_1_axi_gpio_1_0.vds">
           <ReportConfigOption Name="dummy_option" Type="string"/>
@@ -1103,7 +1103,7 @@
       <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2017">
         <ReportConfig Name="design_1_axi_emc_0_0_synth_1_synth_report_utilization_0" Spec="report_utilization" RunStep="synth_design" ReportFile="design_1_axi_emc_0_0_utilization_synth.rpt" Version="1" Minor="0">
           <ReportConfigOption Name="dummy_option" Type="string"/>
-          <ReportConfigOutputOption Name="pb" Type="string" Value=""/>
+          <ReportConfigOutputOption Name="pb" Type="string" Value="design_1_axi_emc_0_0_utilization_synth.pb"/>
         </ReportConfig>
         <ReportConfig Name="design_1_axi_emc_0_0_synth_1_synth_synthesis_report_0" Spec="" RunStep="synth_design" ReportFile="design_1_axi_emc_0_0.vds">
           <ReportConfigOption Name="dummy_option" Type="string"/>
@@ -1120,7 +1120,7 @@
       <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2017">
         <ReportConfig Name="design_1_axi_register_0_0_synth_1_synth_report_utilization_0" Spec="report_utilization" RunStep="synth_design" ReportFile="design_1_axi_register_0_0_utilization_synth.rpt" Version="1" Minor="0">
           <ReportConfigOption Name="dummy_option" Type="string"/>
-          <ReportConfigOutputOption Name="pb" Type="string" Value=""/>
+          <ReportConfigOutputOption Name="pb" Type="string" Value="design_1_axi_register_0_0_utilization_synth.pb"/>
         </ReportConfig>
         <ReportConfig Name="design_1_axi_register_0_0_synth_1_synth_synthesis_report_0" Spec="" RunStep="synth_design" ReportFile="design_1_axi_register_0_0.vds">
           <ReportConfigOption Name="dummy_option" Type="string"/>
@@ -1137,7 +1137,7 @@
       <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2017">
         <ReportConfig Name="design_1_axi_dma_0_0_synth_1_synth_report_utilization_0" Spec="report_utilization" RunStep="synth_design" ReportFile="design_1_axi_dma_0_0_utilization_synth.rpt" Version="1" Minor="0">
           <ReportConfigOption Name="dummy_option" Type="string"/>
-          <ReportConfigOutputOption Name="pb" Type="string" Value=""/>
+          <ReportConfigOutputOption Name="pb" Type="string" Value="design_1_axi_dma_0_0_utilization_synth.pb"/>
         </ReportConfig>
         <ReportConfig Name="design_1_axi_dma_0_0_synth_1_synth_synthesis_report_0" Spec="" RunStep="synth_design" ReportFile="design_1_axi_dma_0_0.vds">
           <ReportConfigOption Name="dummy_option" Type="string"/>
@@ -1154,7 +1154,7 @@
       <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2017">
         <ReportConfig Name="design_1_proc_sys_reset_0_1_synth_1_synth_report_utilization_0" Spec="report_utilization" RunStep="synth_design" ReportFile="design_1_proc_sys_reset_0_1_utilization_synth.rpt" Version="1" Minor="0">
           <ReportConfigOption Name="dummy_option" Type="string"/>
-          <ReportConfigOutputOption Name="pb" Type="string" Value=""/>
+          <ReportConfigOutputOption Name="pb" Type="string" Value="design_1_proc_sys_reset_0_1_utilization_synth.pb"/>
         </ReportConfig>
         <ReportConfig Name="design_1_proc_sys_reset_0_1_synth_1_synth_synthesis_report_0" Spec="" RunStep="synth_design" ReportFile="design_1_proc_sys_reset_0_1.vds">
           <ReportConfigOption Name="dummy_option" Type="string"/>
@@ -1171,7 +1171,7 @@
       <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2017">
         <ReportConfig Name="design_1_xlconcat_1_0_synth_1_synth_report_utilization_0" Spec="report_utilization" RunStep="synth_design" ReportFile="design_1_xlconcat_1_0_utilization_synth.rpt" Version="1" Minor="0">
           <ReportConfigOption Name="dummy_option" Type="string"/>
-          <ReportConfigOutputOption Name="pb" Type="string" Value=""/>
+          <ReportConfigOutputOption Name="pb" Type="string" Value="design_1_xlconcat_1_0_utilization_synth.pb"/>
         </ReportConfig>
         <ReportConfig Name="design_1_xlconcat_1_0_synth_1_synth_synthesis_report_0" Spec="" RunStep="synth_design" ReportFile="design_1_xlconcat_1_0.vds">
           <ReportConfigOption Name="dummy_option" Type="string"/>
@@ -1188,7 +1188,7 @@
       <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2017">
         <ReportConfig Name="design_1_axis_data_fifo_0_0_synth_1_synth_report_utilization_0" Spec="report_utilization" RunStep="synth_design" ReportFile="design_1_axis_data_fifo_0_0_utilization_synth.rpt" Version="1" Minor="0">
           <ReportConfigOption Name="dummy_option" Type="string"/>
-          <ReportConfigOutputOption Name="pb" Type="string" Value=""/>
+          <ReportConfigOutputOption Name="pb" Type="string" Value="design_1_axis_data_fifo_0_0_utilization_synth.pb"/>
         </ReportConfig>
         <ReportConfig Name="design_1_axis_data_fifo_0_0_synth_1_synth_synthesis_report_0" Spec="" RunStep="synth_design" ReportFile="design_1_axis_data_fifo_0_0.vds">
           <ReportConfigOption Name="dummy_option" Type="string"/>
@@ -1205,7 +1205,7 @@
       <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2017">
         <ReportConfig Name="design_1_axi_dma_0_1_synth_1_synth_report_utilization_0" Spec="report_utilization" RunStep="synth_design" ReportFile="design_1_axi_dma_0_1_utilization_synth.rpt" Version="1" Minor="0">
           <ReportConfigOption Name="dummy_option" Type="string"/>
-          <ReportConfigOutputOption Name="pb" Type="string" Value=""/>
+          <ReportConfigOutputOption Name="pb" Type="string" Value="design_1_axi_dma_0_1_utilization_synth.pb"/>
         </ReportConfig>
         <ReportConfig Name="design_1_axi_dma_0_1_synth_1_synth_synthesis_report_0" Spec="" RunStep="synth_design" ReportFile="design_1_axi_dma_0_1.vds">
           <ReportConfigOption Name="dummy_option" Type="string"/>
@@ -1222,7 +1222,7 @@
       <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2017">
         <ReportConfig Name="design_1_proc_sys_reset_0_2_synth_1_synth_report_utilization_0" Spec="report_utilization" RunStep="synth_design" ReportFile="design_1_proc_sys_reset_0_2_utilization_synth.rpt" Version="1" Minor="0">
           <ReportConfigOption Name="dummy_option" Type="string"/>
-          <ReportConfigOutputOption Name="pb" Type="string" Value=""/>
+          <ReportConfigOutputOption Name="pb" Type="string" Value="design_1_proc_sys_reset_0_2_utilization_synth.pb"/>
         </ReportConfig>
         <ReportConfig Name="design_1_proc_sys_reset_0_2_synth_1_synth_synthesis_report_0" Spec="" RunStep="synth_design" ReportFile="design_1_proc_sys_reset_0_2.vds">
           <ReportConfigOption Name="dummy_option" Type="string"/>
@@ -1239,7 +1239,7 @@
       <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2017">
         <ReportConfig Name="design_1_fifo_generator_0_0_synth_1_synth_report_utilization_0" Spec="report_utilization" RunStep="synth_design" ReportFile="design_1_fifo_generator_0_0_utilization_synth.rpt" Version="1" Minor="0">
           <ReportConfigOption Name="dummy_option" Type="string"/>
-          <ReportConfigOutputOption Name="pb" Type="string" Value=""/>
+          <ReportConfigOutputOption Name="pb" Type="string" Value="design_1_fifo_generator_0_0_utilization_synth.pb"/>
         </ReportConfig>
         <ReportConfig Name="design_1_fifo_generator_0_0_synth_1_synth_synthesis_report_0" Spec="" RunStep="synth_design" ReportFile="design_1_fifo_generator_0_0.vds">
           <ReportConfigOption Name="dummy_option" Type="string"/>
@@ -1256,7 +1256,7 @@
       <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2017">
         <ReportConfig Name="design_1_nt35510_apb_adapter_0_0_synth_1_synth_report_utilization_0" Spec="report_utilization" RunStep="synth_design" ReportFile="design_1_nt35510_apb_adapter_0_0_utilization_synth.rpt" Version="1" Minor="0">
           <ReportConfigOption Name="dummy_option" Type="string"/>
-          <ReportConfigOutputOption Name="pb" Type="string" Value=""/>
+          <ReportConfigOutputOption Name="pb" Type="string" Value="design_1_nt35510_apb_adapter_0_0_utilization_synth.pb"/>
         </ReportConfig>
         <ReportConfig Name="design_1_nt35510_apb_adapter_0_0_synth_1_synth_synthesis_report_0" Spec="" RunStep="synth_design" ReportFile="design_1_nt35510_apb_adapter_0_0.vds">
           <ReportConfigOption Name="dummy_option" Type="string"/>
@@ -1273,7 +1273,7 @@
       <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2017">
         <ReportConfig Name="design_1_axi_apb_bridge_0_0_synth_1_synth_report_utilization_0" Spec="report_utilization" RunStep="synth_design" ReportFile="design_1_axi_apb_bridge_0_0_utilization_synth.rpt" Version="1" Minor="0">
           <ReportConfigOption Name="dummy_option" Type="string"/>
-          <ReportConfigOutputOption Name="pb" Type="string" Value=""/>
+          <ReportConfigOutputOption Name="pb" Type="string" Value="design_1_axi_apb_bridge_0_0_utilization_synth.pb"/>
         </ReportConfig>
         <ReportConfig Name="design_1_axi_apb_bridge_0_0_synth_1_synth_synthesis_report_0" Spec="" RunStep="synth_design" ReportFile="design_1_axi_apb_bridge_0_0.vds">
           <ReportConfigOption Name="dummy_option" Type="string"/>
@@ -1290,7 +1290,7 @@
       <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2017">
         <ReportConfig Name="design_1_axi_uart16550_0_0_synth_1_synth_report_utilization_0" Spec="report_utilization" RunStep="synth_design" ReportFile="design_1_axi_uart16550_0_0_utilization_synth.rpt" Version="1" Minor="0">
           <ReportConfigOption Name="dummy_option" Type="string"/>
-          <ReportConfigOutputOption Name="pb" Type="string" Value=""/>
+          <ReportConfigOutputOption Name="pb" Type="string" Value="design_1_axi_uart16550_0_0_utilization_synth.pb"/>
         </ReportConfig>
         <ReportConfig Name="design_1_axi_uart16550_0_0_synth_1_synth_synthesis_report_0" Spec="" RunStep="synth_design" ReportFile="design_1_axi_uart16550_0_0.vds">
           <ReportConfigOption Name="dummy_option" Type="string"/>
@@ -1307,7 +1307,7 @@
       <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2017">
         <ReportConfig Name="design_1_v_frmbuf_wr_0_0_synth_1_synth_report_utilization_0" Spec="report_utilization" RunStep="synth_design" ReportFile="design_1_v_frmbuf_wr_0_0_utilization_synth.rpt" Version="1" Minor="0">
           <ReportConfigOption Name="dummy_option" Type="string"/>
-          <ReportConfigOutputOption Name="pb" Type="string" Value=""/>
+          <ReportConfigOutputOption Name="pb" Type="string" Value="design_1_v_frmbuf_wr_0_0_utilization_synth.pb"/>
         </ReportConfig>
         <ReportConfig Name="design_1_v_frmbuf_wr_0_0_synth_1_synth_synthesis_report_0" Spec="" RunStep="synth_design" ReportFile="design_1_v_frmbuf_wr_0_0.vds">
           <ReportConfigOption Name="dummy_option" Type="string"/>
@@ -1324,7 +1324,7 @@
       <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2017">
         <ReportConfig Name="design_1_smartconnect_0_0_synth_1_synth_report_utilization_0" Spec="report_utilization" RunStep="synth_design" ReportFile="design_1_smartconnect_0_0_utilization_synth.rpt" Version="1" Minor="0">
           <ReportConfigOption Name="dummy_option" Type="string"/>
-          <ReportConfigOutputOption Name="pb" Type="string" Value=""/>
+          <ReportConfigOutputOption Name="pb" Type="string" Value="design_1_smartconnect_0_0_utilization_synth.pb"/>
         </ReportConfig>
         <ReportConfig Name="design_1_smartconnect_0_0_synth_1_synth_synthesis_report_0" Spec="" RunStep="synth_design" ReportFile="design_1_smartconnect_0_0.vds">
           <ReportConfigOption Name="dummy_option" Type="string"/>
@@ -1341,7 +1341,7 @@
       <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2017">
         <ReportConfig Name="design_1_proc_sys_reset_0_3_synth_1_synth_report_utilization_0" Spec="report_utilization" RunStep="synth_design" ReportFile="design_1_proc_sys_reset_0_3_utilization_synth.rpt" Version="1" Minor="0">
           <ReportConfigOption Name="dummy_option" Type="string"/>
-          <ReportConfigOutputOption Name="pb" Type="string" Value=""/>
+          <ReportConfigOutputOption Name="pb" Type="string" Value="design_1_proc_sys_reset_0_3_utilization_synth.pb"/>
         </ReportConfig>
         <ReportConfig Name="design_1_proc_sys_reset_0_3_synth_1_synth_synthesis_report_0" Spec="" RunStep="synth_design" ReportFile="design_1_proc_sys_reset_0_3.vds">
           <ReportConfigOption Name="dummy_option" Type="string"/>
@@ -1358,7 +1358,7 @@
       <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2017">
         <ReportConfig Name="design_1_v_tc_0_0_synth_1_synth_report_utilization_0" Spec="report_utilization" RunStep="synth_design" ReportFile="design_1_v_tc_0_0_utilization_synth.rpt" Version="1" Minor="0">
           <ReportConfigOption Name="dummy_option" Type="string"/>
-          <ReportConfigOutputOption Name="pb" Type="string" Value=""/>
+          <ReportConfigOutputOption Name="pb" Type="string" Value="design_1_v_tc_0_0_utilization_synth.pb"/>
         </ReportConfig>
         <ReportConfig Name="design_1_v_tc_0_0_synth_1_synth_synthesis_report_0" Spec="" RunStep="synth_design" ReportFile="design_1_v_tc_0_0.vds">
           <ReportConfigOption Name="dummy_option" Type="string"/>
@@ -1375,7 +1375,7 @@
       <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2017">
         <ReportConfig Name="design_1_xlconstant_0_1_synth_1_synth_report_utilization_0" Spec="report_utilization" RunStep="synth_design" ReportFile="design_1_xlconstant_0_1_utilization_synth.rpt" Version="1" Minor="0">
           <ReportConfigOption Name="dummy_option" Type="string"/>
-          <ReportConfigOutputOption Name="pb" Type="string" Value=""/>
+          <ReportConfigOutputOption Name="pb" Type="string" Value="design_1_xlconstant_0_1_utilization_synth.pb"/>
         </ReportConfig>
         <ReportConfig Name="design_1_xlconstant_0_1_synth_1_synth_synthesis_report_0" Spec="" RunStep="synth_design" ReportFile="design_1_xlconstant_0_1.vds">
           <ReportConfigOption Name="dummy_option" Type="string"/>
@@ -1392,7 +1392,7 @@
       <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2017">
         <ReportConfig Name="design_1_xlslice_0_1_synth_1_synth_report_utilization_0" Spec="report_utilization" RunStep="synth_design" ReportFile="design_1_xlslice_0_1_utilization_synth.rpt" Version="1" Minor="0">
           <ReportConfigOption Name="dummy_option" Type="string"/>
-          <ReportConfigOutputOption Name="pb" Type="string" Value=""/>
+          <ReportConfigOutputOption Name="pb" Type="string" Value="design_1_xlslice_0_1_utilization_synth.pb"/>
         </ReportConfig>
         <ReportConfig Name="design_1_xlslice_0_1_synth_1_synth_synthesis_report_0" Spec="" RunStep="synth_design" ReportFile="design_1_xlslice_0_1.vds">
           <ReportConfigOption Name="dummy_option" Type="string"/>
@@ -1409,7 +1409,7 @@
       <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2017">
         <ReportConfig Name="design_1_xbar_0_synth_1_synth_report_utilization_0" Spec="report_utilization" RunStep="synth_design" ReportFile="design_1_xbar_0_utilization_synth.rpt" Version="1" Minor="0">
           <ReportConfigOption Name="dummy_option" Type="string"/>
-          <ReportConfigOutputOption Name="pb" Type="string" Value=""/>
+          <ReportConfigOutputOption Name="pb" Type="string" Value="design_1_xbar_0_utilization_synth.pb"/>
         </ReportConfig>
         <ReportConfig Name="design_1_xbar_0_synth_1_synth_synthesis_report_0" Spec="" RunStep="synth_design" ReportFile="design_1_xbar_0.vds">
           <ReportConfigOption Name="dummy_option" Type="string"/>
@@ -1426,7 +1426,7 @@
       <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2017">
         <ReportConfig Name="design_1_debug_bridge_0_0_synth_1_synth_report_utilization_0" Spec="report_utilization" RunStep="synth_design" ReportFile="design_1_debug_bridge_0_0_utilization_synth.rpt" Version="1" Minor="0">
           <ReportConfigOption Name="dummy_option" Type="string"/>
-          <ReportConfigOutputOption Name="pb" Type="string" Value=""/>
+          <ReportConfigOutputOption Name="pb" Type="string" Value="design_1_debug_bridge_0_0_utilization_synth.pb"/>
         </ReportConfig>
         <ReportConfig Name="design_1_debug_bridge_0_0_synth_1_synth_synthesis_report_0" Spec="" RunStep="synth_design" ReportFile="design_1_debug_bridge_0_0.vds">
           <ReportConfigOption Name="dummy_option" Type="string"/>
@@ -1443,7 +1443,7 @@
       <ReportStrategy Name="Vivado Synthesis Default Reports" Flow="Vivado Synthesis 2017">
         <ReportConfig Name="bd_c443_axi_jtag_0_synth_1_synth_report_utilization_0" Spec="report_utilization" RunStep="synth_design" ReportFile="bd_c443_axi_jtag_0_utilization_synth.rpt" Version="1" Minor="0">
           <ReportConfigOption Name="dummy_option" Type="string"/>
-          <ReportConfigOutputOption Name="pb" Type="string" Value=""/>
+          <ReportConfigOutputOption Name="pb" Type="string" Value="bd_c443_axi_jtag_0_utilization_synth.pb"/>
         </ReportConfig>
         <ReportConfig Name="bd_c443_axi_jtag_0_synth_1_synth_synthesis_report_0" Spec="" RunStep="synth_design" ReportFile="bd_c443_axi_jtag_0.vds">
           <ReportConfigOption Name="dummy_option" Type="string"/>
