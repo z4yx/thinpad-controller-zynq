@@ -142,6 +142,7 @@ entity design_1_clk_wiz_0_0_clk_wiz_drp is
   -- Clock out ports
   clk_out1          : out    std_logic;
   clk_out2          : out    std_logic;
+  clk_out3          : out    std_logic;
   -- Status and control signals
   locked            : out    std_logic;
   clk_in1           : in     std_logic
@@ -160,6 +161,7 @@ port
   -- Clock out ports
   clk_out1          : out    std_logic;
   clk_out2          : out    std_logic;
+  clk_out3          : out    std_logic;
   -- Dynamic reconfiguration ports
   daddr             : in     std_logic_vector(6 downto 0);
   dclk              : in     std_logic;
@@ -263,7 +265,7 @@ signal ram_clk_config : mem_type := (
    X"0000005B",
    X"00000000",
    X"0000C350",
-   X"00000001",
+   X"0000005B",
    X"00000000",
    X"0000C350",
    X"00000001",
@@ -382,7 +384,7 @@ begin
 	    ram_clk_config(5)  <=    X"0000005B";
 	    ram_clk_config(6)  <=    X"00000000";
 	    ram_clk_config(7)  <=    X"0000C350";
-	    ram_clk_config(8)  <=    X"00000001";
+	    ram_clk_config(8)  <=    X"0000005B";
 	    ram_clk_config(9)  <=    X"00000000";
 	    ram_clk_config(10) <=    X"0000C350";
 	    ram_clk_config(11) <=    X"00000001";
@@ -556,6 +558,7 @@ config_reg <= load_enable_reg(0 to 30) & load_enable_reg_d;
   -- Clock out ports  
    clk_out1 => clk_out1,
    clk_out2 => clk_out2,
+   clk_out3 => clk_out3,
   -- Dynamic reconfiguration ports             
    daddr => daddr,
    dclk => dclk,
@@ -587,7 +590,7 @@ mmcm_drp_inst: design_1_clk_wiz_0_0_mmcm_drp generic map (
   S1_CLKOUT1_PHASE          =>  0,
   S1_CLKOUT1_DUTY           =>  50000,
   
-  S1_CLKOUT2_DIVIDE         =>  1,         
+  S1_CLKOUT2_DIVIDE         =>  91,         
   S1_CLKOUT2_PHASE          =>  0,          
   S1_CLKOUT2_DUTY           =>  50000,
   

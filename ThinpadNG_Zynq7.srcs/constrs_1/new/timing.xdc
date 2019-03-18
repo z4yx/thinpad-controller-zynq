@@ -14,7 +14,8 @@ set_false_path -to [get_pins -hierarchical {*SyncA_clkB_reg[0]/D}]
 set_false_path -to [get_pins -hierarchical {*SyncA_clkB_reg[*]/CLR}]
 set_false_path -to [get_pins {TxD_data_sync_reg[*]/D}]
 set_false_path -to [get_pins capture/start_sync0_reg/D]
-
+set_false_path -to [get_pins bus_analyze_clk_rst_n/CLR]
+set_false_path -to [get_pins clk_out2_rst_n/CLR]
 
 
 set_false_path -from [get_pins LA/inst/rx/rx0/rx0/bs_finished_reg/C] -to [get_pins LA/inst/rx/rx0/rx0/not_bs_finished_dom_ch_reg/D]

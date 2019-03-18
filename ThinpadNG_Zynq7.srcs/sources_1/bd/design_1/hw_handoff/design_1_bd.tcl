@@ -263,7 +263,7 @@ proc create_hier_cell_xvc_jtag { parentCell nameHier } {
   create_bd_intf_pin -mode Slave -vlnv xilinx.com:interface:aximm_rtl:1.0 S_AXI
 
   # Create pins
-  create_bd_pin -dir I -type rst aux_reset_in
+  create_bd_pin -dir I dcm_locked
   create_bd_pin -dir I -type rst ext_reset_in
   create_bd_pin -dir I -type clk s_axi_aclk
   create_bd_pin -dir O -from 0 -to 0 -type rst s_axi_aresetn
@@ -285,11 +285,11 @@ proc create_hier_cell_xvc_jtag { parentCell nameHier } {
   connect_bd_intf_net -intf_net axi_interconnect_0_M12_AXI [get_bd_intf_pins S_AXI] [get_bd_intf_pins debug_bridge_axi2jtag/S_AXI]
 
   # Create port connections
+  connect_bd_net -net dcm_locked_1 [get_bd_pins dcm_locked] [get_bd_pins debug_bridge_reset_1/dcm_locked]
   connect_bd_net -net debug_bridge_axi2jtag_tap_tck [get_bd_pins tap_tck_0] [get_bd_pins debug_bridge_axi2jtag/tap_tck]
   connect_bd_net -net debug_bridge_axi2jtag_tap_tdi [get_bd_pins tap_tdi_0] [get_bd_pins debug_bridge_axi2jtag/tap_tdi]
   connect_bd_net -net debug_bridge_axi2jtag_tap_tms [get_bd_pins tap_tms_0] [get_bd_pins debug_bridge_axi2jtag/tap_tms]
   connect_bd_net -net debug_bridge_reset_1_peripheral_aresetn [get_bd_pins s_axi_aresetn] [get_bd_pins debug_bridge_axi2jtag/s_axi_aresetn] [get_bd_pins debug_bridge_reset_1/peripheral_aresetn]
-  connect_bd_net -net proc_sys_reset_0_interconnect_aresetn [get_bd_pins aux_reset_in] [get_bd_pins debug_bridge_reset_1/aux_reset_in]
   connect_bd_net -net processing_system7_0_FCLK_RESET0_N [get_bd_pins ext_reset_in] [get_bd_pins debug_bridge_reset_1/ext_reset_in]
   connect_bd_net -net ps7_0_FCLK_CLK3 [get_bd_pins s_axi_aclk] [get_bd_pins debug_bridge_axi2jtag/s_axi_aclk] [get_bd_pins debug_bridge_reset_1/slowest_sync_clk]
   connect_bd_net -net tap_tdo_0_1 [get_bd_pins tap_tdo_0] [get_bd_pins debug_bridge_axi2jtag/tap_tdo]
@@ -930,13 +930,18 @@ proc create_root_design { parentCell } {
    CONFIG.CLKOUT2_PHASE_ERROR {163.922} \
    CONFIG.CLKOUT2_REQUESTED_OUT_FREQ {11.0592} \
    CONFIG.CLKOUT2_USED {true} \
+   CONFIG.CLKOUT3_JITTER {278.968} \
+   CONFIG.CLKOUT3_PHASE_ERROR {163.922} \
+   CONFIG.CLKOUT3_REQUESTED_OUT_FREQ {11.0592} \
+   CONFIG.CLKOUT3_USED {true} \
    CONFIG.MMCM_CLKFBOUT_MULT_F {20.125} \
    CONFIG.MMCM_CLKIN1_PERIOD {20.000} \
    CONFIG.MMCM_CLKIN2_PERIOD {10.0} \
    CONFIG.MMCM_CLKOUT0_DIVIDE_F {20.125} \
    CONFIG.MMCM_CLKOUT1_DIVIDE {91} \
+   CONFIG.MMCM_CLKOUT2_DIVIDE {91} \
    CONFIG.MMCM_DIVCLK_DIVIDE {1} \
-   CONFIG.NUM_OUT_CLKS {2} \
+   CONFIG.NUM_OUT_CLKS {3} \
    CONFIG.PRIM_SOURCE {Global_buffer} \
    CONFIG.USE_DYN_RECONFIG {true} \
  ] $clk_wiz_0
@@ -967,7 +972,7 @@ proc create_root_design { parentCell } {
    CONFIG.PCW_ACT_FPGA0_PERIPHERAL_FREQMHZ {50.000000} \
    CONFIG.PCW_ACT_FPGA1_PERIPHERAL_FREQMHZ {100.000000} \
    CONFIG.PCW_ACT_FPGA2_PERIPHERAL_FREQMHZ {200.000000} \
-   CONFIG.PCW_ACT_FPGA3_PERIPHERAL_FREQMHZ {10.000000} \
+   CONFIG.PCW_ACT_FPGA3_PERIPHERAL_FREQMHZ {50.000000} \
    CONFIG.PCW_ACT_I2C_PERIPHERAL_FREQMHZ {50} \
    CONFIG.PCW_ACT_PCAP_PERIPHERAL_FREQMHZ {200.000000} \
    CONFIG.PCW_ACT_QSPI_PERIPHERAL_FREQMHZ {200.000000} \
@@ -1009,7 +1014,7 @@ proc create_root_design { parentCell } {
    CONFIG.PCW_CLK0_FREQ {50000000} \
    CONFIG.PCW_CLK1_FREQ {100000000} \
    CONFIG.PCW_CLK2_FREQ {200000000} \
-   CONFIG.PCW_CLK3_FREQ {10000000} \
+   CONFIG.PCW_CLK3_FREQ {50000000} \
    CONFIG.PCW_CORE0_FIQ_INTR {0} \
    CONFIG.PCW_CORE0_IRQ_INTR {0} \
    CONFIG.PCW_CORE1_FIQ_INTR {0} \
@@ -1138,8 +1143,8 @@ proc create_root_design { parentCell } {
    CONFIG.PCW_FCLK2_PERIPHERAL_DIVISOR0 {5} \
    CONFIG.PCW_FCLK2_PERIPHERAL_DIVISOR1 {1} \
    CONFIG.PCW_FCLK3_PERIPHERAL_CLKSRC {IO PLL} \
-   CONFIG.PCW_FCLK3_PERIPHERAL_DIVISOR0 {10} \
-   CONFIG.PCW_FCLK3_PERIPHERAL_DIVISOR1 {10} \
+   CONFIG.PCW_FCLK3_PERIPHERAL_DIVISOR0 {5} \
+   CONFIG.PCW_FCLK3_PERIPHERAL_DIVISOR1 {4} \
    CONFIG.PCW_FCLK_CLK0_BUF {TRUE} \
    CONFIG.PCW_FCLK_CLK1_BUF {TRUE} \
    CONFIG.PCW_FCLK_CLK2_BUF {TRUE} \
@@ -1147,7 +1152,7 @@ proc create_root_design { parentCell } {
    CONFIG.PCW_FPGA0_PERIPHERAL_FREQMHZ {50} \
    CONFIG.PCW_FPGA1_PERIPHERAL_FREQMHZ {100} \
    CONFIG.PCW_FPGA2_PERIPHERAL_FREQMHZ {200} \
-   CONFIG.PCW_FPGA3_PERIPHERAL_FREQMHZ {10} \
+   CONFIG.PCW_FPGA3_PERIPHERAL_FREQMHZ {50} \
    CONFIG.PCW_FPGA_FCLK0_ENABLE {1} \
    CONFIG.PCW_FPGA_FCLK1_ENABLE {1} \
    CONFIG.PCW_FPGA_FCLK2_ENABLE {1} \
@@ -1849,6 +1854,7 @@ HDL_ATTRIBUTE.DEBUG {true} \
   connect_bd_net -net bus_analyze_s2mm_introut [get_bd_pins bus_analyze/s2mm_introut] [get_bd_pins xlconcat_1/In1]
   connect_bd_net -net clk_wiz_0_clk_out1 [get_bd_ports clk_out1] [get_bd_pins clk_wiz_0/clk_out1]
   connect_bd_net -net clk_wiz_0_clk_out2 [get_bd_ports clk_out2] [get_bd_pins clk_wiz_0/clk_out2]
+  connect_bd_net -net clk_wiz_0_locked [get_bd_pins clk_wiz_0/locked] [get_bd_pins xvc_jtag/dcm_locked]
   connect_bd_net -net debug_bridge_axi2jtag_tap_tck [get_bd_ports tap_tck_0] [get_bd_pins xvc_jtag/tap_tck_0]
   connect_bd_net -net debug_bridge_axi2jtag_tap_tdi [get_bd_ports tap_tdi_0] [get_bd_pins xvc_jtag/tap_tdi_0]
   connect_bd_net -net debug_bridge_axi2jtag_tap_tms [get_bd_ports tap_tms_0] [get_bd_pins xvc_jtag/tap_tms_0]
@@ -1868,13 +1874,12 @@ HDL_ATTRIBUTE.DEBUG {true} \
   connect_bd_net -net parallel_apb_adapter_0_LCD_data_out [get_bd_ports pp_data_o] [get_bd_pins parallel_apb_adapter_0/LCD_data_out]
   connect_bd_net -net parallel_apb_adapter_0_LCD_data_z [get_bd_ports pp_data_t] [get_bd_pins parallel_apb_adapter_0/LCD_data_z]
   connect_bd_net -net port2reg_1 [get_bd_ports port2reg] [get_bd_pins axi_register_0/port2reg]
-  connect_bd_net -net proc_sys_reset_0_interconnect_aresetn [get_bd_pins axi_interconnect_0/ARESETN] [get_bd_pins proc_sys_reset_0/interconnect_aresetn] [get_bd_pins xvc_jtag/aux_reset_in]
+  connect_bd_net -net proc_sys_reset_0_interconnect_aresetn [get_bd_pins axi_interconnect_0/ARESETN] [get_bd_pins proc_sys_reset_0/interconnect_aresetn]
   connect_bd_net -net proc_sys_reset_0_peripheral_aresetn [get_bd_ports ps_perph_rstn] [get_bd_pins axi_apb_0/s_axi_aresetn] [get_bd_pins axi_emc_0/s_axi_aresetn] [get_bd_pins axi_gpio_0/s_axi_aresetn] [get_bd_pins axi_gpio_1/s_axi_aresetn] [get_bd_pins axi_gpio_2/s_axi_aresetn] [get_bd_pins axi_interconnect_0/M00_ARESETN] [get_bd_pins axi_interconnect_0/M01_ARESETN] [get_bd_pins axi_interconnect_0/M02_ARESETN] [get_bd_pins axi_interconnect_0/M03_ARESETN] [get_bd_pins axi_interconnect_0/M04_ARESETN] [get_bd_pins axi_interconnect_0/M05_ARESETN] [get_bd_pins axi_interconnect_0/M06_ARESETN] [get_bd_pins axi_interconnect_0/M07_ARESETN] [get_bd_pins axi_interconnect_0/M08_ARESETN] [get_bd_pins axi_interconnect_0/M09_ARESETN] [get_bd_pins axi_interconnect_0/S00_ARESETN] [get_bd_pins axi_register_0/s00_axi_aresetn] [get_bd_pins axi_uart16550_0/s_axi_aresetn] [get_bd_pins bus_analyze/axi_resetn] [get_bd_pins clk_wiz_0/s_axi_aresetn] [get_bd_pins la_storage/axi_resetn] [get_bd_pins parallel_apb_adapter_0/nrst] [get_bd_pins proc_sys_reset_0/peripheral_aresetn]
   connect_bd_net -net processing_system7_0_FCLK_CLK0 [get_bd_pins axi_apb_0/s_axi_aclk] [get_bd_pins axi_emc_0/rdclk] [get_bd_pins axi_emc_0/s_axi_aclk] [get_bd_pins axi_gpio_0/s_axi_aclk] [get_bd_pins axi_gpio_1/s_axi_aclk] [get_bd_pins axi_gpio_2/s_axi_aclk] [get_bd_pins axi_interconnect_0/ACLK] [get_bd_pins axi_interconnect_0/M00_ACLK] [get_bd_pins axi_interconnect_0/M01_ACLK] [get_bd_pins axi_interconnect_0/M02_ACLK] [get_bd_pins axi_interconnect_0/M03_ACLK] [get_bd_pins axi_interconnect_0/M04_ACLK] [get_bd_pins axi_interconnect_0/M05_ACLK] [get_bd_pins axi_interconnect_0/M06_ACLK] [get_bd_pins axi_interconnect_0/M07_ACLK] [get_bd_pins axi_interconnect_0/M08_ACLK] [get_bd_pins axi_interconnect_0/M09_ACLK] [get_bd_pins axi_interconnect_0/S00_ACLK] [get_bd_pins axi_register_0/s00_axi_aclk] [get_bd_pins axi_uart16550_0/s_axi_aclk] [get_bd_pins bus_analyze/s_axi_lite_aclk] [get_bd_pins clk_wiz_0/clk_in1] [get_bd_pins clk_wiz_0/s_axi_aclk] [get_bd_pins la_storage/s_axi_lite_aclk] [get_bd_pins parallel_apb_adapter_0/clk] [get_bd_pins proc_sys_reset_0/slowest_sync_clk] [get_bd_pins ps7_0/FCLK_CLK0] [get_bd_pins ps7_0/M_AXI_GP0_ACLK]
   connect_bd_net -net processing_system7_0_FCLK_RESET0_N [get_bd_pins bus_analyze/ext_reset_in] [get_bd_pins la_storage/ext_reset_in] [get_bd_pins proc_sys_reset_0/ext_reset_in] [get_bd_pins ps7_0/FCLK_RESET0_N] [get_bd_pins video_capture/ext_reset_in] [get_bd_pins xvc_jtag/ext_reset_in]
   connect_bd_net -net ps7_0_FCLK_CLK1 [get_bd_ports bus_analyze_clk] [get_bd_pins axi_interconnect_0/M10_ACLK] [get_bd_pins axi_interconnect_0/M11_ACLK] [get_bd_pins bus_analyze/M00_ACLK] [get_bd_pins la_storage/M00_ACLK] [get_bd_pins ps7_0/FCLK_CLK1] [get_bd_pins ps7_0/S_AXI_HP0_ACLK] [get_bd_pins ps7_0/S_AXI_HP1_ACLK] [get_bd_pins ps7_0/S_AXI_HP2_ACLK] [get_bd_pins video_capture/axi_clk]
   connect_bd_net -net ps7_0_FCLK_CLK2 [get_bd_ports clk_serdes] [get_bd_pins ps7_0/FCLK_CLK2]
-  connect_bd_net -net ps7_0_FCLK_CLK3 [get_bd_pins axi_interconnect_0/M12_ACLK] [get_bd_pins ps7_0/FCLK_CLK3] [get_bd_pins xvc_jtag/s_axi_aclk]
   connect_bd_net -net ps7_0_GPIO_O [get_bd_pins ps7_0/GPIO_O] [get_bd_pins xlslice_0/Din]
   connect_bd_net -net ps7_0_SPI0_MOSI_O [get_bd_ports SPI0_MOSI_O] [get_bd_pins ps7_0/SPI0_MOSI_O]
   connect_bd_net -net ps7_0_SPI0_SCLK_O [get_bd_ports SPI0_SCLK_O] [get_bd_pins ps7_0/SPI0_SCLK_O]
@@ -1883,6 +1888,7 @@ HDL_ATTRIBUTE.DEBUG {true} \
 HDL_ATTRIBUTE.DEBUG {true} \
  ] [get_bd_nets s_aresetn_0_1]
   connect_bd_net -net s_aresetn_1 [get_bd_ports la_fifo_aresetn] [get_bd_pins la_storage/s_aresetn]
+  connect_bd_net -net s_axi_aclk_1 [get_bd_pins axi_interconnect_0/M12_ACLK] [get_bd_pins clk_wiz_0/clk_out3] [get_bd_pins xvc_jtag/s_axi_aclk]
   connect_bd_net -net tap_tdo_0_1 [get_bd_ports tap_tdo_0] [get_bd_pins xvc_jtag/tap_tdo_0]
   connect_bd_net -net vid_in_clk_1 [get_bd_ports vid_in_clk] [get_bd_pins video_capture/vid_in_clk]
   connect_bd_net -net video_capture_aresetn [get_bd_pins axi_interconnect_0/M10_ARESETN] [get_bd_pins axi_interconnect_0/M11_ARESETN] [get_bd_pins video_capture/aresetn]
