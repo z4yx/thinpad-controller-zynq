@@ -528,27 +528,6 @@ endgenerate
 
     
 `ifdef EN_CPLD_UART
-    /*
-    wire cpld_clk, cpld_locked;
-    clk_wiz_0 uart_clk(.clk_in1(clk_out1),.clk_out1(cpld_clk),.resetn(ps_perph_rstn),.locked(cpld_locked));
-
-    uart_controller cpld_emu(
-        .data(emc_rtl_dq_i[7:0]),
-        .dout(cpld_emu_data_o),
-        .rst(cpld_locked),
-        .clk(cpld_clk), // 5529600Hz
-        .rxd(cpld_emu_from16550),
-        .rdn(cpld_emu_rdn_sync),
-        .wrn(cpld_emu_wrn),
-        .data_ready(cpld_emu_dataready),
-        .parity_error(),
-        .framing_error(),
-        .tbre(cpld_emu_tbre),
-        .tsre(cpld_emu_tsre),
-        .sdo(cpld_emu_to16550)
-    );
-    */
-    
 
     PULLUP pullup_wrn (.O(cpld_emu_wrn));
     PULLUP pullup_rdn (.O(cpld_emu_rdn));
@@ -560,8 +539,19 @@ endgenerate
     reg data_ready;
     wire uart_rx_flag;
     
+    reg bus_analyze_clk_rst_n, clk_out2_rst_n;
+    
     assign cpld_emu_dataready = data_ready;
     assign cpld_oe = ~cpld_emu_rdn;
+
+    always @ (posedge bus_analyze_clk or negedge ps_perph_rstn) begin
+        if(~ps_perph_rstn) bus_analyze_clk_rst_n <= 1'b0;
+        else bus_analyze_clk_rst_n <= 1'b1;
+    end
+    always @ (posedge clk_out2 or negedge ps_perph_rstn) begin
+        if(~ps_perph_rstn) clk_out2_rst_n <= 1'b0;
+        else clk_out2_rst_n <= 1'b1;
+    end
 
     always @(posedge bus_analyze_clk) begin : proc_Tx
         TxD_data0 <= emc_rtl_dq_i[7:0];
@@ -602,8 +592,8 @@ endgenerate
         .clkB        (clk_out2),
         .FlagIn_clkA (wrn_rise),
         .FlagOut_clkB(tx_en),
-        .a_rst_n     (ps_perph_rstn),
-        .b_rst_n     (ps_perph_rstn)
+        .a_rst_n     (bus_analyze_clk_rst_n),
+        .b_rst_n     (clk_out2_rst_n)
     );
 
     flag_sync rx_flag(
@@ -611,8 +601,8 @@ endgenerate
         .clkB        (bus_analyze_clk),
         .FlagIn_clkA (rx_ack),
         .FlagOut_clkB(uart_rx_flag),
-        .a_rst_n     (ps_perph_rstn),
-        .b_rst_n     (ps_perph_rstn)
+        .a_rst_n     (bus_analyze_clk_rst_n),
+        .b_rst_n     (clk_out2_rst_n)
     );
 
     async_receiver #(.ClkFrequency(11059200),.Baud(9600))
