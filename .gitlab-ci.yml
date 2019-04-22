@@ -2,9 +2,6 @@ variables:
   GIT_SUBMODULE_STRATEGY: recursive
   PROJECT_NAME: "ThinpadNG_Zynq7"
   VIVADO_PATH: "/opt/Xilinx/Vivado/2017.3/bin/vivado"
-  
-before_script:
-  - echo "CI_JOB_MANUAL=$CI_JOB_MANUAL"
 
 
 # all files in ip dir except *.xci are ignored, so the generated result will be cleaned every build
@@ -27,6 +24,7 @@ out_of_context_module_runs:
   stage: generate_ip
   image: vivado2017:2017.3
   before_script:
+    - echo "CI_JOB_MANUAL=$CI_JOB_MANUAL"
     # the cached ip configuration file might be out of date, we should always use the newest one
     - git checkout ${PROJECT_NAME}.srcs/sources_1/bd/*/*.bd
     - find ${PROJECT_NAME}.srcs/sources_1/ip -name '*.xci' -exec git checkout '{}' ';'
