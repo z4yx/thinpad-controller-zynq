@@ -53,6 +53,6 @@ trigger_build:
   stage: deploy
   image: sequenceiq/alpine-curl
   script:
-    - "curl -X POST -F token=cfdca0271a3ce95241ba49f857fc16 -F ref=petalinux1603 https://git.net9.org/api/v4/projects/1184/trigger/pipeline"
+    - "curl -X POST -F token=ce4b02c88036d1763787326d0b281b -F ref=petalinux1603 https://git.tsinghua.edu.cn/api/v4/projects/359/trigger/pipeline"
 
 
