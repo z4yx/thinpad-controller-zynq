@@ -1,7 +1,7 @@
 variables:
   GIT_SUBMODULE_STRATEGY: recursive
   PROJECT_NAME: "ThinpadNG_Zynq7"
-  VIVADO_PATH: "/opt/Xilinx/Vivado/2017.3/bin/vivado"
+  VIVADO_PATH: "/tools/Xilinx/Vivado/2018.3/bin/vivado"
 
 
 # all files in ip dir except *.xci are ignored, so the generated result will be cleaned every build
@@ -22,7 +22,7 @@ stages:
 
 out_of_context_module_runs:
   stage: generate_ip
-  image: vivado2017:2017.3
+  image: vivado2018:2018.3
   before_script:
     # the cached ip configuration file might be out of date, we should always use the newest one
     - git checkout ${PROJECT_NAME}.srcs/sources_1/bd/*/*.bd
@@ -36,7 +36,7 @@ out_of_context_module_runs:
 
 impl_1:
   stage: generate_bitstream
-  image: vivado2017:2017.3
+  image: vivado2018:2018.3
   script:
     - ${VIVADO_PATH} -mode tcl -source tools/build_bitstream.tcl ${PROJECT_NAME}.xpr -tclargs 2
     - cp ${PROJECT_NAME}.runs/impl_1/thinpadNG_zynq_top.sysdef thinpadNG_zynq_top_rev2.hdf
