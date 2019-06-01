@@ -20,7 +20,7 @@ set script_folder [_tcl::get_script_folder]
 ################################################################
 # Check if script is running in correct Vivado version.
 ################################################################
-set scripts_vivado_version 2017.3
+set scripts_vivado_version 2018.3
 set current_vivado_version [version -short]
 
 if { [string first $scripts_vivado_version $current_vivado_version] == -1 } {
@@ -395,7 +395,7 @@ proc create_hier_cell_video_capture { parentCell nameHier } {
  ] $smartconnect_0
 
   # Create instance: v_frmbuf_wr_0, and set properties
-  set v_frmbuf_wr_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:v_frmbuf_wr:2.0 v_frmbuf_wr_0 ]
+  set v_frmbuf_wr_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:v_frmbuf_wr:2.1 v_frmbuf_wr_0 ]
   set_property -dict [ list \
    CONFIG.AXIMM_DATA_WIDTH {64} \
    CONFIG.C_M_AXI_MM_VIDEO_DATA_WIDTH {64} \
@@ -466,9 +466,7 @@ proc create_hier_cell_video_capture { parentCell nameHier } {
   connect_bd_net -net ext_reset_in_1 [get_bd_pins ext_reset_in] [get_bd_pins proc_sys_reset_0/ext_reset_in]
   connect_bd_net -net fifo_generator_0_axis_overflow [get_bd_pins overflow] [get_bd_pins fifo_generator_0/axis_overflow]
   connect_bd_net -net fifo_generator_0_axis_wr_data_count [get_bd_pins fifo_count] [get_bd_pins fifo_generator_0/axis_wr_data_count]
-  set_property -dict [ list \
-HDL_ATTRIBUTE.DEBUG {true} \
- ] [get_bd_nets fifo_generator_0_axis_wr_data_count]
+set_property HDL_ATTRIBUTE.DEBUG {true} [get_bd_nets fifo_generator_0_axis_wr_data_count]
   connect_bd_net -net fifo_generator_0_m_axis_tdata [get_bd_pins fifo_generator_0/m_axis_tdata] [get_bd_pins rgb8to24/Din]
   connect_bd_net -net fifo_generator_0_m_axis_tlast [get_bd_pins fifo_generator_0/m_axis_tlast] [get_bd_pins v_frmbuf_wr_0/s_axis_video_TLAST]
   connect_bd_net -net fifo_generator_0_m_axis_tuser [get_bd_pins fifo_generator_0/m_axis_tuser] [get_bd_pins v_frmbuf_wr_0/s_axis_video_TUSER]
@@ -483,9 +481,7 @@ HDL_ATTRIBUTE.DEBUG {true} \
   connect_bd_net -net xlconcat_0_dout [get_bd_pins rgb8to24/dout] [get_bd_pins v_frmbuf_wr_0/s_axis_video_TDATA]
   connect_bd_net -net xlconstant_0_dout [get_bd_pins v_tc_0/clken] [get_bd_pins v_tc_0/det_clken] [get_bd_pins v_tc_0/resetn] [get_bd_pins v_tc_0/s_axi_aclken] [get_bd_pins xlconstant_0/dout]
   connect_bd_net -net xlslice_0_Dout [get_bd_pins vtc_locked] [get_bd_pins xlslice_0/Dout]
-  set_property -dict [ list \
-HDL_ATTRIBUTE.DEBUG {true} \
- ] [get_bd_nets xlslice_0_Dout]
+set_property HDL_ATTRIBUTE.DEBUG {true} [get_bd_nets xlslice_0_Dout]
 
   # Restore current instance
   current_bd_instance $oldCurInst
@@ -687,10 +683,12 @@ proc create_hier_cell_bus_analyze { parentCell nameHier } {
  ] $axi_interconnect_1
 
   # Create instance: axis_data_fifo_0, and set properties
-  set axis_data_fifo_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_data_fifo:1.1 axis_data_fifo_0 ]
+  set axis_data_fifo_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axis_data_fifo:2.0 axis_data_fifo_0 ]
   set_property -dict [ list \
    CONFIG.FIFO_DEPTH {256} \
+   CONFIG.HAS_RD_DATA_COUNT {1} \
    CONFIG.HAS_TKEEP {0} \
+   CONFIG.HAS_WR_DATA_COUNT {1} \
    CONFIG.TDATA_NUM_BYTES {16} \
  ] $axis_data_fifo_0
 
@@ -920,7 +918,7 @@ proc create_root_design { parentCell } {
   create_hier_cell_bus_analyze [current_bd_instance .] bus_analyze
 
   # Create instance: clk_wiz_0, and set properties
-  set clk_wiz_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:clk_wiz:5.4 clk_wiz_0 ]
+  set clk_wiz_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:clk_wiz:6.0 clk_wiz_0 ]
   set_property -dict [ list \
    CONFIG.CLKIN1_JITTER_PS {200.0} \
    CONFIG.CLKOUT1_JITTER {190.710} \
@@ -1804,9 +1802,7 @@ proc create_root_design { parentCell } {
   # Create interface connections
   connect_bd_intf_net -intf_net S00_AXI_1 [get_bd_intf_pins axi_interconnect_0/S00_AXI] [get_bd_intf_pins ps7_0/M_AXI_GP0]
   connect_bd_intf_net -intf_net S_AXIS_0_1 [get_bd_intf_ports vid_axis] [get_bd_intf_pins video_capture/vid_axis]
-  set_property -dict [ list \
-HDL_ATTRIBUTE.DEBUG {true} \
- ] [get_bd_intf_nets S_AXIS_0_1]
+set_property HDL_ATTRIBUTE.DEBUG {true} [get_bd_intf_nets S_AXIS_0_1]
   connect_bd_intf_net -intf_net S_AXIS_1 [get_bd_intf_ports la_storage_axis] [get_bd_intf_pins la_storage/S_AXIS]
   connect_bd_intf_net -intf_net S_AXI_LITE_1 [get_bd_intf_pins axi_interconnect_0/M05_AXI] [get_bd_intf_pins la_storage/S_AXI_LITE]
   connect_bd_intf_net -intf_net axi_apb_bridge_0_APB_M [get_bd_intf_pins axi_apb_0/APB_M] [get_bd_intf_pins parallel_apb_adapter_0/APB]
@@ -1833,9 +1829,7 @@ HDL_ATTRIBUTE.DEBUG {true} \
   connect_bd_intf_net -intf_net smartconnect_0_M00_AXI [get_bd_intf_pins ps7_0/S_AXI_HP1] [get_bd_intf_pins video_capture/M00_AXI]
   connect_bd_intf_net -intf_net v_tc_ctrl_1 [get_bd_intf_pins axi_interconnect_0/M10_AXI] [get_bd_intf_pins video_capture/v_tc_ctrl]
   connect_bd_intf_net -intf_net vtiming_in_0_1 [get_bd_intf_ports vid_timing_in] [get_bd_intf_pins video_capture/vid_timing_in]
-  set_property -dict [ list \
-HDL_ATTRIBUTE.DEBUG {true} \
- ] [get_bd_intf_nets vtiming_in_0_1]
+set_property HDL_ATTRIBUTE.DEBUG {true} [get_bd_intf_nets vtiming_in_0_1]
 
   # Create port connections
   connect_bd_net -net LCD_data_in_1 [get_bd_ports pp_data_i] [get_bd_pins parallel_apb_adapter_0/LCD_data_in]
@@ -1884,9 +1878,7 @@ HDL_ATTRIBUTE.DEBUG {true} \
   connect_bd_net -net ps7_0_SPI0_MOSI_O [get_bd_ports SPI0_MOSI_O] [get_bd_pins ps7_0/SPI0_MOSI_O]
   connect_bd_net -net ps7_0_SPI0_SCLK_O [get_bd_ports SPI0_SCLK_O] [get_bd_pins ps7_0/SPI0_SCLK_O]
   connect_bd_net -net s_aresetn_0_1 [get_bd_ports vid_axis_rst_n] [get_bd_pins video_capture/vid_axis_rst_n]
-  set_property -dict [ list \
-HDL_ATTRIBUTE.DEBUG {true} \
- ] [get_bd_nets s_aresetn_0_1]
+set_property HDL_ATTRIBUTE.DEBUG {true} [get_bd_nets s_aresetn_0_1]
   connect_bd_net -net s_aresetn_1 [get_bd_ports la_fifo_aresetn] [get_bd_pins la_storage/s_aresetn]
   connect_bd_net -net s_axi_aclk_1 [get_bd_pins axi_interconnect_0/M12_ACLK] [get_bd_pins clk_wiz_0/clk_out3] [get_bd_pins xvc_jtag/s_axi_aclk]
   connect_bd_net -net tap_tdo_0_1 [get_bd_ports tap_tdo_0] [get_bd_pins xvc_jtag/tap_tdo_0]
@@ -1904,7 +1896,7 @@ HDL_ATTRIBUTE.DEBUG {true} \
   # Create address segments
   create_bd_addr_seg -range 0x00001000 -offset 0x43C11000 [get_bd_addr_spaces ps7_0/Data] [get_bd_addr_segs bus_analyze/axi_dma_0/S_AXI_LITE/Reg] SEG_axi_dma_0_Reg
   create_bd_addr_seg -range 0x00001000 -offset 0x43C12000 [get_bd_addr_spaces ps7_0/Data] [get_bd_addr_segs la_storage/axi_dma_0/S_AXI_LITE/Reg] SEG_axi_dma_0_Reg1
-  create_bd_addr_seg -range 0x02000000 -offset 0x60000000 [get_bd_addr_spaces ps7_0/Data] [get_bd_addr_segs axi_emc_0/S_AXI_MEM/MEM0] SEG_axi_emc_0_MEM0
+  create_bd_addr_seg -range 0x02000000 -offset 0x60000000 [get_bd_addr_spaces ps7_0/Data] [get_bd_addr_segs axi_emc_0/S_AXI_MEM/Mem0] SEG_axi_emc_0_MEM0
   create_bd_addr_seg -range 0x00010000 -offset 0x41200000 [get_bd_addr_spaces ps7_0/Data] [get_bd_addr_segs axi_gpio_0/S_AXI/Reg] SEG_axi_gpio_0_Reg
   create_bd_addr_seg -range 0x00010000 -offset 0x41210000 [get_bd_addr_spaces ps7_0/Data] [get_bd_addr_segs axi_gpio_1/S_AXI/Reg] SEG_axi_gpio_1_Reg
   create_bd_addr_seg -range 0x00010000 -offset 0x41220000 [get_bd_addr_spaces ps7_0/Data] [get_bd_addr_segs axi_gpio_2/S_AXI/Reg] SEG_axi_gpio_2_Reg
@@ -1923,6 +1915,7 @@ HDL_ATTRIBUTE.DEBUG {true} \
   # Restore current instance
   current_bd_instance $oldCurInst
 
+  validate_bd_design
   save_bd_design
 }
 # End of create_root_design()

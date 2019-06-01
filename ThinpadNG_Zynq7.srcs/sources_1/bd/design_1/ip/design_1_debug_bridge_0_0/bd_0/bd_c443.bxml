@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Root MajorVersion="0" MinorVersion="33">
+<Root MajorVersion="0" MinorVersion="36">
   <CompositeFile CompositeFileTopName="bd_c443" CanBeSetAsTop="false" CanDisplayChildGraph="true">
     <Description>Composite Fileset</Description>
-    <Generation Name="SYNTHESIS" State="GENERATED" Timestamp="1552893570"/>
-    <Generation Name="IMPLEMENTATION" State="GENERATED" Timestamp="1552893570"/>
-    <Generation Name="SIMULATION" State="GENERATED" Timestamp="1552893570"/>
-    <Generation Name="HW_HANDOFF" State="GENERATED" Timestamp="1552893570"/>
+    <Generation Name="SYNTHESIS" State="GENERATED" Timestamp="1559370519"/>
+    <Generation Name="IMPLEMENTATION" State="GENERATED" Timestamp="1559370519"/>
+    <Generation Name="SIMULATION" State="GENERATED" Timestamp="1559370519"/>
+    <Generation Name="HW_HANDOFF" State="GENERATED" Timestamp="1559370519"/>
     <FileCollection Name="SOURCES" Type="SOURCES">
       <File Name="ip/ip_0/bd_c443_axi_jtag_0.xci" Type="IP">
         <Instance HierarchyPath="axi_jtag"/>
@@ -47,6 +47,11 @@
         <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="false" IsStatusTracked="false"/>
         <Library Name="xil_defaultlib"/>
         <UsedIn Val="HW_HANDOFF"/>
+      </File>
+      <File Name="sim/bd_c443.protoinst">
+        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="false" IsStatusTracked="false"/>
+        <Library Name="xil_defaultlib"/>
+        <UsedIn Val="SIMULATION"/>
       </File>
     </FileCollection>
   </CompositeFile>

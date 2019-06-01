@@ -1,0 +1,28 @@
+{
+   ExpandedHierarchyInLayout: "",
+   guistr: "# # String gsaved with Nlview 6.6.11  2017-06-12 bk=1.3860 VDI=40 GEI=35 GUI=JA:1.6
+#  -string -flagsOSRD
+preplace port s_axi_aclk -pg 1 -y 120 -defaultsOSRD
+preplace port tap_tck_0 -pg 1 -y 90 -defaultsOSRD
+preplace port S_AXI -pg 1 -y 40 -defaultsOSRD
+preplace port tap_tms_0 -pg 1 -y 60 -defaultsOSRD
+preplace port dcm_locked -pg 1 -y 230 -defaultsOSRD
+preplace port tap_tdi_0 -pg 1 -y 30 -defaultsOSRD
+preplace port ext_reset_in -pg 1 -y 170 -defaultsOSRD
+preplace port tap_tdo_0 -pg 1 -y 90 -defaultsOSRD
+preplace portBus s_axi_aresetn -pg 1 -y 150 -defaultsOSRD
+preplace inst debug_bridge_axi2jtag -pg 1 -lvl 2 -y 70 -defaultsOSRD
+preplace inst debug_bridge_reset_1 -pg 1 -lvl 1 -y 190 -defaultsOSRD
+preplace netloc axi_interconnect_0_M12_AXI 1 0 2 NJ 40 NJ
+preplace netloc debug_bridge_axi2jtag_tap_tdi 1 2 1 600J
+preplace netloc debug_bridge_reset_1_peripheral_aresetn 1 1 2 380 150 NJ
+preplace netloc dcm_locked_1 1 0 1 NJ
+preplace netloc processing_system7_0_FCLK_RESET0_N 1 0 1 NJ
+preplace netloc debug_bridge_axi2jtag_tap_tck 1 2 1 NJ
+preplace netloc debug_bridge_axi2jtag_tap_tms 1 2 1 600J
+preplace netloc ps7_0_FCLK_CLK3 1 0 2 0 60 NJ
+preplace netloc tap_tdo_0_1 1 0 2 NJ 90 370J
+levelinfo -pg 1 -20 190 490 620 -top -10 -bot 280
+",
+}
+

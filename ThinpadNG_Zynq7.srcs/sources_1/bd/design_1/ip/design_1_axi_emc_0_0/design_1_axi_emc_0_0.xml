@@ -57,6 +57,15 @@
             </xilinx:parameterInfo>
           </spirit:vendorExtensions>
         </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>INSERT_VIP</spirit:name>
+          <spirit:value spirit:format="long" spirit:resolve="user" spirit:id="BUSIFPARAM_VALUE.ACLK.INSERT_VIP">0</spirit:value>
+          <spirit:vendorExtensions>
+            <xilinx:parameterInfo>
+              <xilinx:parameterUsage>simulation.rtl</xilinx:parameterUsage>
+            </xilinx:parameterInfo>
+          </spirit:vendorExtensions>
+        </spirit:parameter>
       </spirit:parameters>
     </spirit:busInterface>
     <spirit:busInterface>
@@ -79,6 +88,15 @@
         <spirit:parameter>
           <spirit:name>POLARITY</spirit:name>
           <spirit:value spirit:id="BUSIFPARAM_VALUE.ARESETN.POLARITY">ACTIVE_LOW</spirit:value>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>INSERT_VIP</spirit:name>
+          <spirit:value spirit:format="long" spirit:resolve="user" spirit:id="BUSIFPARAM_VALUE.ARESETN.INSERT_VIP">0</spirit:value>
+          <spirit:vendorExtensions>
+            <xilinx:parameterInfo>
+              <xilinx:parameterUsage>simulation.rtl</xilinx:parameterUsage>
+            </xilinx:parameterInfo>
+          </spirit:vendorExtensions>
         </spirit:parameter>
       </spirit:parameters>
     </spirit:busInterface>
@@ -494,6 +512,15 @@
           <spirit:vendorExtensions>
             <xilinx:parameterInfo>
               <xilinx:parameterUsage>none</xilinx:parameterUsage>
+            </xilinx:parameterInfo>
+          </spirit:vendorExtensions>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>INSERT_VIP</spirit:name>
+          <spirit:value spirit:format="long" spirit:resolve="user" spirit:id="BUSIFPARAM_VALUE.S_AXI_REG.INSERT_VIP">0</spirit:value>
+          <spirit:vendorExtensions>
+            <xilinx:parameterInfo>
+              <xilinx:parameterUsage>simulation.rtl</xilinx:parameterUsage>
             </xilinx:parameterInfo>
           </spirit:vendorExtensions>
         </spirit:parameter>
@@ -1067,6 +1094,15 @@
             </xilinx:parameterInfo>
           </spirit:vendorExtensions>
         </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>INSERT_VIP</spirit:name>
+          <spirit:value spirit:format="long" spirit:resolve="user" spirit:id="BUSIFPARAM_VALUE.S_AXI_MEM.INSERT_VIP">0</spirit:value>
+          <spirit:vendorExtensions>
+            <xilinx:parameterInfo>
+              <xilinx:parameterUsage>simulation.rtl</xilinx:parameterUsage>
+            </xilinx:parameterInfo>
+          </spirit:vendorExtensions>
+        </spirit:parameter>
       </spirit:parameters>
     </spirit:busInterface>
     <spirit:busInterface>
@@ -1308,6 +1344,15 @@
             </xilinx:parameterInfo>
           </spirit:vendorExtensions>
         </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>INSERT_VIP</spirit:name>
+          <spirit:value spirit:format="long" spirit:resolve="user" spirit:id="BUSIFPARAM_VALUE.RDCLK.INSERT_VIP">0</spirit:value>
+          <spirit:vendorExtensions>
+            <xilinx:parameterInfo>
+              <xilinx:parameterUsage>simulation.rtl</xilinx:parameterUsage>
+            </xilinx:parameterInfo>
+          </spirit:vendorExtensions>
+        </spirit:parameter>
       </spirit:parameters>
     </spirit:busInterface>
     <spirit:busInterface>
@@ -1418,8 +1463,12 @@
   <spirit:memoryMaps>
     <spirit:memoryMap>
       <spirit:name>S_AXI_MEM</spirit:name>
+      <spirit:displayName>S_AXI_MEM</spirit:displayName>
+      <spirit:description>Memory Map for S_AXI</spirit:description>
       <spirit:addressBlock>
-        <spirit:name>MEM0</spirit:name>
+        <spirit:name>Mem0</spirit:name>
+        <spirit:displayName>Mem0</spirit:displayName>
+        <spirit:description>Register Block</spirit:description>
         <spirit:baseAddress spirit:format="long">0</spirit:baseAddress>
         <spirit:range spirit:format="long" spirit:resolve="generated">4096</spirit:range>
         <spirit:width spirit:format="long">32</spirit:width>
@@ -1435,6 +1484,434 @@
             <spirit:value spirit:id="ADDRBLOCKPARAM_VALUE.S_AXI_MEM.MEM0.OFFSET_HIGH_PARAM">C_S_AXI_MEM0_HIGHADDR</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
+        <spirit:register>
+          <spirit:name>PARITY_ERR_ADDR_REG_0</spirit:name>
+          <spirit:displayName>Bank-0 Parity Error Address Register</spirit:displayName>
+          <spirit:description>Bank-0 Parity Error Address Register</spirit:description>
+          <spirit:addressOffset>0x00</spirit:addressOffset>
+          <spirit:size spirit:format="long">32</spirit:size>
+          <spirit:volatile>true</spirit:volatile>
+          <spirit:access>read-only</spirit:access>
+          <spirit:reset>
+            <spirit:value spirit:format="long">0x0</spirit:value>
+          </spirit:reset>
+          <spirit:field>
+            <spirit:name>PARITY_ERR_ADDR_REG_0</spirit:name>
+            <spirit:displayName>Parity Error Register Width</spirit:displayName>
+            <spirit:description>Parity Error Register Width
+</spirit:description>
+            <spirit:bitOffset>0</spirit:bitOffset>
+            <spirit:bitWidth spirit:format="long">32</spirit:bitWidth>
+            <spirit:volatile>true</spirit:volatile>
+            <spirit:access>read-only</spirit:access>
+            <spirit:writeValueConstraint>
+              <spirit:minimum>0</spirit:minimum>
+              <spirit:maximum>0</spirit:maximum>
+            </spirit:writeValueConstraint>
+            <spirit:testable spirit:testConstraint="unconstrained">false</spirit:testable>
+          </spirit:field>
+        </spirit:register>
+        <spirit:register>
+          <spirit:name>PARITY_ERR_ADDR_REG_1</spirit:name>
+          <spirit:displayName>Bank-1 Parity Error Address Register</spirit:displayName>
+          <spirit:description>Bank-1 Parity Error Address Register</spirit:description>
+          <spirit:addressOffset>0x04</spirit:addressOffset>
+          <spirit:size spirit:format="long">32</spirit:size>
+          <spirit:volatile>true</spirit:volatile>
+          <spirit:access>read-only</spirit:access>
+          <spirit:reset>
+            <spirit:value spirit:format="long">0x0</spirit:value>
+          </spirit:reset>
+          <spirit:field>
+            <spirit:name>PARITY_ERR_ADDR_REG_1</spirit:name>
+            <spirit:displayName>Parity Error Register Width</spirit:displayName>
+            <spirit:description>Parity Error Register Width
+</spirit:description>
+            <spirit:bitOffset>0</spirit:bitOffset>
+            <spirit:bitWidth spirit:format="long">32</spirit:bitWidth>
+            <spirit:volatile>true</spirit:volatile>
+            <spirit:access>read-only</spirit:access>
+            <spirit:writeValueConstraint>
+              <spirit:minimum>0</spirit:minimum>
+              <spirit:maximum>0</spirit:maximum>
+            </spirit:writeValueConstraint>
+            <spirit:testable spirit:testConstraint="unconstrained">false</spirit:testable>
+          </spirit:field>
+        </spirit:register>
+        <spirit:register>
+          <spirit:name>PARITY_ERR_ADDR_REG_2</spirit:name>
+          <spirit:displayName>Bank-2 Parity Error Address Register</spirit:displayName>
+          <spirit:description>Bank-2 Parity Error Address Register</spirit:description>
+          <spirit:addressOffset>0x08</spirit:addressOffset>
+          <spirit:size spirit:format="long">32</spirit:size>
+          <spirit:volatile>true</spirit:volatile>
+          <spirit:access>read-only</spirit:access>
+          <spirit:reset>
+            <spirit:value spirit:format="long">0x0</spirit:value>
+          </spirit:reset>
+          <spirit:field>
+            <spirit:name>PARITY_ERR_ADDR_REG_2</spirit:name>
+            <spirit:displayName>Parity Error Register Width</spirit:displayName>
+            <spirit:description>Parity Error Register Width
+</spirit:description>
+            <spirit:bitOffset>0</spirit:bitOffset>
+            <spirit:bitWidth spirit:format="long">32</spirit:bitWidth>
+            <spirit:volatile>true</spirit:volatile>
+            <spirit:access>read-only</spirit:access>
+            <spirit:writeValueConstraint>
+              <spirit:minimum>0</spirit:minimum>
+              <spirit:maximum>0</spirit:maximum>
+            </spirit:writeValueConstraint>
+            <spirit:testable spirit:testConstraint="unconstrained">false</spirit:testable>
+          </spirit:field>
+        </spirit:register>
+        <spirit:register>
+          <spirit:name>PARITY_ERR_ADDR_REG_3</spirit:name>
+          <spirit:displayName>Bank-3 Parity Error Address Register</spirit:displayName>
+          <spirit:description>Bank-3 Parity Error Address Register</spirit:description>
+          <spirit:addressOffset>0x0C</spirit:addressOffset>
+          <spirit:size spirit:format="long">32</spirit:size>
+          <spirit:volatile>true</spirit:volatile>
+          <spirit:access>read-only</spirit:access>
+          <spirit:reset>
+            <spirit:value spirit:format="long">0x0</spirit:value>
+          </spirit:reset>
+          <spirit:field>
+            <spirit:name>PARITY_ERR_ADDR_REG_3</spirit:name>
+            <spirit:displayName>Parity Error Register Width</spirit:displayName>
+            <spirit:description>Parity Error Register Width
+</spirit:description>
+            <spirit:bitOffset>0</spirit:bitOffset>
+            <spirit:bitWidth spirit:format="long">32</spirit:bitWidth>
+            <spirit:volatile>true</spirit:volatile>
+            <spirit:access>read-only</spirit:access>
+            <spirit:writeValueConstraint>
+              <spirit:minimum>0</spirit:minimum>
+              <spirit:maximum>0</spirit:maximum>
+            </spirit:writeValueConstraint>
+            <spirit:testable spirit:testConstraint="unconstrained">false</spirit:testable>
+          </spirit:field>
+        </spirit:register>
+        <spirit:register>
+          <spirit:name>PSRAM_FLASH_CONFIG_REG_0</spirit:name>
+          <spirit:displayName>Bank-0 PSRAM/Flash Configuration Register</spirit:displayName>
+          <spirit:description>Bank-0 PSRAM/Flash Configuration Register</spirit:description>
+          <spirit:addressOffset>0x10</spirit:addressOffset>
+          <spirit:size spirit:format="long">32</spirit:size>
+          <spirit:volatile>true</spirit:volatile>
+          <spirit:access>read-write</spirit:access>
+          <spirit:reset>
+            <spirit:value spirit:format="long">0x24</spirit:value>
+          </spirit:reset>
+          <spirit:field>
+            <spirit:name>Operational_Mode</spirit:name>
+            <spirit:displayName>Operational Mode</spirit:displayName>
+            <spirit:description>This bits describe the mode in which PSRAM is configured(Applicable only when target memory is PSRAM)
+0x00 - Asynchronous Mode
+0x01 - Page Mode
+0x10 - Reserved for future use (Burst Mode)
+</spirit:description>
+            <spirit:bitOffset>0</spirit:bitOffset>
+            <spirit:bitWidth spirit:format="long">2</spirit:bitWidth>
+            <spirit:volatile>true</spirit:volatile>
+            <spirit:access>read-write</spirit:access>
+            <spirit:writeValueConstraint>
+              <spirit:minimum>0</spirit:minimum>
+              <spirit:maximum>0</spirit:maximum>
+            </spirit:writeValueConstraint>
+            <spirit:testable spirit:testConstraint="unconstrained">false</spirit:testable>
+          </spirit:field>
+          <spirit:field>
+            <spirit:name>CRE_Drive</spirit:name>
+            <spirit:displayName>CRE Drive</spirit:displayName>
+            <spirit:description>0 - Remove Drive Command for CRE
+1 - Drive Command for CRE
+Note: Valid only for PSRAM memories
+</spirit:description>
+            <spirit:bitOffset>6</spirit:bitOffset>
+            <spirit:bitWidth spirit:format="long">1</spirit:bitWidth>
+            <spirit:volatile>true</spirit:volatile>
+            <spirit:access>read-write</spirit:access>
+            <spirit:writeValueConstraint>
+              <spirit:minimum>0</spirit:minimum>
+              <spirit:maximum>0</spirit:maximum>
+            </spirit:writeValueConstraint>
+            <spirit:testable spirit:testConstraint="unconstrained">false</spirit:testable>
+          </spirit:field>
+          <spirit:field>
+            <spirit:name>Read_Mode</spirit:name>
+            <spirit:displayName>Read Mode (RM)</spirit:displayName>
+            <spirit:description>0 - Asynchronous Page Mode
+1 - Synchronous Burst Mode (Applicable when Micron Flash is switched to Sync Read Burst Mode)
+</spirit:description>
+            <spirit:bitOffset>30</spirit:bitOffset>
+            <spirit:bitWidth spirit:format="long">1</spirit:bitWidth>
+            <spirit:volatile>true</spirit:volatile>
+            <spirit:access>read-write</spirit:access>
+            <spirit:writeValueConstraint>
+              <spirit:minimum>0</spirit:minimum>
+              <spirit:maximum>0</spirit:maximum>
+            </spirit:writeValueConstraint>
+            <spirit:testable spirit:testConstraint="unconstrained">false</spirit:testable>
+          </spirit:field>
+          <spirit:field>
+            <spirit:name>Control_Register_Enable</spirit:name>
+            <spirit:displayName>Control Register Enable (CRE)</spirit:displayName>
+            <spirit:description>0 - Normal read/writes to Micron Flash
+1 - Enables Micron flash RCR register configuration
+Note: Valid only if connected memory is Micron Flash
+</spirit:description>
+            <spirit:bitOffset>31</spirit:bitOffset>
+            <spirit:bitWidth spirit:format="long">1</spirit:bitWidth>
+            <spirit:volatile>true</spirit:volatile>
+            <spirit:access>read-write</spirit:access>
+            <spirit:writeValueConstraint>
+              <spirit:minimum>0</spirit:minimum>
+              <spirit:maximum>0</spirit:maximum>
+            </spirit:writeValueConstraint>
+            <spirit:testable spirit:testConstraint="unconstrained">false</spirit:testable>
+          </spirit:field>
+        </spirit:register>
+        <spirit:register>
+          <spirit:name>PSRAM_FLASH_CONFIG_REG_1</spirit:name>
+          <spirit:displayName>Bank-1 PSRAM/Flash Configuration Register</spirit:displayName>
+          <spirit:description>Bank-1 PSRAM/Flash Configuration Register</spirit:description>
+          <spirit:addressOffset>0x14</spirit:addressOffset>
+          <spirit:size spirit:format="long">32</spirit:size>
+          <spirit:volatile>true</spirit:volatile>
+          <spirit:access>read-write</spirit:access>
+          <spirit:reset>
+            <spirit:value spirit:format="long">0x24</spirit:value>
+          </spirit:reset>
+          <spirit:field>
+            <spirit:name>Operational_Mode</spirit:name>
+            <spirit:displayName>Operational Mode</spirit:displayName>
+            <spirit:description>This bits describe the mode in which PSRAM is configured(Applicable only when target memory is PSRAM)
+0x00 - Asynchronous Mode
+0x01 - Page Mode
+0x10 - Reserved for future use (Burst Mode)
+</spirit:description>
+            <spirit:bitOffset>0</spirit:bitOffset>
+            <spirit:bitWidth spirit:format="long">2</spirit:bitWidth>
+            <spirit:volatile>true</spirit:volatile>
+            <spirit:access>read-write</spirit:access>
+            <spirit:writeValueConstraint>
+              <spirit:minimum>0</spirit:minimum>
+              <spirit:maximum>0</spirit:maximum>
+            </spirit:writeValueConstraint>
+            <spirit:testable spirit:testConstraint="unconstrained">false</spirit:testable>
+          </spirit:field>
+          <spirit:field>
+            <spirit:name>CRE_Drive</spirit:name>
+            <spirit:displayName>CRE Drive</spirit:displayName>
+            <spirit:description>0 - Remove Drive Command for CRE
+1 - Drive Command for CRE
+Note: Valid only for PSRAM memories
+</spirit:description>
+            <spirit:bitOffset>6</spirit:bitOffset>
+            <spirit:bitWidth spirit:format="long">1</spirit:bitWidth>
+            <spirit:volatile>true</spirit:volatile>
+            <spirit:access>read-write</spirit:access>
+            <spirit:writeValueConstraint>
+              <spirit:minimum>0</spirit:minimum>
+              <spirit:maximum>0</spirit:maximum>
+            </spirit:writeValueConstraint>
+            <spirit:testable spirit:testConstraint="unconstrained">false</spirit:testable>
+          </spirit:field>
+          <spirit:field>
+            <spirit:name>Read_Mode</spirit:name>
+            <spirit:displayName>Read Mode (RM)</spirit:displayName>
+            <spirit:description>0 - Asynchronous Page Mode
+1 - Synchronous Burst Mode (Applicable when Micron Flash is switched to Sync Read Burst Mode)
+</spirit:description>
+            <spirit:bitOffset>30</spirit:bitOffset>
+            <spirit:bitWidth spirit:format="long">1</spirit:bitWidth>
+            <spirit:volatile>true</spirit:volatile>
+            <spirit:access>read-write</spirit:access>
+            <spirit:writeValueConstraint>
+              <spirit:minimum>0</spirit:minimum>
+              <spirit:maximum>0</spirit:maximum>
+            </spirit:writeValueConstraint>
+            <spirit:testable spirit:testConstraint="unconstrained">false</spirit:testable>
+          </spirit:field>
+          <spirit:field>
+            <spirit:name>Control_Register_Enable</spirit:name>
+            <spirit:displayName>Control Register Enable (CRE)</spirit:displayName>
+            <spirit:description>0 - Normal read/writes to Micron Flash
+1 - Enables Micron flash RCR register configuration
+Note: Valid only if connected memory is Micron Flash
+</spirit:description>
+            <spirit:bitOffset>31</spirit:bitOffset>
+            <spirit:bitWidth spirit:format="long">1</spirit:bitWidth>
+            <spirit:volatile>true</spirit:volatile>
+            <spirit:access>read-write</spirit:access>
+            <spirit:writeValueConstraint>
+              <spirit:minimum>0</spirit:minimum>
+              <spirit:maximum>0</spirit:maximum>
+            </spirit:writeValueConstraint>
+            <spirit:testable spirit:testConstraint="unconstrained">false</spirit:testable>
+          </spirit:field>
+        </spirit:register>
+        <spirit:register>
+          <spirit:name>PSRAM_FLASH_CONFIG_REG_2</spirit:name>
+          <spirit:displayName>Bank-2 PSRAM/Flash Configuration Register</spirit:displayName>
+          <spirit:description>Bank-2 PSRAM/Flash Configuration Register</spirit:description>
+          <spirit:addressOffset>0x18</spirit:addressOffset>
+          <spirit:size spirit:format="long">32</spirit:size>
+          <spirit:volatile>true</spirit:volatile>
+          <spirit:access>read-write</spirit:access>
+          <spirit:reset>
+            <spirit:value spirit:format="long">0x24</spirit:value>
+          </spirit:reset>
+          <spirit:field>
+            <spirit:name>Operational_Mode</spirit:name>
+            <spirit:displayName>Operational Mode</spirit:displayName>
+            <spirit:description>This bits describe the mode in which PSRAM is configured(Applicable only when target memory is PSRAM)
+0x00 - Asynchronous Mode
+0x01 - Page Mode
+0x10 - Reserved for future use (Burst Mode)
+</spirit:description>
+            <spirit:bitOffset>0</spirit:bitOffset>
+            <spirit:bitWidth spirit:format="long">2</spirit:bitWidth>
+            <spirit:volatile>true</spirit:volatile>
+            <spirit:access>read-write</spirit:access>
+            <spirit:writeValueConstraint>
+              <spirit:minimum>0</spirit:minimum>
+              <spirit:maximum>0</spirit:maximum>
+            </spirit:writeValueConstraint>
+            <spirit:testable spirit:testConstraint="unconstrained">false</spirit:testable>
+          </spirit:field>
+          <spirit:field>
+            <spirit:name>CRE_Drive</spirit:name>
+            <spirit:displayName>CRE Drive</spirit:displayName>
+            <spirit:description>0 - Remove Drive Command for CRE
+1 - Drive Command for CRE
+Note: Valid only for PSRAM memories
+</spirit:description>
+            <spirit:bitOffset>6</spirit:bitOffset>
+            <spirit:bitWidth spirit:format="long">1</spirit:bitWidth>
+            <spirit:volatile>true</spirit:volatile>
+            <spirit:access>read-write</spirit:access>
+            <spirit:writeValueConstraint>
+              <spirit:minimum>0</spirit:minimum>
+              <spirit:maximum>0</spirit:maximum>
+            </spirit:writeValueConstraint>
+            <spirit:testable spirit:testConstraint="unconstrained">false</spirit:testable>
+          </spirit:field>
+          <spirit:field>
+            <spirit:name>Read_Mode</spirit:name>
+            <spirit:displayName>Read Mode (RM)</spirit:displayName>
+            <spirit:description>0 - Asynchronous Page Mode
+1 - Synchronous Burst Mode (Applicable when Micron Flash is switched to Sync Read Burst Mode)
+</spirit:description>
+            <spirit:bitOffset>30</spirit:bitOffset>
+            <spirit:bitWidth spirit:format="long">1</spirit:bitWidth>
+            <spirit:volatile>true</spirit:volatile>
+            <spirit:access>read-write</spirit:access>
+            <spirit:writeValueConstraint>
+              <spirit:minimum>0</spirit:minimum>
+              <spirit:maximum>0</spirit:maximum>
+            </spirit:writeValueConstraint>
+            <spirit:testable spirit:testConstraint="unconstrained">false</spirit:testable>
+          </spirit:field>
+          <spirit:field>
+            <spirit:name>Control_Register_Enable</spirit:name>
+            <spirit:displayName>Control Register Enable (CRE)</spirit:displayName>
+            <spirit:description>0 - Normal read/writes to Micron Flash
+1 - Enables Micron flash RCR register configuration
+Note: Valid only if connected memory is Micron Flash
+</spirit:description>
+            <spirit:bitOffset>31</spirit:bitOffset>
+            <spirit:bitWidth spirit:format="long">1</spirit:bitWidth>
+            <spirit:volatile>true</spirit:volatile>
+            <spirit:access>read-write</spirit:access>
+            <spirit:writeValueConstraint>
+              <spirit:minimum>0</spirit:minimum>
+              <spirit:maximum>0</spirit:maximum>
+            </spirit:writeValueConstraint>
+            <spirit:testable spirit:testConstraint="unconstrained">false</spirit:testable>
+          </spirit:field>
+        </spirit:register>
+        <spirit:register>
+          <spirit:name>PSRAM_FLASH_CONFIG_REG_3</spirit:name>
+          <spirit:displayName>Bank-3 PSRAM/Flash Configuration Register</spirit:displayName>
+          <spirit:description>Bank-3 PSRAM/Flash Configuration Register</spirit:description>
+          <spirit:addressOffset>0x1C</spirit:addressOffset>
+          <spirit:size spirit:format="long">32</spirit:size>
+          <spirit:volatile>true</spirit:volatile>
+          <spirit:access>read-write</spirit:access>
+          <spirit:reset>
+            <spirit:value spirit:format="long">0x24</spirit:value>
+          </spirit:reset>
+          <spirit:field>
+            <spirit:name>Operational_Mode</spirit:name>
+            <spirit:displayName>Operational Mode</spirit:displayName>
+            <spirit:description>This bits describe the mode in which PSRAM is configured(Applicable only when target memory is PSRAM)
+0x00 - Asynchronous Mode
+0x01 - Page Mode
+0x10 - Reserved for future use (Burst Mode)
+</spirit:description>
+            <spirit:bitOffset>0</spirit:bitOffset>
+            <spirit:bitWidth spirit:format="long">2</spirit:bitWidth>
+            <spirit:volatile>true</spirit:volatile>
+            <spirit:access>read-write</spirit:access>
+            <spirit:writeValueConstraint>
+              <spirit:minimum>0</spirit:minimum>
+              <spirit:maximum>0</spirit:maximum>
+            </spirit:writeValueConstraint>
+            <spirit:testable spirit:testConstraint="unconstrained">false</spirit:testable>
+          </spirit:field>
+          <spirit:field>
+            <spirit:name>CRE_Drive</spirit:name>
+            <spirit:displayName>CRE Drive</spirit:displayName>
+            <spirit:description>0 - Remove Drive Command for CRE
+1 - Drive Command for CRE
+Note: Valid only for PSRAM memories
+</spirit:description>
+            <spirit:bitOffset>6</spirit:bitOffset>
+            <spirit:bitWidth spirit:format="long">1</spirit:bitWidth>
+            <spirit:volatile>true</spirit:volatile>
+            <spirit:access>read-write</spirit:access>
+            <spirit:writeValueConstraint>
+              <spirit:minimum>0</spirit:minimum>
+              <spirit:maximum>0</spirit:maximum>
+            </spirit:writeValueConstraint>
+            <spirit:testable spirit:testConstraint="unconstrained">false</spirit:testable>
+          </spirit:field>
+          <spirit:field>
+            <spirit:name>Read_Mode</spirit:name>
+            <spirit:displayName>Read Mode (RM)</spirit:displayName>
+            <spirit:description>0 - Asynchronous Page Mode
+1 - Synchronous Burst Mode (Applicable when Micron Flash is switched to Sync Read Burst Mode)
+</spirit:description>
+            <spirit:bitOffset>30</spirit:bitOffset>
+            <spirit:bitWidth spirit:format="long">1</spirit:bitWidth>
+            <spirit:volatile>true</spirit:volatile>
+            <spirit:access>read-write</spirit:access>
+            <spirit:writeValueConstraint>
+              <spirit:minimum>0</spirit:minimum>
+              <spirit:maximum>0</spirit:maximum>
+            </spirit:writeValueConstraint>
+            <spirit:testable spirit:testConstraint="unconstrained">false</spirit:testable>
+          </spirit:field>
+          <spirit:field>
+            <spirit:name>Control_Register_Enable</spirit:name>
+            <spirit:displayName>Control Register Enable (CRE)</spirit:displayName>
+            <spirit:description>0 - Normal read/writes to Micron Flash
+1 - Enables Micron flash RCR register configuration
+Note: Valid only if connected memory is Micron Flash
+</spirit:description>
+            <spirit:bitOffset>31</spirit:bitOffset>
+            <spirit:bitWidth spirit:format="long">1</spirit:bitWidth>
+            <spirit:volatile>true</spirit:volatile>
+            <spirit:access>read-write</spirit:access>
+            <spirit:writeValueConstraint>
+              <spirit:minimum>0</spirit:minimum>
+              <spirit:maximum>0</spirit:maximum>
+            </spirit:writeValueConstraint>
+            <spirit:testable spirit:testConstraint="unconstrained">false</spirit:testable>
+          </spirit:field>
+        </spirit:register>
       </spirit:addressBlock>
       <spirit:addressBlock>
         <spirit:name>MEM1</spirit:name>
@@ -1520,6 +1997,7 @@
         <spirit:displayName>VHDL Synthesis</spirit:displayName>
         <spirit:envIdentifier>vhdlSource:vivado.xilinx.com:synthesis</spirit:envIdentifier>
         <spirit:language>vhdl</spirit:language>
+        <spirit:modelName>axi_emc</spirit:modelName>
         <spirit:fileSetRef>
           <spirit:localName>xilinx_vhdlsynthesis_xilinx_com_ip_lib_pkg_1_0__ref_view_fileset</spirit:localName>
         </spirit:fileSetRef>
@@ -1535,11 +2013,11 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Thu Mar 14 12:56:35 UTC 2019</spirit:value>
+            <spirit:value>Sat Jun 01 06:28:35 UTC 2019</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>7:cca1b6d8</spirit:value>
+            <spirit:value>9:ee09b9af</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -1548,17 +2026,18 @@
         <spirit:displayName>VHDL Synthesis Wrapper</spirit:displayName>
         <spirit:envIdentifier>vhdlSource:vivado.xilinx.com:synthesis.wrapper</spirit:envIdentifier>
         <spirit:language>vhdl</spirit:language>
+        <spirit:modelName>design_1_axi_emc_0_0</spirit:modelName>
         <spirit:fileSetRef>
           <spirit:localName>xilinx_vhdlsynthesiswrapper_view_fileset</spirit:localName>
         </spirit:fileSetRef>
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Thu Mar 14 12:56:35 UTC 2019</spirit:value>
+            <spirit:value>Sat Jun 01 06:28:35 UTC 2019</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>7:cca1b6d8</spirit:value>
+            <spirit:value>9:ee09b9af</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -1567,6 +2046,7 @@
         <spirit:displayName>VHDL Simulation</spirit:displayName>
         <spirit:envIdentifier>vhdlSource:vivado.xilinx.com:simulation</spirit:envIdentifier>
         <spirit:language>vhdl</spirit:language>
+        <spirit:modelName>axi_emc</spirit:modelName>
         <spirit:fileSetRef>
           <spirit:localName>xilinx_vhdlbehavioralsimulation_xilinx_com_ip_lib_pkg_1_0__ref_view_fileset</spirit:localName>
         </spirit:fileSetRef>
@@ -1582,11 +2062,11 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Thu Mar 14 12:56:35 UTC 2019</spirit:value>
+            <spirit:value>Sat Jun 01 06:28:34 UTC 2019</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>7:8a670e86</spirit:value>
+            <spirit:value>9:ac6c148d</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -1595,17 +2075,18 @@
         <spirit:displayName>VHDL Simulation Wrapper</spirit:displayName>
         <spirit:envIdentifier>vhdlSource:vivado.xilinx.com:simulation.wrapper</spirit:envIdentifier>
         <spirit:language>vhdl</spirit:language>
+        <spirit:modelName>design_1_axi_emc_0_0</spirit:modelName>
         <spirit:fileSetRef>
           <spirit:localName>xilinx_vhdlsimulationwrapper_view_fileset</spirit:localName>
         </spirit:fileSetRef>
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Thu Mar 14 12:56:35 UTC 2019</spirit:value>
+            <spirit:value>Sat Jun 01 06:28:35 UTC 2019</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>7:8a670e86</spirit:value>
+            <spirit:value>9:ac6c148d</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -1619,11 +2100,11 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Thu Mar 14 12:56:35 UTC 2019</spirit:value>
+            <spirit:value>Sat Jun 01 06:28:35 UTC 2019</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>7:cca1b6d8</spirit:value>
+            <spirit:value>9:ee09b9af</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -1637,11 +2118,11 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Wed Oct 17 10:53:36 UTC 2018</spirit:value>
+            <spirit:value>Sat Jun 01 06:31:03 UTC 2019</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>7:cca1b6d8</spirit:value>
+            <spirit:value>9:ee09b9af</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -3719,13 +4200,13 @@
     <spirit:fileSet>
       <spirit:name>xilinx_vhdlsynthesis_xilinx_com_ip_emc_common_3_0__ref_view_fileset</spirit:name>
       <spirit:file>
-        <spirit:name>../../ipshared/d806/hdl/emc_common_v3_0_vh_rfs.vhd</spirit:name>
+        <spirit:name>../../ipshared/ea80/hdl/emc_common_v3_0_vh_rfs.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
         <spirit:logicalName>emc_common_v3_0_5</spirit:logicalName>
       </spirit:file>
       <spirit:vendorExtensions>
         <xilinx:subCoreRef>
-          <xilinx:componentRef xilinx:vendor="xilinx.com" xilinx:library="ip" xilinx:name="emc_common" xilinx:version="3.0" xilinx:isGenerated="true" xilinx:checksum="379ecdb2">
+          <xilinx:componentRef xilinx:vendor="xilinx.com" xilinx:library="ip" xilinx:name="emc_common" xilinx:version="3.0" xilinx:isGenerated="true" xilinx:checksum="a0815dfa">
             <xilinx:mode xilinx:name="copy_mode"/>
           </xilinx:componentRef>
         </xilinx:subCoreRef>
@@ -3734,9 +4215,9 @@
     <spirit:fileSet>
       <spirit:name>xilinx_vhdlsynthesis_view_fileset</spirit:name>
       <spirit:file>
-        <spirit:name>../../ipshared/9079/hdl/axi_emc_v3_0_vh_rfs.vhd</spirit:name>
+        <spirit:name>../../ipshared/0cd1/hdl/axi_emc_v3_0_vh_rfs.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
-        <spirit:logicalName>axi_emc_v3_0_14</spirit:logicalName>
+        <spirit:logicalName>axi_emc_v3_0_18</spirit:logicalName>
       </spirit:file>
       <spirit:file>
         <spirit:name>design_1_axi_emc_0_0.xdc</spirit:name>
@@ -3793,14 +4274,14 @@
     <spirit:fileSet>
       <spirit:name>xilinx_vhdlbehavioralsimulation_xilinx_com_ip_emc_common_3_0__ref_view_fileset</spirit:name>
       <spirit:file>
-        <spirit:name>../../ipshared/d806/hdl/emc_common_v3_0_vh_rfs.vhd</spirit:name>
+        <spirit:name>../../ipshared/ea80/hdl/emc_common_v3_0_vh_rfs.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
         <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
         <spirit:logicalName>emc_common_v3_0_5</spirit:logicalName>
       </spirit:file>
       <spirit:vendorExtensions>
         <xilinx:subCoreRef>
-          <xilinx:componentRef xilinx:vendor="xilinx.com" xilinx:library="ip" xilinx:name="emc_common" xilinx:version="3.0" xilinx:isGenerated="true" xilinx:checksum="379ecdb2">
+          <xilinx:componentRef xilinx:vendor="xilinx.com" xilinx:library="ip" xilinx:name="emc_common" xilinx:version="3.0" xilinx:isGenerated="true" xilinx:checksum="a0815dfa">
             <xilinx:mode xilinx:name="copy_mode"/>
           </xilinx:componentRef>
         </xilinx:subCoreRef>
@@ -3809,10 +4290,10 @@
     <spirit:fileSet>
       <spirit:name>xilinx_vhdlbehavioralsimulation_view_fileset</spirit:name>
       <spirit:file>
-        <spirit:name>../../ipshared/9079/hdl/axi_emc_v3_0_vh_rfs.vhd</spirit:name>
+        <spirit:name>../../ipshared/0cd1/hdl/axi_emc_v3_0_vh_rfs.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
         <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
-        <spirit:logicalName>axi_emc_v3_0_14</spirit:logicalName>
+        <spirit:logicalName>axi_emc_v3_0_18</spirit:logicalName>
       </spirit:file>
     </spirit:fileSet>
     <spirit:fileSet>
@@ -4965,7 +5446,7 @@
   <spirit:vendorExtensions>
     <xilinx:coreExtensions>
       <xilinx:displayName>AXI EMC</xilinx:displayName>
-      <xilinx:coreRevision>14</xilinx:coreRevision>
+      <xilinx:coreRevision>18</xilinx:coreRevision>
       <xilinx:configElementInfos>
         <xilinx:configElementInfo xilinx:referenceId="BUSIFPARAM_VALUE.ACLK.CLK_DOMAIN" xilinx:valueSource="default_prop" xilinx:valuePermission="bd"/>
         <xilinx:configElementInfo xilinx:referenceId="BUSIFPARAM_VALUE.ACLK.FREQ_HZ" xilinx:valueSource="user_prop" xilinx:valuePermission="bd"/>
@@ -4976,7 +5457,7 @@
         <xilinx:configElementInfo xilinx:referenceId="BUSIFPARAM_VALUE.S_AXI_MEM.AWUSER_WIDTH" xilinx:valueSource="constant" xilinx:valuePermission="bd"/>
         <xilinx:configElementInfo xilinx:referenceId="BUSIFPARAM_VALUE.S_AXI_MEM.BUSER_WIDTH" xilinx:valueSource="constant" xilinx:valuePermission="bd"/>
         <xilinx:configElementInfo xilinx:referenceId="BUSIFPARAM_VALUE.S_AXI_MEM.CLK_DOMAIN" xilinx:valueSource="default_prop" xilinx:valuePermission="bd"/>
-        <xilinx:configElementInfo xilinx:referenceId="BUSIFPARAM_VALUE.S_AXI_MEM.DATA_WIDTH" xilinx:valueSource="user" xilinx:valuePermission="bd"/>
+        <xilinx:configElementInfo xilinx:referenceId="BUSIFPARAM_VALUE.S_AXI_MEM.DATA_WIDTH" xilinx:valueSource="auto" xilinx:valuePermission="bd"/>
         <xilinx:configElementInfo xilinx:referenceId="BUSIFPARAM_VALUE.S_AXI_MEM.FREQ_HZ" xilinx:valueSource="user_prop" xilinx:valuePermission="bd"/>
         <xilinx:configElementInfo xilinx:referenceId="BUSIFPARAM_VALUE.S_AXI_MEM.HAS_BRESP" xilinx:valueSource="constant" xilinx:valuePermission="bd"/>
         <xilinx:configElementInfo xilinx:referenceId="BUSIFPARAM_VALUE.S_AXI_MEM.HAS_BURST" xilinx:valueSource="constant" xilinx:valuePermission="bd"/>
@@ -5010,10 +5491,10 @@
       </xilinx:configElementInfos>
     </xilinx:coreExtensions>
     <xilinx:packagingInfo>
-      <xilinx:xilinxVersion>2017.3</xilinx:xilinxVersion>
+      <xilinx:xilinxVersion>2018.3</xilinx:xilinxVersion>
       <xilinx:checksum xilinx:scope="busInterfaces" xilinx:value="ad563c1d"/>
-      <xilinx:checksum xilinx:scope="memoryMaps" xilinx:value="3c6279c7"/>
-      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="d01e81bb"/>
+      <xilinx:checksum xilinx:scope="memoryMaps" xilinx:value="6be59a1f"/>
+      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="550bb748"/>
       <xilinx:checksum xilinx:scope="ports" xilinx:value="61bb0619"/>
       <xilinx:checksum xilinx:scope="hdlParameters" xilinx:value="f68b22f9"/>
       <xilinx:checksum xilinx:scope="parameters" xilinx:value="0532b22b"/>

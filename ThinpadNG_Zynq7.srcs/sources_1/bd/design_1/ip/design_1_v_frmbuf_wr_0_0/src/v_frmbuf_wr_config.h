@@ -11,7 +11,7 @@
 #define BITS_PER_SAMPLE         (NR_COMPONENTS*MAX_DATA_WIDTH)
 #define BITS_PER_CLOCK          (BITS_PER_SAMPLE*SAMPLES_PER_CLOCK)
 
-#define AXIS_DATA_WIDTH         ((BITS_PER_CLOCK+7)*8/8)
+#define AXIS_DATA_WIDTH         ((BITS_PER_CLOCK+7)/8*8)
 
 #define AXIMM_DATA_WIDTH        64
 #define AXIMM_NUM_OUTSTANDING   4
@@ -28,7 +28,10 @@
 #define HAS_Y8                  0
 #define HAS_Y10                 0
 #define HAS_BGRX8               0
+#define HAS_BGR8                0
 #define HAS_UYVY8               0
+
+#define HAS_INTERLACED          0
 
 #define PLANE0_STREAM_DEPTH     256
 
