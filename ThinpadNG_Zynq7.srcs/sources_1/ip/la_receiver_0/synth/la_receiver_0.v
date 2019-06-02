@@ -50,7 +50,7 @@
 // IP VLNV: user.org:user:la_receiver:1.4
 // IP Revision: 5
 
-(* X_CORE_INFO = "la_receiver,Vivado 2017.3" *)
+(* X_CORE_INFO = "la_receiver,Vivado 2018.3" *)
 (* CHECK_LICENSE_TYPE = "la_receiver_0,la_receiver,{}" *)
 (* DowngradeIPIdentifiedWarnings = "yes" *)
 module la_receiver_0 (
