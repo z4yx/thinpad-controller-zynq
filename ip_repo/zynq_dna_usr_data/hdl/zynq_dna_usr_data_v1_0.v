@@ -1,17 +1,7 @@
 
 `timescale 1 ns / 1 ps
 
-    module zynq_dna_usr_data_v1_0 #
-    (
-        // Users to add parameters here
-
-        // User parameters ends
-        // Do not modify the parameters beyond this line
-
-
-        // Parameters of Axi Slave Bus Interface APB
-        parameter integer C_APB_TDATA_WIDTH	= 32
-    )
+    module zynq_dna_usr_data_v1_0
     (
         // Users to add ports here
 
@@ -54,6 +44,7 @@
         .SHIFT(dna_shift)//1-bitinput:Activehighshiftenableinput.
     );
 
+    assign APB_pslverr = 0;
     assign APB_pready = core_ready;
     assign dna_read = ~(|dna_counter); // dna_counter == 0
     assign dna_shift = (|dna_counter) & ~(&dna_counter); // 0 < dna_counter < all-ones

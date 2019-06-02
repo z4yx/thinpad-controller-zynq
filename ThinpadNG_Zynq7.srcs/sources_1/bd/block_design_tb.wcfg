@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="block_design_tb_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="axi_dma_pkg" />
+            <top_module name="axi_vip_pkg" />
+            <top_module name="block_design_tb" />
+            <top_module name="design_1_clk_wiz_0_0_family_support" />
+            <top_module name="design_1_clk_wiz_0_0_ipif_pkg" />
+            <top_module name="design_1_clk_wiz_0_0_proc_common_pkg" />
+            <top_module name="emc_pkg" />
+            <top_module name="glbl" />
+            <top_module name="ipif_pkg" />
+            <top_module name="lib_pkg" />
+            <top_module name="std" />
+            <top_module name="vcomponents" />
+            <top_module name="xil_common_vip_pkg" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="0fs"></ZoomStartTime>
+      <ZoomEndTime time="6395000001fs"></ZoomEndTime>
+      <Cursor1Time time="4000000000fs"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="161"></NameColumnWidth>
+      <ValueColumnWidth column_width="149"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="18" />
+   <wvobject type="protoinst" fp_name="/block_design_tb/block_design/design_1_i/axi_interconnect_0/M09_AXI">
+      <obj_property name="DisplayName">FullPathName</obj_property>
+      <obj_property name="children_use_element_short_name">true</obj_property>
+      <obj_property name="WaveformStyle">STYLE_ENUM_TRANSACTION</obj_property>
+      <obj_property name="EnumTransactionColorTable">0=blank 1=#D399FF 2=pink</obj_property>
+      <obj_property name="EnumTransactionValueTable">0=blank;1=Read;2=Write;3=Read/Write</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+      <obj_property name="CustomSignalColor">turquoise</obj_property>
+      <obj_property name="Render_Data">/block_design_tb/block_design/design_1_i/axi_interconnect_0/M09_AXI.readWriteSummary</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      <obj_property name="CellHeight">36</obj_property>
+      <obj_property name="ElementShortName">M09_AXI</obj_property>
+      <obj_property name="ObjectShortName">M09_AXI</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/block_design_tb/block_design/design_1_i/zynq_dna_usr_data_0/APB_penable">
+      <obj_property name="ElementShortName">APB_penable</obj_property>
+      <obj_property name="ObjectShortName">APB_penable</obj_property>
+      <obj_property name="CustomSignalColor">#00FFFF</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/block_design_tb/block_design/design_1_i/zynq_dna_usr_data_0/APB_pready">
+      <obj_property name="ElementShortName">APB_pready</obj_property>
+      <obj_property name="ObjectShortName">APB_pready</obj_property>
+      <obj_property name="CustomSignalColor">#00FFFF</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/block_design_tb/block_design/design_1_i/zynq_dna_usr_data_0/APB_psel">
+      <obj_property name="ElementShortName">APB_psel</obj_property>
+      <obj_property name="ObjectShortName">APB_psel</obj_property>
+      <obj_property name="CustomSignalColor">#00FFFF</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/block_design_tb/block_design/design_1_i/zynq_dna_usr_data_0/APB_paddr">
+      <obj_property name="ElementShortName">APB_paddr[31:0]</obj_property>
+      <obj_property name="ObjectShortName">APB_paddr[31:0]</obj_property>
+      <obj_property name="CustomSignalColor">#00FFFF</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/block_design_tb/block_design/design_1_i/zynq_dna_usr_data_0/APB_prdata">
+      <obj_property name="ElementShortName">APB_prdata[31:0]</obj_property>
+      <obj_property name="ObjectShortName">APB_prdata[31:0]</obj_property>
+      <obj_property name="CustomSignalColor">#00FFFF</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/block_design_tb/block_design/design_1_i/parallel_apb_adapter_0/APB_paddr">
+      <obj_property name="ElementShortName">APB_paddr[31:0]</obj_property>
+      <obj_property name="ObjectShortName">APB_paddr[31:0]</obj_property>
+      <obj_property name="CustomSignalColor">#FF00FF</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/block_design_tb/block_design/design_1_i/parallel_apb_adapter_0/APB_penable">
+      <obj_property name="ElementShortName">APB_penable</obj_property>
+      <obj_property name="ObjectShortName">APB_penable</obj_property>
+      <obj_property name="CustomSignalColor">#FF00FF</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/block_design_tb/block_design/design_1_i/parallel_apb_adapter_0/APB_prdata">
+      <obj_property name="ElementShortName">APB_prdata[31:0]</obj_property>
+      <obj_property name="ObjectShortName">APB_prdata[31:0]</obj_property>
+      <obj_property name="CustomSignalColor">#FF00FF</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/block_design_tb/block_design/design_1_i/parallel_apb_adapter_0/APB_pready">
+      <obj_property name="ElementShortName">APB_pready</obj_property>
+      <obj_property name="ObjectShortName">APB_pready</obj_property>
+      <obj_property name="CustomSignalColor">#FF00FF</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/block_design_tb/block_design/design_1_i/parallel_apb_adapter_0/APB_psel">
+      <obj_property name="ElementShortName">APB_psel</obj_property>
+      <obj_property name="ObjectShortName">APB_psel</obj_property>
+      <obj_property name="CustomSignalColor">#FF00FF</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/block_design_tb/block_design/design_1_i/parallel_apb_adapter_0/APB_pslverr">
+      <obj_property name="ElementShortName">APB_pslverr</obj_property>
+      <obj_property name="ObjectShortName">APB_pslverr</obj_property>
+      <obj_property name="CustomSignalColor">#FF00FF</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/block_design_tb/block_design/design_1_i/parallel_apb_adapter_0/APB_pwdata">
+      <obj_property name="ElementShortName">APB_pwdata[31:0]</obj_property>
+      <obj_property name="ObjectShortName">APB_pwdata[31:0]</obj_property>
+      <obj_property name="CustomSignalColor">#FF00FF</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/block_design_tb/block_design/design_1_i/parallel_apb_adapter_0/APB_pwrite">
+      <obj_property name="ElementShortName">APB_pwrite</obj_property>
+      <obj_property name="ObjectShortName">APB_pwrite</obj_property>
+      <obj_property name="CustomSignalColor">#FF00FF</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/block_design_tb/block_design/design_1_i/ps7_0/FCLK_CLK0">
+      <obj_property name="ElementShortName">FCLK_CLK0</obj_property>
+      <obj_property name="ObjectShortName">FCLK_CLK0</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/block_design_tb/block_design/design_1_i/ps7_0/FCLK_RESET0_N">
+      <obj_property name="ElementShortName">FCLK_RESET0_N</obj_property>
+      <obj_property name="ObjectShortName">FCLK_RESET0_N</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/block_design_tb/block_design/design_1_i/zynq_dna_usr_data_0/inst/dna_counter">
+      <obj_property name="ElementShortName">dna_counter[5:0]</obj_property>
+      <obj_property name="ObjectShortName">dna_counter[5:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/block_design_tb/block_design/design_1_i/zynq_dna_usr_data_0/inst/APB_aresetn">
+      <obj_property name="ElementShortName">APB_aresetn</obj_property>
+      <obj_property name="ObjectShortName">APB_aresetn</obj_property>
+   </wvobject>
+</wave_config>

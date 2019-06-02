@@ -3,7 +3,7 @@
   <spirit:vendor>user.org</spirit:vendor>
   <spirit:library>user</spirit:library>
   <spirit:name>zynq_dna_usr_data</spirit:name>
-  <spirit:version>1.0</spirit:version>
+  <spirit:version>1.1</spirit:version>
   <spirit:busInterfaces>
     <spirit:busInterface>
       <spirit:name>S_APB_RST</spirit:name>
@@ -45,7 +45,11 @@
       <spirit:parameters>
         <spirit:parameter>
           <spirit:name>ASSOCIATED_BUSIF</spirit:name>
-          <spirit:value spirit:id="BUSIFPARAM_VALUE.S_APB_CLK.ASSOCIATED_BUSIF"/>
+          <spirit:value spirit:id="BUSIFPARAM_VALUE.S_APB_CLK.ASSOCIATED_BUSIF">S_APB</spirit:value>
+        </spirit:parameter>
+        <spirit:parameter>
+          <spirit:name>ASSOCIATED_RESET</spirit:name>
+          <spirit:value spirit:id="BUSIFPARAM_VALUE.S_APB_CLK.ASSOCIATED_RESET">APB_aresetn</spirit:value>
         </spirit:parameter>
       </spirit:parameters>
     </spirit:busInterface>
@@ -54,7 +58,9 @@
       <spirit:displayName>APB</spirit:displayName>
       <spirit:busType spirit:vendor="xilinx.com" spirit:library="interface" spirit:name="apb" spirit:version="1.0"/>
       <spirit:abstractionType spirit:vendor="xilinx.com" spirit:library="interface" spirit:name="apb_rtl" spirit:version="1.0"/>
-      <spirit:slave/>
+      <spirit:slave>
+        <spirit:memoryMapRef spirit:memoryMapRef="S_APB"/>
+      </spirit:slave>
       <spirit:portMaps>
         <spirit:portMap>
           <spirit:logicalPort>
@@ -123,6 +129,38 @@
       </spirit:portMaps>
     </spirit:busInterface>
   </spirit:busInterfaces>
+  <spirit:memoryMaps>
+    <spirit:memoryMap>
+      <spirit:name>S_APB</spirit:name>
+      <spirit:displayName>APB Slave</spirit:displayName>
+      <spirit:addressBlock>
+        <spirit:name>reg</spirit:name>
+        <spirit:baseAddress spirit:format="long">0</spirit:baseAddress>
+        <spirit:range spirit:format="long">4096</spirit:range>
+        <spirit:width spirit:format="long">0</spirit:width>
+        <spirit:register>
+          <spirit:name>DATE</spirit:name>
+          <spirit:addressOffset>0</spirit:addressOffset>
+          <spirit:size spirit:format="long">4</spirit:size>
+        </spirit:register>
+        <spirit:register>
+          <spirit:name>TIME</spirit:name>
+          <spirit:addressOffset>4</spirit:addressOffset>
+          <spirit:size spirit:format="long">4</spirit:size>
+        </spirit:register>
+        <spirit:register>
+          <spirit:name>DNA_L</spirit:name>
+          <spirit:addressOffset>8</spirit:addressOffset>
+          <spirit:size spirit:format="long">4</spirit:size>
+        </spirit:register>
+        <spirit:register>
+          <spirit:name>DNA_H</spirit:name>
+          <spirit:addressOffset>12</spirit:addressOffset>
+          <spirit:size spirit:format="long">4</spirit:size>
+        </spirit:register>
+      </spirit:addressBlock>
+    </spirit:memoryMap>
+  </spirit:memoryMaps>
   <spirit:model>
     <spirit:views>
       <spirit:view>
@@ -137,7 +175,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>67cfbefd</spirit:value>
+            <spirit:value>c5403aa4</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -153,7 +191,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>14888a5e</spirit:value>
+            <spirit:value>e6dd19b9</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -167,7 +205,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>f34334ca</spirit:value>
+            <spirit:value>f92e9879</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -345,13 +383,6 @@
         </spirit:wire>
       </spirit:port>
     </spirit:ports>
-    <spirit:modelParameters>
-      <spirit:modelParameter xsi:type="spirit:nameValueTypeType" spirit:dataType="integer">
-        <spirit:name>C_APB_TDATA_WIDTH</spirit:name>
-        <spirit:displayName>C Apb Tdata Width</spirit:displayName>
-        <spirit:value spirit:format="long" spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_APB_TDATA_WIDTH">32</spirit:value>
-      </spirit:modelParameter>
-    </spirit:modelParameters>
   </spirit:model>
   <spirit:choices>
     <spirit:choice>
@@ -374,7 +405,7 @@
       <spirit:file>
         <spirit:name>hdl/zynq_dna_usr_data_v1_0.v</spirit:name>
         <spirit:fileType>verilogSource</spirit:fileType>
-        <spirit:userFileType>CHECKSUM_14888a5e</spirit:userFileType>
+        <spirit:userFileType>CHECKSUM_e6dd19b9</spirit:userFileType>
       </spirit:file>
     </spirit:fileSet>
     <spirit:fileSet>
@@ -387,9 +418,9 @@
     <spirit:fileSet>
       <spirit:name>xilinx_xpgui_view_fileset</spirit:name>
       <spirit:file>
-        <spirit:name>xgui/zynq_dna_usr_data_v1_0.tcl</spirit:name>
+        <spirit:name>xgui/zynq_dna_usr_data_v1_1.tcl</spirit:name>
         <spirit:fileType>tclSource</spirit:fileType>
-        <spirit:userFileType>CHECKSUM_f34334ca</spirit:userFileType>
+        <spirit:userFileType>CHECKSUM_f92e9879</spirit:userFileType>
         <spirit:userFileType>XGUI_VERSION_2</spirit:userFileType>
       </spirit:file>
     </spirit:fileSet>
@@ -416,23 +447,21 @@
       <spirit:name>Component_Name</spirit:name>
       <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Component_Name" spirit:order="1">zynq_dna_usr_data_v1_0</spirit:value>
     </spirit:parameter>
-    <spirit:parameter>
-      <spirit:name>C_APB_TDATA_WIDTH</spirit:name>
-      <spirit:displayName>C Apb Tdata Width</spirit:displayName>
-      <spirit:value spirit:format="long" spirit:resolve="user" spirit:id="PARAM_VALUE.C_APB_TDATA_WIDTH">32</spirit:value>
-    </spirit:parameter>
   </spirit:parameters>
   <spirit:vendorExtensions>
     <xilinx:coreExtensions>
       <xilinx:supportedFamilies>
-        <xilinx:family xilinx:lifeCycle="Pre-Production">zynq</xilinx:family>
+        <xilinx:family xilinx:lifeCycle="Production">zynq</xilinx:family>
       </xilinx:supportedFamilies>
       <xilinx:taxonomies>
         <xilinx:taxonomy>AXI_Peripheral</xilinx:taxonomy>
       </xilinx:taxonomies>
       <xilinx:displayName>Zynq DNA and UsrAccess</xilinx:displayName>
-      <xilinx:coreRevision>7</xilinx:coreRevision>
-      <xilinx:coreCreationDateTime>2019-06-02T03:11:35Z</xilinx:coreCreationDateTime>
+      <xilinx:coreRevision>1</xilinx:coreRevision>
+      <xilinx:upgrades>
+        <xilinx:canUpgradeFrom>user.org:user:zynq_dna_usr_data:1.0</xilinx:canUpgradeFrom>
+      </xilinx:upgrades>
+      <xilinx:coreCreationDateTime>2019-06-02T09:06:00Z</xilinx:coreCreationDateTime>
       <xilinx:tags>
         <xilinx:tag xilinx:name="ui.data.coregen.dd@3f68126c_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/zynq_dna_usr_data_1.0</xilinx:tag>
         <xilinx:tag xilinx:name="ui.data.coregen.dd@1f88f48c_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/zynq_dna_usr_data_1.0</xilinx:tag>
@@ -551,15 +580,67 @@
         <xilinx:tag xilinx:name="ui.data.coregen.dd@6e4b5349_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/zynq_dna_usr_data</xilinx:tag>
         <xilinx:tag xilinx:name="ui.data.coregen.dd@7f1eb130_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/zynq_dna_usr_data</xilinx:tag>
         <xilinx:tag xilinx:name="ui.data.coregen.dd@65fde115_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/zynq_dna_usr_data</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@4132141e_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/zynq_dna_usr_data</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@2a0584c0_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/zynq_dna_usr_data</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@4f7c9481_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/zynq_dna_usr_data</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@5115eea6_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/zynq_dna_usr_data</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@43f7d995_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/zynq_dna_usr_data</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@19d5c853_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/zynq_dna_usr_data</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@34982ef9_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/zynq_dna_usr_data</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@7411f77c_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/zynq_dna_usr_data</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@46e7d8a2_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/zynq_dna_usr_data</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@2799b311_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/zynq_dna_usr_data</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@6cc11e01_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/zynq_dna_usr_data</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@3921c31c_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/zynq_dna_usr_data</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@13bf1d06_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/zynq_dna_usr_data</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@6ed73ba3_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/zynq_dna_usr_data</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@e0e4af5_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/zynq_dna_usr_data</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@1c0a1484_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/zynq_dna_usr_data</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@3c45c816_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/zynq_dna_usr_data</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@2e81ffba_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/zynq_dna_usr_data</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@f210370_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/zynq_dna_usr_data</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@20222c3e_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/zynq_dna_usr_data</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@f3a6d27_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/zynq_dna_usr_data</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@425dfb83_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/zynq_dna_usr_data</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@5a37e136_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/zynq_dna_usr_data</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@657256f3_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/zynq_dna_usr_data</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@13641977_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/zynq_dna_usr_data</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@3b4602cb_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/zynq_dna_usr_data</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@250214e1_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/zynq_dna_usr_data</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@6b6fd21d_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/zynq_dna_usr_data</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@15edf212_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/zynq_dna_usr_data</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@14c8baf1_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/zynq_dna_usr_data</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@36ffb042_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/zynq_dna_usr_data</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@511708ad_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/zynq_dna_usr_data</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@c4c7a62_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/zynq_dna_usr_data</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@14b191f9_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/zynq_dna_usr_data</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@559a64e2_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/zynq_dna_usr_data</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@655bb414_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/zynq_dna_usr_data</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@36716f35_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/zynq_dna_usr_data</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@7166de05_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/zynq_dna_usr_data</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@6f3d7c4c_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/zynq_dna_usr_data</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@282ad266_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/zynq_dna_usr_data</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@30de200c_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/zynq_dna_usr_data</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@47cda30d_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/zynq_dna_usr_data</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@39e1134c_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/zynq_dna_usr_data</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@194718ca_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/zynq_dna_usr_data</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@3f32827d_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/zynq_dna_usr_data</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@37abd385_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/zynq_dna_usr_data</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@63c35548_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/zynq_dna_usr_data</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@74ba8b12_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/zynq_dna_usr_data</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@de4053e_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/zynq_dna_usr_data</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@5a53a08f_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/zynq_dna_usr_data</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@4d9d3f23_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/zynq_dna_usr_data</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@3b62fd1c_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/zynq_dna_usr_data</xilinx:tag>
       </xilinx:tags>
     </xilinx:coreExtensions>
     <xilinx:packagingInfo>
       <xilinx:xilinxVersion>2018.3</xilinx:xilinxVersion>
-      <xilinx:checksum xilinx:scope="busInterfaces" xilinx:value="4c05e078"/>
-      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="4a237fc4"/>
+      <xilinx:checksum xilinx:scope="busInterfaces" xilinx:value="15e1f582"/>
+      <xilinx:checksum xilinx:scope="memoryMaps" xilinx:value="653bf0d5"/>
+      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="21550fe2"/>
       <xilinx:checksum xilinx:scope="ports" xilinx:value="9eefe9b6"/>
-      <xilinx:checksum xilinx:scope="hdlParameters" xilinx:value="0fe425c0"/>
-      <xilinx:checksum xilinx:scope="parameters" xilinx:value="5bee58a5"/>
+      <xilinx:checksum xilinx:scope="parameters" xilinx:value="c3276b51"/>
     </xilinx:packagingInfo>
   </spirit:vendorExtensions>
 </spirit:component>
