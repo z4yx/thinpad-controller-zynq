@@ -13,13 +13,6 @@ if { [llength [get_ips]] != 0} {
 
     set ip_runs [get_runs -filter {SRCSET != sources_1 && IS_SYNTHESIS && STATUS != "synth_design Complete!"}]
     
-    if { [llength $ip_runs] != 0} {
-        launch_runs -quiet -jobs 2 {*}$ip_runs
-        
-        foreach r $ip_runs {
-            wait_on_run $r
-        }
-    }
 
 }
 
