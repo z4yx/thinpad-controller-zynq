@@ -62,10 +62,11 @@
         if(~APB_aresetn) begin
             core_ready <= 1'b0;
             dna_counter <= 6'h0;
+            device_dna <= 64'h0;
         end else begin
-            if(dna_counter >= 2 && dna_counter < 59)
+            if(dna_counter >= 1 && dna_counter <= 57)
                 device_dna <= {device_dna[0+:63], dna_q};
-            else if(dna_counter == 59)
+            if(dna_counter == 57)
                 core_ready <= 1'b1;
             if(~(&dna_counter))
                 dna_counter <= dna_counter + 1;
