@@ -689,6 +689,7 @@ proc create_hier_cell_bus_analyze { parentCell nameHier } {
    CONFIG.HAS_RD_DATA_COUNT {1} \
    CONFIG.HAS_TKEEP {0} \
    CONFIG.HAS_WR_DATA_COUNT {1} \
+   CONFIG.SYNCHRONIZATION_STAGES {3} \
    CONFIG.TDATA_NUM_BYTES {16} \
  ] $axis_data_fifo_0
 
@@ -852,7 +853,7 @@ proc create_root_design { parentCell } {
   # Create instance: axi_apb_0, and set properties
   set axi_apb_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_apb_bridge:3.0 axi_apb_0 ]
   set_property -dict [ list \
-   CONFIG.C_APB_NUM_SLAVES {1} \
+   CONFIG.C_APB_NUM_SLAVES {2} \
    CONFIG.C_M_APB_PROTOCOL {apb4} \
  ] $axi_apb_0
 
@@ -1799,12 +1800,16 @@ proc create_root_design { parentCell } {
   # Create instance: xvc_jtag
   create_hier_cell_xvc_jtag [current_bd_instance .] xvc_jtag
 
+  # Create instance: zynq_dna_usr_data_0, and set properties
+  set zynq_dna_usr_data_0 [ create_bd_cell -type ip -vlnv user.org:user:zynq_dna_usr_data:1.0 zynq_dna_usr_data_0 ]
+
   # Create interface connections
   connect_bd_intf_net -intf_net S00_AXI_1 [get_bd_intf_pins axi_interconnect_0/S00_AXI] [get_bd_intf_pins ps7_0/M_AXI_GP0]
   connect_bd_intf_net -intf_net S_AXIS_0_1 [get_bd_intf_ports vid_axis] [get_bd_intf_pins video_capture/vid_axis]
 set_property HDL_ATTRIBUTE.DEBUG {true} [get_bd_intf_nets S_AXIS_0_1]
   connect_bd_intf_net -intf_net S_AXIS_1 [get_bd_intf_ports la_storage_axis] [get_bd_intf_pins la_storage/S_AXIS]
   connect_bd_intf_net -intf_net S_AXI_LITE_1 [get_bd_intf_pins axi_interconnect_0/M05_AXI] [get_bd_intf_pins la_storage/S_AXI_LITE]
+  connect_bd_intf_net -intf_net axi_apb_0_APB_M2 [get_bd_intf_pins axi_apb_0/APB_M2] [get_bd_intf_pins zynq_dna_usr_data_0/S_APB]
   connect_bd_intf_net -intf_net axi_apb_bridge_0_APB_M [get_bd_intf_pins axi_apb_0/APB_M] [get_bd_intf_pins parallel_apb_adapter_0/APB]
   connect_bd_intf_net -intf_net axi_gpio_0_GPIO [get_bd_intf_ports gpio_rtl] [get_bd_intf_pins axi_gpio_0/GPIO]
   connect_bd_intf_net -intf_net axi_gpio_1_GPIO [get_bd_intf_ports gpio_rtl_0] [get_bd_intf_pins axi_gpio_1/GPIO]
@@ -1869,8 +1874,8 @@ set_property HDL_ATTRIBUTE.DEBUG {true} [get_bd_intf_nets vtiming_in_0_1]
   connect_bd_net -net parallel_apb_adapter_0_LCD_data_z [get_bd_ports pp_data_t] [get_bd_pins parallel_apb_adapter_0/LCD_data_z]
   connect_bd_net -net port2reg_1 [get_bd_ports port2reg] [get_bd_pins axi_register_0/port2reg]
   connect_bd_net -net proc_sys_reset_0_interconnect_aresetn [get_bd_pins axi_interconnect_0/ARESETN] [get_bd_pins proc_sys_reset_0/interconnect_aresetn]
-  connect_bd_net -net proc_sys_reset_0_peripheral_aresetn [get_bd_ports ps_perph_rstn] [get_bd_pins axi_apb_0/s_axi_aresetn] [get_bd_pins axi_emc_0/s_axi_aresetn] [get_bd_pins axi_gpio_0/s_axi_aresetn] [get_bd_pins axi_gpio_1/s_axi_aresetn] [get_bd_pins axi_gpio_2/s_axi_aresetn] [get_bd_pins axi_interconnect_0/M00_ARESETN] [get_bd_pins axi_interconnect_0/M01_ARESETN] [get_bd_pins axi_interconnect_0/M02_ARESETN] [get_bd_pins axi_interconnect_0/M03_ARESETN] [get_bd_pins axi_interconnect_0/M04_ARESETN] [get_bd_pins axi_interconnect_0/M05_ARESETN] [get_bd_pins axi_interconnect_0/M06_ARESETN] [get_bd_pins axi_interconnect_0/M07_ARESETN] [get_bd_pins axi_interconnect_0/M08_ARESETN] [get_bd_pins axi_interconnect_0/M09_ARESETN] [get_bd_pins axi_interconnect_0/S00_ARESETN] [get_bd_pins axi_register_0/s00_axi_aresetn] [get_bd_pins axi_uart16550_0/s_axi_aresetn] [get_bd_pins bus_analyze/axi_resetn] [get_bd_pins clk_wiz_0/s_axi_aresetn] [get_bd_pins la_storage/axi_resetn] [get_bd_pins parallel_apb_adapter_0/nrst] [get_bd_pins proc_sys_reset_0/peripheral_aresetn]
-  connect_bd_net -net processing_system7_0_FCLK_CLK0 [get_bd_pins axi_apb_0/s_axi_aclk] [get_bd_pins axi_emc_0/rdclk] [get_bd_pins axi_emc_0/s_axi_aclk] [get_bd_pins axi_gpio_0/s_axi_aclk] [get_bd_pins axi_gpio_1/s_axi_aclk] [get_bd_pins axi_gpio_2/s_axi_aclk] [get_bd_pins axi_interconnect_0/ACLK] [get_bd_pins axi_interconnect_0/M00_ACLK] [get_bd_pins axi_interconnect_0/M01_ACLK] [get_bd_pins axi_interconnect_0/M02_ACLK] [get_bd_pins axi_interconnect_0/M03_ACLK] [get_bd_pins axi_interconnect_0/M04_ACLK] [get_bd_pins axi_interconnect_0/M05_ACLK] [get_bd_pins axi_interconnect_0/M06_ACLK] [get_bd_pins axi_interconnect_0/M07_ACLK] [get_bd_pins axi_interconnect_0/M08_ACLK] [get_bd_pins axi_interconnect_0/M09_ACLK] [get_bd_pins axi_interconnect_0/S00_ACLK] [get_bd_pins axi_register_0/s00_axi_aclk] [get_bd_pins axi_uart16550_0/s_axi_aclk] [get_bd_pins bus_analyze/s_axi_lite_aclk] [get_bd_pins clk_wiz_0/clk_in1] [get_bd_pins clk_wiz_0/s_axi_aclk] [get_bd_pins la_storage/s_axi_lite_aclk] [get_bd_pins parallel_apb_adapter_0/clk] [get_bd_pins proc_sys_reset_0/slowest_sync_clk] [get_bd_pins ps7_0/FCLK_CLK0] [get_bd_pins ps7_0/M_AXI_GP0_ACLK]
+  connect_bd_net -net proc_sys_reset_0_peripheral_aresetn [get_bd_ports ps_perph_rstn] [get_bd_pins axi_apb_0/s_axi_aresetn] [get_bd_pins axi_emc_0/s_axi_aresetn] [get_bd_pins axi_gpio_0/s_axi_aresetn] [get_bd_pins axi_gpio_1/s_axi_aresetn] [get_bd_pins axi_gpio_2/s_axi_aresetn] [get_bd_pins axi_interconnect_0/M00_ARESETN] [get_bd_pins axi_interconnect_0/M01_ARESETN] [get_bd_pins axi_interconnect_0/M02_ARESETN] [get_bd_pins axi_interconnect_0/M03_ARESETN] [get_bd_pins axi_interconnect_0/M04_ARESETN] [get_bd_pins axi_interconnect_0/M05_ARESETN] [get_bd_pins axi_interconnect_0/M06_ARESETN] [get_bd_pins axi_interconnect_0/M07_ARESETN] [get_bd_pins axi_interconnect_0/M08_ARESETN] [get_bd_pins axi_interconnect_0/M09_ARESETN] [get_bd_pins axi_interconnect_0/S00_ARESETN] [get_bd_pins axi_register_0/s00_axi_aresetn] [get_bd_pins axi_uart16550_0/s_axi_aresetn] [get_bd_pins bus_analyze/axi_resetn] [get_bd_pins clk_wiz_0/s_axi_aresetn] [get_bd_pins la_storage/axi_resetn] [get_bd_pins parallel_apb_adapter_0/nrst] [get_bd_pins proc_sys_reset_0/peripheral_aresetn] [get_bd_pins zynq_dna_usr_data_0/APB_aresetn]
+  connect_bd_net -net processing_system7_0_FCLK_CLK0 [get_bd_pins axi_apb_0/s_axi_aclk] [get_bd_pins axi_emc_0/rdclk] [get_bd_pins axi_emc_0/s_axi_aclk] [get_bd_pins axi_gpio_0/s_axi_aclk] [get_bd_pins axi_gpio_1/s_axi_aclk] [get_bd_pins axi_gpio_2/s_axi_aclk] [get_bd_pins axi_interconnect_0/ACLK] [get_bd_pins axi_interconnect_0/M00_ACLK] [get_bd_pins axi_interconnect_0/M01_ACLK] [get_bd_pins axi_interconnect_0/M02_ACLK] [get_bd_pins axi_interconnect_0/M03_ACLK] [get_bd_pins axi_interconnect_0/M04_ACLK] [get_bd_pins axi_interconnect_0/M05_ACLK] [get_bd_pins axi_interconnect_0/M06_ACLK] [get_bd_pins axi_interconnect_0/M07_ACLK] [get_bd_pins axi_interconnect_0/M08_ACLK] [get_bd_pins axi_interconnect_0/M09_ACLK] [get_bd_pins axi_interconnect_0/S00_ACLK] [get_bd_pins axi_register_0/s00_axi_aclk] [get_bd_pins axi_uart16550_0/s_axi_aclk] [get_bd_pins bus_analyze/s_axi_lite_aclk] [get_bd_pins clk_wiz_0/clk_in1] [get_bd_pins clk_wiz_0/s_axi_aclk] [get_bd_pins la_storage/s_axi_lite_aclk] [get_bd_pins parallel_apb_adapter_0/clk] [get_bd_pins proc_sys_reset_0/slowest_sync_clk] [get_bd_pins ps7_0/FCLK_CLK0] [get_bd_pins ps7_0/M_AXI_GP0_ACLK] [get_bd_pins zynq_dna_usr_data_0/APB_aclk]
   connect_bd_net -net processing_system7_0_FCLK_RESET0_N [get_bd_pins bus_analyze/ext_reset_in] [get_bd_pins la_storage/ext_reset_in] [get_bd_pins proc_sys_reset_0/ext_reset_in] [get_bd_pins ps7_0/FCLK_RESET0_N] [get_bd_pins video_capture/ext_reset_in] [get_bd_pins xvc_jtag/ext_reset_in]
   connect_bd_net -net ps7_0_FCLK_CLK1 [get_bd_ports bus_analyze_clk] [get_bd_pins axi_interconnect_0/M10_ACLK] [get_bd_pins axi_interconnect_0/M11_ACLK] [get_bd_pins bus_analyze/M00_ACLK] [get_bd_pins la_storage/M00_ACLK] [get_bd_pins ps7_0/FCLK_CLK1] [get_bd_pins ps7_0/S_AXI_HP0_ACLK] [get_bd_pins ps7_0/S_AXI_HP1_ACLK] [get_bd_pins ps7_0/S_AXI_HP2_ACLK] [get_bd_pins video_capture/axi_clk]
   connect_bd_net -net ps7_0_FCLK_CLK2 [get_bd_ports clk_serdes] [get_bd_pins ps7_0/FCLK_CLK2]
@@ -1904,9 +1909,10 @@ set_property HDL_ATTRIBUTE.DEBUG {true} [get_bd_nets s_aresetn_0_1]
   create_bd_addr_seg -range 0x00010000 -offset 0x43C20000 [get_bd_addr_spaces ps7_0/Data] [get_bd_addr_segs axi_uart16550_0/S_AXI/Reg] SEG_axi_uart16550_0_Reg
   create_bd_addr_seg -range 0x00010000 -offset 0x43C00000 [get_bd_addr_spaces ps7_0/Data] [get_bd_addr_segs clk_wiz_0/s_axi_lite/Reg] SEG_clk_wiz_0_Reg
   create_bd_addr_seg -range 0x00010000 -offset 0x43C30000 [get_bd_addr_spaces ps7_0/Data] [get_bd_addr_segs xvc_jtag/debug_bridge_axi2jtag/S_AXI/Reg0] SEG_debug_bridge_axi2jtag_Reg0
-  create_bd_addr_seg -range 0x00010000 -offset 0x41230000 [get_bd_addr_spaces ps7_0/Data] [get_bd_addr_segs parallel_apb_adapter_0/APB/Ctrl] SEG_parallel_apb_adapter_0_Ctrl
+  create_bd_addr_seg -range 0x00008000 -offset 0x41230000 [get_bd_addr_spaces ps7_0/Data] [get_bd_addr_segs parallel_apb_adapter_0/APB/Ctrl] SEG_parallel_apb_adapter_0_Ctrl
   create_bd_addr_seg -range 0x00001000 -offset 0x43C13000 [get_bd_addr_spaces ps7_0/Data] [get_bd_addr_segs video_capture/v_frmbuf_wr_0/s_axi_CTRL/Reg] SEG_v_frmbuf_wr_0_Reg
   create_bd_addr_seg -range 0x00001000 -offset 0x43C14000 [get_bd_addr_spaces ps7_0/Data] [get_bd_addr_segs video_capture/v_tc_0/ctrl/Reg] SEG_v_tc_0_Reg
+  create_bd_addr_seg -range 0x00001000 -offset 0x43238000 [get_bd_addr_spaces ps7_0/Data] [get_bd_addr_segs zynq_dna_usr_data_0/S_APB/Reg] SEG_zynq_dna_usr_data_0_Reg
   create_bd_addr_seg -range 0x20000000 -offset 0x00000000 [get_bd_addr_spaces bus_analyze/axi_dma_0/Data_S2MM] [get_bd_addr_segs ps7_0/S_AXI_HP0/HP0_DDR_LOWOCM] SEG_ps7_0_HP0_DDR_LOWOCM
   create_bd_addr_seg -range 0x20000000 -offset 0x00000000 [get_bd_addr_spaces la_storage/axi_dma_0/Data_S2MM] [get_bd_addr_segs ps7_0/S_AXI_HP2/HP2_DDR_LOWOCM] SEG_ps7_0_HP2_DDR_LOWOCM
   create_bd_addr_seg -range 0x20000000 -offset 0x00000000 [get_bd_addr_spaces video_capture/v_frmbuf_wr_0/Data_m_axi_mm_video] [get_bd_addr_segs ps7_0/S_AXI_HP1/HP1_DDR_LOWOCM] SEG_ps7_0_HP1_DDR_LOWOCM

@@ -2,10 +2,10 @@
 <Root MajorVersion="0" MinorVersion="36">
   <CompositeFile CompositeFileTopName="design_1" CanBeSetAsTop="false" CanDisplayChildGraph="true">
     <Description>Composite Fileset</Description>
-    <Generation Name="SYNTHESIS" State="GENERATED" Timestamp="1559370522"/>
-    <Generation Name="IMPLEMENTATION" State="GENERATED" Timestamp="1559370522"/>
-    <Generation Name="SIMULATION" State="GENERATED" Timestamp="1559370522"/>
-    <Generation Name="HW_HANDOFF" State="GENERATED" Timestamp="1559370522"/>
+    <Generation Name="SYNTHESIS" State="GENERATED" Timestamp="1559445609"/>
+    <Generation Name="IMPLEMENTATION" State="GENERATED" Timestamp="1559445609"/>
+    <Generation Name="SIMULATION" State="GENERATED" Timestamp="1559445609"/>
+    <Generation Name="HW_HANDOFF" State="GENERATED" Timestamp="1559445609"/>
     <FileCollection Name="SOURCES" Type="SOURCES">
       <File Name="ip/design_1_ps7_0_0/design_1_ps7_0_0.xci" Type="IP">
         <Instance HierarchyPath="ps7_0"/>
@@ -327,6 +327,25 @@
         <UsedIn Val="IMPLEMENTATION"/>
         <UsedIn Val="SIMULATION"/>
       </File>
+      <File Name="synth/design_1.v" Type="Verilog">
+        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="false" IsStatusTracked="false"/>
+        <Library Name="xil_defaultlib"/>
+        <UsedIn Val="SYNTHESIS"/>
+        <UsedIn Val="IMPLEMENTATION"/>
+      </File>
+      <File Name="sim/design_1.v" Type="Verilog">
+        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="false" IsStatusTracked="false"/>
+        <Library Name="xil_defaultlib"/>
+        <UsedIn Val="SIMULATION"/>
+      </File>
+      <File Name="ip/design_1_zynq_dna_usr_data_0_0/design_1_zynq_dna_usr_data_0_0.xci" Type="IP">
+        <Instance HierarchyPath="zynq_dna_usr_data_0"/>
+        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
+        <Library Name="xil_defaultlib"/>
+        <UsedIn Val="SYNTHESIS"/>
+        <UsedIn Val="IMPLEMENTATION"/>
+        <UsedIn Val="SIMULATION"/>
+      </File>
       <File Name="ip/design_1_auto_ds_0/design_1_auto_ds_0.xci" Type="IP">
         <Instance HierarchyPath="bus_analyze/axi_interconnect_1/s00_couplers/auto_ds"/>
         <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
@@ -485,17 +504,6 @@
         <Library Name="xil_defaultlib"/>
         <UsedIn Val="SYNTHESIS"/>
         <UsedIn Val="IMPLEMENTATION"/>
-        <UsedIn Val="SIMULATION"/>
-      </File>
-      <File Name="synth/design_1.v" Type="Verilog">
-        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="false" IsStatusTracked="false"/>
-        <Library Name="xil_defaultlib"/>
-        <UsedIn Val="SYNTHESIS"/>
-        <UsedIn Val="IMPLEMENTATION"/>
-      </File>
-      <File Name="sim/design_1.v" Type="Verilog">
-        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="false" IsStatusTracked="false"/>
-        <Library Name="xil_defaultlib"/>
         <UsedIn Val="SIMULATION"/>
       </File>
       <File Name="design_1_ooc.xdc" Type="XDC">
