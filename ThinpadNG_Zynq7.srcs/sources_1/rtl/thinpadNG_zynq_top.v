@@ -263,6 +263,7 @@ module thinpadNG_zynq_top #(
     .emc_rtl_wen                (emc_rtl_wen                    ), // output
     .gpio_rtl_0_tri_io          (gpio_rtl_0_tri_io[5:0]         ), // inout
     .gpio_rtl_tri_io            (gpio_rtl_tri_io[31:0]          ), // inout
+    .led_transition_det_in      (gpio_rtl_tri_io[31:0]), // detect transitions on LED
     .gpio_sw_i                  (gpio_sw_i),
     .gpio_sw_o                  (gpio_sw_o),
     .gpio_sw_t                  (gpio_sw_t),
