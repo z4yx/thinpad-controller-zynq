@@ -79,96 +79,96 @@ preplace inst zynq_dna_build_time -pg 1 -lvl 5 -y 1570 -defaultsOSRD
 preplace inst video_capture -pg 1 -lvl 3 -y 680 -defaultsOSRD
 preplace inst xvc_jtag -pg 1 -lvl 4 -y 2210 -defaultsOSRD
 preplace netloc axi_interconnect_0_M08_AXI 1 2 1 630
-preplace netloc axi_emc_0_mem_wen 1 4 2 NJ 100 2240J
-preplace netloc axi_emc_0_mem_dq_t 1 4 2 NJ 60 2260J
+preplace netloc axi_emc_0_mem_wen 1 4 2 NJ 100 2250J
+preplace netloc axi_emc_0_mem_dq_t 1 4 2 NJ 60 2270J
 preplace netloc axi_interconnect_0_M07_AXI 1 2 2 740J 880 1230J
 preplace netloc vid_in_clk_1 1 0 3 NJ 570 NJ 570 710
-preplace netloc parallel_apb_adapter_0_LCD_data_z 1 4 2 1940J 1700 NJ
-preplace netloc processing_system7_0_FIXED_IO 1 4 2 1870J 680 2250J
-preplace netloc axi_gpio_2_gpio_io_t 1 4 2 1820J 1060 NJ
+preplace netloc parallel_apb_adapter_0_LCD_data_z 1 4 2 1950J 1700 NJ
+preplace netloc processing_system7_0_FIXED_IO 1 4 2 1880J 680 2260J
+preplace netloc axi_gpio_2_gpio_io_t 1 4 2 1830J 1060 NJ
 preplace netloc axi_interconnect_0_M04_AXI 1 2 2 690J 870 1270J
-preplace netloc mem_dq_i_1 1 0 5 10J -120 NJ -120 NJ -120 NJ -120 1790
+preplace netloc mem_dq_i_1 1 0 5 10J -120 NJ -120 NJ -120 NJ -120 1800
 preplace netloc v_tc_ctrl_1 1 2 1 700
-preplace netloc proc_sys_reset_0_interconnect_aresetn 1 1 4 260 1670 NJ 1670 NJ 1670 1770
+preplace netloc proc_sys_reset_0_interconnect_aresetn 1 1 4 260 1670 NJ 1670 NJ 1670 1780
 preplace netloc xlconcat_1_dout 1 3 1 1250
-preplace netloc nt35510_apb_adapter_0_LCD_rd 1 4 2 1990J 1850 NJ
+preplace netloc nt35510_apb_adapter_0_LCD_rd 1 4 2 2000J 1850 NJ
 preplace netloc axi_interconnect_0_M12_AXI 1 2 2 620J 1100 1170
 preplace netloc video_capture_dma_interrupt 1 2 2 810 1090 1170
-preplace netloc xlconcat_0_dout 1 2 3 630J 340 NJ 340 1790
-preplace netloc ps7_0_SPI0_SCLK_O 1 4 2 1840J 531 NJ
+preplace netloc xlconcat_0_dout 1 2 3 630J 340 NJ 340 1800
+preplace netloc ps7_0_SPI0_SCLK_O 1 4 2 1850J 531 NJ
 preplace netloc bus_analyze_axis_1 1 0 3 NJ 1220 220J 1300 640J
 preplace netloc port2reg_1 1 0 4 NJ 1390 230J 1350 NJ 1350 1200J
 preplace netloc video_capture_aresetn 1 1 3 250 580 680J 800 1130
 preplace netloc S_AXI_LITE_1 1 2 1 650
-preplace netloc axi_emc_0_mem_oen 1 4 2 NJ 80 2250J
-preplace netloc ps7_0_FCLK_CLK1 1 1 5 240 560 670 830 1300 920 1880 741 NJ
-preplace netloc video_capture_overflow 1 3 3 1290 940 1860J 550 2280J
-preplace netloc ps7_0_SPI0_MOSI_O 1 4 2 NJ 720 2280J
-preplace netloc axi_gpio_0_GPIO 1 4 2 NJ 420 2270J
-preplace netloc ps7_0_FCLK_CLK2 1 4 2 1900J 771 NJ
+preplace netloc axi_emc_0_mem_oen 1 4 2 NJ 80 2260J
+preplace netloc ps7_0_FCLK_CLK1 1 1 5 240 560 670 830 1300 920 1890 741 NJ
+preplace netloc video_capture_overflow 1 3 3 1290 940 1870J 550 2290J
+preplace netloc ps7_0_SPI0_MOSI_O 1 4 2 NJ 720 2290J
+preplace netloc axi_gpio_0_GPIO 1 4 2 NJ 420 2280J
+preplace netloc ps7_0_FCLK_CLK2 1 4 2 1910J 771 NJ
 preplace netloc done_1 1 0 2 NJ 440 NJ
-preplace netloc processing_system7_0_DDR 1 4 2 1850J 560 2250J
-preplace netloc parallel_apb_adapter_0_LCD_data_out 1 4 2 1930J 1670 NJ
-preplace netloc video_capture_vtc_locked 1 3 3 1180 950 1920J 811 NJ
-preplace netloc debug_bridge_axi2jtag_tap_tdi 1 4 2 2000 1950 NJ
+preplace netloc processing_system7_0_DDR 1 4 2 1860J 560 2260J
+preplace netloc parallel_apb_adapter_0_LCD_data_out 1 4 2 1940J 1670 NJ
+preplace netloc video_capture_vtc_locked 1 3 3 1180 950 1930J 811 NJ
+preplace netloc debug_bridge_axi2jtag_tap_tdi 1 4 2 2010 1950 NJ
 preplace netloc axi_interconnect_0_M02_AXI 1 2 2 650 390 1300J
 preplace netloc dma_ctrl_1 1 2 1 730
 preplace netloc axi_interconnect_0_M01_AXI 1 2 1 660
 preplace netloc la_storage_s2mm_introut 1 2 2 810 850 1130
-preplace netloc axi_apb_bridge_0_APB_M2 1 3 2 1320 2300 1770
+preplace netloc axi_apb_bridge_0_APB_M2 1 3 2 1320 2300 1780
 preplace netloc S_AXIS_1 1 0 3 20J 1450 NJ 1450 NJ
 preplace netloc tap_tdo_0_1 1 0 4 NJ 2020 NJ 2020 NJ 2020 1130J
 preplace netloc m_aclk_1 1 0 3 NJ 1420 NJ 1420 620J
 preplace netloc axi_interconnect_1_M00_AXI 1 3 1 1220
 preplace netloc vtiming_in_0_1 1 0 3 NJ 510 210J 520 790J
-preplace netloc video_capture_axis_wr_data_count_0 1 3 3 1140J 930 1870J 710 2300J
+preplace netloc video_capture_axis_wr_data_count_0 1 3 3 1140J 930 1880J 710 2310J
 preplace netloc smartconnect_0_M00_AXI 1 3 1 1300
-preplace netloc processing_system7_0_FCLK_RESET0_N 1 2 3 780 1360 1220 2330 1800
-preplace netloc s_axi_aclk_1 1 1 4 270 2190 N 2190 1150 2340 1810
-preplace netloc proc_sys_reset_0_peripheral_aresetn 1 1 5 220 510 760 1110 1260 2320 1850 1880 NJ
-preplace netloc la_storage_peripheral_aresetn 1 3 3 1160J 1840 NJ 1840 2270J
+preplace netloc processing_system7_0_FCLK_RESET0_N 1 2 3 780 1360 1220 2330 1810
+preplace netloc s_axi_aclk_1 1 1 4 270 2190 N 2190 1150 2340 1820
+preplace netloc proc_sys_reset_0_peripheral_aresetn 1 1 5 220 510 760 1110 1260 2320 1860 1880 NJ
+preplace netloc la_storage_peripheral_aresetn 1 3 3 1160J 1840 NJ 1840 2280J
 preplace netloc axi_interconnect_0_M09_AXI 1 2 2 770J 890 1210
 preplace netloc la_storage_M00_AXI 1 3 1 1240
-preplace netloc axi_register_0_reg2port 1 4 2 1910J 1490 NJ
-preplace netloc bus_analyze_peripheral_aresetn 1 3 3 1190J 1660 1900J 1230 NJ
-preplace netloc xlslice_0_Dout 1 5 1 2300J
-preplace netloc ps7_0_GPIO_O 1 4 1 1870J
-preplace netloc nt35510_apb_adapter_0_LCD_rs 1 4 2 1970J 1790 NJ
-preplace netloc axi_apb_bridge_0_APB_M 1 4 1 1920
-preplace netloc LCD_data_in_1 1 0 5 NJ 1640 NJ 1640 NJ 1640 1140J 2310 1760
-preplace netloc ps7_0_UART_1 1 4 2 1830J 501 NJ
+preplace netloc axi_register_0_reg2port 1 4 2 1920J 1490 NJ
+preplace netloc bus_analyze_peripheral_aresetn 1 3 3 1190J 1660 1910J 1230 NJ
+preplace netloc xlslice_0_Dout 1 5 1 2310J
+preplace netloc ps7_0_GPIO_O 1 4 1 1880J
+preplace netloc nt35510_apb_adapter_0_LCD_rs 1 4 2 1980J 1790 NJ
+preplace netloc axi_apb_bridge_0_APB_M 1 4 1 1930
+preplace netloc LCD_data_in_1 1 0 5 NJ 1640 NJ 1640 NJ 1640 1140J 2310 1770
+preplace netloc ps7_0_UART_1 1 4 2 1840J 501 NJ
 preplace netloc s_aresetn_0_1 1 0 3 10J 550 NJ 550 720J
 preplace netloc axi_uart16550_0_ip2intc_irpt 1 2 2 790 820 1210
-preplace netloc processing_system7_0_FCLK_CLK0 1 1 4 280 530 750 810 1150 1130 1890
-preplace netloc nt35510_apb_adapter_0_LCD_csel 1 4 2 1960J 1760 NJ
+preplace netloc processing_system7_0_FCLK_CLK0 1 1 4 280 530 750 810 1150 1130 1900
+preplace netloc nt35510_apb_adapter_0_LCD_csel 1 4 2 1970J 1760 NJ
 preplace netloc axi_interconnect_0_M06_AXI 1 2 2 640 -10 NJ
 preplace netloc S_AXIS_0_1 1 0 3 NJ 540 NJ 540 780J
-preplace netloc axi_emc_0_mem_cen 1 4 2 NJ 0 2280J
+preplace netloc axi_emc_0_mem_cen 1 4 2 NJ 0 2290J
 preplace netloc s_aresetn_1 1 0 3 10J 1570 NJ 1570 NJ
-preplace netloc debug_bridge_axi2jtag_tap_tck 1 4 2 2020 2010 NJ
-preplace netloc nt35510_apb_adapter_0_LCD_wr 1 4 2 1980J 1820 NJ
-preplace netloc axi_uart16550_0_UART 1 3 3 1300J 500 1820J 471 NJ
-preplace netloc clk_wiz_0_locked 1 3 2 1310 160 1790
-preplace netloc debug_bridge_axi2jtag_tap_tms 1 4 2 2010 1980 NJ
-preplace netloc axi_emc_0_mem_a 1 4 2 NJ -40 2300J
+preplace netloc debug_bridge_axi2jtag_tap_tck 1 4 2 2030 2010 NJ
+preplace netloc nt35510_apb_adapter_0_LCD_wr 1 4 2 1990J 1820 NJ
+preplace netloc axi_uart16550_0_UART 1 3 3 1300J 500 1830J 471 NJ
+preplace netloc clk_wiz_0_locked 1 3 2 1310 160 1800
+preplace netloc debug_bridge_axi2jtag_tap_tms 1 4 2 2020 1980 NJ
+preplace netloc axi_emc_0_mem_a 1 4 2 NJ -40 2310J
 preplace netloc initb_1 1 0 2 10J 430 210J
 preplace netloc transition_det_in_0_1 1 0 4 10J 1400 NJ 1400 770J 1370 1180J
-preplace netloc debug_bridge_reset_1_peripheral_aresetn 1 1 4 280 2350 N 2350 N 2350 1780
-preplace netloc clk_wiz_0_clk_out1 1 4 2 NJ 220 2280J
-preplace netloc nt35510_apb_adapter_0_LCD_nrst 1 4 2 1950J 1730 NJ
-preplace netloc axi_gpio_1_GPIO 1 4 2 1820J 1150 NJ
-preplace netloc clk_wiz_0_clk_out2 1 4 2 NJ 240 2250J
-preplace netloc axi_emc_0_mem_dq_o 1 4 2 NJ 40 2270J
+preplace netloc debug_bridge_reset_1_peripheral_aresetn 1 1 4 280 2350 N 2350 N 2350 1790
+preplace netloc clk_wiz_0_clk_out1 1 4 2 NJ 220 2290J
+preplace netloc nt35510_apb_adapter_0_LCD_nrst 1 4 2 1960J 1730 NJ
+preplace netloc axi_gpio_1_GPIO 1 4 2 1830J 1150 NJ
+preplace netloc clk_wiz_0_clk_out2 1 4 2 NJ 240 2260J
+preplace netloc axi_emc_0_mem_dq_o 1 4 2 NJ 40 2280J
 preplace netloc xlconstant_0_dout 1 1 1 210J
 preplace netloc bus_analyze_s2mm_introut 1 2 2 800 840 1160
-preplace netloc axi_emc_0_mem_ben 1 4 2 NJ -20 2290J
-preplace netloc axi_register_0_irq 1 2 3 800 1850 NJ 1850 1780
-preplace netloc axi_gpio_2_gpio_io_o 1 4 2 1820J 1030 NJ
+preplace netloc axi_emc_0_mem_ben 1 4 2 NJ -20 2300J
+preplace netloc axi_register_0_irq 1 2 3 800 1850 N 1850 1790
+preplace netloc axi_gpio_2_gpio_io_o 1 4 2 1830J 1030 NJ
 preplace netloc axi_interconnect_0_M00_AXI 1 2 2 620 220 NJ
 preplace netloc axi_interconnect_0_M03_AXI 1 2 2 680J 860 1280J
-preplace netloc S00_AXI_1 1 1 4 230 -130 NJ -130 NJ -130 1800
-preplace netloc gpio_io_i_1 1 0 5 NJ 1720 240J 1680 NJ 1680 NJ 1680 1790
-levelinfo -pg 1 -30 130 470 970 1540 2130 2320 -top -300 -bot 2690
+preplace netloc S00_AXI_1 1 1 4 230 -130 NJ -130 NJ -130 1810
+preplace netloc gpio_io_i_1 1 0 5 NJ 1720 240J 1680 NJ 1680 NJ 1680 1800
+levelinfo -pg 1 -30 130 470 970 1550 2140 2330 -top -300 -bot 2690
 "
 }
 {

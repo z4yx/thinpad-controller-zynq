@@ -19,7 +19,7 @@
         output wire [127:0] reg2port,
         input wire [PORT_TO_REG_WIDTH-1:0] port2reg,
         input wire [31:0] transition_det_in,
-        output reg irq,
+        output reg axi_register_irq,
 		// User ports ends
 		// Do not modify the ports beyond this line
 
@@ -80,10 +80,24 @@
 
 	// Add user logic here
 	reg [31:0] transition_sync [0:1];
+	reg transition;
+	reg [3:0] hold_cnt;
 	always@(posedge s00_axi_aclk) begin
 	   transition_sync[1] <= transition_sync[0];
 	   transition_sync[0] <= transition_det_in;
-	   irq <= transition_sync[1] != transition_sync[0];
+	   transition <= transition_sync[1] != transition_sync[0];
+	end
+	always@(posedge s00_axi_aclk) begin
+        if(~s00_axi_aresetn)begin
+           axi_register_irq <= 0;
+           hold_cnt <= 0;
+        end else begin
+           axi_register_irq <= |hold_cnt;
+           if(transition)
+               hold_cnt <= ~4'b0;
+           else if(|hold_cnt)
+               hold_cnt <= hold_cnt - 4'b1;
+        end
 	end
 
 	// User logic ends

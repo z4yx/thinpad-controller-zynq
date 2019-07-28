@@ -1,8 +1,8 @@
 //Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2018.3 (lin64) Build 2405991 Thu Dec  6 23:36:41 MST 2018
-//Date        : Thu Jul 18 17:13:09 2019
-//Host        : cqtestlab running 64-bit Deepin 15.10.2
+//Date        : Sun Jul 28 12:20:23 2019
+//Host        : cqtestlab running 64-bit Deepin 15.11
 //Command     : generate_target design_1_wrapper.bd
 //Design      : design_1_wrapper
 //Purpose     : IP block netlist
@@ -80,6 +80,7 @@ module design_1_wrapper
     la_storage_axis_tlast,
     la_storage_axis_tready,
     la_storage_axis_tvalid,
+    led_transition_det_in,
     port2reg,
     pp_csel,
     pp_data_i,
@@ -179,6 +180,7 @@ module design_1_wrapper
   input la_storage_axis_tlast;
   output la_storage_axis_tready;
   input la_storage_axis_tvalid;
+  input [31:0]led_transition_det_in;
   input [287:0]port2reg;
   output pp_csel;
   input [23:0]pp_data_i;
@@ -429,6 +431,7 @@ module design_1_wrapper
   wire la_storage_axis_tlast;
   wire la_storage_axis_tready;
   wire la_storage_axis_tvalid;
+  wire [31:0]led_transition_det_in;
   wire [287:0]port2reg;
   wire pp_csel;
   wire [23:0]pp_data_i;
@@ -534,6 +537,7 @@ module design_1_wrapper
         .la_storage_axis_tlast(la_storage_axis_tlast),
         .la_storage_axis_tready(la_storage_axis_tready),
         .la_storage_axis_tvalid(la_storage_axis_tvalid),
+        .led_transition_det_in(led_transition_det_in),
         .port2reg(port2reg),
         .pp_csel(pp_csel),
         .pp_data_i(pp_data_i),
