@@ -5,6 +5,7 @@ if { [llength [get_ips]] != 0} {
     upgrade_ip [get_ips]
 
     generate_target all [get_files -of_objects [get_fileset sources_1] -filter {FILE_TYPE == "Block Designs"}]
+    export_ip_user_files -of_objects [get_files -of_objects [get_fileset sources_1] -filter {FILE_TYPE == "Block Designs"}] -no_script -sync -force -quiet
     create_ip_run [get_files -of_objects [get_fileset sources_1] -filter {FILE_TYPE == "Block Designs"}]
 
     foreach ip [get_ips] {
