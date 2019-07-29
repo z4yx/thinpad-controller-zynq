@@ -12,8 +12,12 @@ if { [llength [get_ips]] != 0} {
         create_ip_run -quiet [get_ips $ip]
     }
 
-    set ip_runs [get_runs -filter {SRCSET != sources_1 && IS_SYNTHESIS && STATUS != "synth_design Complete!"}]
+    #set ip_runs [get_runs -filter {SRCSET != sources_1 && IS_SYNTHESIS && STATUS != "synth_design Complete!"}]
     
+    # trigger OOC runs by launching synth_1
+    reset_run synth_1
+    launch_runs synth_1 -jobs 14
+
 
 }
 
