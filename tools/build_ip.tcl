@@ -17,8 +17,7 @@ if { [llength [get_ips]] != 0} {
     # trigger OOC runs by launching synth_1
     reset_run synth_1
     launch_runs synth_1 -jobs 14
-
-
+    wait_on_run synth_1
 }
 
 exit
