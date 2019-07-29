@@ -47,6 +47,8 @@
 		output wire  s00_axi_rvalid,
 		input wire  s00_axi_rready
 	);
+	wire transition_irq_clear;
+	reg transition_irq_flag;
 // Instantiation of Axi Bus Interface S00_AXI
 	axi_register_v1_0_S00_AXI # ( 
 		.C_S_AXI_DATA_WIDTH(C_S00_AXI_DATA_WIDTH),
@@ -55,6 +57,8 @@
 	) axi_register_v1_0_S00_AXI_inst (
         .REG_TO_PORT(reg2port),
         .PORT_TO_REG(port2reg),
+        .transition_irq_flag(transition_irq_flag),
+        .transition_irq_clear(transition_irq_clear),
 		.S_AXI_ACLK(s00_axi_aclk),
 		.S_AXI_ARESETN(s00_axi_aresetn),
 		.S_AXI_AWADDR(s00_axi_awaddr),
@@ -81,7 +85,6 @@
 	// Add user logic here
 	reg [31:0] transition_sync [0:1];
 	reg transition;
-	reg [3:0] hold_cnt;
 	always@(posedge s00_axi_aclk) begin
 	   transition_sync[1] <= transition_sync[0];
 	   transition_sync[0] <= transition_det_in;
@@ -90,13 +93,16 @@
 	always@(posedge s00_axi_aclk) begin
         if(~s00_axi_aresetn)begin
            axi_register_irq <= 0;
-           hold_cnt <= 0;
+           transition_irq_flag <= 0;
         end else begin
-           axi_register_irq <= |hold_cnt;
-           if(transition)
-               hold_cnt <= ~4'b0;
-           else if(|hold_cnt)
-               hold_cnt <= hold_cnt - 4'b1;
+            if(transition_irq_clear) begin
+                transition_irq_flag <= 1'b0;
+                axi_register_irq <= 1'b0;
+            end
+            else if(transition) begin
+                transition_irq_flag <= 1'b1;
+                axi_register_irq <= 1'b1;
+            end
         end
 	end
 

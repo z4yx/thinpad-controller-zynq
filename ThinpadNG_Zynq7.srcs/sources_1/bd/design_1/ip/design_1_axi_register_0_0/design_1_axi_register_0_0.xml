@@ -660,7 +660,7 @@
       <spirit:parameters>
         <spirit:parameter>
           <spirit:name>SENSITIVITY</spirit:name>
-          <spirit:value spirit:id="BUSIFPARAM_VALUE.AXI_REGISTER_IRQ.SENSITIVITY" spirit:choiceRef="choice_list_99a1d2b9">EDGE_RISING</spirit:value>
+          <spirit:value spirit:id="BUSIFPARAM_VALUE.AXI_REGISTER_IRQ.SENSITIVITY" spirit:choiceRef="choice_list_99a1d2b9">LEVEL_HIGH</spirit:value>
         </spirit:parameter>
         <spirit:parameter>
           <spirit:name>PortWidth</spirit:name>
@@ -710,11 +710,11 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Sun Jul 28 04:20:24 UTC 2019</spirit:value>
+            <spirit:value>Mon Jul 29 03:02:46 UTC 2019</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>9:dc35169c</spirit:value>
+            <spirit:value>9:b4efa739</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -730,11 +730,11 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Sun Jul 28 04:20:24 UTC 2019</spirit:value>
+            <spirit:value>Mon Jul 29 03:02:46 UTC 2019</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>9:dc35169c</spirit:value>
+            <spirit:value>9:b4efa739</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -750,11 +750,11 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Sun Jul 28 04:20:24 UTC 2019</spirit:value>
+            <spirit:value>Mon Jul 29 03:02:46 UTC 2019</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>9:903d7526</spirit:value>
+            <spirit:value>9:32c178f2</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -770,11 +770,11 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Sun Jul 28 04:20:24 UTC 2019</spirit:value>
+            <spirit:value>Mon Jul 29 03:02:46 UTC 2019</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>9:903d7526</spirit:value>
+            <spirit:value>9:32c178f2</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -788,11 +788,11 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Sun Jul 28 04:21:18 UTC 2019</spirit:value>
+            <spirit:value>Mon Jul 29 03:03:38 UTC 2019</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>9:dc35169c</spirit:value>
+            <spirit:value>9:b4efa739</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -1219,11 +1219,11 @@
     <spirit:fileSet>
       <spirit:name>xilinx_verilogsynthesis_view_fileset</spirit:name>
       <spirit:file>
-        <spirit:name>../../ipshared/87bb/hdl/axi_register_v1_0_S00_AXI.v</spirit:name>
+        <spirit:name>../../ipshared/c8a5/hdl/axi_register_v1_0_S00_AXI.v</spirit:name>
         <spirit:fileType>verilogSource</spirit:fileType>
       </spirit:file>
       <spirit:file>
-        <spirit:name>../../ipshared/87bb/hdl/axi_register_v1_0.v</spirit:name>
+        <spirit:name>../../ipshared/c8a5/hdl/axi_register_v1_0.v</spirit:name>
         <spirit:fileType>verilogSource</spirit:fileType>
       </spirit:file>
     </spirit:fileSet>
@@ -1238,11 +1238,11 @@
     <spirit:fileSet>
       <spirit:name>xilinx_verilogbehavioralsimulation_view_fileset</spirit:name>
       <spirit:file>
-        <spirit:name>../../ipshared/87bb/hdl/axi_register_v1_0_S00_AXI.v</spirit:name>
+        <spirit:name>../../ipshared/c8a5/hdl/axi_register_v1_0_S00_AXI.v</spirit:name>
         <spirit:fileType>verilogSource</spirit:fileType>
       </spirit:file>
       <spirit:file>
-        <spirit:name>../../ipshared/87bb/hdl/axi_register_v1_0.v</spirit:name>
+        <spirit:name>../../ipshared/c8a5/hdl/axi_register_v1_0.v</spirit:name>
         <spirit:fileType>verilogSource</spirit:fileType>
       </spirit:file>
     </spirit:fileSet>
@@ -1354,7 +1354,7 @@
   <spirit:vendorExtensions>
     <xilinx:coreExtensions>
       <xilinx:displayName>axi_register_v1.0</xilinx:displayName>
-      <xilinx:coreRevision>2</xilinx:coreRevision>
+      <xilinx:coreRevision>1</xilinx:coreRevision>
       <xilinx:tags>
         <xilinx:tag xilinx:name="user.org:user:axi_register:1.0_ARCHIVE_LOCATION">/home/skyworks/ThinpadNG_Zynq7/ip_repo/axi_register_1.0</xilinx:tag>
         <xilinx:tag xilinx:name="user.org:user:axi_register:1.1_ARCHIVE_LOCATION">/home/skyworks/ThinpadNG_Zynq7/ip_repo/axi_register_1.0</xilinx:tag>
@@ -1407,6 +1407,27 @@
         <xilinx:tag xilinx:name="ui.data.coregen.dd@4b2760d1_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/axi_register_1.0</xilinx:tag>
         <xilinx:tag xilinx:name="ui.data.coregen.dd@3c15524a_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/axi_register_1.0</xilinx:tag>
         <xilinx:tag xilinx:name="ui.data.coregen.dd@189ccf27_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/axi_register_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@4e0fed02_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/axi_register_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@44504bc2_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/axi_register_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@3a6860ec_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/axi_register_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@57b7ab5d_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/axi_register_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@77e193aa_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/axi_register_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@7879e64e_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/axi_register_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@79b60c74_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/axi_register_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@eb22051_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/axi_register_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@233034d4_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/axi_register_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@3b9d48e8_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/axi_register_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@3e2481e7_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/axi_register_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@4eb085a9_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/axi_register_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@2a612d40_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/axi_register_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@465c5b95_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/axi_register_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@685fc96d_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/axi_register_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@618ed0f1_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/axi_register_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@5e9c9289_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/axi_register_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@2ab2f532_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/axi_register_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@4c37a812_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/axi_register_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@b85052c_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/axi_register_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@471790cd_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/axi_register_1.0</xilinx:tag>
       </xilinx:tags>
       <xilinx:configElementInfos>
         <xilinx:configElementInfo xilinx:referenceId="BUSIFPARAM_VALUE.AXI_REGISTER_IRQ.PortWidth" xilinx:valueSource="default_prop" xilinx:valuePermission="bd"/>
@@ -1441,10 +1462,10 @@
     </xilinx:coreExtensions>
     <xilinx:packagingInfo>
       <xilinx:xilinxVersion>2018.3</xilinx:xilinxVersion>
-      <xilinx:checksum xilinx:scope="busInterfaces" xilinx:value="24d5cbf1"/>
+      <xilinx:checksum xilinx:scope="busInterfaces" xilinx:value="34f6a6bf"/>
       <xilinx:checksum xilinx:scope="memoryMaps" xilinx:value="ed1368d5"/>
-      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="233c2295"/>
-      <xilinx:checksum xilinx:scope="ports" xilinx:value="7e13a493"/>
+      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="302db67a"/>
+      <xilinx:checksum xilinx:scope="ports" xilinx:value="08cf3783"/>
       <xilinx:checksum xilinx:scope="hdlParameters" xilinx:value="b31e090a"/>
       <xilinx:checksum xilinx:scope="parameters" xilinx:value="ab7bc5cb"/>
     </xilinx:packagingInfo>

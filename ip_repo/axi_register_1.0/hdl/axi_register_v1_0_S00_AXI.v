@@ -18,6 +18,8 @@
 		// Users to add ports here
 		output wire [127:0] REG_TO_PORT,
         input wire [PORT_TO_REG_WIDTH-1:0] PORT_TO_REG,
+        input wire transition_irq_flag,
+        output reg transition_irq_clear,
 
 		// User ports ends
 		// Do not modify the ports beyond this line
@@ -253,12 +255,17 @@
 	                // Respective byte enables are asserted as per write strobes 
 	                // Slave register 3
 	                slv_reg3[(byte_index*8) +: 8] <= S_AXI_WDATA[(byte_index*8) +: 8];
-	              end  
+	              end
+	          2'h5:
+	            if ( S_AXI_WSTRB[0] == 1 ) begin
+	               transition_irq_clear <= S_AXI_WDATA[0];
+	            end
 	          default : begin
 	                      slv_reg0 <= slv_reg0;
 	                      slv_reg1 <= slv_reg1;
 	                      slv_reg2 <= slv_reg2;
 	                      slv_reg3 <= slv_reg3;
+	                      transition_irq_clear <= 0;
 	                    end
 	        endcase
 	      end
@@ -372,7 +379,8 @@
 	        4'h2   : reg_data_out <= slv_reg2;
 	        4'h3   : reg_data_out <= slv_reg3;
 	        4'h4   : reg_data_out <= port2reg_sync2[31:0];
-	        /* 5~7 reserved for now */
+	        4'h5   : reg_data_out <= {31'h0, transition_irq_flag};
+	        /* 6~7 reserved for now */
             4'h8   : reg_data_out <= port2reg_sync2[32*1 +: 32];
             4'h9   : reg_data_out <= port2reg_sync2[32*2 +: 32];
             4'ha   : reg_data_out <= port2reg_sync2[32*3 +: 32];

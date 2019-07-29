@@ -3,7 +3,7 @@
   <spirit:vendor>user.org</spirit:vendor>
   <spirit:library>user</spirit:library>
   <spirit:name>axi_register</spirit:name>
-  <spirit:version>1.2</spirit:version>
+  <spirit:version>1.3</spirit:version>
   <spirit:busInterfaces>
     <spirit:busInterface>
       <spirit:name>S00_AXI</spirit:name>
@@ -291,7 +291,7 @@
       <spirit:parameters>
         <spirit:parameter>
           <spirit:name>SENSITIVITY</spirit:name>
-          <spirit:value spirit:id="BUSIFPARAM_VALUE.AXI_REGISTER_IRQ.SENSITIVITY" spirit:choiceRef="choice_list_99a1d2b9">EDGE_RISING</spirit:value>
+          <spirit:value spirit:id="BUSIFPARAM_VALUE.AXI_REGISTER_IRQ.SENSITIVITY" spirit:choiceRef="choice_list_99a1d2b9">LEVEL_HIGH</spirit:value>
         </spirit:parameter>
       </spirit:parameters>
     </spirit:busInterface>
@@ -332,7 +332,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>8dfbe1c9</spirit:value>
+            <spirit:value>f8e419ee</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -348,7 +348,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>8dfbe1c9</spirit:value>
+            <spirit:value>f8e419ee</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -820,7 +820,7 @@
       <spirit:file>
         <spirit:name>hdl/axi_register_v1_0.v</spirit:name>
         <spirit:fileType>verilogSource</spirit:fileType>
-        <spirit:userFileType>CHECKSUM_09c8bfdf</spirit:userFileType>
+        <spirit:userFileType>CHECKSUM_f7598094</spirit:userFileType>
       </spirit:file>
     </spirit:fileSet>
     <spirit:fileSet>
@@ -837,7 +837,7 @@
     <spirit:fileSet>
       <spirit:name>xilinx_xpgui_view_fileset</spirit:name>
       <spirit:file>
-        <spirit:name>xgui/axi_register_v1_2.tcl</spirit:name>
+        <spirit:name>xgui/axi_register_v1_3.tcl</spirit:name>
         <spirit:fileType>tclSource</spirit:fileType>
         <spirit:userFileType>CHECKSUM_036439f5</spirit:userFileType>
         <spirit:userFileType>XGUI_VERSION_2</spirit:userFileType>
@@ -920,12 +920,13 @@
         <xilinx:taxonomy>AXI_Peripheral</xilinx:taxonomy>
       </xilinx:taxonomies>
       <xilinx:displayName>axi_register_v1.0</xilinx:displayName>
-      <xilinx:coreRevision>2</xilinx:coreRevision>
+      <xilinx:coreRevision>1</xilinx:coreRevision>
       <xilinx:upgrades>
         <xilinx:canUpgradeFrom>user.org:user:axi_register:1.0</xilinx:canUpgradeFrom>
         <xilinx:canUpgradeFrom>user.org:user:axi_register:1.1</xilinx:canUpgradeFrom>
+        <xilinx:canUpgradeFrom>user.org:user:axi_register:1.2</xilinx:canUpgradeFrom>
       </xilinx:upgrades>
-      <xilinx:coreCreationDateTime>2019-07-28T04:18:55Z</xilinx:coreCreationDateTime>
+      <xilinx:coreCreationDateTime>2019-07-29T03:02:10Z</xilinx:coreCreationDateTime>
       <xilinx:tags>
         <xilinx:tag xilinx:name="user.org:user:axi_register:1.0_ARCHIVE_LOCATION">/home/skyworks/ThinpadNG_Zynq7/ip_repo/axi_register_1.0</xilinx:tag>
         <xilinx:tag xilinx:name="user.org:user:axi_register:1.1_ARCHIVE_LOCATION">/home/skyworks/ThinpadNG_Zynq7/ip_repo/axi_register_1.0</xilinx:tag>
@@ -978,14 +979,35 @@
         <xilinx:tag xilinx:name="ui.data.coregen.dd@4b2760d1_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/axi_register_1.0</xilinx:tag>
         <xilinx:tag xilinx:name="ui.data.coregen.dd@3c15524a_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/axi_register_1.0</xilinx:tag>
         <xilinx:tag xilinx:name="ui.data.coregen.dd@189ccf27_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/axi_register_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@4e0fed02_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/axi_register_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@44504bc2_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/axi_register_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@3a6860ec_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/axi_register_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@57b7ab5d_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/axi_register_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@77e193aa_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/axi_register_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@7879e64e_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/axi_register_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@79b60c74_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/axi_register_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@eb22051_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/axi_register_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@233034d4_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/axi_register_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@3b9d48e8_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/axi_register_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@3e2481e7_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/axi_register_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@4eb085a9_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/axi_register_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@2a612d40_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/axi_register_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@465c5b95_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/axi_register_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@685fc96d_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/axi_register_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@618ed0f1_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/axi_register_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@5e9c9289_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/axi_register_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@2ab2f532_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/axi_register_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@4c37a812_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/axi_register_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@b85052c_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/axi_register_1.0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@471790cd_ARCHIVE_LOCATION">/home/zhang/Projects/ThinpadNG_Zynq7/ip_repo/axi_register_1.0</xilinx:tag>
       </xilinx:tags>
     </xilinx:coreExtensions>
     <xilinx:packagingInfo>
       <xilinx:xilinxVersion>2018.3</xilinx:xilinxVersion>
-      <xilinx:checksum xilinx:scope="busInterfaces" xilinx:value="24d5cbf1"/>
+      <xilinx:checksum xilinx:scope="busInterfaces" xilinx:value="34f6a6bf"/>
       <xilinx:checksum xilinx:scope="memoryMaps" xilinx:value="ed1368d5"/>
-      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="233c2295"/>
-      <xilinx:checksum xilinx:scope="ports" xilinx:value="7e13a493"/>
+      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="302db67a"/>
+      <xilinx:checksum xilinx:scope="ports" xilinx:value="08cf3783"/>
       <xilinx:checksum xilinx:scope="hdlParameters" xilinx:value="b31e090a"/>
       <xilinx:checksum xilinx:scope="parameters" xilinx:value="ab7bc5cb"/>
     </xilinx:packagingInfo>
