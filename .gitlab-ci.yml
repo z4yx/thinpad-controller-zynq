@@ -46,8 +46,7 @@ impl_1:
     paths:
         #- thinpadNG_zynq_top_rev2.hdf
       - thinpadNG_zynq_top_rev3.hdf
-      - ${PROJECT_NAME}.runs/synth_1/runme.log
-      - ${PROJECT_NAME}.runs/impl_1/runme.log
+      - ${PROJECT_NAME}.runs/*/runme.log
     when: always
 
 trigger_build:
