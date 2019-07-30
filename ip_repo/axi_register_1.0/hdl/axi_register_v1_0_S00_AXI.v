@@ -225,6 +225,7 @@
 	      slv_reg3 <= 0;
 	    end 
 	  else begin
+        transition_irq_clear <= 0;
 	    if (slv_reg_wren)
 	      begin
 	        case ( axi_awaddr[ADDR_LSB+OPT_MEM_ADDR_BITS:ADDR_LSB] )
@@ -265,7 +266,6 @@
 	                      slv_reg1 <= slv_reg1;
 	                      slv_reg2 <= slv_reg2;
 	                      slv_reg3 <= slv_reg3;
-	                      transition_irq_clear <= 0;
 	                    end
 	        endcase
 	      end
@@ -379,7 +379,7 @@
 	        4'h2   : reg_data_out <= slv_reg2;
 	        4'h3   : reg_data_out <= slv_reg3;
 	        4'h4   : reg_data_out <= port2reg_sync2[31:0];
-	        4'h5   : reg_data_out <= {31'h0, transition_irq_flag};
+	        4'h5   : reg_data_out <= {31'h1, transition_irq_flag};
 	        /* 6~7 reserved for now */
             4'h8   : reg_data_out <= port2reg_sync2[32*1 +: 32];
             4'h9   : reg_data_out <= port2reg_sync2[32*2 +: 32];

@@ -47,8 +47,8 @@
 		output wire  s00_axi_rvalid,
 		input wire  s00_axi_rready
 	);
-	wire transition_irq_clear;
-	reg transition_irq_flag;
+	(* MARK_DEBUG="TRUE" *) wire transition_irq_clear;
+	(* MARK_DEBUG="TRUE" *) reg transition_irq_flag;
 // Instantiation of Axi Bus Interface S00_AXI
 	axi_register_v1_0_S00_AXI # ( 
 		.C_S_AXI_DATA_WIDTH(C_S00_AXI_DATA_WIDTH),
@@ -84,7 +84,7 @@
 
 	// Add user logic here
 	reg [31:0] transition_sync [0:1];
-	reg transition;
+	(* MARK_DEBUG="TRUE" *) reg transition;
 	always@(posedge s00_axi_aclk) begin
 	   transition_sync[1] <= transition_sync[0];
 	   transition_sync[0] <= transition_det_in;
