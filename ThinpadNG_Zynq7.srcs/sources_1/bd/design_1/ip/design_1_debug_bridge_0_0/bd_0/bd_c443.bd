@@ -1,7 +1,7 @@
 {
   "design": {
     "design_info": {
-      "boundary_crc": "0x2BE88827CCD6DBF9",
+      "boundary_crc": "0x2BE88827D64624CB",
       "design_src": "SBD",
       "device": "xc7z020clg484-1",
       "name": "bd_c443",
@@ -37,16 +37,16 @@
             "value_src": "constant"
           },
           "CLK_DOMAIN": {
-            "value": "/clk_wiz_0_clk_out1",
-            "value_src": "ip_prop"
+            "value": "design_1_ps7_0_0_FCLK_CLK3",
+            "value_src": "default_prop"
           },
           "DATA_WIDTH": {
             "value": "32",
             "value_src": "auto"
           },
           "FREQ_HZ": {
-            "value": "11057692",
-            "value_src": "ip_prop"
+            "value": "10000000",
+            "value_src": "user_prop"
           },
           "HAS_BRESP": {
             "value": "1",
@@ -113,8 +113,8 @@
             "value_src": "default"
           },
           "PHASE": {
-            "value": "0.0",
-            "value_src": "ip_prop"
+            "value": "0.000",
+            "value_src": "default_prop"
           },
           "PROTOCOL": {
             "value": "AXI4LITE",
@@ -160,20 +160,20 @@
             "value": "s_axi_aresetn:s_axi_lite_resetn"
           },
           "CLK_DOMAIN": {
-            "value": "/clk_wiz_0_clk_out1",
-            "value_src": "ip_prop"
+            "value": "design_1_ps7_0_0_FCLK_CLK3",
+            "value_src": "default_prop"
           },
           "FREQ_HZ": {
-            "value": "11057692",
-            "value_src": "ip_prop"
+            "value": "10000000",
+            "value_src": "user_prop"
           },
           "INSERT_VIP": {
             "value": "0",
             "value_src": "default"
           },
           "PHASE": {
-            "value": "0.0",
-            "value_src": "ip_prop"
+            "value": "0.000",
+            "value_src": "default_prop"
           }
         }
       },
